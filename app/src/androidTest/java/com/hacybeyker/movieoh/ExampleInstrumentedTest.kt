@@ -1,4 +1,4 @@
-package com.hacybeyker.main
+package com.hacybeyker.movieoh
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
@@ -18,6 +18,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.hacybeyker.main", appContext.packageName)
+        assertEquals("com.hacybeyker.movieoh", appContext.packageName)
     }
 }

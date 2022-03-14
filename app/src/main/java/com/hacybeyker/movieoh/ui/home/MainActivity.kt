@@ -1,8 +1,8 @@
-package com.hacybeyker.main.ui.home
+package com.hacybeyker.movieoh.ui.home
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.hacybeyker.main.R
+import com.hacybeyker.movieoh.R
 
 class MainActivity : AppCompatActivity() {
 

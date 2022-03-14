@@ -1,10 +1,10 @@
-package com.hacybeyker.main
+package com.hacybeyker.movieoh
 
 import android.widget.TextView
 import androidx.lifecycle.Lifecycle
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.hacybeyker.main.ui.home.MainActivity
+import com.hacybeyker.movieoh.ui.home.MainActivity
 import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test

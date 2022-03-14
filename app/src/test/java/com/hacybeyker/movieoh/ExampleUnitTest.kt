@@ -1,4 +1,4 @@
-package com.hacybeyker.main
+package com.hacybeyker.movieoh
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

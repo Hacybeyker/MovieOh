@@ -1,4 +1,4 @@
-package com.hacybeyker.main.commons.network
+package com.hacybeyker.movieoh.commons.network
 
 import android.content.Context
 import android.content.Context.CONNECTIVITY_SERVICE

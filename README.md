@@ -1,6 +1,6 @@
-# Project [name_project]
+# Project MovieOh
 
-Description for project.
+Este proyecto mostrara una lista de peliculas.
 
 ## Setup
 
@@ -14,7 +14,9 @@ git submodule update
 ## Tools
 
 - kotlin
-
+- Retrofit
+- Hilt
+- Coroutines
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)

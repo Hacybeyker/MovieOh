@@ -1,4 +1,4 @@
-package com.hacybeyker.main.di
+package com.hacybeyker.movieoh.di
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

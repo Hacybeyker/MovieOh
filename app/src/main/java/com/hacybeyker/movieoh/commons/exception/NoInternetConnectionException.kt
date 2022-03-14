@@ -1,4 +1,4 @@
-package com.hacybeyker.main.commons.exception
+package com.hacybeyker.movieoh.commons.exception
 
 import java.io.IOException
 

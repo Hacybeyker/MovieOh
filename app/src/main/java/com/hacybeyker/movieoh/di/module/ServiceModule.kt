@@ -1,4 +1,4 @@
-package com.hacybeyker.main.di.module
+package com.hacybeyker.movieoh.di.module
 
 import dagger.Module
 import dagger.hilt.InstallIn
