@@ -68,7 +68,15 @@ android {
             'android/*/.*',
             '*/_ViewBinding*.*',
             '*/_Factory.*',
-            '*/\$$Parcelable*.*'
+            '*/\$$Parcelable*.*',
+            '**/databinding/**',
+            '**/hilt_aggregated_deps/**',
+            '**/DataBindingTriggerClass.class/**',
+            '**/codegen/**',
+            '**/commons/**',
+            '**/data/api/**',
+            '**/di/**',
+            '**/utils/**',
     ]
 
     def debugTree = fileTree(dir: "${buildDir}/intermediates/javac/debug/classes", excludes: fileFilter)

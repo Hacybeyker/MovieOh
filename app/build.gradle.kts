@@ -139,11 +139,9 @@ dependencies {
     implementation(AppDependencies.material)
     implementation(AppDependencies.constraintLayout)
     implementation(AppDependencies.viewPager2)
+    implementation(AppDependencies.lottie)
     // Hilt
     implementation(AppDependencies.hilt)
-    implementation("androidx.appcompat:appcompat:1.4.1")
-    implementation("com.google.android.material:material:1.5.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.3")
     kapt(AppDependencies.hiltCompiler)
     // ViewModel & Livedata
     implementation(AppDependencies.lifecycleViewModel)
