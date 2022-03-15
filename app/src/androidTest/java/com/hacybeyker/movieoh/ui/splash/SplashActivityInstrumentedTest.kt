@@ -17,7 +17,7 @@ import org.junit.runner.RunWith
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class SplashActivityTest {
+class SplashActivityInstrumentedTest {
 
     @get:Rule
     val activityScenarioRule = ActivityScenarioRule(SplashActivity::class.java)
