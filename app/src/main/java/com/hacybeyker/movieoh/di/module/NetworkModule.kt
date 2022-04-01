@@ -20,6 +20,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import ir.mirrajabi.okhttpjsonmock.OkHttpMockInterceptor
+import ir.mirrajabi.okhttpjsonmock.providers.InputStreamProvider
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -27,6 +29,7 @@ import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.IOException
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Named
@@ -36,14 +39,11 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
 
-    private external fun getApiKeyRelease(): String
-    private external fun getApiKeyQA(): String
-
     @Singleton
     @Provides
     @Named(API_KEY)
     fun provideApiKey(): String {
-        return if (BuildConfig.DEBUG) getApiKeyQA() else getApiKeyRelease()
+        return if (BuildConfig.IS_DEVELOPMENT) BuildConfig.KEY_QA else BuildConfig.KEY_PROD
     }
 
     @Singleton
@@ -65,6 +65,24 @@ class NetworkModule {
     @Provides
     fun provideGsonConverterFactory(): GsonConverterFactory {
         return GsonConverterFactory.create()
+    }
+
+    @Singleton
+    @Provides
+    fun provideInputStreamProvider(@ApplicationContext context: Context): InputStreamProvider {
+        return InputStreamProvider { path ->
+            try {
+                return@InputStreamProvider context.applicationContext.assets.open(path)
+            } catch (e: IOException) {
+                throw IOException(e)
+            }
+        }
+    }
+
+    @Singleton
+    @Provides
+    fun provideOkHttpMockInterceptor(inputStreamProvider: InputStreamProvider): OkHttpMockInterceptor {
+        return OkHttpMockInterceptor(inputStreamProvider, 0)
     }
 
     @Singleton
@@ -95,6 +113,7 @@ class NetworkModule {
     @Provides
     fun providerOkHttpClient(
         httpLoggingInterceptor: HttpLoggingInterceptor,
+        okHttpMockInterceptor: OkHttpMockInterceptor,
         chuckerInterceptor: ChuckerInterceptor,
         apiInterceptor: ApiInterceptor
     ): OkHttpClient {
@@ -104,7 +123,7 @@ class NetworkModule {
             .readTimeout(TIMEOUT, TimeUnit.SECONDS)
             .addInterceptor(httpLoggingInterceptor)
             .addInterceptor(chuckerInterceptor)
-            .addInterceptor(apiInterceptor)
+            .addInterceptor(if (BuildConfig.IS_DEVELOPMENT) okHttpMockInterceptor else apiInterceptor)
             .build()
     }
 

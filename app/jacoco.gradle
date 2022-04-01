@@ -73,9 +73,13 @@ android {
             '**/hilt_aggregated_deps/**',
             '**/DataBindingTriggerClass.class/**',
             '**/codegen/**',
-            '**/commons/exception**',
+            '**/commons/**',
             '**/data/api/**',
+            '**/data/model**',
             '**/di/**',
+            '**/domain/entity**',
+            '**/ui/splash/SplashActivity**',
+            '**/ui/home/HomeActivity**',
             '**/utils/**',
     ]
 

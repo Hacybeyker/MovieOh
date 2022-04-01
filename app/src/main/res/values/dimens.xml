@@ -2,4 +2,7 @@
 <resources>
     <dimen name="dp5">5dp</dimen>
     <dimen name="sp40">40sp</dimen>
+    <dimen name="dp15">15dp</dimen>
+    <dimen name="dp109">109dp</dimen>
+    <dimen name="dp164">164dp</dimen>
 </resources>

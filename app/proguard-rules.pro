@@ -19,3 +19,11 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+#-keep class com.hacybeyker.movieoh.commons.base.BaseActivity {*;}
+#-keep class com.hacybeyker.movieoh.ui.home.HomeActivity {*;}
+#-keep class com.hacybeyker.movieoh.ui.home.viewmodel.HomeViewModel {*;}
+
+-obfuscationdictionary 'avengers_dictionary.txt'
+-classobfuscationdictionary 'avengers_dictionary.txt'
+-packageobfuscationdictionary 'avengers_dictionary.txt'

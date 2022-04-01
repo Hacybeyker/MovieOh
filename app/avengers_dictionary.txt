@@ -1,0 +1,10 @@
+#Custom method dictionary
+
+HawkEye
+IronMan
+CapAmerica
+Thor
+Hulk
+BlackWidow
+NickFuria
+Spiderman

@@ -39,5 +39,4 @@ class SplashActivityInstrumentedTest {
             activity.startActivity(intent)
         }
     }
-
 }

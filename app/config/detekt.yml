@@ -243,9 +243,9 @@ exceptions:
       - 'RuntimeException'
       - 'Throwable'
   ThrowingNewInstanceOfSameException:
-    active: true
+    active: false
   TooGenericExceptionCaught:
-    active: true
+    active: false
     excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
     exceptionNames:
       - 'ArrayIndexOutOfBoundsException'
@@ -305,7 +305,7 @@ formatting:
     indentSize: 4
     continuationIndentSize: 4
   MaximumLineLength:
-    active: true
+    active: false
     maxLineLength: 120
     ignoreBackTickedIdentifier: false
   ModifierOrdering:
@@ -677,7 +677,7 @@ style:
   MandatoryBracesLoops:
     active: false
   MaxLineLength:
-    active: true
+    active: false
     maxLineLength: 120
     excludePackageStatements: true
     excludeImportStatements: true
@@ -757,7 +757,7 @@ style:
   UnusedPrivateClass:
     active: true
   UnusedPrivateMember:
-    active: true
+    active: false
     allowedNames: '(_|ignored|expected|serialVersionUID)'
   UseArrayLiteralsInAnnotations:
     active: false
