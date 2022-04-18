@@ -1,6 +1,5 @@
 package com.hacybeyker.movieoh.di.module
 
-import android.util.Log
 import com.hacybeyker.movieoh.data.api.TrendingMovieApi
 import dagger.Module
 import dagger.Provides
@@ -16,7 +15,6 @@ class ServiceModule {
     @Singleton
     @Provides
     fun provideTrendingMovieServices(retrofit: Retrofit): TrendingMovieApi {
-        Log.d("TAG", "Here - providerRetrofit: ${retrofit.baseUrl()}")
         return retrofit.create(TrendingMovieApi::class.java)
     }
 }

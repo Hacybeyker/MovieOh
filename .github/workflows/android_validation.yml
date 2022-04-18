@@ -36,9 +36,6 @@ jobs:
           name: lint_report
           path: app/build/reports/lint-results-debug.html
 
-      - name: Run KtLintFormat
-        run: ./gradlew app:ktlintFormat
-
       - name: Run KtLintCheck
         run: ./gradlew app:ktlintCheck
 

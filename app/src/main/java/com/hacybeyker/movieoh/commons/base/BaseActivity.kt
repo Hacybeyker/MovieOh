@@ -1,29 +1,32 @@
 package com.hacybeyker.movieoh.commons.base
 
 import android.os.Bundle
+import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
 
-@Suppress("UNCHECKED_CAST")
-abstract class BaseActivity<D : ViewBinding, V : ViewModel> : AppCompatActivity() {
+abstract class BaseActivity<VB : ViewBinding, VM : ViewModel> : AppCompatActivity() {
 
-    protected abstract val viewBinding: D
+    protected abstract val viewBinding: VB
 
-    protected abstract val viewModelClass: Class<V>
+    protected abstract val viewModelClass: Class<VM>
 
-    abstract fun setupView()
+    open fun setupView() { /*Your implementation*/
+    }
 
-    abstract fun setupObservers()
+    open fun setupObservers() { /*Your implementation*/
+    }
 
-    open fun startObserver(){}
+    open fun launchObservers() { /*Your implementation*/
+    }
 
-    internal lateinit var viewModel: V
-        private set
+    @VisibleForTesting
+    lateinit var viewModel: VM
 
-    internal lateinit var binding: D
-        private set
+    @VisibleForTesting
+    lateinit var binding: VB
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,11 +35,6 @@ abstract class BaseActivity<D : ViewBinding, V : ViewModel> : AppCompatActivity(
         setContentView(binding.root)
         setupView()
         setupObservers()
+        launchObservers()
     }
-
-    /*private fun getViewModelClass(): Class<V> {
-        val type = (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[1]
-        return type as Class<V>
-    }*/
-
 }

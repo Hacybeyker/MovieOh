@@ -24,6 +24,24 @@
 #-keep class com.hacybeyker.movieoh.ui.home.HomeActivity {*;}
 #-keep class com.hacybeyker.movieoh.ui.home.viewmodel.HomeViewModel {*;}
 
--obfuscationdictionary 'avengers_dictionary.txt'
--classobfuscationdictionary 'avengers_dictionary.txt'
--packageobfuscationdictionary 'avengers_dictionary.txt'
+#-keep class com.hacybeyker.movieoh.data.model.remote.response.ResultResponseModel {*;}
+#-keep class com.hacybeyker.movieoh.data.model.remote.response.MovieResponseModel {*;}
+
+#-obfuscationdictionary 'avengers_dictionary.txt'
+#-classobfuscationdictionary 'avengers_dictionary.txt'
+#-packageobfuscationdictionary 'avengers_dictionary.txt'
+
+#-keepattributes Signature, InnerClasses, EnclosingMethod,Exceptions
+#-keepattributes RuntimeVisibleAnnotations, RuntimeVisibleParameterAnnotations
+#-keepclassmembers,allowshrinking,allowobfuscation interface * {
+#    @retrofit2.http.* <methods>;
+#}
+
+-keepclassmembers,allowobfuscation class * {
+  @com.google.gson.annotations.SerializedName <fields>;
+}
+
+#-keep class com.google.crypto.** { *; }
+
+#-keepnames class * extends java.io.Serializable
+#-keepnames class * extends android.os.Parcelable

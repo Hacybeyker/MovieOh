@@ -10,6 +10,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.fail
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.ArgumentMatchers.anyInt
@@ -30,10 +31,11 @@ class TrendingDataSourceRemoteTest {
 
     private val mockResponse: ResultResponseModel = mock()
 
-    private val sutTrendingDataSourceRemote: TrendingDataSourceRemote by lazy {
-        TrendingDataSourceRemote(
-            mockApi
-        )
+    private lateinit var sutTrendingDataSourceRemote: TrendingDataSourceRemote
+
+    @Before
+    fun setup() {
+        sutTrendingDataSourceRemote = TrendingDataSourceRemote(mockApi)
     }
 
     @Test

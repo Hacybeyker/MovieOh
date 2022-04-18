@@ -85,12 +85,6 @@ android {
         }
     }
 
-    externalNativeBuild {
-        ndkBuild {
-            path("src/main/jni/Android.mk")
-        }
-    }
-
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -139,11 +133,17 @@ android {
     }
 
     scabbard {
-        enabled = true
+        enabled = false
         failOnError = false
         fullBindingGraphValidation = true
         qualifiedNames = true
         outputFormat = "png"
+    }
+
+    tasks {
+        "preBuild" {
+            dependsOn("ktlintFormat")
+        }
     }
 }
 

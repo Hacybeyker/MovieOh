@@ -4,8 +4,8 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.hacybeyker.movieoh.commons.exception.ApiException
 import com.hacybeyker.movieoh.domain.entity.MovieEntity
 import com.hacybeyker.movieoh.domain.usecase.TrendingUseCase
-import com.hacybeyker.movieoh.getOrAwaitValue
 import com.hacybeyker.movieoh.utils.TestCoroutineRule
+import com.hacybeyker.movieoh.utils.getOrAwaitValue
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -45,7 +45,7 @@ class HomeViewModelTest {
     }
 
     @Test
-    fun `Given When call fetchTrendingMovie Then usecase call fetchTrendingMovie`() {
+    fun `GIVEN a mockMovieEntityList WHEN call fetchTrendingMovie THEN usecase call fetchTrendingMovie`() {
         testCoroutineRule.runBlockingTest {
             whenever(mockTrendingUseCase.fetchTrendingMovie(anyInt())).doReturn(mockMovieEntityList)
             whenever(mockMovieEntityList.size).doReturn(2)
@@ -62,7 +62,7 @@ class HomeViewModelTest {
     }
 
     @Test
-    fun `Given When call fetchTrendingMovie Then throw exception`() {
+    fun `GIVEN a exception WHEN call fetchTrendingMovie THEN generate throw exception`() {
         testCoroutineRule.runBlockingTest {
             whenever(mockTrendingUseCase.fetchTrendingMovie(anyInt())).doAnswer { throw ApiException() }
 
