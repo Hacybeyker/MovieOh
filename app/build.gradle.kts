@@ -208,4 +208,6 @@ dependencies {
     kapt(AppDependencies.glideCompiler)
     // Detekt
     detektPlugins(ValidationDependencies.detekt)
+    // Library
+    implementation(project(":uikit"))
 }

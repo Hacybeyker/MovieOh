@@ -7,20 +7,29 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeActivity">
 
+    <com.hacybeyker.uikit.component.section.Header
+        android:id="@+id/hTopRated"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:text="@string/top_rated" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvMovieTopRated"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipToPadding="false"
         android:orientation="horizontal"
-        android:paddingStart="@dimen/dp15"
-        android:paddingEnd="@dimen/dp15"
+        android:paddingStart="@dimen/dp10"
+        android:paddingEnd="@dimen/dp10"
         android:scrollbars="none"
         android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/hTopRated"
         tools:ignore="SpeakableTextPresentCheck"
         tools:listitem="@layout/recycler_movie"
         tools:visibility="visible" />
