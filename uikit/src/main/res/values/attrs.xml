@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ImageView">
+        <attr name="percentRounded" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="Header">
+        <attr name="text" format="string" localization="suggested" />
+        <attr name="showIcon" format="boolean" />
+        <attr name="icon" format="reference" />
+        <attr name="colorText" format="reference|color" />
+        <attr name="colorIcon" format="reference|color" />
+    </declare-styleable>
+</resources>
