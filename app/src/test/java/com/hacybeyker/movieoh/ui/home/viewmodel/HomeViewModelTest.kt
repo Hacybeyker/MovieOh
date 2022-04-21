@@ -3,7 +3,9 @@ package com.hacybeyker.movieoh.ui.home.viewmodel
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.hacybeyker.movieoh.commons.exception.ApiException
 import com.hacybeyker.movieoh.domain.entity.MovieEntity
+import com.hacybeyker.movieoh.domain.usecase.DiscoverUseCase
 import com.hacybeyker.movieoh.domain.usecase.TrendingUseCase
+import com.hacybeyker.movieoh.domain.usecase.UpcomingUseCase
 import com.hacybeyker.movieoh.utils.TestCoroutineRule
 import com.hacybeyker.movieoh.utils.getOrAwaitValue
 import kotlinx.coroutines.CoroutineDispatcher
@@ -35,13 +37,22 @@ class HomeViewModelTest {
 
     private val mockTrendingUseCase: TrendingUseCase = mock()
 
+    private val mockUpcomingUseCase: UpcomingUseCase = mock()
+
+    private val mockDiscoverUseCase: DiscoverUseCase = mock()
+
     private val mockDispatcherIO: CoroutineDispatcher by lazy { Dispatchers.IO }
 
     private lateinit var sutHomeViewModel: HomeViewModel
 
     @Before
     fun setup() {
-        sutHomeViewModel = HomeViewModel(mockTrendingUseCase, mockDispatcherIO)
+        sutHomeViewModel = HomeViewModel(
+            mockTrendingUseCase,
+            mockUpcomingUseCase,
+            mockDiscoverUseCase,
+            mockDispatcherIO
+        )
     }
 
     @Test

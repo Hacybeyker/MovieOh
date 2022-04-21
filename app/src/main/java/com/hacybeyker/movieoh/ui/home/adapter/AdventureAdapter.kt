@@ -8,14 +8,14 @@ import com.hacybeyker.movieoh.databinding.RecyclerMovieBinding
 import com.hacybeyker.movieoh.domain.entity.MovieEntity
 import com.hacybeyker.movieoh.utils.extensions.loadImage
 
-open class MovieSimilarAdapter :
-    ListAdapter<MovieEntity, MovieSimilarAdapter.MovieSimilarViewHolder>(MovieDiffUtilCallback()) {
+class AdventureAdapter :
+    ListAdapter<MovieEntity, AdventureAdapter.AdventureViewHolder>(MovieDiffUtilCallback()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieSimilarViewHolder {
-        return MovieSimilarViewHolder.from(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdventureViewHolder {
+        return AdventureViewHolder.from(parent)
     }
 
-    override fun onBindViewHolder(holder: MovieSimilarViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: AdventureViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
@@ -23,14 +23,14 @@ open class MovieSimilarAdapter :
         super.submitList(list)
     }
 
-    class MovieSimilarViewHolder(private val binding: RecyclerMovieBinding) :
+    class AdventureViewHolder(private val binding: RecyclerMovieBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         companion object {
-            fun from(parent: ViewGroup): MovieSimilarViewHolder {
+            fun from(parent: ViewGroup): AdventureViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = RecyclerMovieBinding.inflate(layoutInflater, parent, false)
-                return MovieSimilarViewHolder(binding)
+                return AdventureViewHolder(binding)
             }
         }
 

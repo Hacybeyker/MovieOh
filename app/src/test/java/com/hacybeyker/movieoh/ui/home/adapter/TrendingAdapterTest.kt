@@ -16,38 +16,38 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 
 @RunWith(RobolectricTestRunner::class)
-class MovieSimilarAdapterTest {
+class TrendingAdapterTest {
 
     private val spyListMovieEntity: ArrayList<MovieEntity> = spy()
 
-    private lateinit var sutMovieSimilarAdapter: MovieSimilarAdapter
+    private lateinit var sutTrendingAdapter: TrendingAdapter
 
     @Before
     fun setup() {
-        sutMovieSimilarAdapter = MovieSimilarAdapter()
+        sutTrendingAdapter = TrendingAdapter()
         spyListMovieEntity.add(getMovieOne())
         spyListMovieEntity.add(getMovieTwo())
-        sutMovieSimilarAdapter.submitList(spyListMovieEntity)
+        sutTrendingAdapter.submitList(spyListMovieEntity)
     }
 
     @Test
     fun validateAdapter() {
-        val viewHolder = sutMovieSimilarAdapter.onCreateViewHolder(
+        val viewHolder = sutTrendingAdapter.onCreateViewHolder(
             FrameLayout(RuntimeEnvironment.getApplication()),
             0
         )
-        sutMovieSimilarAdapter.onBindViewHolder(viewHolder, 0)
+        sutTrendingAdapter.onBindViewHolder(viewHolder, 0)
         viewHolder.bind(spyListMovieEntity[0])
-        whenever(sutMovieSimilarAdapter.itemCount).doReturn(2)
+        whenever(sutTrendingAdapter.itemCount).doReturn(2)
 
-        assertNotNull(sutMovieSimilarAdapter)
-        assertEquals(2, sutMovieSimilarAdapter.itemCount)
+        assertNotNull(sutTrendingAdapter)
+        assertEquals(2, sutTrendingAdapter.itemCount)
     }
 
     @Test
     fun validateObjectAreEquals() {
         spyListMovieEntity.forEachIndexed { index, movieEntity ->
-            assertEquals(sutMovieSimilarAdapter.currentList[index], movieEntity)
+            assertEquals(sutTrendingAdapter.currentList[index], movieEntity)
         }
     }
 }

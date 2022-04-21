@@ -1,0 +1,412 @@
+{
+  "dates": {
+    "maximum": "2022-05-12",
+    "minimum": "2022-04-19"
+  },
+  "page": 1,
+  "results": [
+    {
+      "adult": false,
+      "backdrop_path": "/egoyMDLqCxzjnSrWOz50uLlJWmD.jpg",
+      "genre_ids": [
+        28,
+        878,
+        35,
+        10751
+      ],
+      "id": 675353,
+      "original_language": "en",
+      "original_title": "Sonic the Hedgehog 2",
+      "overview": "After settling in Green Hills, Sonic is eager to prove he has what it takes to be a true hero. His test comes when Dr. Robotnik returns, this time with a new partner, Knuckles, in search for an emerald that has the power to destroy civilizations. Sonic teams up with his own sidekick, Tails, and together they embark on a globe-trotting journey to find the emerald before it falls into the wrong hands.",
+      "popularity": 5368.313,
+      "poster_path": "/6DrHO1jr3qVrViUO6s6kFiAGM7.jpg",
+      "release_date": "2022-03-30",
+      "title": "Sonic the Hedgehog 2",
+      "video": false,
+      "vote_average": 7.7,
+      "vote_count": 552
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/85xYejKh6JPTEUGrn2SIPCxxiQO.jpg",
+      "genre_ids": [
+        14,
+        12
+      ],
+      "id": 338953,
+      "original_language": "en",
+      "original_title": "Fantastic Beasts: The Secrets of Dumbledore",
+      "overview": "Professor Albus Dumbledore knows the powerful, dark wizard Gellert Grindelwald is moving to seize control of the wizarding world. Unable to stop him alone, he entrusts magizoologist Newt Scamander to lead an intrepid team of wizards and witches. They soon encounter an array of old and new beasts as they clash with Grindelwald's growing legion of followers.",
+      "popularity": 1453.183,
+      "poster_path": "/jrgifaYeUtTnaH7NF5Drkgjg2MB.jpg",
+      "release_date": "2022-04-07",
+      "title": "Fantastic Beasts: The Secrets of Dumbledore",
+      "video": false,
+      "vote_average": 6.9,
+      "vote_count": 473
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/yzH5zvuEzzsHLZnn0jwYoPf0CMT.jpg",
+      "genre_ids": [
+        53,
+        28
+      ],
+      "id": 760926,
+      "original_language": "en",
+      "original_title": "Gold",
+      "overview": "In the not-too-distant future, two drifters traveling through the desert stumble across the biggest gold nugget ever found and the dream of immense wealth and greed takes hold. They hatch a plan to excavate their bounty, with one man leaving to secure the necessary tools while the other remains with the gold. The man who remains must endure harsh desert elements, ravenous wild dogs, and mysterious intruders, while battling the sinking suspicion that he has been abandoned to his fate.",
+      "popularity": 1578.543,
+      "poster_path": "/ejXBuNLvK4kZ7YcqeKqUWnCxdJq.jpg",
+      "release_date": "2022-01-13",
+      "title": "Gold",
+      "video": false,
+      "vote_average": 6.5,
+      "vote_count": 191
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/6mJrgL7Mi13XjJeGYJFlD6UEVQw.jpg",
+      "genre_ids": [
+        16,
+        35,
+        10751,
+        10402
+      ],
+      "id": 438695,
+      "original_language": "en",
+      "original_title": "Sing 2",
+      "overview": "Buster and his new cast now have their sights set on debuting a new show at the Crystal Tower Theater in glamorous Redshore City. But with no connections, he and his singers must sneak into the Crystal Entertainment offices, run by the ruthless wolf mogul Jimmy Crystal, where the gang pitches the ridiculous idea of casting the lion rock legend Clay Calloway in their show. Buster must embark on a quest to find the now-isolated Clay and persuade him to return to the stage.",
+      "popularity": 1062.402,
+      "poster_path": "/aWeKITRFbbwY8txG5uCj4rMCfSP.jpg",
+      "release_date": "2021-12-01",
+      "title": "Sing 2",
+      "video": false,
+      "vote_average": 8.1,
+      "vote_count": 2582
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/tj4lzGgHrfjnjVqAKkLIjFqPSyO.jpg",
+      "genre_ids": [
+        28,
+        878,
+        14
+      ],
+      "id": 526896,
+      "original_language": "en",
+      "original_title": "Morbius",
+      "overview": "Dangerously ill with a rare blood disorder, and determined to save others suffering his same fate, Dr. Michael Morbius attempts a desperate gamble. What at first appears to be a radical success soon reveals itself to be a remedy potentially worse than the disease.",
+      "popularity": 837.412,
+      "poster_path": "/6nhwr1LCozBiIN47b8oBEomOADm.jpg",
+      "release_date": "2022-03-30",
+      "title": "Morbius",
+      "video": false,
+      "vote_average": 5.8,
+      "vote_count": 480
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/ifUfE79O1raUwbaQRIB7XnFz5ZC.jpg",
+      "genre_ids": [
+        27,
+        9648,
+        53
+      ],
+      "id": 646385,
+      "original_language": "en",
+      "original_title": "Scream",
+      "overview": "Twenty-five years after a streak of brutal murders shocked the quiet town of Woodsboro, a new killer has donned the Ghostface mask and begins targeting a group of teenagers to resurrect secrets from the town’s deadly past.",
+      "popularity": 890.08,
+      "poster_path": "/1m3W6cpgwuIyjtg5nSnPx7yFkXW.jpg",
+      "release_date": "2022-01-12",
+      "title": "Scream",
+      "video": false,
+      "vote_average": 6.8,
+      "vote_count": 1170
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/fEe5fe82qHzjO4yej0o79etqsWV.jpg",
+      "genre_ids": [
+        16,
+        35,
+        28,
+        10751,
+        80
+      ],
+      "id": 629542,
+      "original_language": "en",
+      "original_title": "The Bad Guys",
+      "overview": "When the infamous Bad Guys are finally caught after years of countless heists and being the world’s most-wanted villains, Mr. Wolf brokers a deal to save them all from prison.",
+      "popularity": 653.716,
+      "poster_path": "/7qop80YfuO0BwJa1uXk1DXUUEwv.jpg",
+      "release_date": "2022-03-17",
+      "title": "The Bad Guys",
+      "video": false,
+      "vote_average": 7.5,
+      "vote_count": 90
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/geYUecpFI2AonDLhjyK9zoVFcMv.jpg",
+      "genre_ids": [
+        16,
+        28,
+        12,
+        9648
+      ],
+      "id": 810693,
+      "original_language": "ja",
+      "original_title": "劇場版 呪術廻戦 0",
+      "overview": "Yuta Okkotsu is a nervous high school student who is suffering from a serious problem—his childhood friend Rika has turned into a curse and won't leave him alone. Since Rika is no ordinary curse, his plight is noticed by Satoru Gojo, a teacher at Jujutsu High, a school where fledgling exorcists learn how to combat curses. Gojo convinces Yuta to enroll, but can he learn enough in time to confront the curse that haunts him?",
+      "popularity": 501.608,
+      "poster_path": "/3pTwMUEavTzVOh6yLN0aEwR7uSy.jpg",
+      "release_date": "2021-12-24",
+      "title": "Jujutsu Kaisen 0",
+      "video": false,
+      "vote_average": 7.8,
+      "vote_count": 105
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/ndCSoasjIZAMMDIuMxuGnNWu4DU.jpg",
+      "genre_ids": [
+        14,
+        28,
+        12
+      ],
+      "id": 453395,
+      "original_language": "en",
+      "original_title": "Doctor Strange in the Multiverse of Madness",
+      "overview": "Doctor Strange, with the help of mystical allies both old and new, traverses the mind-bending and dangerous alternate realities of the Multiverse to confront a mysterious new adversary.",
+      "popularity": 413.617,
+      "poster_path": "/wRnbWt44nKjsFPrqSmwYki5vZtF.jpg",
+      "release_date": "2022-05-04",
+      "title": "Doctor Strange in the Multiverse of Madness",
+      "video": false,
+      "vote_average": 0,
+      "vote_count": 0
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/hw7foD5in5YCs7qY3Pap9pdc1Vc.jpg",
+      "genre_ids": [
+        28,
+        12,
+        35,
+        10749
+      ],
+      "id": 752623,
+      "original_language": "en",
+      "original_title": "The Lost City",
+      "overview": "Follows a reclusive romance novelist who was sure nothing could be worse than getting stuck on a book tour with her cover model, until a kidnapping attempt sweeps them both into a cutthroat jungle adventure, proving life can be so much stranger, and more romantic, than any of her paperback fictions.",
+      "popularity": 444.952,
+      "poster_path": "/neMZH82Stu91d3iqvLdNQfqPPyl.jpg",
+      "release_date": "2022-03-24",
+      "title": "The Lost City",
+      "video": false,
+      "vote_average": 7.1,
+      "vote_count": 100
+    },
+    {
+      "adult": false,
+      "backdrop_path": null,
+      "genre_ids": [
+        35
+      ],
+      "id": 671318,
+      "original_language": "es",
+      "original_title": "¿Y cómo es él?",
+      "overview": "Thomas is a meek man on the verge of a nervous breakdown. Despite his situation he decides to fake a work trip to go to Vallarta to confront Jero, a taxi driver who is sleeping with his wife.",
+      "popularity": 357.804,
+      "poster_path": "/wRMNOaEpFftdQD73G0TaKXFJP3.jpg",
+      "release_date": "2022-04-07",
+      "title": "¿Y cómo es él?",
+      "video": false,
+      "vote_average": 0,
+      "vote_count": 0
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/ik9SVGcYxKg6y2a9cW0e0WchImW.jpg",
+      "genre_ids": [
+        28,
+        12,
+        18,
+        14
+      ],
+      "id": 639933,
+      "original_language": "en",
+      "original_title": "The Northman",
+      "overview": "Prince Amleth is on the verge of becoming a man when his father is brutally murdered by his uncle, who kidnaps the boy's mother. Two decades later, Amleth is now a Viking who's on a mission to save his mother, kill his uncle and avenge his father.",
+      "popularity": 343.481,
+      "poster_path": "/zhLKlUaF1SEpO58ppHIAyENkwgw.jpg",
+      "release_date": "2022-04-07",
+      "title": "The Northman",
+      "video": false,
+      "vote_average": 8.3,
+      "vote_count": 35
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/hHtv1I73l040wERu7o9U8B5JTcN.jpg",
+      "genre_ids": [
+        27,
+        9648,
+        53
+      ],
+      "id": 760104,
+      "original_language": "en",
+      "original_title": "X",
+      "overview": "In 1979, a group of young filmmakers set out to make an adult film in rural Texas, but when their reclusive, elderly hosts catch them in the act, the cast find themselves fighting for their lives.",
+      "popularity": 273.07,
+      "poster_path": "/woTQx9Q4b8aO13jR9dsj8C9JESy.jpg",
+      "release_date": "2022-03-17",
+      "title": "X",
+      "video": false,
+      "vote_average": 7,
+      "vote_count": 172
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/fRrpOILyXuWaWLmqF7kXeMVwITQ.jpg",
+      "genre_ids": [
+        27,
+        53,
+        12,
+        9648
+      ],
+      "id": 522444,
+      "original_language": "en",
+      "original_title": "Black Water: Abyss",
+      "overview": "An adventure-loving couple convince their friends to explore a remote, uncharted cave system in the forests of Northern Australia. With a tropical storm approaching, they abseil into the mouth of the cave, but when the caves start to flood, tensions rise as oxygen levels fall and the friends find themselves trapped. Unknown to them, the storm has also brought in a pack of dangerous and hungry crocodiles.",
+      "popularity": 189.848,
+      "poster_path": "/pmAv14TPE2vKMIRrVeCd1Ll7K94.jpg",
+      "release_date": "2020-07-09",
+      "title": "Black Water: Abyss",
+      "video": false,
+      "vote_average": 5.2,
+      "vote_count": 316
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/uHmvk8FnoxpgujDU0RIXLkv2fNt.jpg",
+      "genre_ids": [
+        16,
+        35
+      ],
+      "id": 573164,
+      "original_language": "es",
+      "original_title": "Un rescate de huevitos",
+      "overview": "Toto and his friends must rescue his egg children after they're taken away for a gourmet food event in Africa.",
+      "popularity": 213.321,
+      "poster_path": "/ewrIYKTLaqerwznGzNhmqr0huTs.jpg",
+      "release_date": "2021-08-12",
+      "title": "An Egg Rescue",
+      "video": false,
+      "vote_average": 8.1,
+      "vote_count": 301
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/vo9MRyCMBAdSqZgkI70AfVg8ISI.jpg",
+      "genre_ids": [
+        12,
+        10751,
+        18
+      ],
+      "id": 754067,
+      "original_language": "fr",
+      "original_title": "Mystère",
+      "overview": "Stéphane decides to move to the beautiful mountains of Cantal in order to reconnect with his 8-year-old daughter, Victoria, who has been silent since her mother's disappearance. During a walk in the forest, a shepherd gives Victoria a puppy named \"Mystery\" who will gradually give her a taste for life. But very quickly, Stéphane discovers that the animal is in reality a wolf… Despite the warnings and the danger of this situation, he cannot bring himself to separate his daughter from this seemingly harmless ball of hair.",
+      "popularity": 192.151,
+      "poster_path": "/u6fBXfWU7jaG0zWYiOvh1myEQC.jpg",
+      "release_date": "2021-12-15",
+      "title": "Vicky and Her Mystery",
+      "video": false,
+      "vote_average": 7.2,
+      "vote_count": 343
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/wp3vpSWAIjKSEeYb8F5NSZfONqw.jpg",
+      "genre_ids": [
+        28,
+        12,
+        878,
+        35,
+        14
+      ],
+      "id": 545611,
+      "original_language": "en",
+      "original_title": "Everything Everywhere All at Once",
+      "overview": "An aging Chinese immigrant is swept up in an insane adventure, where she alone can save what's important to her by connecting with the lives she could have led in other universes.",
+      "popularity": 119.322,
+      "poster_path": "/w3LxiVYdWWRvEVdn5RYq6jIqkb1.jpg",
+      "release_date": "2022-03-24",
+      "title": "Everything Everywhere All at Once",
+      "video": false,
+      "vote_average": 8.9,
+      "vote_count": 63
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/b6UXXuRQL3teEMVKTyae5hTq8ke.jpg",
+      "genre_ids": [
+        35
+      ],
+      "id": 671043,
+      "original_language": "fr",
+      "original_title": "Pourris gâtés",
+      "overview": "The billionaire is tired of the whims of his own children and decides to teach them a lesson. He announces to them that he has become bankrupt. Now spoiled teenagers will have to do what they have never done: go to work, learn to love and value life.",
+      "popularity": 125.14,
+      "poster_path": "/nW5LHayHlbavYD6XRM9SjKi55uu.jpg",
+      "release_date": "2021-09-15",
+      "title": "Spoiled Brats",
+      "video": false,
+      "vote_average": 6.3,
+      "vote_count": 266
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/ffsEyx9TfP8oOeNgTetgDUgndYw.jpg",
+      "genre_ids": [
+        18,
+        35
+      ],
+      "id": 626735,
+      "original_language": "en",
+      "original_title": "Dog",
+      "overview": "An army ranger and his dog embark on a road trip along the Pacific Coast Highway to attend a friend's funeral.",
+      "popularity": 120.833,
+      "poster_path": "/zHQy4h36WwuCetKS7C3wcT1hkgA.jpg",
+      "release_date": "2022-02-17",
+      "title": "Dog",
+      "video": false,
+      "vote_average": 7.4,
+      "vote_count": 209
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/kHd4rwdRtJXnYMraQSrlgPSCsIt.jpg",
+      "genre_ids": [
+        28,
+        53
+      ],
+      "id": 628900,
+      "original_language": "en",
+      "original_title": "The Contractor",
+      "overview": "After being involuntarily discharged from the U.S. Special Forces, James Harper decides to support his family by joining a private contracting organization alongside his best friend and under the command of a fellow veteran. Overseas on a covert mission, Harper must evade those trying to kill him while making his way back home.",
+      "popularity": 104.224,
+      "poster_path": "/rJPGPZ5soaG27MK90oKpioSiJE2.jpg",
+      "release_date": "2022-03-10",
+      "title": "The Contractor",
+      "video": false,
+      "vote_average": 6.2,
+      "vote_count": 123
+    }
+  ],
+  "total_pages": 26,
+  "total_results": 501
+}

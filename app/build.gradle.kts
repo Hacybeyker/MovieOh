@@ -201,7 +201,7 @@ dependencies {
     testImplementation(TestDependencies.hiltAndroid)
     // Chucker
     debugImplementation(AppDependencies.chucker)
-    "qaImplementation"(AppDependencies.chuckerNoOp)
+    "qaImplementation"(AppDependencies.chucker)
     releaseImplementation(AppDependencies.chuckerNoOp)
     // Glide
     implementation(AppDependencies.glide)
@@ -209,5 +209,5 @@ dependencies {
     // Detekt
     detektPlugins(ValidationDependencies.detekt)
     // Library
-    implementation(project(":uikit"))
+    api(project(":uikit"))
 }

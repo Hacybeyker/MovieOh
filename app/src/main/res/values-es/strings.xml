@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name" translatable="false">MovieOh</string>
     <string name="hello_world">Hola Mundo!</string>
-    <string name="top_rated">Mas Valorados</string>
+    <string name="upcoming">Estrenos</string>
+    <string name="trending">Tendencias</string>
+    <string name="action">Acción</string>
+    <string name="animation">Animacion</string>
+    <string name="adventure">Aventura</string>
+    <string name="comedy">Comedia</string>
+    <string name="drama">Drama</string>
 </resources>
