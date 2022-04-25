@@ -7,6 +7,7 @@ import javax.inject.Inject
 class DiscoverUseCase @Inject constructor(
     private val discoverRepository: DiscoverRepository
 ) {
+
     suspend fun fetchDiscover(page: Int, genre: Int): List<MovieEntity> {
         return discoverRepository.fetchDiscover(page, genre)
     }

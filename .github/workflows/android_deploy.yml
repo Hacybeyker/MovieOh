@@ -57,6 +57,8 @@ jobs:
     env:
       REPO_USERID: ${{ secrets.REPO_USERID }}
       REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
+      KEY_PROD: ${{ secrets.KEY_PROD }}
+      KEY_QA: ${{ secrets.KEY_QA }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
@@ -66,6 +68,11 @@ jobs:
 
       - name: Make Gradle Executable
         run: chmod +x ./gradlew
+
+      - name: SetLocalProperties
+        run: |
+          echo KEY_PROD=$KEY_PROD >> local.properties
+          echo KEY_QA=KEY_QA >> local.properties
 
       - name: Run Tests
         run: ./gradlew app:testDebugUnitTest
@@ -83,6 +90,8 @@ jobs:
     env:
       REPO_USERID: ${{ secrets.REPO_USERID }}
       REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
+      KEY_PROD: ${{ secrets.KEY_PROD }}
+      KEY_QA: ${{ secrets.KEY_QA }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
@@ -92,6 +101,11 @@ jobs:
 
       - name: Make Gradle Executable
         run: chmod +x ./gradlew
+
+      - name: SetLocalProperties
+        run: |
+          echo KEY_PROD=$KEY_PROD >> local.properties
+          echo KEY_QA=KEY_QA >> local.properties
 
       - name: Run Jacoco Test Report
         run: ./gradlew app:jacocoTestReport
@@ -112,6 +126,8 @@ jobs:
     env:
       REPO_USERID: ${{ secrets.REPO_USERID }}
       REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
+      KEY_PROD: ${{ secrets.KEY_PROD }}
+      KEY_QA: ${{ secrets.KEY_QA }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
@@ -126,6 +142,11 @@ jobs:
 
       - name: Make Gradle Executable
         run: chmod +x ./gradlew
+
+      - name: SetLocalProperties
+        run: |
+          echo KEY_PROD=$KEY_PROD >> local.properties
+          echo KEY_QA=KEY_QA >> local.properties
 
       - name: Run Lint
         run: ./gradlew app:lintDebug
@@ -154,6 +175,8 @@ jobs:
     env:
       REPO_USERID: ${{ secrets.REPO_USERID }}
       REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
+      KEY_PROD: ${{ secrets.KEY_PROD }}
+      KEY_QA: ${{ secrets.KEY_QA }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
@@ -169,11 +192,16 @@ jobs:
       - name: Make Gradle Executable
         run: chmod +x ./gradlew
 
-      - name: Run AssembleRelease
-        run: ./gradlew app:assembleRelease
+      - name: SetLocalProperties
+        run: |
+          echo KEY_PROD=$KEY_PROD >> local.properties
+          echo KEY_QA=KEY_QA >> local.properties
+
+      - name: Run AssembleDebug
+        run: ./gradlew app:assembleDebug
 
       - name: Upload Artifact APK
         uses: actions/upload-artifact@v2
         with:
           name: apk-release
-          path: ./app/build/outputs/apk/release
+          path: ./app/build/outputs/apk/debug
