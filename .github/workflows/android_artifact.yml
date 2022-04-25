@@ -15,12 +15,6 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: SetLocalPropertiesProd
-        run: echo KEY_PROD="${{secrets.KEY_PROD}}" > ./local.properties
-
-      - name: SetLocalPropertiesQa
-        run: echo KEY_QA="${{secrets.KEY_QA}}" > ./local.properties
-
       - name: Git Submodule
         uses: ./.github/workflows/submodule-action
 
@@ -31,6 +25,12 @@ jobs:
 
       - name: Make Gradle Executable
         run: chmod +x ./gradlew
+
+      - name: SetLocalPropertiesProd
+        run: echo KEY_PROD="$KEY_PROD" > ./local.properties
+
+      - name: SetLocalPropertiesQa
+        run: echo KEY_QA="$KEY_QA" > ./local.properties
 
       - name: Run Lint
         run: ./gradlew app:lintDebug
