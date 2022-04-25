@@ -24,14 +24,16 @@ class SplashActivity : AppCompatActivity() {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        Handler(Looper.getMainLooper()).postDelayed(Runnable {
-            startActivity(Intent(this, HomeActivity::class.java))
-            finish()
-        }, TIMER_SPLASH)
+        Handler(Looper.getMainLooper()).postDelayed(
+            Runnable {
+                startActivity(Intent(this, HomeActivity::class.java))
+                finish()
+            },
+            TIMER_SPLASH
+        )
     }
 
     override fun onDestroy() {
         super.onDestroy()
-
     }
 }

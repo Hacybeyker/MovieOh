@@ -7,6 +7,7 @@ plugins {
     id("scabbard.gradle") version "0.5.0"
     id("org.jlleitschuh.gradle.ktlint") version "10.2.0"
     id("io.gitlab.arturbosch.detekt") version "1.18.1"
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
 apply {
@@ -49,16 +50,23 @@ android {
                 "proguard-rules.pro"
             )
             buildConfigField("String", "BASE_URL", ConstantsApp.Release.BASE_URL)
+            buildConfigField(
+                "boolean",
+                "IS_DEVELOPMENT",
+                ConstantsApp.Release.IS_DEVELOPMENT.toString()
+            )
         }
         create("qa") {
-            isDebuggable = false
+            initWith(getByName("debug"))
+            isDebuggable = true
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            buildConfigField("String", "BASE_URL", ConstantsApp.Debug.BASE_URL)
+            buildConfigField("String", "BASE_URL", ConstantsApp.QA.BASE_URL)
+            buildConfigField("boolean", "IS_DEVELOPMENT", ConstantsApp.QA.IS_DEVELOPMENT.toString())
         }
         getByName("debug") {
             isDebuggable = true
@@ -69,12 +77,11 @@ android {
                 "proguard-rules.pro"
             )
             buildConfigField("String", "BASE_URL", ConstantsApp.Debug.BASE_URL)
-        }
-    }
-
-    externalNativeBuild {
-        ndkBuild {
-            path("src/main/jni/Android.mk")
+            buildConfigField(
+                "boolean",
+                "IS_DEVELOPMENT",
+                ConstantsApp.Debug.IS_DEVELOPMENT.toString()
+            )
         }
     }
 
@@ -126,7 +133,19 @@ android {
     }
 
     scabbard {
-        enabled = true
+        enabled = false
+        failOnError = false
+        fullBindingGraphValidation = true
+        qualifiedNames = true
+        outputFormat = "png"
+    }
+
+    tasks {
+        "preBuild" {
+            dependsOn("ktlintFormat")
+            dependsOn("ktlintCheck")
+            dependsOn("detekt")
+        }
     }
 }
 
@@ -169,6 +188,7 @@ dependencies {
     testImplementation(TestDependencies.kotlinCoroutines)
     testImplementation(TestDependencies.mockWebServer)
     testImplementation(TestDependencies.mockitoCore)
+    testImplementation(TestDependencies.mockitoKotlin)
     testImplementation(TestDependencies.mockitoInline)
     testImplementation(TestDependencies.archCore)
     testImplementation(TestDependencies.espressoCore)
@@ -183,10 +203,13 @@ dependencies {
     testImplementation(TestDependencies.hiltAndroid)
     // Chucker
     debugImplementation(AppDependencies.chucker)
+    "qaImplementation"(AppDependencies.chucker)
     releaseImplementation(AppDependencies.chuckerNoOp)
     // Glide
     implementation(AppDependencies.glide)
     kapt(AppDependencies.glideCompiler)
     // Detekt
     detektPlugins(ValidationDependencies.detekt)
+    // Library
+    api(project(":uikit"))
 }

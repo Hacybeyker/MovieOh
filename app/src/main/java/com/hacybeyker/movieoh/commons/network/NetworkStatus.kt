@@ -11,7 +11,12 @@ class NetworkStatus @Inject constructor(@ApplicationContext private val context:
 
     fun isOnline(): Boolean {
         val cm = context.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
-        return cm.getNetworkCapabilities(cm.activeNetwork)
-            ?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) ?: false
+        val network = cm.activeNetwork ?: return false
+        val activeNetwork = cm.getNetworkCapabilities(network) ?: return false
+        return when {
+            activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+            activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+            else -> false
+        }
     }
 }

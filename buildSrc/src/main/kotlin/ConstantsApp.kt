@@ -1,11 +1,18 @@
 object ConstantsApp {
-    object Debug {
-        //TODO change your BASE_URL
-        const val BASE_URL = "\"YOUR_BASE_URL\""
-    }
 
     object Release {
-        //TODO change your BASE_URL
-        const val BASE_URL = "\"YOUR_BASE_URL\""
+        const val BASE_URL = "\"https://api.themoviedb.org/3/\""
+        const val IS_DEVELOPMENT = false
     }
+
+    object Debug {
+        const val BASE_URL = "\"https://hacybeyker/mocks/\""
+        const val IS_DEVELOPMENT = true
+    }
+
+    object QA {
+        const val BASE_URL = "\"https://api.themoviedb.org/3/\""
+        const val IS_DEVELOPMENT = false
+    }
+
 }
