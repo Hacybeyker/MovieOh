@@ -12,9 +12,17 @@ jobs:
     env:
       REPO_USERID: ${{ secrets.REPO_USERID }}
       REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
+      KEY_PROD: ${{ secrets.KEY_PROD }}
+      KEY_QA: ${{ secrets.KEY_QA }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
+
+      - name: SetLocalPropertiesProd
+        run: echo KEY_PROD="${{secrets.KEY_PROD}}" > ./local.properties
+
+      - name: SetLocalPropertiesQa
+        run: echo KEY_QA="${{secrets.KEY_QA}}" > ./local.properties
 
       - name: Git Submodule
         uses: ./.github/workflows/submodule-action
