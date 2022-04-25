@@ -9,6 +9,12 @@ import com.hacybeyker.movieoh.domain.entity.MovieEntity
 import com.hacybeyker.movieoh.domain.usecase.DiscoverUseCase
 import com.hacybeyker.movieoh.domain.usecase.TrendingUseCase
 import com.hacybeyker.movieoh.domain.usecase.UpcomingUseCase
+import com.hacybeyker.movieoh.utils.constans.Genre.ACTION
+import com.hacybeyker.movieoh.utils.constans.Genre.ADVENTURE
+import com.hacybeyker.movieoh.utils.constans.Genre.ANIMATION
+import com.hacybeyker.movieoh.utils.constans.Genre.COMEDY
+import com.hacybeyker.movieoh.utils.constans.Genre.DRAMA
+import com.hacybeyker.movieoh.utils.constans.Genre.PAGE_STAR
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.async
@@ -54,13 +60,13 @@ class HomeViewModel @Inject constructor(
                 val timeStart = System.currentTimeMillis()
                 println("Here - TimeStart: $timeStart")
                 loading.postValue(false)
-                val trending = async { trendingUseCase.fetchTrendingMovie(1) }
-                val upcoming = async { upcomingUseCase.fetchUpcoming(1) }
-                val action = async { discoverUseCase.fetchDiscover(1, 28) }
-                val animation = async { discoverUseCase.fetchDiscover(1, 16) }
-                val comedy = async { discoverUseCase.fetchDiscover(1, 35) }
-                val drama = async { discoverUseCase.fetchDiscover(1, 18) }
-                val adventure = async { discoverUseCase.fetchDiscover(1, 12) }
+                val trending = async { trendingUseCase.fetchTrendingMovie(PAGE_STAR) }
+                val upcoming = async { upcomingUseCase.fetchUpcoming(PAGE_STAR) }
+                val action = async { discoverUseCase.fetchDiscover(PAGE_STAR, ACTION) }
+                val animation = async { discoverUseCase.fetchDiscover(PAGE_STAR, ANIMATION) }
+                val comedy = async { discoverUseCase.fetchDiscover(PAGE_STAR, COMEDY) }
+                val drama = async { discoverUseCase.fetchDiscover(PAGE_STAR, DRAMA) }
+                val adventure = async { discoverUseCase.fetchDiscover(PAGE_STAR, ADVENTURE) }
                 this@HomeViewModel.trending.postValue(trending.await())
                 this@HomeViewModel.upcoming.postValue(upcoming.await())
                 this@HomeViewModel.action.postValue(action.await())

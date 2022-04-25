@@ -143,6 +143,8 @@ android {
     tasks {
         "preBuild" {
             dependsOn("ktlintFormat")
+            dependsOn("ktlintCheck")
+            dependsOn("detekt")
         }
     }
 }
