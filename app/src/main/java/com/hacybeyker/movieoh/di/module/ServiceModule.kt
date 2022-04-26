@@ -1,6 +1,7 @@
 package com.hacybeyker.movieoh.di.module
 
 import com.hacybeyker.movieoh.data.api.DiscoverApi
+import com.hacybeyker.movieoh.data.api.SimilarApi
 import com.hacybeyker.movieoh.data.api.TrendingMovieApi
 import com.hacybeyker.movieoh.data.api.UpcomingApi
 import dagger.Module
@@ -30,5 +31,11 @@ class ServiceModule {
     @Provides
     fun provideDiscoverServices(retrofit: Retrofit): DiscoverApi {
         return retrofit.create(DiscoverApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideSimilarService(retrofit: Retrofit): SimilarApi {
+        return retrofit.create(SimilarApi::class.java)
     }
 }

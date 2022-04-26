@@ -1,4 +1,4 @@
-package com.hacybeyker.movieoh.ui.home.adapter
+package com.hacybeyker.movieoh.ui.detail.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,16 +7,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hacybeyker.movieoh.databinding.RecyclerMovieBinding
 import com.hacybeyker.movieoh.domain.entity.MovieEntity
 import com.hacybeyker.movieoh.ui.OnItemMovie
+import com.hacybeyker.movieoh.ui.home.adapter.MovieDiffUtilCallback
 import com.hacybeyker.movieoh.utils.extensions.loadImage
 
-class ActionAdapter(private val onItemMovie: OnItemMovie) :
-    ListAdapter<MovieEntity, ActionAdapter.ActionViewHolder>(MovieDiffUtilCallback()) {
+class SimilarAdapter(private val onItemMovie: OnItemMovie) :
+    ListAdapter<MovieEntity, SimilarAdapter.SimilarViewHolder>(MovieDiffUtilCallback()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActionViewHolder {
-        return ActionViewHolder.from(parent, onItemMovie)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SimilarViewHolder {
+        return SimilarViewHolder.from(parent, onItemMovie)
     }
 
-    override fun onBindViewHolder(holder: ActionViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: SimilarViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
@@ -24,17 +25,17 @@ class ActionAdapter(private val onItemMovie: OnItemMovie) :
         super.submitList(list)
     }
 
-    class ActionViewHolder(
+    class SimilarViewHolder(
         private val binding: RecyclerMovieBinding,
         private val onItemMovie: OnItemMovie
     ) :
         RecyclerView.ViewHolder(binding.root) {
 
         companion object {
-            fun from(parent: ViewGroup, onItemMovie: OnItemMovie): ActionViewHolder {
+            fun from(parent: ViewGroup, onItemMovie: OnItemMovie): SimilarViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = RecyclerMovieBinding.inflate(layoutInflater, parent, false)
-                return ActionViewHolder(binding, onItemMovie)
+                return SimilarViewHolder(binding, onItemMovie)
             }
         }
 

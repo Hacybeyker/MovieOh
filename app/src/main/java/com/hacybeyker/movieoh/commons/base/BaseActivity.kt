@@ -13,14 +13,13 @@ abstract class BaseActivity<VB : ViewBinding, VM : ViewModel> : AppCompatActivit
 
     protected abstract val viewModelClass: Class<VM>
 
-    open fun setupView() { /*Your implementation*/
-    }
+    protected abstract fun setupView()
 
-    open fun setupObservers() { /*Your implementation*/
-    }
+    protected abstract fun setupObservers()
 
-    open fun launchObservers() { /*Your implementation*/
-    }
+    protected abstract fun launchObservers()
+
+    open fun getIntentData() = Unit
 
     @VisibleForTesting
     lateinit var viewModel: VM
@@ -33,6 +32,7 @@ abstract class BaseActivity<VB : ViewBinding, VM : ViewModel> : AppCompatActivit
         viewModel = ViewModelProvider(this)[viewModelClass]
         binding = viewBinding
         setContentView(binding.root)
+        getIntentData()
         setupView()
         setupObservers()
         launchObservers()

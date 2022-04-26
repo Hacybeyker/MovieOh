@@ -140,13 +140,13 @@ android {
         outputFormat = "png"
     }
 
-    tasks {
+/*    tasks {
         "preBuild" {
             dependsOn("ktlintFormat")
             dependsOn("ktlintCheck")
             dependsOn("detekt")
         }
-    }
+    }*/
 }
 
 dependencies {

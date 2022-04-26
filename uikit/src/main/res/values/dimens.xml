@@ -4,6 +4,8 @@
     <dimen name="dp5">5dp</dimen>
     <dimen name="dp10">10dp</dimen>
     <dimen name="dp20">20dp</dimen>
+    <dimen name="sp15">15sp</dimen>
+    <dimen name="sp20">20sp</dimen>
     <dimen name="sp40">40sp</dimen>
     <dimen name="dp15">15dp</dimen>
     <dimen name="dp109">109dp</dimen>

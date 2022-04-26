@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clMainDetail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context=".ui.detail.DetailActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsvMainDetailScroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clDetail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="@dimen/dp5"
+                android:padding="@dimen/dp15"
+                android:tint="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/icon_arrow_left"
+                tools:ignore="ImageContrastCheck" />
+
+            <com.hacybeyker.uikit.component.image.ImageView
+                android:id="@+id/ivPosterLandscape"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp0"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toTopOf="@id/glPoster"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:percentRounded="@dimen/dp0"
+                tools:ignore="ImageContrastCheck"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/glPoster"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintGuide_percent="0.30"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clContainerDetail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/shape_rounded"
+                android:translationY="-20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/glPoster">
+
+                <com.hacybeyker.uikit.component.image.ImageView
+                    android:id="@+id/ivPosterPortrait"
+                    android:layout_width="@dimen/dp109"
+                    android:layout_height="@dimen/dp164"
+                    android:layout_marginStart="@dimen/dp15"
+                    android:layout_marginTop="@dimen/dp15"
+                    android:scaleType="fitXY"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:percentRounded="@dimen/dp5"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="@dimen/dp0"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp15"
+                    android:layout_marginEnd="@dimen/dp15"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:textSize="@dimen/sp20"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/ivPosterPortrait"
+                    app:layout_constraintTop_toTopOf="@id/ivPosterPortrait"
+                    tools:text="The Batman" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvReleaseDate"
+                    android:layout_width="@dimen/dp0"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp15"
+                    android:layout_marginTop="@dimen/dp10"
+                    android:layout_marginEnd="@dimen/dp15"
+                    android:fontFamily="@font/montserrat_light"
+                    android:gravity="start"
+                    android:textColor="#757575"
+                    android:textSize="@dimen/sp15"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/ivPosterPortrait"
+                    app:layout_constraintTop_toBottomOf="@id/tvTitle"
+                    tools:ignore="TextContrastCheck"
+                    tools:text="2022" />
+
+                <com.hacybeyker.uikit.component.section.Header
+                    android:id="@+id/hAbout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ivPosterPortrait"
+                    app:text="Acerca de esta pelicula" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvOverview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp15"
+                    android:layout_marginEnd="@dimen/dp15"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/montserrat_light"
+                    android:gravity="start"
+                    android:maxLines="4"
+                    android:textColor="#757575"
+                    android:textSize="@dimen/sp15"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/hAbout"
+                    tools:ignore="TextContrastCheck"
+                    tools:text="@tools:sample/lorem/random" />
+
+                <com.hacybeyker.uikit.component.section.Header
+                    android:id="@+id/hSimilar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvOverview"
+                    app:text="Peliculas similares" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvMovieSimilar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/dp10"
+                    android:paddingEnd="@dimen/dp10"
+                    android:scrollbars="none"
+                    android:visibility="gone"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/hSimilar"
+                    tools:ignore="SpeakableTextPresentCheck"
+                    tools:listitem="@layout/recycler_movie"
+                    tools:visibility="visible" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

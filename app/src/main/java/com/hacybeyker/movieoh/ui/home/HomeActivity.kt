@@ -1,9 +1,13 @@
 package com.hacybeyker.movieoh.ui.home
 
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.DefaultItemAnimator
 import com.hacybeyker.movieoh.commons.base.BaseActivity
 import com.hacybeyker.movieoh.databinding.ActivityHomeBinding
+import com.hacybeyker.movieoh.domain.entity.MovieEntity
+import com.hacybeyker.movieoh.ui.OnItemMovie
+import com.hacybeyker.movieoh.ui.detail.DetailActivity
 import com.hacybeyker.movieoh.ui.home.adapter.ActionAdapter
 import com.hacybeyker.movieoh.ui.home.adapter.AdventureAdapter
 import com.hacybeyker.movieoh.ui.home.adapter.AnimationAdapter
@@ -15,11 +19,11 @@ import com.hacybeyker.movieoh.ui.home.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>() {
+class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), OnItemMovie {
 
     private val adapterTrending: TrendingAdapter by lazy { TrendingAdapter() }
     private val adapterUpcoming: UpcomingAdapter by lazy { UpcomingAdapter() }
-    private val adapterAction: ActionAdapter by lazy { ActionAdapter() }
+    private val adapterAction: ActionAdapter by lazy { ActionAdapter(this) }
     private val adapterAnimation: AnimationAdapter by lazy { AnimationAdapter() }
     private val adapterComedy: ComedyAdapter by lazy { ComedyAdapter() }
     private val adapterDrama: DramaAdapter by lazy { DramaAdapter() }
@@ -100,5 +104,10 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>() {
             binding.rvMovieAdventure.visibility = View.VISIBLE
             adapterAdventure.submitList(adventure.toMutableList())
         }
+    }
+
+    override fun onClickMovie(movie: MovieEntity) {
+        Log.d("TAG", "Here - onClickMovie: Click en Home")
+        this.startActivity(DetailActivity.newInstance(this, movie))
     }
 }
