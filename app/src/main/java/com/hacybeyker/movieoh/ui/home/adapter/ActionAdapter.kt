@@ -27,8 +27,7 @@ class ActionAdapter(private val onItemMovie: OnItemMovie) :
     class ActionViewHolder(
         private val binding: RecyclerMovieBinding,
         private val onItemMovie: OnItemMovie
-    ) :
-        RecyclerView.ViewHolder(binding.root) {
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         companion object {
             fun from(parent: ViewGroup, onItemMovie: OnItemMovie): ActionViewHolder {

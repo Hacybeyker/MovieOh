@@ -27,6 +27,7 @@ android {
         versionName = ConfigureApp.version
         testInstrumentationRunner = AppVersion.testInstrumentationRunner
         renderscriptSupportModeEnabled = true
+        vectorDrawables.useSupportLibrary = true
         kapt {
             arguments {
                 arg("room.schemaLocation", "$projectDir/schemas")
@@ -59,8 +60,8 @@ android {
         create("qa") {
             initWith(getByName("debug"))
             isDebuggable = true
-            isMinifyEnabled = true
-            isShrinkResources = true
+            isMinifyEnabled = false
+            isShrinkResources = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -140,13 +141,13 @@ android {
         outputFormat = "png"
     }
 
-/*    tasks {
+    tasks {
         "preBuild" {
             dependsOn("ktlintFormat")
             dependsOn("ktlintCheck")
             dependsOn("detekt")
         }
-    }*/
+    }
 }
 
 dependencies {
@@ -190,7 +191,6 @@ dependencies {
     testImplementation(TestDependencies.mockitoCore)
     testImplementation(TestDependencies.mockitoKotlin)
     testImplementation(TestDependencies.mockitoInline)
-    testImplementation(TestDependencies.archCore)
     testImplementation(TestDependencies.espressoCore)
     testImplementation(TestDependencies.espressoIntents)
     debugImplementation(TestDependencies.fragment)

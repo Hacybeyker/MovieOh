@@ -8,4 +8,7 @@
     <string name="adventure">Aventura</string>
     <string name="comedy">Comedia</string>
     <string name="drama">Drama</string>
+    <string name="opinions">%1$d Opiniones</string>
+    <string name="duration">Duración</string>
+    <string name="watch_now">Ver ahora</string>
 </resources>

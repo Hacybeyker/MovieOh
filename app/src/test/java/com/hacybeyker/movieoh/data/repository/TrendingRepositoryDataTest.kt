@@ -37,10 +37,11 @@ class TrendingRepositoryDataTest {
         testCoroutineRule.runBlockingTest {
             whenever(mockDataSource.fetchTrendingMovie(anyInt())).doReturn(mockListMovieEntity)
 
-            val result = sutRepositoryData.fetchTrendingMovie(anyInt())
+            val resultData = sutRepositoryData.fetchTrendingMovie(anyInt())
 
+            assertNotNull(sutRepositoryData)
+            assertNotNull(resultData)
             verify(mockDataSource, times(numInvocations = 1)).fetchTrendingMovie(anyInt())
-            assertNotNull(result)
         }
     }
 }

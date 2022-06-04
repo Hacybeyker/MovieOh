@@ -1,6 +1,5 @@
 package com.hacybeyker.movieoh.ui.home
 
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.DefaultItemAnimator
 import com.hacybeyker.movieoh.commons.base.BaseActivity
@@ -21,13 +20,13 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), OnItemMovie {
 
-    private val adapterTrending: TrendingAdapter by lazy { TrendingAdapter() }
-    private val adapterUpcoming: UpcomingAdapter by lazy { UpcomingAdapter() }
+    private val adapterTrending: TrendingAdapter by lazy { TrendingAdapter(this) }
+    private val adapterUpcoming: UpcomingAdapter by lazy { UpcomingAdapter(this) }
     private val adapterAction: ActionAdapter by lazy { ActionAdapter(this) }
-    private val adapterAnimation: AnimationAdapter by lazy { AnimationAdapter() }
-    private val adapterComedy: ComedyAdapter by lazy { ComedyAdapter() }
-    private val adapterDrama: DramaAdapter by lazy { DramaAdapter() }
-    private val adapterAdventure: AdventureAdapter by lazy { AdventureAdapter() }
+    private val adapterAnimation: AnimationAdapter by lazy { AnimationAdapter(this) }
+    private val adapterComedy: ComedyAdapter by lazy { ComedyAdapter(this) }
+    private val adapterDrama: DramaAdapter by lazy { DramaAdapter(this) }
+    private val adapterAdventure: AdventureAdapter by lazy { AdventureAdapter(this) }
 
     override val viewBinding: ActivityHomeBinding
         get() = ActivityHomeBinding.inflate(layoutInflater)
@@ -66,7 +65,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), OnItemM
     }
 
     override fun launchObservers() {
-        viewModel.fetchTrendingMovie()
+        viewModel.initHome()
     }
 
     override fun setupObservers() {
@@ -107,7 +106,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), OnItemM
     }
 
     override fun onClickMovie(movie: MovieEntity) {
-        Log.d("TAG", "Here - onClickMovie: Click en Home")
         this.startActivity(DetailActivity.newInstance(this, movie))
     }
 }

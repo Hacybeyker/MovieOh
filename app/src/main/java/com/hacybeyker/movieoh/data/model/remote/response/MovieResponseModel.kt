@@ -1,7 +1,12 @@
 package com.hacybeyker.movieoh.data.model.remote.response
 
+import androidx.annotation.VisibleForTesting
 import com.google.gson.annotations.SerializedName
+import com.hacybeyker.movieoh.domain.entity.AMAZON
+import com.hacybeyker.movieoh.domain.entity.HBO
 import com.hacybeyker.movieoh.domain.entity.MovieEntity
+import com.hacybeyker.movieoh.domain.entity.NETFLIX
+import com.hacybeyker.movieoh.domain.entity.StreamEntity
 
 data class MovieResponseModel(
     @SerializedName("adult")
@@ -33,8 +38,32 @@ data class MovieResponseModel(
     @SerializedName("vote_average")
     val voteAverage: Double?,
     @SerializedName("vote_count")
-    val voteCount: Int?
-)
+    val voteCount: Int?,
+    @SerializedName("runtime")
+    val runtime: Int?,
+    @SerializedName("homepage")
+    val homepage: String?,
+    @SerializedName("genres")
+    val genres: List<GenreResponseModel>?
+) {
+    @VisibleForTesting
+    fun isAvailableStream(): Boolean {
+        if (homepage == null) return false
+        return homepage.contains(NETFLIX) ||
+            homepage.contains(AMAZON) ||
+            homepage.contains(HBO)
+    }
+
+    fun assignedStream(): StreamEntity {
+        var stream: StreamEntity = StreamEntity.NONE
+        if (homepage != null && isAvailableStream()) when {
+            homepage.contains(NETFLIX) -> stream = StreamEntity.NETFLIX
+            homepage.contains(AMAZON) -> stream = StreamEntity.AMAZON
+            homepage.contains(HBO) -> stream = StreamEntity.HBO
+        }
+        return stream
+    }
+}
 
 fun MovieResponseModel.toEntity(): MovieEntity {
     return MovieEntity(
@@ -45,6 +74,11 @@ fun MovieResponseModel.toEntity(): MovieEntity {
         overview = overview ?: "",
         releaseDate = releaseDate ?: "",
         title = title ?: "",
-        voteAverage = voteAverage ?: 0.0
+        voteAverage = voteAverage ?: 0.0,
+        voteCount = voteCount ?: 0,
+        runtime = runtime ?: 0,
+        homepage = homepage ?: "",
+        stream = assignedStream(),
+        genres = genres?.toListGenreEntity() ?: arrayListOf()
     )
 }

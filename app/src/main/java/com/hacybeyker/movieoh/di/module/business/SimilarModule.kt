@@ -1,4 +1,4 @@
-package com.hacybeyker.movieoh.di.module
+package com.hacybeyker.movieoh.di.module.business
 
 import com.hacybeyker.movieoh.data.datasource.SimilarDataSource
 import com.hacybeyker.movieoh.data.datasource.remote.SimilarDataSourceRemote
