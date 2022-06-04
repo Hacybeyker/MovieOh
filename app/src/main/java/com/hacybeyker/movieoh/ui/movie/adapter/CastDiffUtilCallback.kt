@@ -1,4 +1,4 @@
-package com.hacybeyker.movieoh.ui.detail.adapter
+package com.hacybeyker.movieoh.ui.movie.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 import com.hacybeyker.movieoh.domain.entity.CastEntity

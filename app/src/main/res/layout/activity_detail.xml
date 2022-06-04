@@ -5,7 +5,7 @@
     android:id="@+id/clMainDetail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.detail.DetailActivity">
+    tools:context=".ui.movie.DetailActivity">
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nsvMainDetailScroll"

@@ -1,4 +1,4 @@
-package com.hacybeyker.movieoh.ui.detail.adapter
+package com.hacybeyker.movieoh.ui.movie.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

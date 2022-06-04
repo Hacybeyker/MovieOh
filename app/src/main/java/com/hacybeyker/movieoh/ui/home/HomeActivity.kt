@@ -6,7 +6,6 @@ import com.hacybeyker.movieoh.commons.base.BaseActivity
 import com.hacybeyker.movieoh.databinding.ActivityHomeBinding
 import com.hacybeyker.movieoh.domain.entity.MovieEntity
 import com.hacybeyker.movieoh.ui.OnItemMovie
-import com.hacybeyker.movieoh.ui.detail.DetailActivity
 import com.hacybeyker.movieoh.ui.home.adapter.ActionAdapter
 import com.hacybeyker.movieoh.ui.home.adapter.AdventureAdapter
 import com.hacybeyker.movieoh.ui.home.adapter.AnimationAdapter
@@ -15,6 +14,7 @@ import com.hacybeyker.movieoh.ui.home.adapter.DramaAdapter
 import com.hacybeyker.movieoh.ui.home.adapter.TrendingAdapter
 import com.hacybeyker.movieoh.ui.home.adapter.UpcomingAdapter
 import com.hacybeyker.movieoh.ui.home.viewmodel.HomeViewModel
+import com.hacybeyker.movieoh.ui.movie.DetailActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

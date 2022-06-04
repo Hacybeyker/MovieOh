@@ -1,4 +1,4 @@
-package com.hacybeyker.movieoh.ui.detail.viewmodel
+package com.hacybeyker.movieoh.ui.movie.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.LiveData

@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MovieOH">
         <activity
-            android:name=".ui.detail.DetailActivity"
+            android:name=".ui.movie.DetailActivity"
             android:exported="false" />
         <activity
             android:name=".ui.splash.SplashActivity"

@@ -1,4 +1,4 @@
-package com.hacybeyker.movieoh.ui.detail
+package com.hacybeyker.movieoh.ui.movie
 
 import android.app.Activity
 import android.content.Intent
@@ -14,9 +14,9 @@ import com.hacybeyker.movieoh.domain.entity.GenreEntity
 import com.hacybeyker.movieoh.domain.entity.MovieEntity
 import com.hacybeyker.movieoh.domain.entity.StreamEntity
 import com.hacybeyker.movieoh.ui.OnItemMovie
-import com.hacybeyker.movieoh.ui.detail.adapter.CastAdapter
-import com.hacybeyker.movieoh.ui.detail.adapter.SimilarAdapter
-import com.hacybeyker.movieoh.ui.detail.viewmodel.DetailViewModel
+import com.hacybeyker.movieoh.ui.movie.adapter.CastAdapter
+import com.hacybeyker.movieoh.ui.movie.adapter.SimilarAdapter
+import com.hacybeyker.movieoh.ui.movie.viewmodel.DetailViewModel
 import com.hacybeyker.movieoh.utils.extensions.format
 import com.hacybeyker.movieoh.utils.extensions.getRuntime
 import com.hacybeyker.movieoh.utils.extensions.loadImage
