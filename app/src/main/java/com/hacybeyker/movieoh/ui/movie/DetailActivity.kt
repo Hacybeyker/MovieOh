@@ -25,7 +25,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(), OnItemMovie {
 
-    private val similarAdapter: SimilarAdapter by lazy { SimilarAdapter(this) }
+    private val similarAdapter: SimilarAdapter by lazy { SimilarAdapter(onClick = { onClickMovie(it) }) }
     private val castAdapter: CastAdapter by lazy { CastAdapter() }
 
     override val viewBinding: ActivityDetailBinding
@@ -74,7 +74,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(), O
     override fun launchObservers() {
         viewModel.movieLiveData.observe(this) { movie ->
             this.movie = movie
-            showExtraInfo()
+            setupExtraInfo()
         }
 
         viewModel.creditsLiveData.observe(this) { credits ->
@@ -103,19 +103,23 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(), O
         }
     }
 
-    private fun showExtraInfo() {
+    private fun setupExtraInfo() {
         movie?.let { movie ->
             binding.apply {
                 includeInfo.tvTextText.text = movie.runtime.getRuntime()
                 generateChipGenre(movie.genres)
-                if (movie.stream != null && movie.stream != StreamEntity.NONE) {
-                    includeInfo.vDividerText.visibility = View.VISIBLE
-                    includeInfo.clContainerIcon.visibility = View.VISIBLE
-                    includeInfo.ivIconIcon.setImageResource(movie.stream!!.icon)
-                    includeInfo.clContainerIcon.setOnClickListener {
-                        openLink(movie.homepage)
-                    }
-                }
+                showStream(movie)
+            }
+        }
+    }
+
+    private fun showStream(movie: MovieEntity) {
+        movie.stream?.let { stream ->
+            if (stream != StreamEntity.NONE) {
+                binding.includeInfo.vDividerText.visibility = View.VISIBLE
+                binding.includeInfo.clContainerIcon.visibility = View.VISIBLE
+                binding.includeInfo.ivIconIcon.setImageResource(stream.icon)
+                binding.includeInfo.clContainerIcon.setOnClickListener { openLink(movie.homepage) }
             }
         }
     }

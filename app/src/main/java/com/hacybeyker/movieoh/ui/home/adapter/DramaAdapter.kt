@@ -6,14 +6,14 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hacybeyker.movieoh.databinding.RecyclerMovieBinding
 import com.hacybeyker.movieoh.domain.entity.MovieEntity
-import com.hacybeyker.movieoh.ui.OnItemMovie
 import com.hacybeyker.movieoh.utils.extensions.loadImage
 
-class DramaAdapter(private val onItemMovie: OnItemMovie) :
-    ListAdapter<MovieEntity, DramaAdapter.DramaViewHolder>(MovieDiffUtilCallback()) {
+class DramaAdapter(
+    private val onClick: (MovieEntity) -> Unit
+) : ListAdapter<MovieEntity, DramaAdapter.DramaViewHolder>(MovieDiffUtilCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DramaViewHolder {
-        return DramaViewHolder.from(parent, onItemMovie)
+        return DramaViewHolder.from(parent, onClick)
     }
 
     override fun onBindViewHolder(holder: DramaViewHolder, position: Int) {
@@ -26,20 +26,20 @@ class DramaAdapter(private val onItemMovie: OnItemMovie) :
 
     class DramaViewHolder(
         private val binding: RecyclerMovieBinding,
-        private val onItemMovie: OnItemMovie
+        private val onClick: (MovieEntity) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
         companion object {
-            fun from(parent: ViewGroup, onItemMovie: OnItemMovie): DramaViewHolder {
+            fun from(parent: ViewGroup, onClick: (MovieEntity) -> Unit): DramaViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = RecyclerMovieBinding.inflate(layoutInflater, parent, false)
-                return DramaViewHolder(binding, onItemMovie)
+                return DramaViewHolder(binding, onClick)
             }
         }
 
         fun bind(item: MovieEntity) {
             with(binding) {
-                ivMoviePoster.setOnClickListener { onItemMovie.onClickMovie(item) }
+                ivMoviePoster.setOnClickListener { onClick(item) }
                 ivMoviePoster.loadImage(item.posterPath)
             }
         }

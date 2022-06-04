@@ -2,11 +2,9 @@ package com.hacybeyker.movieoh.data.model.remote.response
 
 import androidx.annotation.VisibleForTesting
 import com.google.gson.annotations.SerializedName
-import com.hacybeyker.movieoh.domain.entity.AMAZON
-import com.hacybeyker.movieoh.domain.entity.HBO
 import com.hacybeyker.movieoh.domain.entity.MovieEntity
-import com.hacybeyker.movieoh.domain.entity.NETFLIX
 import com.hacybeyker.movieoh.domain.entity.StreamEntity
+import com.hacybeyker.movieoh.utils.constans.Stream
 
 data class MovieResponseModel(
     @SerializedName("adult")
@@ -49,17 +47,19 @@ data class MovieResponseModel(
     @VisibleForTesting
     fun isAvailableStream(): Boolean {
         if (homepage == null) return false
-        return homepage.contains(NETFLIX) ||
-            homepage.contains(AMAZON) ||
-            homepage.contains(HBO)
+        return homepage.contains(Stream.NETFLIX) ||
+            homepage.contains(Stream.AMAZON) ||
+            homepage.contains(Stream.HBO) ||
+            homepage.contains(Stream.DISNEY)
     }
 
     fun assignedStream(): StreamEntity {
         var stream: StreamEntity = StreamEntity.NONE
         if (homepage != null && isAvailableStream()) when {
-            homepage.contains(NETFLIX) -> stream = StreamEntity.NETFLIX
-            homepage.contains(AMAZON) -> stream = StreamEntity.AMAZON
-            homepage.contains(HBO) -> stream = StreamEntity.HBO
+            homepage.contains(Stream.NETFLIX) -> stream = StreamEntity.NETFLIX
+            homepage.contains(Stream.AMAZON) -> stream = StreamEntity.AMAZON
+            homepage.contains(Stream.HBO) -> stream = StreamEntity.HBO
+            homepage.contains(Stream.DISNEY) -> stream = StreamEntity.DISNEY
         }
         return stream
     }

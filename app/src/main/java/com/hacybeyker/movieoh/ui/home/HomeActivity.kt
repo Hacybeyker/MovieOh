@@ -20,13 +20,13 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), OnItemMovie {
 
-    private val adapterTrending: TrendingAdapter by lazy { TrendingAdapter(this) }
-    private val adapterUpcoming: UpcomingAdapter by lazy { UpcomingAdapter(this) }
-    private val adapterAction: ActionAdapter by lazy { ActionAdapter(this) }
-    private val adapterAnimation: AnimationAdapter by lazy { AnimationAdapter(this) }
-    private val adapterComedy: ComedyAdapter by lazy { ComedyAdapter(this) }
-    private val adapterDrama: DramaAdapter by lazy { DramaAdapter(this) }
-    private val adapterAdventure: AdventureAdapter by lazy { AdventureAdapter(this) }
+    private val adapterUpcoming: UpcomingAdapter by lazy { UpcomingAdapter { onClickMovie(it) } }
+    private val adapterTrending: TrendingAdapter by lazy { TrendingAdapter { onClickMovie(it) } }
+    private val adapterAction: ActionAdapter by lazy { ActionAdapter { onClickMovie(it) } }
+    private val adapterAnimation: AnimationAdapter by lazy { AnimationAdapter { onClickMovie(it) } }
+    private val adapterComedy: ComedyAdapter by lazy { ComedyAdapter { onClickMovie(it) } }
+    private val adapterDrama: DramaAdapter by lazy { DramaAdapter { onClickMovie(it) } }
+    private val adapterAdventure: AdventureAdapter by lazy { AdventureAdapter { onClickMovie(it) } }
 
     override val viewBinding: ActivityHomeBinding
         get() = ActivityHomeBinding.inflate(layoutInflater)
@@ -35,33 +35,35 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), OnItemM
         get() = HomeViewModel::class.java
 
     override fun setupView() {
-        binding.rvMovieTrending.adapter = adapterTrending
-        binding.rvMovieTrending.setHasFixedSize(true)
-        binding.rvMovieTrending.itemAnimator = DefaultItemAnimator()
+        binding.apply {
+            rvMovieUpcoming.adapter = adapterUpcoming
+            rvMovieUpcoming.setHasFixedSize(true)
+            rvMovieUpcoming.itemAnimator = DefaultItemAnimator()
 
-        binding.rvMovieUpcoming.adapter = adapterUpcoming
-        binding.rvMovieUpcoming.setHasFixedSize(true)
-        binding.rvMovieUpcoming.itemAnimator = DefaultItemAnimator()
+            rvMovieTrending.adapter = adapterTrending
+            rvMovieTrending.setHasFixedSize(true)
+            rvMovieTrending.itemAnimator = DefaultItemAnimator()
 
-        binding.rvMovieAction.adapter = adapterAction
-        binding.rvMovieAction.setHasFixedSize(true)
-        binding.rvMovieAction.itemAnimator = DefaultItemAnimator()
+            rvMovieAction.adapter = adapterAction
+            rvMovieAction.setHasFixedSize(true)
+            rvMovieAction.itemAnimator = DefaultItemAnimator()
 
-        binding.rvMovieAnimation.adapter = adapterAnimation
-        binding.rvMovieAnimation.setHasFixedSize(true)
-        binding.rvMovieAnimation.itemAnimator = DefaultItemAnimator()
+            rvMovieAnimation.adapter = adapterAnimation
+            rvMovieAnimation.setHasFixedSize(true)
+            rvMovieAnimation.itemAnimator = DefaultItemAnimator()
 
-        binding.rvMovieComedy.adapter = adapterComedy
-        binding.rvMovieComedy.setHasFixedSize(true)
-        binding.rvMovieComedy.itemAnimator = DefaultItemAnimator()
+            rvMovieComedy.adapter = adapterComedy
+            rvMovieComedy.setHasFixedSize(true)
+            rvMovieComedy.itemAnimator = DefaultItemAnimator()
 
-        binding.rvMovieDrama.adapter = adapterDrama
-        binding.rvMovieDrama.setHasFixedSize(true)
-        binding.rvMovieDrama.itemAnimator = DefaultItemAnimator()
+            rvMovieDrama.adapter = adapterDrama
+            rvMovieDrama.setHasFixedSize(true)
+            rvMovieDrama.itemAnimator = DefaultItemAnimator()
 
-        binding.rvMovieAdventure.adapter = adapterAdventure
-        binding.rvMovieAdventure.setHasFixedSize(true)
-        binding.rvMovieAdventure.itemAnimator = DefaultItemAnimator()
+            rvMovieAdventure.adapter = adapterAdventure
+            rvMovieAdventure.setHasFixedSize(true)
+            rvMovieAdventure.itemAnimator = DefaultItemAnimator()
+        }
     }
 
     override fun launchObservers() {
@@ -69,39 +71,41 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), OnItemM
     }
 
     override fun setupObservers() {
-        viewModel.trendingLiveData.observe(this) { trendingMovie ->
-            binding.rvMovieTrending.visibility = View.VISIBLE
-            adapterTrending.submitList(trendingMovie.toMutableList())
-        }
+        viewModel.apply {
+            trendingLiveData.observe(this@HomeActivity) { trendingMovie ->
+                binding.rvMovieTrending.visibility = View.VISIBLE
+                adapterTrending.submitList(trendingMovie.toMutableList())
+            }
 
-        viewModel.upcomingLiveData.observe(this) { upcoming ->
-            binding.rvMovieUpcoming.visibility = View.VISIBLE
-            adapterUpcoming.submitList(upcoming.toMutableList())
-        }
+            upcomingLiveData.observe(this@HomeActivity) { upcoming ->
+                binding.rvMovieUpcoming.visibility = View.VISIBLE
+                adapterUpcoming.submitList(upcoming.toMutableList())
+            }
 
-        viewModel.actionLiveData.observe(this) { action ->
-            binding.rvMovieAction.visibility = View.VISIBLE
-            adapterAction.submitList(action.toMutableList())
-        }
+            actionLiveData.observe(this@HomeActivity) { action ->
+                binding.rvMovieAction.visibility = View.VISIBLE
+                adapterAction.submitList(action.toMutableList())
+            }
 
-        viewModel.animationLiveData.observe(this) { animation ->
-            binding.rvMovieAnimation.visibility = View.VISIBLE
-            adapterAnimation.submitList(animation.toMutableList())
-        }
+            animationLiveData.observe(this@HomeActivity) { animation ->
+                binding.rvMovieAnimation.visibility = View.VISIBLE
+                adapterAnimation.submitList(animation.toMutableList())
+            }
 
-        viewModel.comedyLiveData.observe(this) { comedy ->
-            binding.rvMovieComedy.visibility = View.VISIBLE
-            adapterComedy.submitList(comedy.toMutableList())
-        }
+            comedyLiveData.observe(this@HomeActivity) { comedy ->
+                binding.rvMovieComedy.visibility = View.VISIBLE
+                adapterComedy.submitList(comedy.toMutableList())
+            }
 
-        viewModel.dramaLiveData.observe(this) { drama ->
-            binding.rvMovieDrama.visibility = View.VISIBLE
-            adapterDrama.submitList(drama.toMutableList())
-        }
+            dramaLiveData.observe(this@HomeActivity) { drama ->
+                binding.rvMovieDrama.visibility = View.VISIBLE
+                adapterDrama.submitList(drama.toMutableList())
+            }
 
-        viewModel.adventureLiveData.observe(this) { adventure ->
-            binding.rvMovieAdventure.visibility = View.VISIBLE
-            adapterAdventure.submitList(adventure.toMutableList())
+            adventureLiveData.observe(this@HomeActivity) { adventure ->
+                binding.rvMovieAdventure.visibility = View.VISIBLE
+                adapterAdventure.submitList(adventure.toMutableList())
+            }
         }
     }
 

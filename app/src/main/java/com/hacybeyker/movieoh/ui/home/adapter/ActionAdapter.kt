@@ -6,14 +6,14 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hacybeyker.movieoh.databinding.RecyclerMovieBinding
 import com.hacybeyker.movieoh.domain.entity.MovieEntity
-import com.hacybeyker.movieoh.ui.OnItemMovie
 import com.hacybeyker.movieoh.utils.extensions.loadImage
 
-class ActionAdapter(private val onItemMovie: OnItemMovie) :
-    ListAdapter<MovieEntity, ActionAdapter.ActionViewHolder>(MovieDiffUtilCallback()) {
+class ActionAdapter(
+    private val onClick: (MovieEntity) -> Unit
+) : ListAdapter<MovieEntity, ActionAdapter.ActionViewHolder>(MovieDiffUtilCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActionViewHolder {
-        return ActionViewHolder.from(parent, onItemMovie)
+        return ActionViewHolder.from(parent, onClick)
     }
 
     override fun onBindViewHolder(holder: ActionViewHolder, position: Int) {
@@ -26,20 +26,20 @@ class ActionAdapter(private val onItemMovie: OnItemMovie) :
 
     class ActionViewHolder(
         private val binding: RecyclerMovieBinding,
-        private val onItemMovie: OnItemMovie
+        private val onClick: (MovieEntity) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
         companion object {
-            fun from(parent: ViewGroup, onItemMovie: OnItemMovie): ActionViewHolder {
+            fun from(parent: ViewGroup, onClick: (MovieEntity) -> Unit): ActionViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = RecyclerMovieBinding.inflate(layoutInflater, parent, false)
-                return ActionViewHolder(binding, onItemMovie)
+                return ActionViewHolder(binding, onClick)
             }
         }
 
         fun bind(item: MovieEntity) {
             with(binding) {
-                ivMoviePoster.setOnClickListener { onItemMovie.onClickMovie(item) }
+                ivMoviePoster.setOnClickListener { onClick(item) }
                 ivMoviePoster.loadImage(item.posterPath)
             }
         }

@@ -1,6 +1,7 @@
 package com.hacybeyker.movieoh.domain.entity
 
 import com.hacybeyker.movieoh.R
+import com.hacybeyker.movieoh.utils.constans.Stream
 
 enum class StreamEntity(
     val icon: Int,
@@ -8,23 +9,22 @@ enum class StreamEntity(
 ) {
     NONE(
         icon = R.drawable.icon_netflix,
-        type = "none"
+        type = Stream.NONE
     ),
     NETFLIX(
         icon = R.drawable.icon_netflix,
-        type = "netflix"
+        type = Stream.NETFLIX
     ),
     AMAZON(
         icon = R.drawable.icon_amazon,
-        type = "amazon"
+        type = Stream.AMAZON
     ),
     HBO(
         icon = R.drawable.icon_hbo,
-        type = "hbo"
+        type = Stream.HBO
+    ),
+    DISNEY(
+        icon = R.drawable.icon_disney,
+        type = Stream.DISNEY
     )
 }
-
-const val NETFLIX = "netflix"
-const val AMAZON = "amazon"
-const val STAR_PLUS = "starplus"
-const val HBO = "hbo"

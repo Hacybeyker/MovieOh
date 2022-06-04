@@ -1,7 +1,6 @@
 package com.hacybeyker.movieoh.commons.base
 
 import android.os.Bundle
-import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -21,10 +20,8 @@ abstract class BaseActivity<VB : ViewBinding, VM : ViewModel> : AppCompatActivit
 
     open fun getIntentData() = Unit
 
-    @VisibleForTesting
     lateinit var viewModel: VM
 
-    @VisibleForTesting
     lateinit var binding: VB
 
     override fun onCreate(savedInstanceState: Bundle?) {
