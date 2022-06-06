@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/clMainDetail"
+    style="@style/Main_Container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.movie.DetailActivity">
@@ -20,11 +21,11 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivBack"
+                style="@style/Icon_Arrow_Back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:elevation="@dimen/dp5"
                 android:padding="@dimen/dp15"
-                android:tint="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/icon_arrow_left"
@@ -77,12 +78,11 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvTitle"
+                    style="@style/Title_A1"
                     android:layout_width="@dimen/dp0"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp15"
                     android:layout_marginEnd="@dimen/dp15"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:textSize="@dimen/sp20"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/ivPosterPortrait"
                     app:layout_constraintTop_toTopOf="@id/ivPosterPortrait"
@@ -90,15 +90,13 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvReleaseDate"
+                    style="@style/Title_A2"
                     android:layout_width="@dimen/dp0"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp15"
                     android:layout_marginTop="@dimen/dp10"
                     android:layout_marginEnd="@dimen/dp15"
-                    android:fontFamily="@font/montserrat_regular"
                     android:gravity="start"
-                    android:textColor="#757575"
-                    android:textSize="@dimen/sp15"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/ivPosterPortrait"
                     app:layout_constraintTop_toBottomOf="@id/tvTitle"
@@ -126,16 +124,14 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvOverview"
+                    style="@style/Title_A3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp15"
                     android:layout_marginEnd="@dimen/dp15"
                     android:ellipsize="end"
-                    android:fontFamily="@font/montserrat_light"
                     android:gravity="start"
                     android:maxLines="4"
-                    android:textColor="#757575"
-                    android:textSize="@dimen/sp15"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/hAbout"

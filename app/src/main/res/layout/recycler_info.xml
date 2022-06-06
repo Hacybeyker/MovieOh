@@ -25,14 +25,12 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvTextIconText"
+                style="@style/Title_A4_01"
                 android:layout_width="@dimen/dp0"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat_regular"
                 android:gravity="end"
                 android:paddingStart="@dimen/dp2"
                 android:paddingEnd="@dimen/dp2"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp11"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/tvTextIconIcon"
                 app:layout_constraintStart_toStartOf="parent"
@@ -41,12 +39,12 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/tvTextIconIcon"
+                style="@style/Icon_Star"
                 android:layout_width="@dimen/dp0"
                 android:layout_height="@dimen/dp10"
                 android:paddingStart="@dimen/dp2"
                 android:paddingEnd="@dimen/dp2"
                 android:scaleType="fitStart"
-                android:tint="@color/black"
                 app:layout_constraintBottom_toBottomOf="@id/tvTextIconText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tvTextIconText"
@@ -56,12 +54,11 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvTextIconDescription"
+            style="@style/Title_A4_02"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp5"
-            android:fontFamily="@font/montserrat_regular"
             android:gravity="center"
-            android:textSize="@dimen/sp11"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -72,9 +69,9 @@
 
     <View
         android:id="@+id/vDivider"
+        style="@style/View_Divider"
         android:layout_width="@dimen/dp1"
         android:layout_height="@dimen/dp20"
-        android:background="@color/philippine_gray"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@id/clContainerTextIcon"
         app:layout_constraintEnd_toStartOf="@id/clContainerText"
@@ -94,12 +91,10 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvTextText"
+            style="@style/Title_A4_01"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_regular"
             android:gravity="center"
-            android:textColor="@color/black"
-            android:textSize="@dimen/sp11"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -108,13 +103,12 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvTextDescription"
+            style="@style/Title_A4_02"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp5"
-            android:fontFamily="@font/montserrat_regular"
             android:gravity="center"
             android:text="@string/duration"
-            android:textSize="@dimen/sp11"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -125,9 +119,9 @@
 
     <View
         android:id="@+id/vDividerText"
+        style="@style/View_Divider"
         android:layout_width="@dimen/dp1"
         android:layout_height="@dimen/dp20"
-        android:background="@color/philippine_gray"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/clContainerText"
         app:layout_constraintEnd_toStartOf="@id/clContainerIcon"
@@ -159,13 +153,12 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvIconDescription"
+            style="@style/Title_A4_02"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp5"
-            android:fontFamily="@font/montserrat_regular"
             android:gravity="center"
             android:text="@string/watch_now"
-            android:textSize="@dimen/sp11"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
