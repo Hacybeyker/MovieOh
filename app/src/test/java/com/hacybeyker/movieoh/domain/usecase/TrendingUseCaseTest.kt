@@ -33,10 +33,10 @@ class TrendingUseCaseTest {
             whenever(mockRepository.fetchTrendingMovie(anyInt())).doReturn(mockListMovieEntity)
             whenever(mockListMovieEntity.size).doReturn(2)
 
-            val result = sutTrendingUseCase.fetchTrendingMovie(anyInt())
+            val resultData = sutTrendingUseCase.fetchTrendingMovie(anyInt())
 
             assertNotNull(sutTrendingUseCase)
-            assertNotNull(result)
+            assertNotNull(resultData)
             assertEquals(2, mockListMovieEntity.size)
             verify(mockRepository, times(numInvocations = 1)).fetchTrendingMovie(anyInt())
         }

@@ -1,29 +1,62 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Theme.MovieOH" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
-        <item name="windowNoTitle">true</item>
-        <item name="android:windowContentOverlay">@null</item>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="FontMain">
+        <item name="fontFamily">@font/montserrat_regular</item>
     </style>
 
-    <style name="Theme.FullScreen" parent="Theme.MovieOH">
-        <item name="windowActionBar">false</item>
-        <item name="android:windowFullscreen">true</item>
+    <style name="Title_A1" parent="FontMain">
+        <item name="android:letterSpacing">0.02</item>
+        <item name="android:textSize">@dimen/sp18</item>
+        <item name="android:textColor">@color/umbra</item>
     </style>
 
-    <style name="Smaller_Drawable">
-        <item name="android:textSize">18sp</item>
-        <item name="android:scaleX">0.8</item>
-        <item name="android:scaleY">0.8</item>
+    <style name="Title_A2" parent="FontMain">
+        <item name="android:letterSpacing">0.02</item>
+        <item name="android:textSize">@dimen/sp16</item>
+        <item name="android:textColor">@color/umbra</item>
+    </style>
+
+    <style name="Title_A3" parent="FontMain">
+        <item name="android:letterSpacing">0.02</item>
+        <item name="android:textSize">@dimen/sp14</item>
+        <item name="android:textColor">@color/black_tie</item>
+    </style>
+
+    <style name="Title_A4" parent="FontMain">
+        <item name="android:letterSpacing">0.02</item>
+        <item name="android:textSize">@dimen/sp12</item>
+        <item name="android:textColor">@color/black_tie</item>
+    </style>
+
+    <style name="Title_A4_01" parent="Title_A4">
+        <item name="android:textColor">@color/umbra</item>
+    </style>
+
+    <style name="Title_A4_02" parent="Title_A4">
+        <item name="android:textColor">@color/black_tie</item>
+    </style>
+
+    <style name="Main_Container">
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="Icon_Arrow_Back">
+        <item name="android:tint">@color/black_tie</item>
+    </style>
+
+    <style name="Icon_Star">
+        <item name="android:tint">@color/black</item>
+    </style>
+
+    <style name="View_Divider">
+        <item name="android:background">@color/black</item>
+    </style>
+
+    <style name="header_section_container">
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+        <item name="android:clickable">true</item>
+        <item name="android:clipToPadding">true</item>
+        <item name="android:focusable">true</item>
     </style>
 </resources>

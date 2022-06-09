@@ -56,28 +56,44 @@ class HomeViewModelTest {
     }
 
     @Test
-    fun `GIVEN a mockMovieEntityList WHEN call fetchTrendingMovie THEN usecase call fetchTrendingMovie`() {
+    fun `GIVEN a mockMovieEntityList WHEN call initHome THEN call all usecase`() {
         testCoroutineRule.runBlockingTest {
             whenever(mockTrendingUseCase.fetchTrendingMovie(anyInt())).doReturn(mockMovieEntityList)
+            whenever(mockUpcomingUseCase.fetchUpcoming(anyInt())).doReturn(mockMovieEntityList)
+            whenever(mockDiscoverUseCase.fetchDiscover(anyInt(), anyInt()))
+                .doReturn(mockMovieEntityList)
             whenever(mockMovieEntityList.size).doReturn(2)
 
-            sutHomeViewModel.fetchTrendingMovie()
+            sutHomeViewModel.initHome()
             val trending = sutHomeViewModel.trendingLiveData.getOrAwaitValue()
+            val upcoming = sutHomeViewModel.upcomingLiveData.getOrAwaitValue()
+            val action = sutHomeViewModel.actionLiveData.getOrAwaitValue()
+            val animation = sutHomeViewModel.animationLiveData.getOrAwaitValue()
+            val comedy = sutHomeViewModel.comedyLiveData.getOrAwaitValue()
+            val drama = sutHomeViewModel.dramaLiveData.getOrAwaitValue()
+            val adventure = sutHomeViewModel.adventureLiveData.getOrAwaitValue()
             val loading = sutHomeViewModel.loadingLiveData.getOrAwaitValue()
 
-            assertNotNull(loading)
             assertNotNull(trending)
+            assertNotNull(upcoming)
+            assertNotNull(action)
+            assertNotNull(animation)
+            assertNotNull(comedy)
+            assertNotNull(drama)
+            assertNotNull(adventure)
+            assertNotNull(loading)
+
             assertEquals(2, trending.size)
             verify(mockTrendingUseCase, times(numInvocations = 1)).fetchTrendingMovie(anyInt())
         }
     }
 
     @Test
-    fun `GIVEN a exception WHEN call fetchTrendingMovie THEN generate throw exception`() {
+    fun `GIVEN a exception WHEN call initHome THEN generate throw exception`() {
         testCoroutineRule.runBlockingTest {
             whenever(mockTrendingUseCase.fetchTrendingMovie(anyInt())).doAnswer { throw ApiException() }
 
-            sutHomeViewModel.fetchTrendingMovie()
+            sutHomeViewModel.initHome()
             val trending = sutHomeViewModel.trendingLiveData.getOrAwaitValue()
             val loading = sutHomeViewModel.loadingLiveData.getOrAwaitValue()
 

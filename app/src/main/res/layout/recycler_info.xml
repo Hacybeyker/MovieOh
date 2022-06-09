@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clMainRecyclerInfo"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/clContainerTextIcon"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/clContainerText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTextIconText"
+                style="@style/Title_A4_01"
+                android:layout_width="@dimen/dp0"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:paddingStart="@dimen/dp2"
+                android:paddingEnd="@dimen/dp2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tvTextIconIcon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="7.4" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/tvTextIconIcon"
+                style="@style/Icon_Star"
+                android:layout_width="@dimen/dp0"
+                android:layout_height="@dimen/dp10"
+                android:paddingStart="@dimen/dp2"
+                android:paddingEnd="@dimen/dp2"
+                android:scaleType="fitStart"
+                app:layout_constraintBottom_toBottomOf="@id/tvTextIconText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvTextIconText"
+                app:layout_constraintTop_toTopOf="@id/tvTextIconText"
+                app:srcCompat="@drawable/icon_star" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTextIconDescription"
+            style="@style/Title_A4_02"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp5"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="4369 opiniones" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <View
+        android:id="@+id/vDivider"
+        style="@style/View_Divider"
+        android:layout_width="@dimen/dp1"
+        android:layout_height="@dimen/dp20"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@id/clContainerTextIcon"
+        app:layout_constraintEnd_toStartOf="@id/clContainerText"
+        app:layout_constraintStart_toEndOf="@id/clContainerTextIcon"
+        app:layout_constraintTop_toTopOf="@id/clContainerTextIcon" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/clContainerText"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/clContainerIcon"
+        app:layout_constraintStart_toEndOf="@id/clContainerTextIcon"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTextText"
+            style="@style/Title_A4_01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="2h 56 min" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTextDescription"
+            style="@style/Title_A4_02"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp5"
+            android:gravity="center"
+            android:text="@string/duration"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Duración" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <View
+        android:id="@+id/vDividerText"
+        style="@style/View_Divider"
+        android:layout_width="@dimen/dp1"
+        android:layout_height="@dimen/dp20"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/clContainerText"
+        app:layout_constraintEnd_toStartOf="@id/clContainerIcon"
+        app:layout_constraintStart_toEndOf="@id/clContainerText"
+        app:layout_constraintTop_toTopOf="@id/clContainerText"
+        tools:visibility="visible" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/clContainerIcon"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/clContainerText"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivIconIcon"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp15"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@drawable/icon_amazon" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvIconDescription"
+            style="@style/Title_A4_02"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp5"
+            android:gravity="center"
+            android:text="@string/watch_now"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Ver ahora" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

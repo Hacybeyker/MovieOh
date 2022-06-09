@@ -8,11 +8,12 @@ import com.hacybeyker.movieoh.databinding.RecyclerMovieBinding
 import com.hacybeyker.movieoh.domain.entity.MovieEntity
 import com.hacybeyker.movieoh.utils.extensions.loadImage
 
-class AnimationAdapter :
-    ListAdapter<MovieEntity, AnimationAdapter.AnimationViewHolder>(MovieDiffUtilCallback()) {
+class AnimationAdapter(
+    private val onClick: (MovieEntity) -> Unit
+) : ListAdapter<MovieEntity, AnimationAdapter.AnimationViewHolder>(MovieDiffUtilCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnimationViewHolder {
-        return AnimationViewHolder.from(parent)
+        return AnimationViewHolder.from(parent, onClick)
     }
 
     override fun onBindViewHolder(holder: AnimationViewHolder, position: Int) {
@@ -23,19 +24,22 @@ class AnimationAdapter :
         super.submitList(list)
     }
 
-    class AnimationViewHolder(private val binding: RecyclerMovieBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    class AnimationViewHolder(
+        private val binding: RecyclerMovieBinding,
+        private val onClick: (MovieEntity) -> Unit
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         companion object {
-            fun from(parent: ViewGroup): AnimationViewHolder {
+            fun from(parent: ViewGroup, onClick: (MovieEntity) -> Unit): AnimationViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = RecyclerMovieBinding.inflate(layoutInflater, parent, false)
-                return AnimationViewHolder(binding)
+                return AnimationViewHolder(binding, onClick)
             }
         }
 
         fun bind(item: MovieEntity) {
             with(binding) {
+                ivMoviePoster.setOnClickListener { onClick(item) }
                 ivMoviePoster.loadImage(item.posterPath)
             }
         }

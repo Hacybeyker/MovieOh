@@ -27,6 +27,7 @@ android {
         versionName = ConfigureApp.version
         testInstrumentationRunner = AppVersion.testInstrumentationRunner
         renderscriptSupportModeEnabled = true
+        vectorDrawables.useSupportLibrary = true
         kapt {
             arguments {
                 arg("room.schemaLocation", "$projectDir/schemas")
@@ -59,8 +60,8 @@ android {
         create("qa") {
             initWith(getByName("debug"))
             isDebuggable = true
-            isMinifyEnabled = true
-            isShrinkResources = true
+            isMinifyEnabled = false
+            isShrinkResources = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -178,6 +179,11 @@ dependencies {
     implementation(AppDependencies.roomRuntime)
     kapt(AppDependencies.roomCompiler)
     implementation(AppDependencies.roomKtx)
+    // Glide
+    implementation(AppDependencies.glide)
+    kapt(AppDependencies.glideCompiler)
+    // Shimmer Facebook
+    implementation(AppDependencies.shimmerFacebook)
     // Test
     testImplementation(TestDependencies.junit)
     testImplementation(TestDependencies.robolectric)
@@ -190,7 +196,6 @@ dependencies {
     testImplementation(TestDependencies.mockitoCore)
     testImplementation(TestDependencies.mockitoKotlin)
     testImplementation(TestDependencies.mockitoInline)
-    testImplementation(TestDependencies.archCore)
     testImplementation(TestDependencies.espressoCore)
     testImplementation(TestDependencies.espressoIntents)
     debugImplementation(TestDependencies.fragment)
@@ -205,9 +210,6 @@ dependencies {
     debugImplementation(AppDependencies.chucker)
     "qaImplementation"(AppDependencies.chucker)
     releaseImplementation(AppDependencies.chuckerNoOp)
-    // Glide
-    implementation(AppDependencies.glide)
-    kapt(AppDependencies.glideCompiler)
     // Detekt
     detektPlugins(ValidationDependencies.detekt)
     // Library

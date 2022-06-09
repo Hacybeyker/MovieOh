@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="FontMain">
+        <item name="fontFamily">@font/montserrat_regular</item>
+    </style>
+
+    <style name="Title_A1" parent="FontMain">
+        <item name="android:letterSpacing">0.02</item>
+        <item name="android:textSize">@dimen/sp18</item>
+        <item name="android:textColor">@color/paternoster</item>
+    </style>
+
+    <style name="Title_A2" parent="FontMain">
+        <item name="android:letterSpacing">0.02</item>
+        <item name="android:textSize">@dimen/sp16</item>
+        <item name="android:textColor">@color/paternoster</item>
+    </style>
+
+    <style name="Title_A3" parent="FontMain">
+        <item name="android:letterSpacing">0.02</item>
+        <item name="android:textSize">@dimen/sp14</item>
+        <item name="android:textColor">@color/silver_snippet</item>
+    </style>
+
+    <style name="Title_A4" parent="FontMain">
+        <item name="android:letterSpacing">0.02</item>
+        <item name="android:textSize">@dimen/sp12</item>
+        <item name="android:textColor">@color/silver_snippet</item>
+    </style>
+
+    <style name="Title_A4_01" parent="Title_A4">
+        <item name="android:textColor">@color/paternoster</item>
+    </style>
+
+    <style name="Title_A4_02" parent="Title_A4">
+        <item name="android:textColor">@color/silver_snippet</item>
+    </style>
+
+    <style name="Main_Container">
+        <item name="android:background">@color/umbra</item>
+    </style>
+
+    <style name="Icon_Arrow_Back">
+        <item name="android:tint">@color/silver_snippet</item>
+    </style>
+
+    <style name="Icon_Star">
+        <item name="android:tint">@color/white</item>
+    </style>
+
+    <style name="View_Divider">
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="header_section_container">
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+        <item name="android:clickable">true</item>
+        <item name="android:clipToPadding">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+</resources>

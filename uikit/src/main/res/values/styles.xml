@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <style name="text_header_section">
-        <item name="android:fontFamily">@font/montserrat_regular</item>
-        <item name="android:textColor">@color/silver_sand</item>
-        <item name="android:textSize">@dimen/sp16</item>
-    </style>
-</resources>

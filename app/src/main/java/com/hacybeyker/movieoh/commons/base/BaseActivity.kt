@@ -1,7 +1,6 @@
 package com.hacybeyker.movieoh.commons.base
 
 import android.os.Bundle
-import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -13,19 +12,16 @@ abstract class BaseActivity<VB : ViewBinding, VM : ViewModel> : AppCompatActivit
 
     protected abstract val viewModelClass: Class<VM>
 
-    open fun setupView() { /*Your implementation*/
-    }
+    protected abstract fun setupView()
 
-    open fun setupObservers() { /*Your implementation*/
-    }
+    protected abstract fun setupObservers()
 
-    open fun launchObservers() { /*Your implementation*/
-    }
+    protected abstract fun launchObservers()
 
-    @VisibleForTesting
+    open fun getIntentData() = Unit
+
     lateinit var viewModel: VM
 
-    @VisibleForTesting
     lateinit var binding: VB
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +29,7 @@ abstract class BaseActivity<VB : ViewBinding, VM : ViewModel> : AppCompatActivit
         viewModel = ViewModelProvider(this)[viewModelClass]
         binding = viewBinding
         setContentView(binding.root)
+        getIntentData()
         setupView()
         setupObservers()
         launchObservers()

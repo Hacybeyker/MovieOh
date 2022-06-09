@@ -37,7 +37,7 @@ class Header @JvmOverloads constructor(
         binding.ivIconHeader.setImageResource(value)
     }
 
-    private var colorTextValue = 0
+    /*private var colorTextValue = 0
         set(value) {
             field = value
             setColorText(value)
@@ -55,7 +55,7 @@ class Header @JvmOverloads constructor(
 
     private fun setColorIcon(value: Int) {
         binding.ivIconHeader.setColorFilter(value)
-    }
+    }*/
 
     private var showIconValue = true
         set(value) {
@@ -82,7 +82,7 @@ class Header @JvmOverloads constructor(
                     R.styleable.Header_icon,
                     R.drawable.icon_arrow_right
                 )
-                colorTextValue =
+                /*colorTextValue =
                     typedArray.getInt(
                         R.styleable.Header_colorText,
                         context.getColor(R.color.silver_sand)
@@ -91,7 +91,7 @@ class Header @JvmOverloads constructor(
                     typedArray.getInt(
                         R.styleable.Header_colorIcon,
                         context.getColor(R.color.philippine_gray)
-                    )
+                    )*/
             }
             attributeSet.recycle()
         }

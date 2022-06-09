@@ -54,12 +54,10 @@ class HomeViewModel @Inject constructor(
     private val loading: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>() }
     val loadingLiveData: LiveData<Boolean> get() = loading
 
-    fun fetchTrendingMovie() {
+    fun initHome() {
         viewModelScope.launch(dispatcherIO) {
             try {
-                val timeStart = System.currentTimeMillis()
-                println("Here - TimeStart: $timeStart")
-                loading.postValue(false)
+                loading.postValue(true)
                 val trending = async { trendingUseCase.fetchTrendingMovie(PAGE_STAR) }
                 val upcoming = async { upcomingUseCase.fetchUpcoming(PAGE_STAR) }
                 val action = async { discoverUseCase.fetchDiscover(PAGE_STAR, ACTION) }
@@ -74,13 +72,16 @@ class HomeViewModel @Inject constructor(
                 this@HomeViewModel.comedy.postValue(comedy.await())
                 this@HomeViewModel.drama.postValue(drama.await())
                 this@HomeViewModel.adventure.postValue(adventure.await())
-                val timeEnd = System.currentTimeMillis()
-                println("Here - TimeEnd: $timeEnd")
-                println("Here - TotalTime: ${timeEnd - timeStart}")
-                loading.postValue(true)
+                loading.postValue(false)
             } catch (e: Exception) {
                 trending.postValue(arrayListOf())
-                loading.postValue(true)
+                upcoming.postValue(arrayListOf())
+                action.postValue(arrayListOf())
+                animation.postValue(arrayListOf())
+                comedy.postValue(arrayListOf())
+                drama.postValue(arrayListOf())
+                adventure.postValue(arrayListOf())
+                loading.postValue(false)
             }
         }
     }
