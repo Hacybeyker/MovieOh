@@ -57,7 +57,7 @@ class HomeViewModel @Inject constructor(
     fun initHome() {
         viewModelScope.launch(dispatcherIO) {
             try {
-                loading.postValue(false)
+                loading.postValue(true)
                 val trending = async { trendingUseCase.fetchTrendingMovie(PAGE_STAR) }
                 val upcoming = async { upcomingUseCase.fetchUpcoming(PAGE_STAR) }
                 val action = async { discoverUseCase.fetchDiscover(PAGE_STAR, ACTION) }
@@ -72,7 +72,7 @@ class HomeViewModel @Inject constructor(
                 this@HomeViewModel.comedy.postValue(comedy.await())
                 this@HomeViewModel.drama.postValue(drama.await())
                 this@HomeViewModel.adventure.postValue(adventure.await())
-                loading.postValue(true)
+                loading.postValue(false)
             } catch (e: Exception) {
                 trending.postValue(arrayListOf())
                 upcoming.postValue(arrayListOf())
@@ -81,7 +81,7 @@ class HomeViewModel @Inject constructor(
                 comedy.postValue(arrayListOf())
                 drama.postValue(arrayListOf())
                 adventure.postValue(arrayListOf())
-                loading.postValue(true)
+                loading.postValue(false)
             }
         }
     }

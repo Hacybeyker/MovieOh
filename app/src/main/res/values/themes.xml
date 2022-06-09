@@ -3,6 +3,7 @@
     <style name="Theme.MovieOh" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:statusBarColor">@color/white</item>
         <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="Theme.FullScreen" parent="Theme.MovieOh">
@@ -10,5 +11,9 @@
         <item name="android:windowFullscreen">true</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="Shimmer">
+        <item name="android:background">@color/black_tie</item>
     </style>
 </resources>

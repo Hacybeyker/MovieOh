@@ -27,7 +27,7 @@ class TrendingAdapterTest {
 
     @Before
     fun setup() {
-        sutTrendingAdapter = TrendingAdapter(mockOnItemMovie)
+        sutTrendingAdapter = TrendingAdapter {}
         spyListMovieEntity.add(getMovieOne())
         spyListMovieEntity.add(getMovieTwo())
         sutTrendingAdapter.submitList(spyListMovieEntity)

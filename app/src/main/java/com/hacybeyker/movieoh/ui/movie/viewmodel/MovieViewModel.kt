@@ -19,7 +19,7 @@ import javax.inject.Inject
 import javax.inject.Named
 
 @HiltViewModel
-class DetailViewModel @Inject constructor(
+class MovieViewModel @Inject constructor(
     private val movieUseCase: MovieUseCase,
     private val creditsUseCase: CreditsUseCase,
     private val similarUseCase: SimilarUseCase,
@@ -35,16 +35,22 @@ class DetailViewModel @Inject constructor(
     private val credits: MutableLiveData<CreditsEntity> by lazy { MutableLiveData<CreditsEntity>() }
     val creditsLiveData: LiveData<CreditsEntity> get() = credits
 
+    private val loading: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>() }
+    val loadingLiveData: LiveData<Boolean> get() = loading
+
     fun init(movieId: Int) {
         viewModelScope.launch(dispatcherIO) {
             try {
+                loading.postValue(true)
                 val similar = async { similarUseCase.fetchSimilar(movieId) }
                 val movie = async { movieUseCase.fetchMovie(movieId) }
                 val credits = async { creditsUseCase.fetchCredits(movieId) }
-                this@DetailViewModel.similar.postValue(similar.await())
-                this@DetailViewModel.movie.postValue(movie.await())
-                this@DetailViewModel.credits.postValue(credits.await())
+                this@MovieViewModel.similar.postValue(similar.await())
+                this@MovieViewModel.movie.postValue(movie.await())
+                this@MovieViewModel.credits.postValue(credits.await())
+                loading.postValue(false)
             } catch (e: Exception) {
+                loading.postValue(false)
                 Log.d("TAG", "Here - fetchSimilar: ${e.message}")
             }
         }

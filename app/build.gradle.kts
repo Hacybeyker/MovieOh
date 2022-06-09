@@ -179,6 +179,11 @@ dependencies {
     implementation(AppDependencies.roomRuntime)
     kapt(AppDependencies.roomCompiler)
     implementation(AppDependencies.roomKtx)
+    // Glide
+    implementation(AppDependencies.glide)
+    kapt(AppDependencies.glideCompiler)
+    // Shimmer Facebook
+    implementation(AppDependencies.shimmerFacebook)
     // Test
     testImplementation(TestDependencies.junit)
     testImplementation(TestDependencies.robolectric)
@@ -205,9 +210,6 @@ dependencies {
     debugImplementation(AppDependencies.chucker)
     "qaImplementation"(AppDependencies.chucker)
     releaseImplementation(AppDependencies.chuckerNoOp)
-    // Glide
-    implementation(AppDependencies.glide)
-    kapt(AppDependencies.glideCompiler)
     // Detekt
     detektPlugins(ValidationDependencies.detekt)
     // Library

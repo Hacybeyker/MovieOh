@@ -9,36 +9,36 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import com.google.android.material.chip.Chip
 import com.hacybeyker.movieoh.R
 import com.hacybeyker.movieoh.commons.base.BaseActivity
-import com.hacybeyker.movieoh.databinding.ActivityDetailBinding
+import com.hacybeyker.movieoh.databinding.ActivityMovieBinding
 import com.hacybeyker.movieoh.domain.entity.GenreEntity
 import com.hacybeyker.movieoh.domain.entity.MovieEntity
 import com.hacybeyker.movieoh.domain.entity.StreamEntity
 import com.hacybeyker.movieoh.ui.OnItemMovie
 import com.hacybeyker.movieoh.ui.movie.adapter.CastAdapter
 import com.hacybeyker.movieoh.ui.movie.adapter.SimilarAdapter
-import com.hacybeyker.movieoh.ui.movie.viewmodel.DetailViewModel
+import com.hacybeyker.movieoh.ui.movie.viewmodel.MovieViewModel
 import com.hacybeyker.movieoh.utils.extensions.format
 import com.hacybeyker.movieoh.utils.extensions.getRuntime
 import com.hacybeyker.movieoh.utils.extensions.loadImage
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(), OnItemMovie {
+class MovieActivity : BaseActivity<ActivityMovieBinding, MovieViewModel>(), OnItemMovie {
 
     private val similarAdapter: SimilarAdapter by lazy { SimilarAdapter(onClick = { onClickMovie(it) }) }
     private val castAdapter: CastAdapter by lazy { CastAdapter() }
 
-    override val viewBinding: ActivityDetailBinding
-        get() = ActivityDetailBinding.inflate(layoutInflater)
+    override val viewBinding: ActivityMovieBinding
+        get() = ActivityMovieBinding.inflate(layoutInflater)
 
-    override val viewModelClass: Class<DetailViewModel>
-        get() = DetailViewModel::class.java
+    override val viewModelClass: Class<MovieViewModel>
+        get() = MovieViewModel::class.java
 
     private var movie: MovieEntity? = null
 
     companion object {
         fun newInstance(activity: Activity, movie: MovieEntity): Intent {
-            val intent = Intent(activity, DetailActivity::class.java)
+            val intent = Intent(activity, MovieActivity::class.java)
             val bundle = Bundle().apply { putParcelable(MovieEntity::class.java.name, movie) }
             intent.putExtras(bundle)
             return intent
@@ -72,19 +72,36 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(), O
     }
 
     override fun launchObservers() {
-        viewModel.movieLiveData.observe(this) { movie ->
-            this.movie = movie
-            setupExtraInfo()
-        }
+        viewModel.apply {
+            loadingLiveData.observe(this@MovieActivity) { loading ->
+                when (loading) {
+                    true -> {
+                        binding.sflContainerMovie.visibility = View.VISIBLE
+                        binding.nsvMainDetailScroll.visibility = View.GONE
+                        binding.sflContainerMovie.startShimmer()
+                    }
+                    else -> {
+                        binding.sflContainerMovie.visibility = View.GONE
+                        binding.nsvMainDetailScroll.visibility = View.VISIBLE
+                        binding.sflContainerMovie.stopShimmer()
+                    }
+                }
+            }
 
-        viewModel.creditsLiveData.observe(this) { credits ->
-            binding.rvMovieCast.visibility = View.VISIBLE
-            castAdapter.submitList(credits.cast.toMutableList())
-        }
+            movieLiveData.observe(this@MovieActivity) { movie ->
+                this@MovieActivity.movie = movie
+                setupExtraInfo()
+            }
 
-        viewModel.similarLiveData.observe(this) { similar ->
-            binding.rvMovieSimilar.visibility = View.VISIBLE
-            similarAdapter.submitList(similar.toMutableList())
+            creditsLiveData.observe(this@MovieActivity) { credits ->
+                binding.rvMovieCast.visibility = View.VISIBLE
+                castAdapter.submitList(credits.cast.toMutableList())
+            }
+
+            similarLiveData.observe(this@MovieActivity) { similar ->
+                binding.rvMovieSimilar.visibility = View.VISIBLE
+                similarAdapter.submitList(similar.toMutableList())
+            }
         }
     }
 

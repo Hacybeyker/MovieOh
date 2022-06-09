@@ -14,7 +14,7 @@ import com.hacybeyker.movieoh.ui.home.adapter.DramaAdapter
 import com.hacybeyker.movieoh.ui.home.adapter.TrendingAdapter
 import com.hacybeyker.movieoh.ui.home.adapter.UpcomingAdapter
 import com.hacybeyker.movieoh.ui.home.viewmodel.HomeViewModel
-import com.hacybeyker.movieoh.ui.movie.DetailActivity
+import com.hacybeyker.movieoh.ui.movie.MovieActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -72,6 +72,21 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), OnItemM
 
     override fun setupObservers() {
         viewModel.apply {
+            loadingLiveData.observe(this@HomeActivity) { loading ->
+                when (loading) {
+                    true -> {
+                        binding.sflContainerHome.visibility = View.VISIBLE
+                        binding.nsvMainHomeScroll.visibility = View.GONE
+                        binding.sflContainerHome.startShimmer()
+                    }
+                    else -> {
+                        binding.sflContainerHome.visibility = View.GONE
+                        binding.nsvMainHomeScroll.visibility = View.VISIBLE
+                        binding.sflContainerHome.stopShimmer()
+                    }
+                }
+            }
+
             trendingLiveData.observe(this@HomeActivity) { trendingMovie ->
                 binding.rvMovieTrending.visibility = View.VISIBLE
                 adapterTrending.submitList(trendingMovie.toMutableList())
@@ -110,6 +125,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), OnItemM
     }
 
     override fun onClickMovie(movie: MovieEntity) {
-        this.startActivity(DetailActivity.newInstance(this, movie))
+        this.startActivity(MovieActivity.newInstance(this, movie))
     }
 }

@@ -11,4 +11,8 @@
         <item name="windowNoTitle">true</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>
+
+    <style name="Shimmer">
+        <item name="android:background">@color/black_tie</item>
+    </style>
 </resources>
