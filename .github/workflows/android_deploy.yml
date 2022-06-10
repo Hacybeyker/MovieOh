@@ -27,7 +27,7 @@ jobs:
       - name: SetLocalProperties
         run: |
           echo KEY_PROD=$KEY_PROD >> local.properties
-          echo KEY_QA=KEY_QA >> local.properties
+          echo KEY_QA=$$KEY_QA >> local.properties
 
       - name: Run Lint
         run: ./gradlew app:lintDebug
@@ -72,7 +72,7 @@ jobs:
       - name: SetLocalProperties
         run: |
           echo KEY_PROD=$KEY_PROD >> local.properties
-          echo KEY_QA=KEY_QA >> local.properties
+          echo KEY_QA=$KEY_QA >> local.properties
 
       - name: Run Tests
         run: ./gradlew app:testDebugUnitTest
@@ -105,7 +105,7 @@ jobs:
       - name: SetLocalProperties
         run: |
           echo KEY_PROD=$KEY_PROD >> local.properties
-          echo KEY_QA=KEY_QA >> local.properties
+          echo KEY_QA=$KEY_QA >> local.properties
 
       - name: Run Jacoco Test Report
         run: ./gradlew app:jacocoTestReport
@@ -146,7 +146,7 @@ jobs:
       - name: SetLocalProperties
         run: |
           echo KEY_PROD=$KEY_PROD >> local.properties
-          echo KEY_QA=KEY_QA >> local.properties
+          echo KEY_QA=$KEY_QA >> local.properties
 
       - name: Run Lint
         run: ./gradlew app:lintDebug
@@ -195,7 +195,7 @@ jobs:
       - name: SetLocalProperties
         run: |
           echo KEY_PROD=$KEY_PROD >> local.properties
-          echo KEY_QA=KEY_QA >> local.properties
+          echo KEY_QA=$KEY_QA >> local.properties
 
       - name: Run AssembleDebug
         run: ./gradlew app:assembleDebug
