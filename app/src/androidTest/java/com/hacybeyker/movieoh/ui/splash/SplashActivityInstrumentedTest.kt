@@ -27,7 +27,7 @@ class SplashActivityInstrumentedTest {
         onView(withId(R.id.tvTitle)).perform(click())
         var message = ""
         activityScenarioRule.scenario.onActivity { activity ->
-            message = activity.resources.getString(R.string.app_name)
+            message = activity.resources.getString(R.string.application_name)
         }
         onView(withId(R.id.tvTitle)).check(matches(withText(message)))
     }

@@ -1,7 +1,5 @@
 <resources>
-    <string name="app_name_release" translatable="false">MovieOh</string>
-    <string name="app_name_qa" translatable="false">MovieOhQA</string>
-    <string name="app_name_debug" translatable="false">MovieOhDebug</string>
+    <string name="application_name" translatable="false">MovieOh</string>
     <string name="hello_world">Hello World!</string>
     <string name="upcoming">Upcoming</string>
     <string name="trending">Trending</string>

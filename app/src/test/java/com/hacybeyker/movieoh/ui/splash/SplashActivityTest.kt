@@ -35,7 +35,7 @@ class SplashActivityTest {
             ShadowLooper.runUiThreadTasksIncludingDelayedTasks()
             val tvTitle = activity.findViewById<AppCompatTextView>(R.id.tvTitle)
             val lavMovie = activity.findViewById<LottieAnimationView>(R.id.lavMovie)
-            assertEquals(tvTitle.text, activity.resources.getString(R.string.app_name_debug))
+            assertEquals(tvTitle.text, activity.resources.getString(R.string.application_name))
             assertThat(lavMovie.visibility, equalTo(View.VISIBLE))
             assertThat(tvTitle.visibility, equalTo(View.VISIBLE))
             val expectedIntent = Intent(activity.applicationContext, HomeActivity::class.java)
