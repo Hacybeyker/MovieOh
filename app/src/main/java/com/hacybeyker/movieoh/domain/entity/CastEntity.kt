@@ -1,9 +1,12 @@
 package com.hacybeyker.movieoh.domain.entity
 
+import androidx.annotation.VisibleForTesting
+
 data class CastEntity(
     val adult: Boolean,
     val gender: Int,
-    val id: Int,
+    @get:VisibleForTesting
+    var id: Int,
     val knownForDepartment: String,
     val name: String,
     val originalName: String,

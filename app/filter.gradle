@@ -49,7 +49,7 @@ ext.getMyFilter = { ->
             '**/domain/entity**',
             '**/ui/splash/SplashActivity**',
             '**/ui/home/HomeActivity**',
-            '**/ui/detail/DetailActivity**',
+            '**/ui/movie/MovieActivity**',
             '**/utils/**'
     ]
 }

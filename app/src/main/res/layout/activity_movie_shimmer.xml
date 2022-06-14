@@ -9,18 +9,18 @@
     tools:context=".ui.movie.MovieActivity">
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/nsvMainDetailScroll"
+        android:id="@+id/nsvMainDetailScrollShimmer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/clDetail"
+            android:id="@+id/clDetailShimmer"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <View
-                android:id="@+id/ivBack"
+                android:id="@+id/ivBackShimmer"
                 style="@style/Shimmer"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
@@ -30,12 +30,12 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="ImageContrastCheck" />
 
-            <com.hacybeyker.uikit.component.image.ImageView
-                android:id="@+id/ivPosterLandscape"
+            <View
+                android:id="@+id/ivPosterLandscapeShimmer"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp0"
                 android:scaleType="fitXY"
-                app:layout_constraintBottom_toTopOf="@id/glPoster"
+                app:layout_constraintBottom_toTopOf="@id/glPosterShimmer"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -44,7 +44,7 @@
                 tools:srcCompat="@tools:sample/avatars" />
 
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/glPoster"
+                android:id="@+id/glPosterShimmer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -54,17 +54,17 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/clContainerDetail"
+                android:id="@+id/clContainerDetailShimmer"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/shape_rounded"
                 android:translationY="-20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/glPoster">
+                app:layout_constraintTop_toTopOf="@id/glPosterShimmer">
 
                 <View
-                    android:id="@+id/ivPosterPortrait"
+                    android:id="@+id/ivPosterPortraitShimmer"
                     style="@style/Shimmer"
                     android:layout_width="@dimen/dp109"
                     android:layout_height="@dimen/dp164"
@@ -77,17 +77,17 @@
                     tools:srcCompat="@tools:sample/avatars" />
 
                 <View
-                    android:id="@+id/tvTitle"
+                    android:id="@+id/tvTitleShimmer"
                     style="@style/Shimmer"
                     android:layout_width="140dp"
                     android:layout_height="10dp"
                     android:layout_marginStart="@dimen/dp15"
                     android:layout_marginEnd="@dimen/dp15"
-                    app:layout_constraintStart_toEndOf="@id/ivPosterPortrait"
-                    app:layout_constraintTop_toTopOf="@id/ivPosterPortrait" />
+                    app:layout_constraintStart_toEndOf="@id/ivPosterPortraitShimmer"
+                    app:layout_constraintTop_toTopOf="@id/ivPosterPortraitShimmer" />
 
                 <View
-                    android:id="@+id/tvReleaseDate"
+                    android:id="@+id/tvReleaseDateShimmer"
                     style="@style/Shimmer"
                     android:layout_width="@dimen/dp0"
                     android:layout_height="10dp"
@@ -96,13 +96,13 @@
                     android:layout_marginEnd="@dimen/dp15"
                     android:gravity="start"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/ivPosterPortrait"
-                    app:layout_constraintTop_toBottomOf="@id/tvTitle"
+                    app:layout_constraintStart_toEndOf="@id/ivPosterPortraitShimmer"
+                    app:layout_constraintTop_toBottomOf="@id/tvTitleShimmer"
                     tools:ignore="TextContrastCheck"
                     tools:text="2022" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/includeInfo"
+                    android:id="@+id/includeInfoShimmer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp15"
@@ -110,10 +110,10 @@
                     android:layout_marginEnd="@dimen/dp15"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ivPosterPortrait">
+                    app:layout_constraintTop_toBottomOf="@id/ivPosterPortraitShimmer">
 
                     <View
-                        android:id="@+id/vOne"
+                        android:id="@+id/vOneShimmer"
                         style="@style/Shimmer"
                         android:layout_width="120dp"
                         android:layout_height="40dp"
@@ -121,16 +121,16 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <View
-                        android:id="@+id/vTwo"
+                        android:id="@+id/vTwoShimmer"
                         style="@style/Shimmer"
                         android:layout_width="120dp"
                         android:layout_height="40dp"
-                        app:layout_constraintEnd_toStartOf="@id/vThree"
-                        app:layout_constraintStart_toEndOf="@id/vOne"
+                        app:layout_constraintEnd_toStartOf="@id/vThreeShimmer"
+                        app:layout_constraintStart_toEndOf="@id/vOneShimmer"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <View
-                        android:id="@+id/vThree"
+                        android:id="@+id/vThreeShimmer"
                         style="@style/Shimmer"
                         android:layout_width="120dp"
                         android:layout_height="40dp"
@@ -141,14 +141,14 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <RelativeLayout
-                    android:id="@+id/hAbout"
+                    android:id="@+id/hAboutShimmer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:padding="15dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/includeInfo">
+                    app:layout_constraintTop_toBottomOf="@id/includeInfoShimmer">
 
                     <View
                         style="@style/Shimmer"
@@ -164,7 +164,7 @@
                 </RelativeLayout>
 
                 <View
-                    android:id="@+id/tvOverview"
+                    android:id="@+id/tvOverviewShimmer"
                     style="@style/Shimmer"
                     android:layout_width="match_parent"
                     android:layout_height="90dp"
@@ -175,19 +175,19 @@
                     android:maxLines="4"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/hAbout"
+                    app:layout_constraintTop_toBottomOf="@id/hAboutShimmer"
                     tools:ignore="TextContrastCheck"
                     tools:text="@tools:sample/lorem/random" />
 
                 <androidx.appcompat.widget.LinearLayoutCompat
-                    android:id="@+id/hsvGenre"
+                    android:id="@+id/hsvGenreShimmer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="15dp"
                     android:orientation="horizontal"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvOverview">
+                    app:layout_constraintTop_toBottomOf="@id/tvOverviewShimmer">
 
                     <View
                         style="@style/Shimmer"
@@ -209,14 +209,14 @@
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <RelativeLayout
-                    android:id="@+id/hCast"
+                    android:id="@+id/hCastShimmer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:padding="15dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/hsvGenre">
+                    app:layout_constraintTop_toBottomOf="@id/hsvGenreShimmer">
 
                     <View
                         style="@style/Shimmer"
@@ -232,14 +232,14 @@
                 </RelativeLayout>
 
                 <androidx.appcompat.widget.LinearLayoutCompat
-                    android:id="@+id/rvMovieCast"
+                    android:id="@+id/rvMovieCastShimmer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/hCast">
+                    app:layout_constraintTop_toBottomOf="@id/hCastShimmer">
 
                     <View
                         style="@style/Shimmer"

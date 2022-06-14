@@ -16,4 +16,8 @@
     <style name="Shimmer">
         <item name="android:background">@color/black_tie</item>
     </style>
+
+    <style name="Splash">
+        <item name="android:background">@color/color_mariner</item>
+    </style>
 </resources>
