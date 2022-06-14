@@ -115,7 +115,16 @@ android {
     }
 
     lint {
-        disable.addAll(listOf("TypographyFractions", "TypographyQuotes"))
+        disable.addAll(
+            listOf(
+                "TypographyFractions",
+                "TypographyQuotes",
+                "JvmStaticProvidesInObjectDetector",
+                "FieldSiteTargetOnQualifierAnnotation",
+                "ModuleCompanionObjects",
+                "ModuleCompanionObjectsNotInModuleParent"
+            )
+        )
         checkDependencies = true
         abortOnError = false
         ignoreWarnings = false

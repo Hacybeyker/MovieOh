@@ -1,6 +1,5 @@
 <resources>
-    <string name="application_name" translatable="false">MovieOh</string>
-    <string name="hello_world">Hola Mundo!</string>
+    <string name="app_name">MovieOh</string>
     <string name="upcoming">Estrenos</string>
     <string name="trending">Tendencias</string>
     <string name="action">Acción</string>

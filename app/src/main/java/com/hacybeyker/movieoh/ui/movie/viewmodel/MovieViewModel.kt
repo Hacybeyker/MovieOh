@@ -1,6 +1,5 @@
 package com.hacybeyker.movieoh.ui.movie.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -51,7 +50,6 @@ class MovieViewModel @Inject constructor(
                 loading.postValue(false)
             } catch (e: Exception) {
                 loading.postValue(false)
-                Log.d("TAG", "Here - fetchSimilar: ${e.message}")
             }
         }
     }
