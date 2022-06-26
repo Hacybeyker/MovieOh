@@ -1,9 +1,9 @@
-name: Android Deploy
+name: Android Publish
 
 on:
   push:
     branches:
-      - 'develop'
+      - 'master'
 
 jobs:
   lint:
@@ -57,8 +57,8 @@ jobs:
     env:
       REPO_USERID: ${{ secrets.REPO_USERID }}
       REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
-      KEY_PROD: ${{ secrets.KEY_PROD }}
-      KEY_QA: ${{ secrets.KEY_QA }}
+      LOCAL_PROPERTIES_KEY_PROD: ${{ secrets.LOCAL_PROPERTIES_KEY_PROD }}
+      LOCAL_PROPERTIES_KEY_QA: ${{ secrets.LOCAL_PROPERTIES_KEY_QA }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
@@ -90,8 +90,8 @@ jobs:
     env:
       REPO_USERID: ${{ secrets.REPO_USERID }}
       REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
-      KEY_PROD: ${{ secrets.KEY_PROD }}
-      KEY_QA: ${{ secrets.KEY_QA }}
+      LOCAL_PROPERTIES_KEY_PROD: ${{ secrets.LOCAL_PROPERTIES_KEY_PROD }}
+      LOCAL_PROPERTIES_KEY_QA: ${{ secrets.LOCAL_PROPERTIES_KEY_QA }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
@@ -126,8 +126,8 @@ jobs:
     env:
       REPO_USERID: ${{ secrets.REPO_USERID }}
       REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
-      KEY_PROD: ${{ secrets.KEY_PROD }}
-      KEY_QA: ${{ secrets.KEY_QA }}
+      LOCAL_PROPERTIES_KEY_PROD: ${{ secrets.LOCAL_PROPERTIES_KEY_PROD }}
+      LOCAL_PROPERTIES_KEY_QA: ${{ secrets.LOCAL_PROPERTIES_KEY_QA }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
@@ -168,15 +168,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  artifact:
-    name: Artifact
-    needs: [ sonarqube ]
+  publish:
+    name: Publish
     runs-on: ubuntu-latest
     env:
-      REPO_USERID: ${{ secrets.REPO_USERID }}
-      REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
-      KEY_PROD: ${{ secrets.KEY_PROD }}
-      KEY_QA: ${{ secrets.KEY_QA }}
+      SIGNING_KEY_ALIAS_MOVIEOH: ${{ secrets.SIGNING_KEY_ALIAS_MOVIEOH }}
+      SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
+      SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
@@ -197,11 +195,35 @@ jobs:
           echo KEY_PROD=$LOCAL_PROPERTIES_KEY_PROD >> local.properties
           echo KEY_QA=$LOCAL_PROPERTIES_KEY_QA >> local.properties
 
-      - name: Run AssembleQa
-        run: ./gradlew app:assembleQa
+      - name: Signing App Release
+        run: |
+          ./gradlew app:bundleRelease
+          ./gradlew app:assembleRelease
 
-      - name: Upload Artifact APK
+      - name: Upload Artifact APK Release
         uses: actions/upload-artifact@v2
         with:
-          name: apk-qa
-          path: ./app/build/outputs/apk/qa
+          name: apk-release
+          path: ./app/build/outputs/apk/release
+
+      - name: Upload Artifact Bundle Release
+        uses: actions/upload-artifact@v2
+        with:
+          name: apk-bundle-release
+          path: ./app/build/outputs/bundle/release
+
+      - name: Create Tag Release
+        run: |
+          currentVersion=`grep versionName ./buildSrc/src/main/kotlin/Configuration.kt | awk -F" " '{ print $5 }' `
+          currentFormattedVersion=`echo $currentVersion | sed 's/.\(.*\)/\1/' | sed 's/\(.*\)./\1/'`
+          echo "Version: $currentFormattedVersion"
+          git tag $currentFormattedVersion
+          git push origin --tags
+
+      - name: Deploy to Alpha
+        uses: r0adkll/upload-google-play@v1.0.17
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.SIGNING_SERVICE_ACCOUNT }}
+          packageName: com.hacybeyker.movieoh
+          releaseFiles: ./app/build/outputs/bundle/release/app-release.aab
+          track: alpha

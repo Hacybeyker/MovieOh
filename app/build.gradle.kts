@@ -24,7 +24,7 @@ android {
         minSdk = AppVersion.minSdkVersion
         targetSdk = AppVersion.targetSdkVersion
         versionCode = ConfigureApp.versionCode
-        versionName = ConfigureApp.version
+        versionName = ConfigureApp.versionName
         testInstrumentationRunner = AppVersion.testInstrumentationRunner
         renderscriptSupportModeEnabled = true
         vectorDrawables.useSupportLibrary = true
@@ -36,8 +36,21 @@ android {
     }
 
     testOptions {
+        animationsDisabled = true
         unitTests {
             isIncludeAndroidResources = true
+        }
+    }
+
+    signingConfigs {
+        create("release") {
+            keyAlias = findProperty("SIGNING_KEY_ALIAS_MOVIEOH") as String?
+                ?: System.getenv("SIGNING_KEY_ALIAS_MOVIEOH")
+            keyPassword = findProperty("SIGNING_KEY_PASSWORD") as String?
+                ?: System.getenv("SIGNING_KEY_PASSWORD")
+            storeFile = file("../.signing/release-movieoh-key.jks")
+            storePassword = findProperty("SIGNING_STORE_PASSWORD") as String?
+                ?: System.getenv("SIGNING_STORE_PASSWORD")
         }
     }
 
@@ -46,6 +59,7 @@ android {
             isDebuggable = false
             isMinifyEnabled = true
             isShrinkResources = true
+            signingConfig = signingConfigs.getByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -69,12 +83,17 @@ android {
                 "proguard-rules.pro"
             )
             buildConfigField("String", "BASE_URL", ConstantsApp.QA.BASE_URL)
-            buildConfigField("boolean", "IS_DEVELOPMENT", ConstantsApp.QA.IS_DEVELOPMENT.toString())
+            buildConfigField(
+                "boolean",
+                "IS_DEVELOPMENT",
+                ConstantsApp.QA.IS_DEVELOPMENT.toString()
+            )
         }
         getByName("debug") {
             isDebuggable = true
             isMinifyEnabled = false
             isShrinkResources = false
+            // signingConfig = signingConfigs.getByName("debug")
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-debug"
             proguardFiles(

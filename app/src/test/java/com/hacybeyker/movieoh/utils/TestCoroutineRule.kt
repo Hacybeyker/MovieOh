@@ -17,10 +17,10 @@ class TestCoroutineRule : TestRule {
     private val testCoroutineDispatcher = StandardTestDispatcher()
     private val testCoroutineScope = TestScope(testCoroutineDispatcher)
 
-    override fun apply(base: Statement?, description: Description?) = object : Statement() {
+    override fun apply(base: Statement, description: Description): Statement = object : Statement() {
         override fun evaluate() {
             Dispatchers.setMain(testCoroutineDispatcher)
-            base?.evaluate()
+            base.evaluate()
             Dispatchers.resetMain()
         }
     }

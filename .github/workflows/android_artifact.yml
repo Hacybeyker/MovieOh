@@ -9,8 +9,8 @@ jobs:
     env:
       REPO_USERID: ${{ secrets.REPO_USERID }}
       REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
-      KEY_PROD: ${{ secrets.KEY_PROD }}
-      KEY_QA: ${{ secrets.KEY_QA }}
+      LOCAL_PROPERTIES_KEY_PROD: ${{ secrets.LOCAL_PROPERTIES_KEY_PROD }}
+      LOCAL_PROPERTIES_KEY_QA: ${{ secrets.LOCAL_PROPERTIES_KEY_QA }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
@@ -26,10 +26,10 @@ jobs:
       - name: Make Gradle Executable
         run: chmod +x ./gradlew
 
-      - name: SetLocalProperties
+      - name: Set LocalProperties
         run: |
-          echo KEY_PROD=$KEY_PROD >> local.properties
-          echo KEY_QA=$KEY_QA >> local.properties
+          echo KEY_PROD=$LOCAL_PROPERTIES_KEY_PROD >> local.properties
+          echo KEY_QA=$LOCAL_PROPERTIES_KEY_QA >> local.properties
 
       - name: Run Lint
         run: ./gradlew app:lintDebug
@@ -78,10 +78,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Run AssembleDebug
+      - name: Run AssembleQa
         run: ./gradlew app:assembleQa --stacktrace
 
-      - name: Upload Artifact APK QA
+      - name: Upload Artifact APK
         uses: actions/upload-artifact@v2
         with:
           name: apk-qa
