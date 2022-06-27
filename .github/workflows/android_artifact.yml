@@ -23,6 +23,11 @@ jobs:
           echo KEY_PROD=$LOCAL_PROPERTIES_KEY_PROD >> local.properties
           echo KEY_QA=$LOCAL_PROPERTIES_KEY_QA >> local.properties
 
+      - name: Set LocalProperties
+        run: |
+          echo KEY_PROD=$LOCAL_PROPERTIES_KEY_PROD >> local.properties
+          echo KEY_QA=$LOCAL_PROPERTIES_KEY_QA >> local.properties
+
       - name: Run Lint
         run: ./gradlew app:lintDebug
 
