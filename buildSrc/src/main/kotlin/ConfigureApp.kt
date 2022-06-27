@@ -3,6 +3,6 @@ object ConfigureApp {
     const val organization = "hacybeyker"
     const val projectName = "app-movieoh-android"
     const val applicationId = "com.hacybeyker.movieoh"
-    const val versionCode = 1
-    const val version = "1.0.0"
+    const val versionCode = 3
+    const val versionName = "3.0.0"
 }
