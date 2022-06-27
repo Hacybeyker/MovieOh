@@ -1,7 +1,7 @@
 
 # Project MovieOh!
 
-![GithubActions](https://github.com/hacybeyker/Movieoh/actions/workflows/android_deploy.yml/badge.svg?branch=develop) ![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=com.hacybeyker.movieoh&metric=alert_status)
+![GithubActions](https://github.com/hacybeyker/Movieoh/actions/workflows/android_publish.yml/badge.svg?branch=master) ![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=com.hacybeyker.movieoh&metric=alert_status)
 
 This project consumes the Themoviedb movie api and shows various categories of movies and when selecting a specific one, it shows a detail with more information about the movie.
 
@@ -41,9 +41,9 @@ Run the following git commands
 
 ## Apis
 
-For this project was used api [TheMovieDB]([https://developers.themoviedb.org/3/getting-started/introduction]).
+For this project was used api [TheMovieDB](https://developers.themoviedb.org/3/getting-started/introduction).
 
-## Imagenes
+## Images
 
 ![Home](https://drive.google.com/uc?export=view&id=14vsx4xQKC4C9guW4elhAo4EbEWgnDfkp)
 
