@@ -91,16 +91,20 @@ class HomeViewModelTest {
     @Test
     fun `GIVEN a exception WHEN call initHome THEN generate throw exception`() {
         testCoroutineRule.runBlockingTest {
-            whenever(mockTrendingUseCase.fetchTrendingMovie(anyInt())).doAnswer { throw ApiException() }
-
-            sutHomeViewModel.initHome()
-            val trending = sutHomeViewModel.trendingLiveData.getOrAwaitValue()
-            val loading = sutHomeViewModel.loadingLiveData.getOrAwaitValue()
-
-            assertNotNull(loading)
-            assertNotNull(trending)
-            assertEquals(arrayListOf<MovieEntity>(), trending)
-            verify(mockTrendingUseCase, times(numInvocations = 1)).fetchTrendingMovie(anyInt())
+            val page: Int = anyInt()
+            try {
+                whenever(mockTrendingUseCase.fetchTrendingMovie(page)).doAnswer { throw ApiException() }
+                sutHomeViewModel.initHome()
+                // Assert.fail("")
+            } catch (e: Exception) {
+                val trending = sutHomeViewModel.trendingLiveData.getOrAwaitValue()
+                val loading = sutHomeViewModel.loadingLiveData.getOrAwaitValue()
+                // Then
+                assertNotNull(loading)
+                assertNotNull(trending)
+                assertEquals(arrayListOf<MovieEntity>(), trending)
+                verify(mockTrendingUseCase, times(numInvocations = 1)).fetchTrendingMovie(page)
+            }
         }
     }
 }
