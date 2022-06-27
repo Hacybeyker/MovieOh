@@ -18,16 +18,13 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: Git Submodule
-        uses: ./.github/workflows/submodule-action
+      - name: Configure Step
+        uses: ./.github/workflows/actions/configure
 
-      - name: Setup JDK 11
-        uses: actions/setup-java@v1
-        with:
-          java-version: 11
-
-      - name: Make Gradle Executable
-        run: chmod +x ./gradlew
+      - name: SetLocal Properties
+        run: |
+          echo KEY_PROD=$LOCAL_PROPERTIES_KEY_PROD >> local.properties
+          echo KEY_QA=$LOCAL_PROPERTIES_KEY_QA >> local.properties
 
       - name: SetLocal Properties
         run: |
