@@ -18,11 +18,8 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: Git Submodule
-        uses: ./.github/workflows/submodule-action
-
-      - name: Make Gradle Executable
-        run: chmod +x ./gradlew
+      - name: Configure Step
+        uses: ./.github/workflows/actions/configure
 
       - name: Set LocalProperties
         run: |
@@ -50,8 +47,8 @@ jobs:
           name: detekt_report
           path: app/build/reports/detekt
 
-  unit-test:
-    name: Unit Test
+  code-analysis:
+    name: Code Analysis
     needs: [ lint ]
     runs-on: ubuntu-latest
     env:
@@ -63,11 +60,8 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: Git Submodule
-        uses: ./.github/workflows/submodule-action
-
-      - name: Make Gradle Executable
-        run: chmod +x ./gradlew
+      - name: Configure Step
+        uses: ./.github/workflows/actions/configure
 
       - name: Set LocalProperties
         run: |
@@ -83,34 +77,10 @@ jobs:
           name: unit_test_report
           path: app/build/reports/tests/testDebugUnitTest/
 
-  jacoco:
-    name: Coverage Test
-    needs: [ unit-test ]
-    runs-on: ubuntu-latest
-    env:
-      REPO_USERID: ${{ secrets.REPO_USERID }}
-      REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
-      LOCAL_PROPERTIES_KEY_PROD: ${{ secrets.LOCAL_PROPERTIES_KEY_PROD }}
-      LOCAL_PROPERTIES_KEY_QA: ${{ secrets.LOCAL_PROPERTIES_KEY_QA }}
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
-
-      - name: Git Submodule
-        uses: ./.github/workflows/submodule-action
-
-      - name: Make Gradle Executable
-        run: chmod +x ./gradlew
-
-      - name: Set LocalProperties
-        run: |
-          echo KEY_PROD=$LOCAL_PROPERTIES_KEY_PROD >> local.properties
-          echo KEY_QA=$LOCAL_PROPERTIES_KEY_QA >> local.properties
-
       - name: Run Jacoco Test Report
         run: ./gradlew app:jacocoTestReport
 
-      - name: Upload coverage test report
+      - name: Upload Coverage Test Report
         uses: actions/upload-artifact@v2
         with:
           name: jacoco_test_report
@@ -119,50 +89,6 @@ jobs:
       - name: Run Jacoco Test Coverage Verification
         run: ./gradlew app:jacocoTestCoverageVerification
 
-  sonarqube:
-    name: Analysis Code
-    needs: [ jacoco ]
-    runs-on: ubuntu-latest
-    env:
-      REPO_USERID: ${{ secrets.REPO_USERID }}
-      REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
-      LOCAL_PROPERTIES_KEY_PROD: ${{ secrets.LOCAL_PROPERTIES_KEY_PROD }}
-      LOCAL_PROPERTIES_KEY_QA: ${{ secrets.LOCAL_PROPERTIES_KEY_QA }}
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
-
-      - name: Git Submodule
-        uses: ./.github/workflows/submodule-action
-
-      - name: Setup JDK 11
-        uses: actions/setup-java@v1
-        with:
-          java-version: 11
-
-      - name: Make Gradle Executable
-        run: chmod +x ./gradlew
-
-      - name: Set LocalProperties
-        run: |
-          echo KEY_PROD=$LOCAL_PROPERTIES_KEY_PROD >> local.properties
-          echo KEY_QA=$LOCAL_PROPERTIES_KEY_QA >> local.properties
-
-      - name: Run Lint
-        run: ./gradlew app:lintDebug
-
-      - name: Run KtLintCheck
-        run: ./gradlew app:ktlintCheck
-
-      - name: Run Detekt
-        run: ./gradlew app:detekt
-
-      - name: Run Tests
-        run: ./gradlew app:testDebugUnitTest
-
-      - name: Run Jacoco Test Report
-        run: ./gradlew app:jacocoTestReport
-
       - name: Run SonarQube Scan
         run: ./gradlew app:sonarqube -Dsonar.host.url=https://sonarcloud.io/ -Dsonar.login=${{ secrets.SONARCLOUDTOKEN }}
         env:
@@ -170,7 +96,7 @@ jobs:
 
   artifact:
     name: Artifact
-    needs: [ sonarqube ]
+    needs: [ code-analysis ]
     runs-on: ubuntu-latest
     env:
       REPO_USERID: ${{ secrets.REPO_USERID }}
@@ -181,16 +107,8 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: Git Submodule
-        uses: ./.github/workflows/submodule-action
-
-      - name: Setup JDK 11
-        uses: actions/setup-java@v1
-        with:
-          java-version: 11
-
-      - name: Make Gradle Executable
-        run: chmod +x ./gradlew
+      - name: Configure Step
+        uses: ./.github/workflows/actions/configure
 
       - name: Set LocalProperties
         run: |
