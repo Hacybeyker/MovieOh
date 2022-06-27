@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#FF000000</color>
+    <color name="paternoster">#C7C7C7</color>
+    <color name="umbra">#1F1F1F</color>
+    <color name="silver_snippet">#8F8F8F</color>
+    <color name="black_tie">#474747</color>
+</resources>

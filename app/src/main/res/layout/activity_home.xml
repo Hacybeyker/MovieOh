@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clMainHome"
+    style="@style/Main_Container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.HomeActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsvMainHomeScroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clContainerInsideScroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.hacybeyker.uikit.component.section.Header
+                android:id="@+id/hUpcoming"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:text="@string/upcoming" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvMovieUpcoming"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/dp10"
+                android:paddingEnd="@dimen/dp10"
+                android:scrollbars="none"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/hUpcoming"
+                tools:ignore="SpeakableTextPresentCheck"
+                tools:listitem="@layout/recycler_movie"
+                tools:visibility="visible" />
+
+            <com.hacybeyker.uikit.component.section.Header
+                android:id="@+id/hTrending"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rvMovieUpcoming"
+                app:text="@string/trending" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvMovieTrending"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/dp10"
+                android:paddingEnd="@dimen/dp10"
+                android:scrollbars="none"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/hTrending"
+                tools:ignore="SpeakableTextPresentCheck"
+                tools:listitem="@layout/recycler_movie"
+                tools:visibility="visible" />
+
+            <com.hacybeyker.uikit.component.section.Header
+                android:id="@+id/hAction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rvMovieTrending"
+                app:text="@string/action" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvMovieAction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/dp10"
+                android:paddingEnd="@dimen/dp10"
+                android:scrollbars="none"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/hAction"
+                tools:ignore="SpeakableTextPresentCheck"
+                tools:listitem="@layout/recycler_movie"
+                tools:visibility="visible" />
+
+            <com.hacybeyker.uikit.component.section.Header
+                android:id="@+id/hAnimation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rvMovieAction"
+                app:text="@string/animation" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvMovieAnimation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/dp10"
+                android:paddingEnd="@dimen/dp10"
+                android:scrollbars="none"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/hAnimation"
+                tools:ignore="SpeakableTextPresentCheck"
+                tools:listitem="@layout/recycler_movie"
+                tools:visibility="visible" />
+
+            <com.hacybeyker.uikit.component.section.Header
+                android:id="@+id/hComedy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rvMovieAnimation"
+                app:text="@string/comedy" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvMovieComedy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/dp10"
+                android:paddingEnd="@dimen/dp10"
+                android:scrollbars="none"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/hComedy"
+                tools:ignore="SpeakableTextPresentCheck"
+                tools:listitem="@layout/recycler_movie"
+                tools:visibility="visible" />
+
+            <com.hacybeyker.uikit.component.section.Header
+                android:id="@+id/hDrama"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rvMovieComedy"
+                app:text="@string/drama" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvMovieDrama"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/dp10"
+                android:paddingEnd="@dimen/dp10"
+                android:scrollbars="none"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/hDrama"
+                tools:ignore="SpeakableTextPresentCheck"
+                tools:listitem="@layout/recycler_movie"
+                tools:visibility="visible" />
+
+            <com.hacybeyker.uikit.component.section.Header
+                android:id="@+id/hAdventure"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rvMovieDrama"
+                app:text="@string/adventure" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvMovieAdventure"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/dp10"
+                android:paddingEnd="@dimen/dp10"
+                android:scrollbars="none"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/hAdventure"
+                tools:ignore="SpeakableTextPresentCheck"
+                tools:listitem="@layout/recycler_movie"
+                tools:visibility="visible" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/sflContainerHome"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        tools:visibility="gone">
+
+        <include layout="@layout/activity_home_shimmer" />
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

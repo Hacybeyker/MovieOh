@@ -1,0 +1,429 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "genre_ids": [
+        28,
+        12,
+        878
+      ],
+      "original_language": "en",
+      "original_title": "Spider-Man: No Way Home",
+      "poster_path": "/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg",
+      "video": false,
+      "vote_average": 8.5,
+      "overview": "Peter Parker is unmasked and no longer able to separate his normal life from the high-stakes of being a super-hero. When he asks for help from Doctor Strange the stakes become even more dangerous, forcing him to discover what it truly means to be Spider-Man.",
+      "release_date": "2021-12-15",
+      "vote_count": 5726,
+      "title": "Spider-Man: No Way Home",
+      "adult": false,
+      "backdrop_path": "/1Rr5SrvHxMXHu5RjKpaMba8VTzi.jpg",
+      "id": 634649,
+      "popularity": 6732.373,
+      "media_type": "movie"
+    },
+    {
+      "original_language": "en",
+      "original_title": "Eternals",
+      "poster_path": "/6AdXwFTRTAzggD2QUTt5B7JFGKL.jpg",
+      "video": false,
+      "vote_average": 7.3,
+      "vote_count": 3464,
+      "title": "Eternals",
+      "release_date": "2021-11-03",
+      "adult": false,
+      "backdrop_path": "/k2twTjSddgLc1oFFHVibfxp2kQV.jpg",
+      "genre_ids": [
+        28,
+        12,
+        14,
+        878
+      ],
+      "overview": "The Eternals are a team of ancient aliens who have been living on Earth in secret for thousands of years. When an unexpected tragedy forces them out of the shadows, they are forced to reunite against mankind’s most ancient enemy, the Deviants.",
+      "id": 524434,
+      "popularity": 8859.024,
+      "media_type": "movie"
+    },
+    {
+      "genre_ids": [
+        18,
+        36
+      ],
+      "original_language": "en",
+      "original_title": "Munich: The Edge of War",
+      "poster_path": "/nj5a7SnvBdWGBNVZxcfM46t1CBt.jpg",
+      "video": false,
+      "vote_average": 6.7,
+      "title": "Munich: The Edge of War",
+      "overview": "At the tense 1938 Munich Conference, former friends who now work for opposing governments become reluctant spies racing to expose a Nazi secret.",
+      "release_date": "2022-01-06",
+      "id": 760336,
+      "adult": false,
+      "backdrop_path": "/Ac2neP9SZtetX7sAHvl3MHfWnWC.jpg",
+      "vote_count": 62,
+      "popularity": 56.844,
+      "media_type": "movie"
+    },
+    {
+      "overview": "The tale of an extraordinary family, the Madrigals, who live hidden in the mountains of Colombia, in a magical house, in a vibrant town, in a wondrous, charmed place called an Encanto. The magic of the Encanto has blessed every child in the family with a unique gift from super strength to the power to heal—every child except one, Mirabel. But when she discovers that the magic surrounding the Encanto is in danger, Mirabel decides that she, the only ordinary Madrigal, might just be her exceptional family's last hope.",
+      "release_date": "2021-11-24",
+      "adult": false,
+      "backdrop_path": "/3G1Q5xF40HkUBJXxt2DQgQzKTp5.jpg",
+      "genre_ids": [
+        16,
+        35,
+        10751,
+        14
+      ],
+      "vote_count": 3390,
+      "original_language": "en",
+      "original_title": "Encanto",
+      "poster_path": "/4j0PNHkMr5ax3IA8tjtxcmPU3QT.jpg",
+      "title": "Encanto",
+      "video": false,
+      "vote_average": 7.8,
+      "id": 568124,
+      "popularity": 4895.571,
+      "media_type": "movie"
+    },
+    {
+      "genre_ids": [
+        878,
+        28,
+        12
+      ],
+      "original_language": "en",
+      "original_title": "The Matrix Resurrections",
+      "poster_path": "/8c4a8kE7PizaGQQnditMmI1xbRp.jpg",
+      "video": false,
+      "title": "The Matrix Resurrections",
+      "vote_count": 2470,
+      "overview": "Plagued by strange memories, Neo's life takes an unexpected turn when he finds himself back inside the Matrix.",
+      "id": 624860,
+      "vote_average": 6.9,
+      "release_date": "2021-12-16",
+      "adult": false,
+      "backdrop_path": "/eNI7PtK6DEYgZmHWP9gQNuff8pv.jpg",
+      "popularity": 3117.579,
+      "media_type": "movie"
+    },
+    {
+      "genre_ids": [
+        16,
+        10751,
+        14,
+        35,
+        12
+      ],
+      "original_language": "en",
+      "original_title": "Hotel Transylvania: Transformania",
+      "poster_path": "/teCy1egGQa0y8ULJvlrDHQKnxBL.jpg",
+      "video": false,
+      "title": "Hotel Transylvania: Transformania",
+      "vote_count": 1063,
+      "overview": "When Van Helsing's mysterious invention, the \"Monsterfication Ray,\" goes haywire, Drac and his monster pals are all transformed into humans, and Johnny becomes a monster. In their new mismatched bodies, Drac and Johnny must team up and race across the globe to find a cure before it's too late, and before they drive each other crazy.",
+      "id": 585083,
+      "vote_average": 7.7,
+      "release_date": "2022-01-13",
+      "adult": false,
+      "backdrop_path": "/qBLEWvJNVsehJkEJqIigPsWyBse.jpg",
+      "popularity": 8679.472,
+      "media_type": "movie"
+    },
+    {
+      "overview": "Buster and his new cast now have their sights set on debuting a new show at the Crystal Tower Theater in glamorous Redshore City. But with no connections, he and his singers must sneak into the Crystal Entertainment offices, run by the ruthless wolf mogul Jimmy Crystal, where the gang pitches the ridiculous idea of casting the lion rock legend Clay Calloway in their show. Buster must embark on a quest to find the now-isolated Clay and persuade him to return to the stage.",
+      "release_date": "2021-12-01",
+      "title": "Sing 2",
+      "adult": false,
+      "backdrop_path": "/tutaKitJJIaqZPyMz7rxrhb4Yxm.jpg",
+      "genre_ids": [
+        35,
+        16,
+        10751,
+        10402
+      ],
+      "original_language": "en",
+      "original_title": "Sing 2",
+      "poster_path": "/aWeKITRFbbwY8txG5uCj4rMCfSP.jpg",
+      "vote_count": 1302,
+      "video": false,
+      "vote_average": 8.3,
+      "id": 438695,
+      "popularity": 4878.84,
+      "media_type": "movie"
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/7VwrJUAh7ed1ndbPmb0HDO0Bh6r.jpg",
+      "genre_ids": [
+        10749,
+        35
+      ],
+      "id": 790142,
+      "original_language": "en",
+      "original_title": "The Royal Treatment",
+      "overview": "Isabella runs her own salon and isn’t afraid to speak her mind, while Prince Thomas runs his own country and is about to marry for duty rather than love. When Izzy and her fellow stylists get the opportunity of a lifetime to do the hair for the royal wedding, she and Prince Thomas learn that taking control of their own destiny requires following their hearts.",
+      "poster_path": "/xkDOzFVQQNnTKDPSfBFbirlLiSq.jpg",
+      "release_date": "2022-01-20",
+      "title": "The Royal Treatment",
+      "video": false,
+      "vote_average": 6.8,
+      "vote_count": 115,
+      "popularity": 188.198,
+      "media_type": "movie"
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/jYEW5xZkZk2WTrdbMGAPFuBqbDc.jpg",
+      "title": "Dune",
+      "genre_ids": [
+        878,
+        12
+      ],
+      "original_language": "en",
+      "original_title": "Dune",
+      "poster_path": "/d5NXSklXo0qyIYkgV94XAgMIckC.jpg",
+      "video": false,
+      "vote_average": 7.9,
+      "overview": "Paul Atreides, a brilliant and gifted young man born into a great destiny beyond his understanding, must travel to the most dangerous planet in the universe to ensure the future of his family and his people. As malevolent forces explode into conflict over the planet's exclusive supply of the most precious resource in existence-a commodity capable of unlocking humanity's greatest potential-only those who can conquer their fear will survive.",
+      "release_date": "2021-09-15",
+      "vote_count": 5635,
+      "id": 438631,
+      "popularity": 806.03,
+      "media_type": "movie"
+    },
+    {
+      "overview": "When a single mom and her two kids arrive in a small town, they begin to discover their connection to the original Ghostbusters and the secret legacy their grandfather left behind.",
+      "release_date": "2021-11-11",
+      "adult": false,
+      "backdrop_path": "/EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg",
+      "vote_count": 1512,
+      "genre_ids": [
+        35,
+        14,
+        12
+      ],
+      "title": "Ghostbusters: Afterlife",
+      "original_language": "en",
+      "original_title": "Ghostbusters: Afterlife",
+      "poster_path": "/sg4xJaufDiQl7caFEskBtQXfD4x.jpg",
+      "id": 425909,
+      "video": false,
+      "vote_average": 7.7,
+      "popularity": 3924.285,
+      "media_type": "movie"
+    },
+    {
+      "overview": "This time, the rivals team up to help a cowgirl and her brother save their homestead from a greedy land-grabber, and they’re going to need some help! Jerry’s three precocious nephews are all ready for action, and Tom is rounding up a posse of prairie dogs. But can a ragtag band of varmints defeat a deceitful desperado determined to deceive a damsel in distress? No matter what happens with Tom and Jerry in the saddle, it’ll be a rootin’ tootin’ good time!",
+      "release_date": "2022-01-24",
+      "title": "Tom and Jerry Cowboy Up!",
+      "adult": false,
+      "backdrop_path": "/q1NXVYTqSStNQsnKrCvtU6NPzEk.jpg",
+      "genre_ids": [
+        16,
+        35,
+        10751,
+        37
+      ],
+      "original_language": "en",
+      "original_title": "Tom and Jerry Cowboy Up!",
+      "poster_path": "/q0mdCfXNkQHu961k94Fe2dNtvMm.jpg",
+      "vote_count": 6,
+      "video": false,
+      "vote_average": 7,
+      "id": 892153,
+      "popularity": 37.015,
+      "media_type": "movie"
+    },
+    {
+      "original_language": "en",
+      "original_title": "Venom: Let There Be Carnage",
+      "poster_path": "/rjkmN1dniUHVYAtwuV3Tji7FsDO.jpg",
+      "video": false,
+      "id": 580489,
+      "overview": "After finding a host body in investigative reporter Eddie Brock, the alien symbiote must face a new enemy, Carnage, the alter ego of serial killer Cletus Kasady.",
+      "release_date": "2021-09-30",
+      "vote_count": 5988,
+      "adult": false,
+      "backdrop_path": "/vIgyYkXkg6NC2whRbYjBD7eb3Er.jpg",
+      "vote_average": 7.1,
+      "genre_ids": [
+        878,
+        28,
+        12
+      ],
+      "title": "Venom: Let There Be Carnage",
+      "popularity": 2508.176,
+      "media_type": "movie"
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/r2GAjd4rNOHJh6i6Y0FntmYuPQW.jpg",
+      "id": 370172,
+      "genre_ids": [
+        12,
+        28,
+        53
+      ],
+      "original_language": "en",
+      "original_title": "No Time to Die",
+      "poster_path": "/iUgygt3fscRoKWCV1d0C7FbM9TP.jpg",
+      "video": false,
+      "vote_average": 7.5,
+      "title": "No Time to Die",
+      "overview": "Bond has left active service and is enjoying a tranquil life in Jamaica. His peace is short-lived when his old friend Felix Leiter from the CIA turns up asking for help. The mission to rescue a kidnapped scientist turns out to be far more treacherous than expected, leading Bond onto the trail of a mysterious villain armed with dangerous new technology.",
+      "release_date": "2021-09-29",
+      "vote_count": 3254,
+      "popularity": 807.4,
+      "media_type": "movie"
+    },
+    {
+      "title": "Scream",
+      "overview": "Twenty-five years after a streak of brutal murders shocked the quiet town of Woodsboro, a new killer has donned the Ghostface mask and begins targeting a group of teenagers to resurrect secrets from the town’s deadly past.",
+      "release_date": "2022-01-12",
+      "adult": false,
+      "backdrop_path": "/usaZV7KB6Man9Rm9TyDAeQf7uVD.jpg",
+      "vote_count": 307,
+      "genre_ids": [
+        27,
+        9648,
+        53
+      ],
+      "vote_average": 7.2,
+      "original_language": "en",
+      "original_title": "Scream",
+      "poster_path": "/kZNHR1upJKF3eTzdgl5V8s8a4C3.jpg",
+      "video": false,
+      "id": 646385,
+      "popularity": 774.007,
+      "media_type": "movie"
+    },
+    {
+      "overview": "King Louis XIV's quest for immortality leads him to capture and steal a mermaid's life force, a move that is further complicated by his illegitimate daughter's discovery of the creature.",
+      "release_date": "2022-01-21",
+      "title": "The King's Daughter",
+      "adult": false,
+      "backdrop_path": "/1GrURa0tEBIBjJ2EbeRsMP65YPK.jpg",
+      "genre_ids": [
+        14,
+        18,
+        10749
+      ],
+      "original_language": "en",
+      "original_title": "The King's Daughter",
+      "poster_path": "/nCRfr3eOlwH7wfxaz6cU1bhMR1W.jpg",
+      "vote_count": 122,
+      "video": false,
+      "vote_average": 7.7,
+      "id": 245842,
+      "popularity": 642.948,
+      "media_type": "movie"
+    },
+    {
+      "overview": "Evan McCauley has skills he never learned and memories of places he has never visited. Self-medicated and on the brink of a mental breakdown, a secret group that call themselves “Infinites” come to his rescue, revealing that his memories are real.",
+      "release_date": "2021-09-09",
+      "adult": false,
+      "backdrop_path": "/fyxNrfrFcobLuNCufMhNkQuWorX.jpg",
+      "vote_count": 788,
+      "genre_ids": [
+        878,
+        28,
+        53
+      ],
+      "id": 581726,
+      "original_language": "en",
+      "original_title": "Infinite",
+      "poster_path": "/niw2AKHz6XmwiRMLWaoyAOAti0G.jpg",
+      "title": "Infinite",
+      "video": false,
+      "vote_average": 6.8,
+      "popularity": 565.153,
+      "media_type": "movie"
+    },
+    {
+      "overview": "Through their shared grief and connection to music, an orphaned girl bonds with her emotionally aloof, successful violinist uncle.",
+      "release_date": "2022-01-21",
+      "title": "My Father's Violin",
+      "adult": false,
+      "backdrop_path": "/kqswkpeEheVWasvJ3wd7Kw48c23.jpg",
+      "genre_ids": [
+        18,
+        10402
+      ],
+      "original_language": "tr",
+      "original_title": "Babamın Kemanı",
+      "poster_path": "/mXYhKwUdHEZqwHNLP5DnrIFTAj2.jpg",
+      "vote_count": 25,
+      "video": false,
+      "vote_average": 9,
+      "id": 920394,
+      "popularity": 88.591,
+      "media_type": "movie"
+    },
+    {
+      "genre_ids": [
+        53,
+        27,
+        9648
+      ],
+      "id": 576845,
+      "original_language": "en",
+      "original_title": "Last Night in Soho",
+      "poster_path": "/ahbwIJl7T0D34m3sPKlBaCqs2xH.jpg",
+      "video": false,
+      "vote_average": 7.5,
+      "overview": "A young girl, passionate about fashion design, is mysteriously able to enter the 1960s where she encounters her idol, a dazzling wannabe singer. But 1960s London is not what it seems, and time seems to be falling apart with shady consequences.",
+      "release_date": "2021-10-21",
+      "vote_count": 1115,
+      "title": "Last Night in Soho",
+      "adult": false,
+      "backdrop_path": "/eTUFS0aj81tdtz464wgGXDt7lm2.jpg",
+      "popularity": 324.923,
+      "media_type": "movie"
+    },
+    {
+      "genre_ids": [
+        80,
+        18,
+        9648
+      ],
+      "original_language": "en",
+      "original_title": "My Son",
+      "poster_path": "/8d4q6bf1PS6OX6F3syWnfBzFZg9.jpg",
+      "title": "My Son",
+      "video": false,
+      "vote_average": 6.3,
+      "overview": "When a man's only son goes missing, he travels to the town where his ex-wife lives in search of answers. To play a man whose life is clouded by mystery, McAvoy will not be given a script of dialogue.",
+      "release_date": "2021-10-14",
+      "vote_count": 74,
+      "id": 750253,
+      "adult": false,
+      "backdrop_path": "/nqPDhVKKWsATdXHTnYJ1rKfzd0w.jpg",
+      "popularity": 65.136,
+      "media_type": "movie"
+    },
+    {
+      "original_title": "Shang-Chi and the Legend of the Ten Rings",
+      "poster_path": "/1BIoJGKbXjdFDAqUEiA2VHqkK1Z.jpg",
+      "video": false,
+      "vote_average": 7.8,
+      "overview": "Shang-Chi must confront the past he thought he left behind when he is drawn into the web of the mysterious Ten Rings organization.",
+      "release_date": "2021-09-01",
+      "vote_count": 5311,
+      "adult": false,
+      "backdrop_path": "/8jIRAV5KVZeIP6tjI1NuCfb9Il0.jpg",
+      "id": 566525,
+      "genre_ids": [
+        28,
+        12,
+        14
+      ],
+      "title": "Shang-Chi and the Legend of the Ten Rings",
+      "original_language": "en",
+      "popularity": 1711.559,
+      "media_type": "movie"
+    }
+  ],
+  "total_pages": 1000,
+  "total_results": 20000
+}

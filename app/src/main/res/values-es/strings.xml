@@ -1,4 +1,13 @@
 <resources>
-    <string name="app_name" translatable="false">scaffolding_android_main</string>
-    <string name="hello_world">Hola Mundo!</string>
+    <string name="app_name">MovieOh</string>
+    <string name="upcoming">Estrenos</string>
+    <string name="trending">Tendencias</string>
+    <string name="action">Acción</string>
+    <string name="animation">Animacion</string>
+    <string name="adventure">Aventura</string>
+    <string name="comedy">Comedia</string>
+    <string name="drama">Drama</string>
+    <string name="opinions">%1$d Opiniones</string>
+    <string name="duration">Duración</string>
+    <string name="watch_now">Ver ahora</string>
 </resources>

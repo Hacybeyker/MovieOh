@@ -7,6 +7,7 @@ plugins {
     id("scabbard.gradle") version "0.5.0"
     id("org.jlleitschuh.gradle.ktlint") version "10.2.0"
     id("io.gitlab.arturbosch.detekt") version "1.18.1"
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
 apply {
@@ -23,9 +24,10 @@ android {
         minSdk = AppVersion.minSdkVersion
         targetSdk = AppVersion.targetSdkVersion
         versionCode = ConfigureApp.versionCode
-        versionName = ConfigureApp.version
+        versionName = ConfigureApp.versionName
         testInstrumentationRunner = AppVersion.testInstrumentationRunner
         renderscriptSupportModeEnabled = true
+        vectorDrawables.useSupportLibrary = true
         kapt {
             arguments {
                 arg("room.schemaLocation", "$projectDir/schemas")
@@ -34,8 +36,21 @@ android {
     }
 
     testOptions {
+        animationsDisabled = true
         unitTests {
             isIncludeAndroidResources = true
+        }
+    }
+
+    signingConfigs {
+        create("release") {
+            keyAlias = findProperty("SIGNING_KEY_ALIAS_MOVIEOH") as String?
+                ?: System.getenv("SIGNING_KEY_ALIAS_MOVIEOH")
+            keyPassword = findProperty("SIGNING_KEY_PASSWORD") as String?
+                ?: System.getenv("SIGNING_KEY_PASSWORD")
+            storeFile = file("../.signing/release-movieoh-key.jks")
+            storePassword = findProperty("SIGNING_STORE_PASSWORD") as String?
+                ?: System.getenv("SIGNING_STORE_PASSWORD")
         }
     }
 
@@ -44,37 +59,53 @@ android {
             isDebuggable = false
             isMinifyEnabled = true
             isShrinkResources = true
+            signingConfig = signingConfigs.getByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
             buildConfigField("String", "BASE_URL", ConstantsApp.Release.BASE_URL)
+            buildConfigField(
+                "boolean",
+                "IS_DEVELOPMENT",
+                ConstantsApp.Release.IS_DEVELOPMENT.toString()
+            )
         }
         create("qa") {
-            isDebuggable = false
-            isMinifyEnabled = true
-            isShrinkResources = true
+            initWith(getByName("debug"))
+            isDebuggable = true
+            isMinifyEnabled = false
+            isShrinkResources = false
+            applicationIdSuffix = ".qa"
+            versionNameSuffix = "-qa"
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            buildConfigField("String", "BASE_URL", ConstantsApp.Debug.BASE_URL)
+            buildConfigField("String", "BASE_URL", ConstantsApp.QA.BASE_URL)
+            buildConfigField(
+                "boolean",
+                "IS_DEVELOPMENT",
+                ConstantsApp.QA.IS_DEVELOPMENT.toString()
+            )
         }
         getByName("debug") {
             isDebuggable = true
             isMinifyEnabled = false
             isShrinkResources = false
+            // signingConfig = signingConfigs.getByName("debug")
+            applicationIdSuffix = ".debug"
+            versionNameSuffix = "-debug"
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
             buildConfigField("String", "BASE_URL", ConstantsApp.Debug.BASE_URL)
-        }
-    }
-
-    externalNativeBuild {
-        ndkBuild {
-            path("src/main/jni/Android.mk")
+            buildConfigField(
+                "boolean",
+                "IS_DEVELOPMENT",
+                ConstantsApp.Debug.IS_DEVELOPMENT.toString()
+            )
         }
     }
 
@@ -103,7 +134,16 @@ android {
     }
 
     lint {
-        disable.addAll(listOf("TypographyFractions", "TypographyQuotes"))
+        disable.addAll(
+            listOf(
+                "TypographyFractions",
+                "TypographyQuotes",
+                "JvmStaticProvidesInObjectDetector",
+                "FieldSiteTargetOnQualifierAnnotation",
+                "ModuleCompanionObjects",
+                "ModuleCompanionObjectsNotInModuleParent"
+            )
+        )
         checkDependencies = true
         abortOnError = false
         ignoreWarnings = false
@@ -126,7 +166,19 @@ android {
     }
 
     scabbard {
-        enabled = true
+        enabled = false
+        failOnError = false
+        fullBindingGraphValidation = true
+        qualifiedNames = true
+        outputFormat = "png"
+    }
+
+    tasks {
+        "preBuild" {
+            dependsOn("ktlintFormat")
+            dependsOn("ktlintCheck")
+            dependsOn("detekt")
+        }
     }
 }
 
@@ -139,6 +191,7 @@ dependencies {
     implementation(AppDependencies.material)
     implementation(AppDependencies.constraintLayout)
     implementation(AppDependencies.viewPager2)
+    implementation(AppDependencies.lottie)
     // Hilt
     implementation(AppDependencies.hilt)
     kapt(AppDependencies.hiltCompiler)
@@ -158,6 +211,11 @@ dependencies {
     implementation(AppDependencies.roomRuntime)
     kapt(AppDependencies.roomCompiler)
     implementation(AppDependencies.roomKtx)
+    // Glide
+    implementation(AppDependencies.glide)
+    kapt(AppDependencies.glideCompiler)
+    // Shimmer Facebook
+    implementation(AppDependencies.shimmerFacebook)
     // Test
     testImplementation(TestDependencies.junit)
     testImplementation(TestDependencies.robolectric)
@@ -168,21 +226,24 @@ dependencies {
     testImplementation(TestDependencies.kotlinCoroutines)
     testImplementation(TestDependencies.mockWebServer)
     testImplementation(TestDependencies.mockitoCore)
+    testImplementation(TestDependencies.mockitoKotlin)
     testImplementation(TestDependencies.mockitoInline)
-    testImplementation(TestDependencies.archCore)
+    testImplementation(TestDependencies.espressoCore)
+    testImplementation(TestDependencies.espressoIntents)
     debugImplementation(TestDependencies.fragment)
     androidTestImplementation(TestDependencies.extJUnit)
     androidTestImplementation(TestDependencies.espressoCore)
+    androidTestImplementation(TestDependencies.coreKtx)
     androidTestImplementation(TestDependencies.espressoContrib)
     androidTestImplementation(TestDependencies.hiltAndroid)
     kaptAndroidTest(TestDependencies.hiltCompiler)
     testImplementation(TestDependencies.hiltAndroid)
     // Chucker
     debugImplementation(AppDependencies.chucker)
+    "qaImplementation"(AppDependencies.chucker)
     releaseImplementation(AppDependencies.chuckerNoOp)
-    // Glide
-    implementation(AppDependencies.glide)
-    kapt(AppDependencies.glideCompiler)
     // Detekt
     detektPlugins(ValidationDependencies.detekt)
+    // Library
+    api(project(":uikit"))
 }
