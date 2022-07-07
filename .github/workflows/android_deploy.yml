@@ -27,19 +27,13 @@ jobs:
           echo KEY_QA=$LOCAL_PROPERTIES_KEY_QA >> local.properties
 
       - name: Run Lint
-        run: ./gradlew app:lintDebug
+        uses: ./.github/workflows/actions/lint
 
       - name: Upload Lint Test Report
         uses: actions/upload-artifact@v2
         with:
           name: lint_report
           path: app/build/reports/lint-results-debug.html
-
-      - name: Run KtLintCheck
-        run: ./gradlew app:ktlintCheck
-
-      - name: Run Detekt
-        run: ./gradlew app:detekt
 
       - name: Upload Detekt Report
         uses: actions/upload-artifact@v2
@@ -67,6 +61,9 @@ jobs:
         run: |
           echo KEY_PROD=$LOCAL_PROPERTIES_KEY_PROD >> local.properties
           echo KEY_QA=$LOCAL_PROPERTIES_KEY_QA >> local.properties
+
+      - name: Run Lint
+        uses: ./.github/workflows/actions/lint
 
       - name: Run Tests
         run: ./gradlew app:testDebugUnitTest
