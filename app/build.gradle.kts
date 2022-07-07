@@ -45,11 +45,11 @@ android {
     signingConfigs {
         create("release") {
             keyAlias = findProperty("SIGNING_KEY_ALIAS_MOVIEOH") as String?
-                ?: System.getenv("SIGNING_KEY_ALIAS_MOVIEOH")
-            keyPassword = findProperty("SIGNING_KEY_PASSWORD") as String?
+                ?: System.getenv("SIGNING_KEY_ALIAS")
+            keyPassword = findProperty("SIGNING_KEY_PASSWORD_MOVIEOH") as String?
                 ?: System.getenv("SIGNING_KEY_PASSWORD")
             storeFile = file("../.signing/release-movieoh-key.jks")
-            storePassword = findProperty("SIGNING_STORE_PASSWORD") as String?
+            storePassword = findProperty("SIGNING_STORE_PASSWORD_MOVIEOH") as String?
                 ?: System.getenv("SIGNING_STORE_PASSWORD")
         }
     }
@@ -219,25 +219,14 @@ dependencies {
     // Test
     testImplementation(TestDependencies.junit)
     testImplementation(TestDependencies.robolectric)
-    testImplementation(TestDependencies.hamcrest)
     testImplementation(TestDependencies.archCore)
     testImplementation(TestDependencies.coreKtx)
     testImplementation(TestDependencies.junitKtx)
     testImplementation(TestDependencies.kotlinCoroutines)
-    testImplementation(TestDependencies.mockWebServer)
-    testImplementation(TestDependencies.mockitoCore)
     testImplementation(TestDependencies.mockitoKotlin)
     testImplementation(TestDependencies.mockitoInline)
-    testImplementation(TestDependencies.espressoCore)
-    testImplementation(TestDependencies.espressoIntents)
-    debugImplementation(TestDependencies.fragment)
     androidTestImplementation(TestDependencies.extJUnit)
     androidTestImplementation(TestDependencies.espressoCore)
-    androidTestImplementation(TestDependencies.coreKtx)
-    androidTestImplementation(TestDependencies.espressoContrib)
-    androidTestImplementation(TestDependencies.hiltAndroid)
-    kaptAndroidTest(TestDependencies.hiltCompiler)
-    testImplementation(TestDependencies.hiltAndroid)
     // Chucker
     debugImplementation(AppDependencies.chucker)
     "qaImplementation"(AppDependencies.chucker)
