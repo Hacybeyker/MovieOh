@@ -32,8 +32,4 @@ class SplashActivity : AppCompatActivity() {
             TIMER_SPLASH
         )
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-    }
 }
