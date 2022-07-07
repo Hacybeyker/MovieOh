@@ -135,15 +135,16 @@ jobs:
       - name: Create Tag Release
         run: |
           currentVersion=`grep versionName ./buildSrc/src/main/kotlin/ConfigureApp.kt | awk -F" " '{ print $5 }' `
-          currentFormattedVersion=`echo $currentVersion | sed 's/.\(.*\)/\1/' | sed 's/\(.*\)./\1/'`
-          echo "Version: $currentFormattedVersion"
-          git tag $currentFormattedVersion
+          versionFormatted=`echo $currentVersion | sed 's/.\(.*\)/\1/' | sed 's/\(.*\)./\1/'`
+          echo "Version: $versionFormatted"
+          git tag $versionFormatted
           git push origin --tags
 
       - name: Obtain Package Name
         run: |
           currentPackage=`grep applicationId ./buildSrc/src/main/kotlin/ConfigureApp.kt | awk -F" " '{ print $5 }' `
           packageFormatted=`echo $currentPackage | sed 's/.\(.*\)/\1/' | sed 's/\(.*\)./\1/'`
+          echo "Package: $packageFormatted"
 
       - name: Deploy to Alpha
         uses: r0adkll/upload-google-play@v1.0.17
