@@ -46,10 +46,10 @@ android {
         create("release") {
             keyAlias = findProperty("SIGNING_KEY_ALIAS_MOVIEOH") as String?
                 ?: System.getenv("SIGNING_KEY_ALIAS")
-            keyPassword = findProperty("SIGNING_KEY_PASSWORD_MOVIEOH") as String?
+            keyPassword = findProperty("SIGNING_KEY_PASSWORD_HACYBEYKER") as String?
                 ?: System.getenv("SIGNING_KEY_PASSWORD")
             storeFile = file("../.signing/release-movieoh-key.jks")
-            storePassword = findProperty("SIGNING_STORE_PASSWORD_MOVIEOH") as String?
+            storePassword = findProperty("SIGNING_STORE_PASSWORD_HACYBEYKER") as String?
                 ?: System.getenv("SIGNING_STORE_PASSWORD")
         }
     }
