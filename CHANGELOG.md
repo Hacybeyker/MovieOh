@@ -1,5 +1,10 @@
 # MovieOh Changelog
 
+## Version 4.0.0
+### Added
+- Update yml for actions.
+- Add actions lint.
+
 ## Version 3.0.0
 ### Added
 - Add actions for Publish in google play.

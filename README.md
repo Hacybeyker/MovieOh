@@ -1,4 +1,5 @@
 
+
 # Project MovieOh!
 
 ![GithubActions](https://github.com/hacybeyker/Movieoh/actions/workflows/android_publish.yml/badge.svg?branch=master) ![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=com.hacybeyker.movieoh&metric=alert_status)
@@ -7,10 +8,16 @@ This project consumes the Themoviedb movie api and shows various categories of m
 
 ## Setup
 
-Run the following git commands
 
-    git submodule init
-    git submodule update
+1. Run the following git commands
+
+   git submodule init
+   git submodule update
+
+2. Add variables in local.properties
+
+   KEY_PROD=YOUR_KEY  
+   KEY_QA=YOUR_KEY
 
 ## Tools
 

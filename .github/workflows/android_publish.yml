@@ -5,15 +5,16 @@ on:
     branches:
       - 'master'
 
+env:
+  REPO_USERID: ${{ secrets.REPO_USERID }}
+  REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
+  LOCAL_PROPERTIES_KEY_PROD: ${{ secrets.LOCAL_PROPERTIES_KEY_PROD }}
+  LOCAL_PROPERTIES_KEY_QA: ${{ secrets.LOCAL_PROPERTIES_KEY_QA }}
+
 jobs:
   lint:
     name: Lint
     runs-on: ubuntu-latest
-    env:
-      REPO_USERID: ${{ secrets.REPO_USERID }}
-      REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
-      LOCAL_PROPERTIES_KEY_PROD: ${{ secrets.LOCAL_PROPERTIES_KEY_PROD }}
-      LOCAL_PROPERTIES_KEY_QA: ${{ secrets.LOCAL_PROPERTIES_KEY_QA }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
@@ -45,11 +46,6 @@ jobs:
     name: Code Analysis
     needs: [ lint ]
     runs-on: ubuntu-latest
-    env:
-      REPO_USERID: ${{ secrets.REPO_USERID }}
-      REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
-      LOCAL_PROPERTIES_KEY_PROD: ${{ secrets.LOCAL_PROPERTIES_KEY_PROD }}
-      LOCAL_PROPERTIES_KEY_QA: ${{ secrets.LOCAL_PROPERTIES_KEY_QA }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
@@ -96,10 +92,6 @@ jobs:
     needs: [ code-analysis ]
     runs-on: ubuntu-latest
     env:
-      REPO_USERID: ${{ secrets.REPO_USERID }}
-      REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
-      LOCAL_PROPERTIES_KEY_PROD: ${{ secrets.LOCAL_PROPERTIES_KEY_PROD }}
-      LOCAL_PROPERTIES_KEY_QA: ${{ secrets.LOCAL_PROPERTIES_KEY_QA }}
       SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
       SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
       SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
@@ -140,16 +132,10 @@ jobs:
           git tag $versionFormatted
           git push origin --tags
 
-      - name: Obtain Package Name
-        run: |
-          currentPackage=`grep applicationId ./buildSrc/src/main/kotlin/ConfigureApp.kt | awk -F" " '{ print $5 }' `
-          packageFormatted=`echo $currentPackage | sed 's/.\(.*\)/\1/' | sed 's/\(.*\)./\1/'`
-          echo "Package: $packageFormatted"
-
       - name: Deploy to Alpha
         uses: r0adkll/upload-google-play@v1.0.17
         with:
           serviceAccountJsonPlainText: ${{ secrets.SIGNING_SERVICE_ACCOUNT }}
-          packageName: $packageFormatted
+          packageName: com.hacybeyker.movieoh
           releaseFiles: ./app/build/outputs/bundle/release/app-release.aab
           track: alpha
