@@ -62,9 +62,14 @@ android {
 
             rule {
                 limit {
-                    minimum = 0.0
+                    minimum = 0.75
                 }
             }
         }
+    }
+
+    task jacocoTestReportViewResult(type: Exec, dependsOn: 'jacocoTestReport', group: 'jacocoReport') {
+        executable "sh"
+        args "-c", "open '${buildDir}/reports/jacoco/jacocoTestReport/html/index.html'"
     }
 }

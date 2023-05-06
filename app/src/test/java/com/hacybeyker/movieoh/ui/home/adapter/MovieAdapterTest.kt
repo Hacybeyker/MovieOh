@@ -5,8 +5,8 @@ import com.hacybeyker.movieoh.data.model.remote.response.ResultResponseModel
 import com.hacybeyker.movieoh.data.model.remote.response.toMovieResponseModelList
 import com.hacybeyker.movieoh.domain.entity.MovieEntity
 import com.hacybeyker.movieoh.utils.JSONFileLoader
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotNull
+import junit.framework.TestCase.assertEquals
+import junit.framework.TestCase.assertNotNull
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -14,9 +14,9 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 
 @RunWith(RobolectricTestRunner::class)
-class ActionAdapterTest {
+class MovieAdapterTest {
 
-    private lateinit var sutActionAdapter: ActionAdapter
+    private lateinit var sutMovieAdapter: MovieAdapter
 
     private val movieEntityList: List<MovieEntity> by lazy {
         JSONFileLoader()
@@ -26,26 +26,26 @@ class ActionAdapterTest {
 
     @Before
     fun setup() {
-        sutActionAdapter = ActionAdapter { }
-        sutActionAdapter.submitList(movieEntityList.toMutableList())
+        sutMovieAdapter = MovieAdapter { }
+        sutMovieAdapter.submitList(movieEntityList.toMutableList())
     }
 
     @Test
-    fun verifyActionAdapter() {
+    fun `GIVEN view holder WHEN send data THEN verify is ok`() {
         // Given
-        val viewHolder = sutActionAdapter.onCreateViewHolder(
+        val viewHolder = sutMovieAdapter.onCreateViewHolder(
             parent = FrameLayout(RuntimeEnvironment.getApplication()),
             viewType = 0
         )
 
-        // When
-        sutActionAdapter.onBindViewHolder(viewHolder, 0)
+        // WHEN
+        sutMovieAdapter.onBindViewHolder(viewHolder, 0)
         viewHolder.bind(movieEntityList[0])
 
-        // Then
-        assertNotNull(sutActionAdapter)
+        // THEN
+        assertNotNull(sutMovieAdapter)
         assertNotNull(viewHolder)
-        assertEquals(movieEntityList.size, sutActionAdapter.itemCount)
-        assertEquals(movieEntityList[0], sutActionAdapter.currentList[0])
+        assertEquals(movieEntityList.size, sutMovieAdapter.itemCount)
+        assertEquals(movieEntityList[0], sutMovieAdapter.currentList[0])
     }
 }

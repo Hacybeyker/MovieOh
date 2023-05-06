@@ -95,7 +95,6 @@ class HomeViewModelTest {
             try {
                 whenever(mockTrendingUseCase.fetchTrendingMovie(page)).doAnswer { throw ApiException() }
                 sutHomeViewModel.initHome()
-                // Assert.fail("")
             } catch (e: Exception) {
                 val trending = sutHomeViewModel.trendingLiveData.getOrAwaitValue()
                 val loading = sutHomeViewModel.loadingLiveData.getOrAwaitValue()
