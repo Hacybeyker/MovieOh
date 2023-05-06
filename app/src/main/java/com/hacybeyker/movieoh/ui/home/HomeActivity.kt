@@ -6,13 +6,7 @@ import com.hacybeyker.movieoh.commons.base.BaseActivity
 import com.hacybeyker.movieoh.databinding.ActivityHomeBinding
 import com.hacybeyker.movieoh.domain.entity.MovieEntity
 import com.hacybeyker.movieoh.ui.OnItemMovie
-import com.hacybeyker.movieoh.ui.home.adapter.ActionAdapter
-import com.hacybeyker.movieoh.ui.home.adapter.AdventureAdapter
-import com.hacybeyker.movieoh.ui.home.adapter.AnimationAdapter
-import com.hacybeyker.movieoh.ui.home.adapter.ComedyAdapter
-import com.hacybeyker.movieoh.ui.home.adapter.DramaAdapter
-import com.hacybeyker.movieoh.ui.home.adapter.TrendingAdapter
-import com.hacybeyker.movieoh.ui.home.adapter.UpcomingAdapter
+import com.hacybeyker.movieoh.ui.home.adapter.MovieAdapter
 import com.hacybeyker.movieoh.ui.home.viewmodel.HomeViewModel
 import com.hacybeyker.movieoh.ui.movie.MovieActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,13 +14,13 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), OnItemMovie {
 
-    private val adapterUpcoming: UpcomingAdapter by lazy { UpcomingAdapter { onClickMovie(it) } }
-    private val adapterTrending: TrendingAdapter by lazy { TrendingAdapter { onClickMovie(it) } }
-    private val adapterAction: ActionAdapter by lazy { ActionAdapter { onClickMovie(it) } }
-    private val adapterAnimation: AnimationAdapter by lazy { AnimationAdapter { onClickMovie(it) } }
-    private val adapterComedy: ComedyAdapter by lazy { ComedyAdapter { onClickMovie(it) } }
-    private val adapterDrama: DramaAdapter by lazy { DramaAdapter { onClickMovie(it) } }
-    private val adapterAdventure: AdventureAdapter by lazy { AdventureAdapter { onClickMovie(it) } }
+    private val adapterUpcoming: MovieAdapter by lazy { MovieAdapter { onClickMovie(it) } }
+    private val adapterTrending: MovieAdapter by lazy { MovieAdapter { onClickMovie(it) } }
+    private val adapterAction: MovieAdapter by lazy { MovieAdapter { onClickMovie(it) } }
+    private val adapterAnimation: MovieAdapter by lazy { MovieAdapter { onClickMovie(it) } }
+    private val adapterComedy: MovieAdapter by lazy { MovieAdapter { onClickMovie(it) } }
+    private val adapterDrama: MovieAdapter by lazy { MovieAdapter { onClickMovie(it) } }
+    private val adapterAdventure: MovieAdapter by lazy { MovieAdapter { onClickMovie(it) } }
 
     override val viewBinding: ActivityHomeBinding
         get() = ActivityHomeBinding.inflate(layoutInflater)

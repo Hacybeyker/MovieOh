@@ -1,27 +1,32 @@
-
-
 # Project MovieOh!
 
 ![GithubActions](https://github.com/hacybeyker/Movieoh/actions/workflows/android_publish.yml/badge.svg?branch=master) ![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=com.hacybeyker.movieoh&metric=alert_status)
 
-This project consumes the Themoviedb movie api and shows various categories of movies and when selecting a specific one, it shows a detail with more information about the movie.
+This project consumes the Themoviedb movie api and shows various categories of movies and when
+selecting a specific one, it shows a detail with more information about the movie.
 
 ## Setup
 
-
 1. Run the following git commands
 
+   ```text
    git submodule init
+    ```
+   ```text
    git submodule update
+    ```
 
 2. Add variables in local.properties
 
+   ```text
    KEY_PROD=YOUR_KEY  
    KEY_QA=YOUR_KEY
+    ```
 
 ## Tools
 
 ### Project
+
 - Kotlin
 - Hilt
 - Mockito
@@ -30,17 +35,19 @@ This project consumes the Themoviedb movie api and shows various categories of m
 - Glide
 
 ### Support
+
 - Lint
 - Detekt
 - Ktlint
 - Chucker
 
 ### CI/CD
+
 - Github Actions
 - SonarCloud
 
-
 ## Service
+
 - [Google Play](https://play.google.com/store/apps/details?id=com.hacybeyker.movieoh)
 - [Github Actions](https://github.com/Hacybeyker/MovieOh/actions)
 - [SonarCloud](https://sonarcloud.io/project/overview?id=com.hacybeyker.movieoh)
@@ -48,7 +55,8 @@ This project consumes the Themoviedb movie api and shows various categories of m
 
 ## Apis
 
-For this project was used api [TheMovieDB](https://developers.themoviedb.org/3/getting-started/introduction).
+For this project was used
+api [TheMovieDB](https://developers.themoviedb.org/3/getting-started/introduction).
 
 ## Images
 
@@ -57,4 +65,5 @@ For this project was used api [TheMovieDB](https://developers.themoviedb.org/3/g
 ![MovieDetail](https://drive.google.com/uc?export=view&id=1iHD1MaS3BQYwgveg4avoOHIb66kJRHj3)
 
 ## License
+
 [MIT](https://choosealicense.com/licenses/mit/)
