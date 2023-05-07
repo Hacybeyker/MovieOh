@@ -10,4 +10,9 @@
     <string name="opinions">%1$d Opiniones</string>
     <string name="duration">Duración</string>
     <string name="watch_now">Ver ahora</string>
+
+    <string name="platforms">Plataformas</string>
+    <string name="about_movie">Acerca de esta película</string>
+    <string name="cast">Elenco</string>
+    <string name="similar_movies">Películas similares</string>
 </resources>

@@ -4,13 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/clMainRecyclerMovie"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dp5"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground">
 
     <com.hacybeyker.uikit.component.image.ImageView
         android:id="@+id/ivMoviePoster"
         android:layout_width="@dimen/dp109"
         android:layout_height="@dimen/dp164"
-        android:padding="@dimen/dp5"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

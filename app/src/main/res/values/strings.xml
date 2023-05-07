@@ -10,4 +10,9 @@
     <string name="opinions">%1$d Opinions</string>
     <string name="duration">Duration</string>
     <string name="watch_now">Watch now</string>
+
+    <string name="platforms">Platforms</string>
+    <string name="about_movie">About this movie</string>
+    <string name="cast">Cast</string>
+    <string name="similar_movies">Similar movies</string>
 </resources>

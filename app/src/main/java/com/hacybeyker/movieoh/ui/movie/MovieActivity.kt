@@ -5,13 +5,16 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.DefaultItemAnimator
 import com.google.android.material.chip.Chip
 import com.hacybeyker.movieoh.R
 import com.hacybeyker.movieoh.commons.base.BaseActivity
+import com.hacybeyker.movieoh.commons.base.NetworkResult
 import com.hacybeyker.movieoh.databinding.ActivityMovieBinding
 import com.hacybeyker.movieoh.domain.entity.GenreEntity
 import com.hacybeyker.movieoh.domain.entity.MovieEntity
+import com.hacybeyker.movieoh.domain.entity.PlatformsEntity
 import com.hacybeyker.movieoh.domain.entity.StreamEntity
 import com.hacybeyker.movieoh.ui.OnItemMovie
 import com.hacybeyker.movieoh.ui.movie.adapter.CastAdapter
@@ -66,8 +69,8 @@ class MovieActivity : BaseActivity<ActivityMovieBinding, MovieViewModel>(), OnIt
     }
 
     override fun setupObservers() {
-        movie?.let {
-            viewModel.init(it.id)
+        movie?.let { movieEntity ->
+            viewModel.init(movieEntity)
         }
     }
 
@@ -80,6 +83,7 @@ class MovieActivity : BaseActivity<ActivityMovieBinding, MovieViewModel>(), OnIt
                         binding.nsvMainDetailScroll.visibility = View.GONE
                         binding.sflContainerMovie.startShimmer()
                     }
+
                     else -> {
                         binding.sflContainerMovie.visibility = View.GONE
                         binding.nsvMainDetailScroll.visibility = View.VISIBLE
@@ -101,6 +105,33 @@ class MovieActivity : BaseActivity<ActivityMovieBinding, MovieViewModel>(), OnIt
             similarLiveData.observe(this@MovieActivity) { similar ->
                 binding.rvMovieSimilar.visibility = View.VISIBLE
                 similarAdapter.submitList(similar.toMutableList())
+            }
+
+            platforms.observe(this@MovieActivity) { result ->
+                when (result) {
+                    is NetworkResult.Error -> {
+                        Toast.makeText(
+                            this@MovieActivity,
+                            "Here - ${result.message}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+
+                    is NetworkResult.Loading -> {
+                        binding.hPlatforms.visibility = View.GONE
+                        binding.hsvPlatforms.visibility = View.GONE
+                    }
+
+                    is NetworkResult.Success -> {
+                        result.data?.let {
+                            if (it.isNotEmpty()) {
+                                binding.hPlatforms.visibility = View.VISIBLE
+                                binding.hsvPlatforms.visibility = View.VISIBLE
+                                generateChipPlatforms(it)
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -147,6 +178,15 @@ class MovieActivity : BaseActivity<ActivityMovieBinding, MovieViewModel>(), OnIt
             chip.text = genre.name
             chip.id = genre.id
             binding.cgGenre.addView(chip)
+        }
+    }
+
+    private fun generateChipPlatforms(list: List<PlatformsEntity>) {
+        list.forEach { platform ->
+            val chip = Chip(this)
+            chip.text = platform.name
+            chip.setOnClickListener { openLink(platform.url) }
+            binding.cgPlatforms.addView(chip)
         }
     }
 

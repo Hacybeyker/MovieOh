@@ -4,7 +4,7 @@ import com.hacybeyker.movieoh.data.model.remote.response.ResultResponseModel
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface DiscoverApi {
+fun interface DiscoverApi {
     @GET("discover/movie")
     suspend fun fetchDiscover(
         @Query("page") page: Int,

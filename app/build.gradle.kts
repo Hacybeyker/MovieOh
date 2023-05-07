@@ -66,6 +66,11 @@ android {
             )
             buildConfigField("String", "BASE_URL", ConstantsApp.Release.BASE_URL)
             buildConfigField(
+                "String",
+                "BASE_URL_PLATFORMS",
+                ConstantsApp.Release.BASE_URL_PLATFORMS
+            )
+            buildConfigField(
                 "boolean",
                 "IS_DEVELOPMENT",
                 ConstantsApp.Release.IS_DEVELOPMENT.toString()
@@ -84,6 +89,11 @@ android {
             )
             buildConfigField("String", "BASE_URL", ConstantsApp.QA.BASE_URL)
             buildConfigField(
+                "String",
+                "BASE_URL_PLATFORMS",
+                ConstantsApp.Release.BASE_URL_PLATFORMS
+            )
+            buildConfigField(
                 "boolean",
                 "IS_DEVELOPMENT",
                 ConstantsApp.QA.IS_DEVELOPMENT.toString()
@@ -101,6 +111,11 @@ android {
                 "proguard-rules.pro"
             )
             buildConfigField("String", "BASE_URL", ConstantsApp.Debug.BASE_URL)
+            buildConfigField(
+                "String",
+                "BASE_URL_PLATFORMS",
+                ConstantsApp.Release.BASE_URL_PLATFORMS
+            )
             buildConfigField(
                 "boolean",
                 "IS_DEVELOPMENT",
@@ -166,7 +181,7 @@ android {
     }
 
     scabbard {
-        enabled = false
+        enabled = true
         failOnError = false
         fullBindingGraphValidation = true
         qualifiedNames = true

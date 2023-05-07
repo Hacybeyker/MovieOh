@@ -12,6 +12,7 @@ import com.hacybeyker.movieoh.utils.constans.ConstantsDI
 import com.hacybeyker.movieoh.utils.constans.ConstantsDI.Http.RESPONSE_OK
 import com.hacybeyker.movieoh.utils.constans.ConstantsDI.Named.API_KEY
 import com.hacybeyker.movieoh.utils.constans.ConstantsDI.Named.BASE_URL
+import com.hacybeyker.movieoh.utils.constans.ConstantsDI.Named.IDENTIFIER_TM_DB
 import com.hacybeyker.movieoh.utils.constans.ConstantsDI.Parameters.AUTH_TOKEN
 import com.hacybeyker.movieoh.utils.constans.ConstantsDI.Parameters.BEARER
 import com.hacybeyker.movieoh.utils.constans.ConstantsDI.Parameters.TIMEOUT
@@ -110,6 +111,7 @@ class NetworkModule {
     }
 
     @Singleton
+    @Named(IDENTIFIER_TM_DB)
     @Provides
     fun providerOkHttpClient(
         httpLoggingInterceptor: HttpLoggingInterceptor,
@@ -128,10 +130,11 @@ class NetworkModule {
     }
 
     @Singleton
+    @Named(IDENTIFIER_TM_DB)
     @Provides
     fun providerRetrofit(
         @Named(BASE_URL) baseUrl: String,
-        client: OkHttpClient,
+        @Named(IDENTIFIER_TM_DB) client: OkHttpClient,
         gsonConverterFactory: GsonConverterFactory
     ): Retrofit {
         return Retrofit.Builder()

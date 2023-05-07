@@ -6,6 +6,7 @@
     style="@style/Main_Container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="false"
     tools:context=".ui.movie.MovieActivity">
 
     <androidx.core.widget.NestedScrollView
@@ -26,6 +27,7 @@
                 style="@style/Icon_Arrow_Back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp30"
                 android:elevation="@dimen/dp5"
                 android:padding="@dimen/dp15"
                 app:layout_constraintStart_toStartOf="parent"
@@ -52,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintGuide_percent="0.25"
+                app:layout_constraintGuide_percent="0.30"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -122,7 +124,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/includeInfo"
-                    app:text="Acerca de esta pelicula" />
+                    app:showIcon="false"
+                    app:text="@string/about_movie" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvOverview"
@@ -180,13 +183,66 @@
                 </HorizontalScrollView>
 
                 <com.hacybeyker.uikit.component.section.Header
+                    android:id="@+id/hPlatforms"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/hsvGenre"
+                    app:showIcon="false"
+                    app:text="@string/platforms"
+                    tools:visibility="visible" />
+
+                <HorizontalScrollView
+                    android:id="@+id/hsvPlatforms"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp15"
+                    android:layout_marginEnd="@dimen/dp15"
+                    android:scrollbars="none"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/hPlatforms"
+                    tools:visibility="visible">
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/cgPlatforms"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="visible"
+                        app:singleLine="true">
+
+                        <com.google.android.material.chip.Chip
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            app:iconStartPadding="@dimen/dp5"
+                            tools:text="Google Play"
+                            tools:visibility="visible" />
+
+                        <com.google.android.material.chip.Chip
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            app:iconStartPadding="@dimen/dp5"
+                            tools:text="Apple TV"
+                            tools:visibility="visible" />
+
+                    </com.google.android.material.chip.ChipGroup>
+
+                </HorizontalScrollView>
+
+                <com.hacybeyker.uikit.component.section.Header
                     android:id="@+id/hCast"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/hsvGenre"
-                    app:text="Cast" />
+                    app:layout_constraintTop_toBottomOf="@id/hsvPlatforms"
+                    app:showIcon="false"
+                    app:text="@string/cast" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvMovieCast"
@@ -214,7 +270,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/rvMovieCast"
-                    app:text="Peliculas similares" />
+                    app:showIcon="false"
+                    app:text="@string/similar_movies" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvMovieSimilar"
