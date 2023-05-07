@@ -2,8 +2,12 @@ package com.hacybeyker.movieoh.utils.constans
 
 object ConstantsDI {
     object Named {
+        const val IDENTIFIER_TM_DB = "TMDB"
         const val BASE_URL = "base_url"
         const val API_KEY = "api_key"
+
+        const val IDENTIFIER_PLATFORMS = "PLATFORMS"
+        const val BASE_URL_PLATFORMS = "base_url_platforms"
     }
 
     object Parameters {

@@ -1,5 +1,9 @@
 # MovieOh Changelog
 
+## Version 4.2.0
+### Added
+- The list of platforms in the movie detail was implemented.
+
 ## Version 4.1.0
 ### Added
 - The adapters were migrated, only one will be used in common.
