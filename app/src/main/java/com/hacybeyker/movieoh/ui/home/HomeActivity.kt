@@ -2,6 +2,7 @@ package com.hacybeyker.movieoh.ui.home
 
 import android.view.View
 import androidx.recyclerview.widget.DefaultItemAnimator
+import com.hacybeyker.movieoh.R
 import com.hacybeyker.movieoh.commons.base.BaseActivity
 import com.hacybeyker.movieoh.databinding.ActivityHomeBinding
 import com.hacybeyker.movieoh.domain.entity.MovieEntity
@@ -27,6 +28,10 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), OnItemM
 
     override val viewModelClass: Class<HomeViewModel>
         get() = HomeViewModel::class.java
+
+    override fun setupStatusBar() {
+        window.statusBarColor = getColor(R.color.black)
+    }
 
     override fun setupView() {
         binding.apply {
@@ -73,6 +78,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), OnItemM
                         binding.nsvMainHomeScroll.visibility = View.GONE
                         binding.sflContainerHome.startShimmer()
                     }
+
                     else -> {
                         binding.sflContainerHome.visibility = View.GONE
                         binding.nsvMainHomeScroll.visibility = View.VISIBLE

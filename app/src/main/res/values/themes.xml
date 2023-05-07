@@ -1,16 +1,15 @@
 <resources>
 
-    <style name="Theme.MovieOh" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="android:statusBarColor">@color/white</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowLightStatusBar">true</item>
+    <style name="Theme.MovieOh" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
-    <style name="Theme.FullScreen" parent="Theme.MovieOh">
-        <item name="windowActionBar">false</item>
-        <item name="android:windowFullscreen">true</item>
-        <item name="windowNoTitle">true</item>
-        <item name="android:windowContentOverlay">@null</item>
+    <style name="Theme.MovieOh.NoActionBar" parent="Theme.MovieOh">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:fitsSystemWindows">false</item>
     </style>
 
     <style name="Shimmer">

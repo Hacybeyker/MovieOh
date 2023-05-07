@@ -166,7 +166,7 @@ android {
     }
 
     scabbard {
-        enabled = false
+        enabled = true
         failOnError = false
         fullBindingGraphValidation = true
         qualifiedNames = true

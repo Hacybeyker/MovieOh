@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Configure Step
         uses: ./.github/workflows/actions/configure
@@ -28,13 +28,13 @@ jobs:
         uses: ./.github/workflows/actions/lint
 
       - name: Upload Lint Test Report
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: lint_report
           path: app/build/reports/lint-results-debug.html
 
       - name: Upload Detekt Report
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: detekt_report
           path: app/build/reports/detekt
@@ -43,7 +43,7 @@ jobs:
         run: ./gradlew app:testDebugUnitTest
 
       - name: Upload Test Report
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: unit_test_report
           path: app/build/reports/tests/testDebugUnitTest/
@@ -52,7 +52,7 @@ jobs:
         run: ./gradlew app:jacocoTestReport
 
       - name: Upload Coverage Test Report
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: jacoco_test_report
           path: app/build/reports/jacoco/jacocoTestReport/
@@ -69,7 +69,7 @@ jobs:
         run: ./gradlew app:assembleQa --stacktrace
 
       - name: Upload Artifact APK
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: apk-qa
           path: ./app/build/outputs/apk/qa

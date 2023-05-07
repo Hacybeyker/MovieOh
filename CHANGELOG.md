@@ -4,6 +4,8 @@
 ### Added
 - The adapters were migrated, only one will be used in common.
 - Updated interfaces to fun interfaces.
+- Update Github Actions.
+- Update StatusBar.
 
 ## Version 4.0.0
 ### Added
