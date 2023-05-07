@@ -6,6 +6,7 @@
     style="@style/Main_Container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="false"
     tools:context=".ui.movie.MovieActivity">
 
     <androidx.core.widget.NestedScrollView
@@ -28,6 +29,7 @@
                 android:layout_height="wrap_content"
                 android:elevation="@dimen/dp5"
                 android:padding="@dimen/dp15"
+                android:layout_marginTop="@dimen/dp30"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/icon_arrow_left"
@@ -52,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintGuide_percent="0.25"
+                app:layout_constraintGuide_percent="0.30"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

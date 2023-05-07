@@ -40,7 +40,7 @@ class SimilarAdapter(
 
         fun bind(item: MovieEntity) {
             with(binding) {
-                ivMoviePoster.setOnClickListener { onClick(item) }
+                clMainRecyclerMovie.setOnClickListener { onClick(item) }
                 ivMoviePoster.loadImage(item.posterPath)
             }
         }

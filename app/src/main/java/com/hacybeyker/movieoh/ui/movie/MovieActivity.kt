@@ -80,6 +80,7 @@ class MovieActivity : BaseActivity<ActivityMovieBinding, MovieViewModel>(), OnIt
                         binding.nsvMainDetailScroll.visibility = View.GONE
                         binding.sflContainerMovie.startShimmer()
                     }
+
                     else -> {
                         binding.sflContainerMovie.visibility = View.GONE
                         binding.nsvMainDetailScroll.visibility = View.VISIBLE

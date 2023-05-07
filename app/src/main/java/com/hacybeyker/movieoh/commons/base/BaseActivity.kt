@@ -18,6 +18,8 @@ abstract class BaseActivity<VB : ViewBinding, VM : ViewModel> : AppCompatActivit
 
     protected abstract fun launchObservers()
 
+    open fun setupStatusBar() = Unit
+
     open fun getIntentData() = Unit
 
     lateinit var viewModel: VM
@@ -29,6 +31,7 @@ abstract class BaseActivity<VB : ViewBinding, VM : ViewModel> : AppCompatActivit
         viewModel = ViewModelProvider(this)[viewModelClass]
         binding = viewBinding
         setContentView(binding.root)
+        setupStatusBar()
         getIntentData()
         setupView()
         setupObservers()
