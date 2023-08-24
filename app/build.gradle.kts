@@ -1,13 +1,14 @@
 plugins {
     id("com.android.application")
-    id("kotlin-android")
-    id("kotlin-kapt")
+    kotlin("android")
+    kotlin("kapt")
     id("kotlin-parcelize")
     id("dagger.hilt.android.plugin")
-    id("scabbard.gradle") version "0.5.0"
+    id("jacoco")
+    id("org.sonarqube") version "3.3"
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
     id("org.jlleitschuh.gradle.ktlint") version "10.2.0"
     id("io.gitlab.arturbosch.detekt") version "1.18.1"
-    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
 apply {
@@ -16,8 +17,8 @@ apply {
 }
 
 android {
+    namespace = ConfigureApp.applicationId
     compileSdk = AppVersion.compileSdkVersion
-    buildToolsVersion = AppVersion.buildToolsVersion
 
     defaultConfig {
         applicationId = ConfigureApp.applicationId
@@ -125,15 +126,16 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
-    kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
+    kotlinOptions.jvmTarget = JavaVersion.VERSION_17.toString()
 
     buildFeatures {
         dataBinding = true
         viewBinding = true
+        buildConfig = true
     }
 
     bundle {
@@ -180,12 +182,13 @@ android {
         }
     }
 
-    scabbard {
-        enabled = true
-        failOnError = false
-        fullBindingGraphValidation = true
-        qualifiedNames = true
-        outputFormat = "png"
+    ktlint {
+        android.set(true)
+        ignoreFailures.set(false)
+        reporters {
+            reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.HTML)
+            reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
+        }
     }
 
     tasks {
@@ -198,8 +201,8 @@ android {
 }
 
 dependencies {
+    // Core
     implementation(fileTree("libs") { include(listOf("*.jar", "*.aar")) })
-    implementation(AppDependencies.kotlinStdlib)
     implementation(AppDependencies.coreKtx)
     // View
     implementation(AppDependencies.appCompat)

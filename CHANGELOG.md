@@ -1,5 +1,13 @@
 # MovieOh Changelog
 
+## Version 5.0.0
+### Added
+- Migration Gradle 7.2.1 -> 8.0.2
+- Migration Android Gradle Plugin 7.3.3 -> 8.0
+- Migration Android SDK API 33
+- Migration Java17
+- Migration Kotlin 1.9.0
+
 ## Version 4.2.0
 ### Added
 - The list of platforms in the movie detail was implemented.
