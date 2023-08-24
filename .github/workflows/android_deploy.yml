@@ -1,5 +1,5 @@
 name: Android Deploy
-run-name: Android Validation execute by @${{ github.actor }}
+run-name: Android Deploy execute by @${{ github.actor }}
 
 on:
   push:
@@ -37,7 +37,7 @@ jobs:
           echo KEY_QA=$LOCAL_PROPERTIES_KEY_QA >> local.properties
 
       - name: Run Lint
-        uses: ./.github/workflows/actions/lint
+        uses: ./.github/actions/lint
 
       - name: Upload Lint Test Report
         uses: actions/upload-artifact@v3
@@ -76,7 +76,7 @@ jobs:
           echo KEY_QA=$LOCAL_PROPERTIES_KEY_QA >> local.properties
 
       - name: Run Lint
-        uses: ./.github/workflows/actions/lint
+        uses: ./.github/actions/lint
 
       - name: Run Tests
         run: ./gradlew app:testDebugUnitTest

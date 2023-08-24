@@ -6,7 +6,7 @@
 - Migration Android Gradle Plugin 7.3.3 -> 8.0
 - Migration Android SDK API 33
 - Migration Java17
-- Migration Kotlin 1.9.0
+- Migration Github Actions
 
 ## Version 4.2.0
 ### Added
