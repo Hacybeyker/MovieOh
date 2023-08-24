@@ -14,11 +14,11 @@ import com.hacybeyker.movieoh.domain.usecase.MovieUseCase
 import com.hacybeyker.movieoh.domain.usecase.PlatformsUseCase
 import com.hacybeyker.movieoh.domain.usecase.SimilarUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
+import javax.inject.Named
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import javax.inject.Inject
-import javax.inject.Named
 
 @HiltViewModel
 class MovieViewModel @Inject constructor(

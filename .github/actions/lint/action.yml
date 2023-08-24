@@ -1,4 +1,4 @@
-name: "Lint"
+name: "Lint Step"
 description: "Run command lint"
 runs:
   using: "composite"

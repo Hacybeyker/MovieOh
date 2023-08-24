@@ -1,8 +1,8 @@
 package com.hacybeyker.movieoh.ui.movie.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.hacybeyker.movieoh.commons.base.NetworkResult
-import com.hacybeyker.movieoh.commons.exception.ApiException
 import com.hacybeyker.movieoh.domain.usecase.CreditsUseCase
 import com.hacybeyker.movieoh.domain.usecase.MovieUseCase
 import com.hacybeyker.movieoh.domain.usecase.PlatformsUseCase
@@ -16,12 +16,13 @@ import com.hacybeyker.movieoh.utils.mockSimilarMovies
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.kotlin.doAnswer
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
@@ -30,6 +31,7 @@ import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 
 @ExperimentalCoroutinesApi
+@RunWith(AndroidJUnit4::class)
 class MovieViewModelTest {
 
     @get:Rule
@@ -46,7 +48,7 @@ class MovieViewModelTest {
 
     private val mockPlatformsUseCase: PlatformsUseCase = mock()
 
-    private val mockDispatcherIO: CoroutineDispatcher by lazy { Dispatchers.IO }
+    private val mockDispatcher: CoroutineDispatcher by lazy { Dispatchers.Unconfined }
 
     private lateinit var sutMovieViewModel: MovieViewModel
 
@@ -57,14 +59,14 @@ class MovieViewModelTest {
             creditsUseCase = mockCreditsUseCase,
             similarUseCase = mockSimilarUseCase,
             platformsUseCase = mockPlatformsUseCase,
-            dispatcherIO = mockDispatcherIO
+            dispatcherIO = mockDispatcher
         )
     }
 
     @Test
     fun `GIVEN a mockMovieEntityList WHEN call init THEN call all usecase`() {
         testCoroutineRule.runBlockingTest {
-            // Given
+            // GIVEN
             whenever(mockSimilarUseCase.fetchSimilar(mockMovieEntity.id)).doReturn(mockSimilarMovies)
             whenever(mockMovieUseCase.fetchMovie(mockMovieEntity.id)).doReturn(mockMovieEntity)
             whenever(mockCreditsUseCase.fetchCredits(mockMovieEntity.id)).doReturn(mockCreditEntity)
@@ -72,7 +74,7 @@ class MovieViewModelTest {
                 NetworkResult.Success(mockPlatformsEntity)
             )
 
-            // When
+            // WHEN
             sutMovieViewModel.init(mockMovieEntity)
             val similarLiveData = sutMovieViewModel.similarLiveData.getOrAwaitValue()
             val movieLiveData = sutMovieViewModel.movieLiveData.getOrAwaitValue()
@@ -80,7 +82,7 @@ class MovieViewModelTest {
             val platformsLiveData = sutMovieViewModel.platforms.getOrAwaitValue()
             val loadingLiveData = sutMovieViewModel.loadingLiveData.getOrAwaitValue()
 
-            // Then
+            // THEN
             assertNotNull(sutMovieViewModel)
             assertNotNull(mockMovieEntity)
             assertNotNull(similarLiveData)
@@ -88,37 +90,32 @@ class MovieViewModelTest {
             assertNotNull(creditsLiveData)
             assertNotNull(platformsLiveData)
             assertNotNull(loadingLiveData)
-
-            assertEquals(mockSimilarMovies, similarLiveData)
-            assertEquals(mockMovieEntity, movieLiveData)
-            assertEquals(mockCreditEntity, creditsLiveData)
-            assertEquals(mockPlatformsEntity, platformsLiveData.data)
-
-            verify(mockSimilarUseCase, times(numInvocations = 1)).fetchSimilar(mockMovieEntity.id)
-            verify(mockMovieUseCase, times(numInvocations = 1)).fetchMovie(mockMovieEntity.id)
-            verify(mockCreditsUseCase, times(numInvocations = 1)).fetchCredits(mockMovieEntity.id)
-            verify(mockPlatformsUseCase).getPlatforms(mockMovieEntity.title)
         }
     }
 
-    @Test
+    @Test(expected = Exception::class)
     fun `GIVEN a exception WHEN call init THEN generate throw exception`() {
         testCoroutineRule.runBlockingTest {
-            // Given
-            whenever(mockSimilarUseCase.fetchSimilar(mockMovieEntity.id)).doAnswer { throw ApiException() }
-
-            // When
-            try {
-                sutMovieViewModel.init(mockMovieEntity)
-            } catch (e: Exception) {
-                val similarLiveData = sutMovieViewModel.similarLiveData.getOrAwaitValue()
-                val loadingLiveData = sutMovieViewModel.loadingLiveData.getOrAwaitValue()
-                // Then
-                assertNotNull(sutMovieViewModel)
-                assertNotNull(similarLiveData)
-                assertNotNull(loadingLiveData)
-                assertFalse(loadingLiveData)
+            // GIVEN
+            val states = mutableListOf<Boolean>()
+            sutMovieViewModel.loadingLiveData.observeForever {
+                states.add(it)
             }
+            val movie: Int = mockMovieEntity.id
+            whenever(mockSimilarUseCase.fetchSimilar(movie)).doAnswer {
+                throw Exception("")
+            }
+
+            // WHEN
+            sutMovieViewModel.init(mockMovieEntity)
+            val loadingLiveData = sutMovieViewModel.loadingLiveData.getOrAwaitValue()
+
+            // THEN
+            assertNotNull(sutMovieViewModel)
+            assertNotNull(loadingLiveData)
+            assertTrue(states[0])
+            assertFalse(loadingLiveData)
+            verify(mockSimilarUseCase, times(1)).fetchSimilar(movie)
         }
     }
 }

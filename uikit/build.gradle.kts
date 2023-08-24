@@ -1,18 +1,19 @@
 plugins {
     id("com.android.library")
-    id("org.jetbrains.kotlin.android")
-    id("kotlin-android")
-    id("kotlin-kapt")
+    kotlin("android")
+    kotlin("kapt")
+    id("kotlin-parcelize")
 }
 
 android {
+    namespace = "com.hacybeyker.uikit"
     compileSdk = AppVersion.compileSdkVersion
 
     defaultConfig {
         minSdk = AppVersion.minSdkVersion
-        targetSdk = AppVersion.targetSdkVersion
         testInstrumentationRunner = AppVersion.testInstrumentationRunner
         consumerProguardFiles("consumer-rules.pro")
+        renderscriptSupportModeEnabled = true
     }
 
     buildTypes {
@@ -33,18 +34,17 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
-    }
+    kotlinOptions.jvmTarget = JavaVersion.VERSION_17.toString()
 
     buildFeatures {
         dataBinding = true
         viewBinding = true
     }
+
 }
 
 dependencies {

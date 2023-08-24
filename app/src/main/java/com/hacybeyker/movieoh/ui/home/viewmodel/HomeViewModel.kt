@@ -16,11 +16,11 @@ import com.hacybeyker.movieoh.utils.constans.Genre.COMEDY
 import com.hacybeyker.movieoh.utils.constans.Genre.DRAMA
 import com.hacybeyker.movieoh.utils.constans.Genre.PAGE_STAR
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
+import javax.inject.Named
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import javax.inject.Inject
-import javax.inject.Named
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(

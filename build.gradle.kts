@@ -1,37 +1,8 @@
-buildscript {
-    repositories {
-        google()
-        mavenCentral()
-        mavenLocal()
-        maven(url = "https://jitpack.io")
-    }
-    dependencies {
-        classpath("com.android.tools.build:gradle:7.2.1")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.21")
-        classpath("com.google.dagger:hilt-android-gradle-plugin:2.39.1")
-        classpath("org.jacoco:org.jacoco.core:0.8.7")
-        classpath("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:3.3")
-        classpath("com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin:2.0.1")
-    }
-}
-
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-        mavenLocal()
-        maven(url = "https://jitpack.io")
-    }
-    configurations.all {
-        resolutionStrategy.eachDependency {
-            if (requested.group == "com.github.kittinunf.result" && requested.name == "result" && requested.version == "3.0.0") {
-                useVersion("3.0.1")
-                because("Transitive dependency of Scabbard, currently not available on mavenCentral()")
-            }
-        }
-    }
-}
-
-tasks.register("clean", Delete::class) {
-    delete(rootProject.buildDir)
+plugins {
+    id("com.android.application").version("8.0.2") apply false
+    id("com.android.library").version("8.0.2") apply false
+    id("org.jetbrains.kotlin.android").version("1.8.22") apply false
+    id("org.jetbrains.kotlin.kapt").version("1.8.22") apply false
+    id("com.google.dagger.hilt.android").version("2.46.1") apply false
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin").version("2.0.1") apply false
 }
