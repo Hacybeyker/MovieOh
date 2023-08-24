@@ -37,7 +37,7 @@ jobs:
           echo KEY_QA=$LOCAL_PROPERTIES_KEY_QA >> local.properties
 
       - name: Run Lint
-        uses: ./.github/workflows/actions/lint
+        uses: ./.github/actions/lint
 
       - name: Upload Lint Test Report
         uses: actions/upload-artifact@v3
