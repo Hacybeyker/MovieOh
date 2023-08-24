@@ -1,4 +1,4 @@
-name: "Submodule"
+name: "Submodule Step"
 description: "Run command to initialize submodule"
 runs:
   using: "composite"
