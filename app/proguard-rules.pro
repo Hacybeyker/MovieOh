@@ -37,11 +37,18 @@
 #    @retrofit2.http.* <methods>;
 #}
 
--keepclassmembers,allowobfuscation class * {
-  @com.google.gson.annotations.SerializedName <fields>;
-}
+#-keepclassmembers,allowobfuscation class * {
+#  @com.google.gson.annotations.SerializedName <fields>;
+#}
 
-#-keep class com.google.crypto.** { *; }
+ # Keep generic signature of Call, Response (R8 full mode strips signatures from non-kept items).
+ -keep,allowobfuscation,allowshrinking interface retrofit2.Call
+ -keep,allowobfuscation,allowshrinking class retrofit2.Response
 
-#-keepnames class * extends java.io.Serializable
-#-keepnames class * extends android.os.Parcelable
+ # With R8 full mode generic signatures are stripped for classes that are not
+ # kept. Suspend functions are wrapped in continuations where the type argument
+ # is used.
+ -keep,allowobfuscation,allowshrinking class kotlin.coroutines.Continuation
+
+-keep class com.hacybeyker.movieoh.data.** { <fields>; }
+-keep class com.hacybeyker.movieoh.domain.** { <fields>; }

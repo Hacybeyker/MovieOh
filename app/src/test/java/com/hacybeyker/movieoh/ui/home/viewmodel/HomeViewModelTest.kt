@@ -1,7 +1,7 @@
 package com.hacybeyker.movieoh.ui.home.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.hacybeyker.movieoh.commons.exception.ApiException
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.hacybeyker.movieoh.domain.entity.MovieEntity
 import com.hacybeyker.movieoh.domain.usecase.DiscoverUseCase
 import com.hacybeyker.movieoh.domain.usecase.TrendingUseCase
@@ -16,6 +16,7 @@ import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.kotlin.doAnswer
 import org.mockito.kotlin.doReturn
@@ -25,6 +26,7 @@ import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 
 @ExperimentalCoroutinesApi
+@RunWith(AndroidJUnit4::class)
 class HomeViewModelTest {
 
     @get:Rule
@@ -41,7 +43,7 @@ class HomeViewModelTest {
 
     private val mockDiscoverUseCase: DiscoverUseCase = mock()
 
-    private val mockDispatcherIO: CoroutineDispatcher by lazy { Dispatchers.IO }
+    private val mockDispatcherIO: CoroutineDispatcher by lazy { Dispatchers.Unconfined }
 
     private lateinit var sutHomeViewModel: HomeViewModel
 
@@ -58,12 +60,15 @@ class HomeViewModelTest {
     @Test
     fun `GIVEN a mockMovieEntityList WHEN call initHome THEN call all usecase`() {
         testCoroutineRule.runBlockingTest {
+            // GIVEN
             whenever(mockTrendingUseCase.fetchTrendingMovie(anyInt())).doReturn(mockMovieEntityList)
             whenever(mockUpcomingUseCase.fetchUpcoming(anyInt())).doReturn(mockMovieEntityList)
-            whenever(mockDiscoverUseCase.fetchDiscover(anyInt(), anyInt()))
-                .doReturn(mockMovieEntityList)
+            whenever(mockDiscoverUseCase.fetchDiscover(anyInt(), anyInt())).doReturn(
+                mockMovieEntityList
+            )
             whenever(mockMovieEntityList.size).doReturn(2)
 
+            // WHEN
             sutHomeViewModel.initHome()
             val trending = sutHomeViewModel.trendingLiveData.getOrAwaitValue()
             val upcoming = sutHomeViewModel.upcomingLiveData.getOrAwaitValue()
@@ -74,6 +79,7 @@ class HomeViewModelTest {
             val adventure = sutHomeViewModel.adventureLiveData.getOrAwaitValue()
             val loading = sutHomeViewModel.loadingLiveData.getOrAwaitValue()
 
+            // THEN
             assertNotNull(trending)
             assertNotNull(upcoming)
             assertNotNull(action)
@@ -88,22 +94,23 @@ class HomeViewModelTest {
         }
     }
 
-    @Test
+    @Test(expected = Exception::class)
     fun `GIVEN a exception WHEN call initHome THEN generate throw exception`() {
         testCoroutineRule.runBlockingTest {
-            val page: Int = anyInt()
-            try {
-                whenever(mockTrendingUseCase.fetchTrendingMovie(page)).doAnswer { throw ApiException() }
-                sutHomeViewModel.initHome()
-            } catch (e: Exception) {
-                val trending = sutHomeViewModel.trendingLiveData.getOrAwaitValue()
-                val loading = sutHomeViewModel.loadingLiveData.getOrAwaitValue()
-                // Then
-                assertNotNull(loading)
-                assertNotNull(trending)
-                assertEquals(arrayListOf<MovieEntity>(), trending)
-                verify(mockTrendingUseCase, times(numInvocations = 1)).fetchTrendingMovie(page)
-            }
+            // GIVEN
+            val page: Int = 1
+            whenever(mockTrendingUseCase.fetchTrendingMovie(page)).doAnswer { throw Exception("") }
+
+            // WHEN
+            sutHomeViewModel.initHome()
+            val trending = sutHomeViewModel.trendingLiveData.getOrAwaitValue()
+            val loading = sutHomeViewModel.loadingLiveData.getOrAwaitValue()
+
+            // THEN
+            assertNotNull(loading)
+            assertNotNull(trending)
+            assertEquals(arrayListOf<MovieEntity>(), trending)
+            verify(mockTrendingUseCase, times(numInvocations = 1)).fetchTrendingMovie(page)
         }
     }
 }

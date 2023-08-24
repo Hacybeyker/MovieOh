@@ -23,6 +23,11 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import ir.mirrajabi.okhttpjsonmock.OkHttpMockInterceptor
 import ir.mirrajabi.okhttpjsonmock.providers.InputStreamProvider
+import java.io.IOException
+import java.util.concurrent.TimeUnit
+import javax.inject.Inject
+import javax.inject.Named
+import javax.inject.Singleton
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -30,11 +35,6 @@ import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.io.IOException
-import java.util.concurrent.TimeUnit
-import javax.inject.Inject
-import javax.inject.Named
-import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
