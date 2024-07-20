@@ -29,23 +29,22 @@ import java.util.concurrent.TimeoutException
  * `InstantTaskExecutorRule` or a similar mechanism to execute tasks synchronously.
  */
 
-/*https://github.com/googlecodelabs/android-testing/blob/end_codelab_2_actions/app/src/test/java/com/example/android/architecture/blueprints/todoapp/LiveDataTestUtil.kt*/
-
 @VisibleForTesting(otherwise = VisibleForTesting.NONE)
 fun <T> LiveData<T>.getOrAwaitValue(
     time: Long = 2,
     timeUnit: TimeUnit = TimeUnit.SECONDS,
-    afterObserve: () -> Unit = {}
+    afterObserve: () -> Unit = {},
 ): T {
     var data: T? = null
     val latch = CountDownLatch(1)
-    val observer = object : Observer<T> {
-        override fun onChanged(value: T) {
-            data = value
-            latch.countDown()
-            this@getOrAwaitValue.removeObserver(this)
+    val observer =
+        object : Observer<T> {
+            override fun onChanged(value: T) {
+                data = value
+                latch.countDown()
+                this@getOrAwaitValue.removeObserver(this)
+            }
         }
-    }
     this.observeForever(observer)
 
     try {

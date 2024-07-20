@@ -33,7 +33,6 @@ import org.mockito.kotlin.whenever
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
 class MovieViewModelTest {
-
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
@@ -54,13 +53,14 @@ class MovieViewModelTest {
 
     @Before
     fun setup() {
-        sutMovieViewModel = MovieViewModel(
-            movieUseCase = mockMovieUseCase,
-            creditsUseCase = mockCreditsUseCase,
-            similarUseCase = mockSimilarUseCase,
-            platformsUseCase = mockPlatformsUseCase,
-            dispatcherIO = mockDispatcher
-        )
+        sutMovieViewModel =
+            MovieViewModel(
+                movieUseCase = mockMovieUseCase,
+                creditsUseCase = mockCreditsUseCase,
+                similarUseCase = mockSimilarUseCase,
+                platformsUseCase = mockPlatformsUseCase,
+                dispatcherIO = mockDispatcher,
+            )
     }
 
     @Test
@@ -71,7 +71,7 @@ class MovieViewModelTest {
             whenever(mockMovieUseCase.fetchMovie(mockMovieEntity.id)).doReturn(mockMovieEntity)
             whenever(mockCreditsUseCase.fetchCredits(mockMovieEntity.id)).doReturn(mockCreditEntity)
             whenever(mockPlatformsUseCase.getPlatforms(mockMovieEntity.title)).doReturn(
-                NetworkResult.Success(mockPlatformsEntity)
+                NetworkResult.Success(mockPlatformsEntity),
             )
 
             // WHEN

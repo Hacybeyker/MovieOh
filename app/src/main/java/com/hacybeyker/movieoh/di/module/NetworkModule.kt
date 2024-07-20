@@ -23,11 +23,6 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import ir.mirrajabi.okhttpjsonmock.OkHttpMockInterceptor
 import ir.mirrajabi.okhttpjsonmock.providers.InputStreamProvider
-import java.io.IOException
-import java.util.concurrent.TimeUnit
-import javax.inject.Inject
-import javax.inject.Named
-import javax.inject.Singleton
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -35,11 +30,15 @@ import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.IOException
+import java.util.concurrent.TimeUnit
+import javax.inject.Inject
+import javax.inject.Named
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
-
     @Singleton
     @Provides
     @Named(API_KEY)
@@ -70,7 +69,9 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideInputStreamProvider(@ApplicationContext context: Context): InputStreamProvider {
+    fun provideInputStreamProvider(
+        @ApplicationContext context: Context,
+    ): InputStreamProvider {
         return InputStreamProvider { path ->
             try {
                 return@InputStreamProvider context.applicationContext.assets.open(path)
@@ -88,11 +89,13 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideChuckCollector(@ApplicationContext context: Context): ChuckerCollector {
+    fun provideChuckCollector(
+        @ApplicationContext context: Context,
+    ): ChuckerCollector {
         return ChuckerCollector(
             context = context,
             showNotification = true,
-            retentionPeriod = RetentionManager.Period.ONE_HOUR
+            retentionPeriod = RetentionManager.Period.ONE_HOUR,
         )
     }
 
@@ -100,7 +103,7 @@ class NetworkModule {
     @Provides
     fun provideChuckInterceptor(
         chuckerCollector: ChuckerCollector,
-        @ApplicationContext context: Context
+        @ApplicationContext context: Context,
     ): ChuckerInterceptor {
         return ChuckerInterceptor.Builder(context)
             .collector(chuckerCollector)
@@ -117,7 +120,7 @@ class NetworkModule {
         httpLoggingInterceptor: HttpLoggingInterceptor,
         okHttpMockInterceptor: OkHttpMockInterceptor,
         chuckerInterceptor: ChuckerInterceptor,
-        apiInterceptor: ApiInterceptor
+        apiInterceptor: ApiInterceptor,
     ): OkHttpClient {
         return OkHttpClient.Builder()
             .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
@@ -135,7 +138,7 @@ class NetworkModule {
     fun providerRetrofit(
         @Named(BASE_URL) baseUrl: String,
         @Named(IDENTIFIER_TM_DB) client: OkHttpClient,
-        gsonConverterFactory: GsonConverterFactory
+        gsonConverterFactory: GsonConverterFactory,
     ): Retrofit {
         return Retrofit.Builder()
             .baseUrl(baseUrl)
@@ -144,22 +147,24 @@ class NetworkModule {
             .build()
     }
 
-    class ApiInterceptor @Inject constructor(
-        @Named(API_KEY) private val apiKey: String,
-        private val networkUtils: NetworkStatus
-    ) : Interceptor {
-        override fun intercept(chain: Interceptor.Chain): Response {
-            if (!networkUtils.isOnline()) {
-                throw NoInternetConnectionException()
+    class ApiInterceptor
+        @Inject
+        constructor(
+            @Named(API_KEY) private val apiKey: String,
+            private val networkUtils: NetworkStatus,
+        ) : Interceptor {
+            override fun intercept(chain: Interceptor.Chain): Response {
+                if (!networkUtils.isOnline()) {
+                    throw NoInternetConnectionException()
+                }
+                var request = chain.request()
+                val url = request.url.newBuilder().addQueryParameter(API_KEY, apiKey).build()
+                request = Request.Builder().url(url).build()
+                val response = chain.proceed(request)
+                if (!response.isSuccessful && response.code != RESPONSE_OK) {
+                    throw ApiException()
+                }
+                return response
             }
-            var request = chain.request()
-            val url = request.url.newBuilder().addQueryParameter(API_KEY, apiKey).build()
-            request = Request.Builder().url(url).build()
-            val response = chain.proceed(request)
-            if (!response.isSuccessful && response.code != RESPONSE_OK) {
-                throw ApiException()
-            }
-            return response
         }
-    }
 }

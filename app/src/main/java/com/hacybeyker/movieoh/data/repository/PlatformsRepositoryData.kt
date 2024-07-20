@@ -6,11 +6,12 @@ import com.hacybeyker.movieoh.domain.entity.PlatformsEntity
 import com.hacybeyker.movieoh.domain.repository.PlatformsRepository
 import javax.inject.Inject
 
-class PlatformsRepositoryData @Inject constructor(
-    private val dataSource: PlatformsDataSource
-) : PlatformsRepository {
-
-    override suspend fun getPlatforms(name: String): NetworkResult<List<PlatformsEntity>> {
-        return dataSource.getPlatforms(name)
+class PlatformsRepositoryData
+    @Inject
+    constructor(
+        private val dataSource: PlatformsDataSource,
+    ) : PlatformsRepository {
+        override suspend fun getPlatforms(name: String): NetworkResult<List<PlatformsEntity>> {
+            return dataSource.getPlatforms(name)
+        }
     }
-}

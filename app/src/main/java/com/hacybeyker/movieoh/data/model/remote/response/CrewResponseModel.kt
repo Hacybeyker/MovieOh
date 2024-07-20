@@ -44,6 +44,6 @@ fun CrewResponseModel.toCrewEntity(): CrewEntity {
         profilePath = profilePath ?: "",
         creditId = creditId ?: "",
         department = department ?: "",
-        job = job ?: ""
+        job = job ?: "",
     )
 }

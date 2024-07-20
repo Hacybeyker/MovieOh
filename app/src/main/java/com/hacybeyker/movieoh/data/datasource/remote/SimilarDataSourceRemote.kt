@@ -6,11 +6,12 @@ import com.hacybeyker.movieoh.data.model.remote.response.toMovieResponseModelLis
 import com.hacybeyker.movieoh.domain.entity.MovieEntity
 import javax.inject.Inject
 
-class SimilarDataSourceRemote @Inject constructor(
-    private val api: SimilarApi
-) : SimilarDataSource {
-
-    override suspend fun fetchSimilar(movie: Int): List<MovieEntity> {
-        return api.fetchSimilar(movie).toMovieResponseModelList()
+class SimilarDataSourceRemote
+    @Inject
+    constructor(
+        private val api: SimilarApi,
+    ) : SimilarDataSource {
+        override suspend fun fetchSimilar(movie: Int): List<MovieEntity> {
+            return api.fetchSimilar(movie).toMovieResponseModelList()
+        }
     }
-}

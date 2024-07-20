@@ -6,7 +6,7 @@ import com.hacybeyker.movieoh.domain.entity.MovieEntity
 fun getListMovieEntity(): List<MovieEntity> {
     return arrayListOf(
         getMovieOne(),
-        getMovieTwo()
+        getMovieTwo(),
     )
 }
 
@@ -29,7 +29,7 @@ fun getMovieResponseModel(): MovieResponseModel {
         voteCount = 145,
         runtime = 145,
         homepage = "",
-        genres = null
+        genres = null,
     )
 }
 
@@ -47,7 +47,7 @@ fun getMovieOne(): MovieEntity {
         runtime = 145,
         homepage = "",
         genres = emptyList(),
-        stream = null
+        stream = null,
     )
 }
 
@@ -65,6 +65,6 @@ fun getMovieTwo(): MovieEntity {
         runtime = 145,
         homepage = "",
         genres = emptyList(),
-        stream = null
+        stream = null,
     )
 }

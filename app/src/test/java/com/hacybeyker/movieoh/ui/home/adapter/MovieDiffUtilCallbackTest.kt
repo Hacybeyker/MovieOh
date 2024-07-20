@@ -9,7 +9,6 @@ import org.junit.Before
 import org.junit.Test
 
 class MovieDiffUtilCallbackTest {
-
     private lateinit var sutMovieDiffUtilCallback: MovieDiffUtilCallback
 
     @Before

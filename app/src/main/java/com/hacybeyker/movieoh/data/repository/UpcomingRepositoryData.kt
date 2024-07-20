@@ -5,11 +5,12 @@ import com.hacybeyker.movieoh.domain.entity.MovieEntity
 import com.hacybeyker.movieoh.domain.repository.UpcomingRepository
 import javax.inject.Inject
 
-class UpcomingRepositoryData @Inject constructor(
-    private val dataSource: UpcomingDataSource
-) : UpcomingRepository {
-
-    override suspend fun fetchUpcoming(page: Int): List<MovieEntity> {
-        return dataSource.fetchUpcoming(page)
+class UpcomingRepositoryData
+    @Inject
+    constructor(
+        private val dataSource: UpcomingDataSource,
+    ) : UpcomingRepository {
+        override suspend fun fetchUpcoming(page: Int): List<MovieEntity> {
+            return dataSource.fetchUpcoming(page)
+        }
     }
-}

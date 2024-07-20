@@ -20,7 +20,6 @@ import org.mockito.kotlin.whenever
 
 @ExperimentalCoroutinesApi
 class SimilarDataSourceRemoteTest {
-
     @get:Rule
     val testCoroutineRule = TestCoroutineRule()
 
@@ -53,7 +52,7 @@ class SimilarDataSourceRemoteTest {
         testCoroutineRule.runBlockingTest {
             try {
                 whenever(
-                    mockSimilarApi.fetchSimilar(anyInt())
+                    mockSimilarApi.fetchSimilar(anyInt()),
                 ).doThrow(RuntimeException(ApiException()))
 
                 sutSimilarDataSourceRemote.fetchSimilar(anyInt())

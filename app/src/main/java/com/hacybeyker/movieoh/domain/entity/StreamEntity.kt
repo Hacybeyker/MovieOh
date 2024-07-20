@@ -9,22 +9,22 @@ enum class StreamEntity(
 ) {
     NONE(
         icon = R.drawable.icon_netflix,
-        type = Stream.NONE
+        type = Stream.NONE,
     ),
     NETFLIX(
         icon = R.drawable.icon_netflix,
-        type = Stream.NETFLIX
+        type = Stream.NETFLIX,
     ),
     AMAZON(
         icon = R.drawable.icon_amazon,
-        type = Stream.AMAZON
+        type = Stream.AMAZON,
     ),
     HBO(
         icon = R.drawable.icon_hbo,
-        type = Stream.HBO
+        type = Stream.HBO,
     ),
     DISNEY(
         icon = R.drawable.icon_disney,
-        type = Stream.DISNEY
-    )
+        type = Stream.DISNEY,
+    ),
 }

@@ -19,7 +19,6 @@ import org.robolectric.RuntimeEnvironment
 
 @RunWith(RobolectricTestRunner::class)
 class CastAdapterTest {
-
     private lateinit var sutCastAdapter: CastAdapter
 
     private val spyListCastEntity: ArrayList<CastEntity> = spy()
@@ -43,10 +42,11 @@ class CastAdapterTest {
     fun validateAdapter() {
         // Given
         whenever(sutCastAdapter.itemCount).doReturn(creditsEntity.cast.size)
-        val viewHolder = sutCastAdapter.onCreateViewHolder(
-            parent = FrameLayout(RuntimeEnvironment.getApplication()),
-            viewType = 0
-        )
+        val viewHolder =
+            sutCastAdapter.onCreateViewHolder(
+                parent = FrameLayout(RuntimeEnvironment.getApplication()),
+                viewType = 0,
+            )
 
         // When
         sutCastAdapter.onBindViewHolder(viewHolder, 0)
@@ -62,10 +62,11 @@ class CastAdapterTest {
     fun validateAdapter2() {
         // Given
         whenever(sutCastAdapter.itemCount).doReturn(creditsEntity.cast.size)
-        val viewHolder = sutCastAdapter.onCreateViewHolder(
-            parent = FrameLayout(RuntimeEnvironment.getApplication()),
-            viewType = 0
-        )
+        val viewHolder =
+            sutCastAdapter.onCreateViewHolder(
+                parent = FrameLayout(RuntimeEnvironment.getApplication()),
+                viewType = 0,
+            )
 
         // When
         sutCastAdapter.onBindViewHolder(viewHolder, 0)

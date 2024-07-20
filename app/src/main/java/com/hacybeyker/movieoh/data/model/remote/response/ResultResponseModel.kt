@@ -11,7 +11,7 @@ data class ResultResponseModel(
     @SerializedName("total_pages")
     val totalPages: Int,
     @SerializedName("total_results")
-    val totalResults: Int
+    val totalResults: Int,
 )
 
 fun ResultResponseModel.toMovieResponseModelList(): List<MovieEntity> {

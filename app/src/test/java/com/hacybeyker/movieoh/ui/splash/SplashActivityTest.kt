@@ -22,7 +22,6 @@ import org.robolectric.shadows.ShadowLooper
 
 @RunWith(AndroidJUnit4::class)
 class SplashActivityTest {
-
     @get:Rule
     val activityScenarioRule = ActivityScenarioRule(SplashActivity::class.java)
 
