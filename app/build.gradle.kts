@@ -5,10 +5,10 @@ plugins {
     id("kotlin-parcelize")
     id("dagger.hilt.android.plugin")
     id("jacoco")
-    id("org.sonarqube") version "3.3"
+    id("org.sonarqube") version "5.1.0.4882"
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
-    id("org.jlleitschuh.gradle.ktlint") version "10.2.0"
-    id("io.gitlab.arturbosch.detekt") version "1.18.1"
+    id("org.jlleitschuh.gradle.ktlint") version "12.1.1"
+    id("io.gitlab.arturbosch.detekt") version "1.23.6"
 }
 
 apply {
@@ -63,18 +63,18 @@ android {
             signingConfig = signingConfigs.getByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
             buildConfigField("String", "BASE_URL", ConstantsApp.Release.BASE_URL)
             buildConfigField(
                 "String",
                 "BASE_URL_PLATFORMS",
-                ConstantsApp.Release.BASE_URL_PLATFORMS
+                ConstantsApp.Release.BASE_URL_PLATFORMS,
             )
             buildConfigField(
                 "boolean",
                 "IS_DEVELOPMENT",
-                ConstantsApp.Release.IS_DEVELOPMENT.toString()
+                ConstantsApp.Release.IS_DEVELOPMENT.toString(),
             )
         }
         create("qa") {
@@ -86,18 +86,18 @@ android {
             versionNameSuffix = "-qa"
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
             buildConfigField("String", "BASE_URL", ConstantsApp.QA.BASE_URL)
             buildConfigField(
                 "String",
                 "BASE_URL_PLATFORMS",
-                ConstantsApp.Release.BASE_URL_PLATFORMS
+                ConstantsApp.Release.BASE_URL_PLATFORMS,
             )
             buildConfigField(
                 "boolean",
                 "IS_DEVELOPMENT",
-                ConstantsApp.QA.IS_DEVELOPMENT.toString()
+                ConstantsApp.QA.IS_DEVELOPMENT.toString(),
             )
         }
         getByName("debug") {
@@ -109,18 +109,18 @@ android {
             versionNameSuffix = "-debug"
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
             buildConfigField("String", "BASE_URL", ConstantsApp.Debug.BASE_URL)
             buildConfigField(
                 "String",
                 "BASE_URL_PLATFORMS",
-                ConstantsApp.Release.BASE_URL_PLATFORMS
+                ConstantsApp.Release.BASE_URL_PLATFORMS,
             )
             buildConfigField(
                 "boolean",
                 "IS_DEVELOPMENT",
-                ConstantsApp.Debug.IS_DEVELOPMENT.toString()
+                ConstantsApp.Debug.IS_DEVELOPMENT.toString(),
             )
         }
     }
@@ -158,8 +158,8 @@ android {
                 "JvmStaticProvidesInObjectDetector",
                 "FieldSiteTargetOnQualifierAnnotation",
                 "ModuleCompanionObjects",
-                "ModuleCompanionObjectsNotInModuleParent"
-            )
+                "ModuleCompanionObjectsNotInModuleParent",
+            ),
         )
         checkDependencies = true
         abortOnError = false
@@ -173,7 +173,8 @@ android {
     detekt {
         buildUponDefaultConfig = true
         allRules = true
-        config = files("$projectDir/config/detekt.yml")
+        autoCorrect = true
+        config.setFrom("$projectDir/config/detekt.yml")
         reports {
             html.enabled = true
             xml.enabled = true
@@ -236,6 +237,8 @@ dependencies {
     implementation(AppDependencies.shimmerFacebook)
     // Test
     testImplementation(TestDependencies.junit)
+    androidTestImplementation(TestDependencies.extJUnit)
+    androidTestImplementation(TestDependencies.espressoCore)
     testImplementation(TestDependencies.robolectric)
     testImplementation(TestDependencies.archCore)
     testImplementation(TestDependencies.coreKtx)
@@ -243,8 +246,6 @@ dependencies {
     testImplementation(TestDependencies.kotlinCoroutines)
     testImplementation(TestDependencies.mockitoKotlin)
     testImplementation(TestDependencies.mockitoInline)
-    androidTestImplementation(TestDependencies.extJUnit)
-    androidTestImplementation(TestDependencies.espressoCore)
     // Chucker
     debugImplementation(AppDependencies.chucker)
     "qaImplementation"(AppDependencies.chucker)

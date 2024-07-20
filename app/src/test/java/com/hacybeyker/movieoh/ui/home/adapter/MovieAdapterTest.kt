@@ -15,7 +15,6 @@ import org.robolectric.RuntimeEnvironment
 
 @RunWith(RobolectricTestRunner::class)
 class MovieAdapterTest {
-
     private lateinit var sutMovieAdapter: MovieAdapter
 
     private val movieEntityList: List<MovieEntity> by lazy {
@@ -33,10 +32,11 @@ class MovieAdapterTest {
     @Test
     fun `GIVEN view holder WHEN send data THEN verify is ok`() {
         // Given
-        val viewHolder = sutMovieAdapter.onCreateViewHolder(
-            parent = FrameLayout(RuntimeEnvironment.getApplication()),
-            viewType = 0
-        )
+        val viewHolder =
+            sutMovieAdapter.onCreateViewHolder(
+                parent = FrameLayout(RuntimeEnvironment.getApplication()),
+                viewType = 0,
+            )
 
         // WHEN
         sutMovieAdapter.onBindViewHolder(viewHolder, 0)

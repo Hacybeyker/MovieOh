@@ -12,7 +12,6 @@ import dagger.hilt.android.components.ViewModelComponent
 @Module
 @InstallIn(ViewModelComponent::class)
 abstract class DiscoverModule {
-
     @Binds
     abstract fun bindsDiscoverDataSource(discoverDataSourceRemote: DiscoverDataSourceRemote): DiscoverDataSource
 

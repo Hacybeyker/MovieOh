@@ -8,6 +8,6 @@ fun interface DiscoverApi {
     @GET("discover/movie")
     suspend fun fetchDiscover(
         @Query("page") page: Int,
-        @Query("with_genres") genre: Int
+        @Query("with_genres") genre: Int,
     ): ResultResponseModel
 }

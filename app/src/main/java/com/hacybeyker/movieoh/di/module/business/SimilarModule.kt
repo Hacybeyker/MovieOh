@@ -12,7 +12,6 @@ import dagger.hilt.android.components.ViewModelComponent
 @Module
 @InstallIn(ViewModelComponent::class)
 abstract class SimilarModule {
-
     @Binds
     abstract fun bindSimilarDataSource(similarDataSourceRemote: SimilarDataSourceRemote): SimilarDataSource
 

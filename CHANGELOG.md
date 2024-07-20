@@ -1,5 +1,12 @@
 # MovieOh Changelog
 
+## Version 6.0.0
+### Added
+- Migration Gradle 8.0.2 -> 8.5.1
+- Migration Android Gradle Plugin 8.0 -> 8.7
+- Migration Android SDK API 34
+- Migration Github Actions
+
 ## Version 5.0.0
 ### Added
 - Migration Gradle 7.2.1 -> 8.0.2

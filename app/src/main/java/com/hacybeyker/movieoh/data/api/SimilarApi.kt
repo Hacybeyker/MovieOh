@@ -6,5 +6,7 @@ import retrofit2.http.Path
 
 fun interface SimilarApi {
     @GET("movie/{movie}/similar")
-    suspend fun fetchSimilar(@Path(value = "movie") movie: Int): ResultResponseModel
+    suspend fun fetchSimilar(
+        @Path(value = "movie") movie: Int,
+    ): ResultResponseModel
 }

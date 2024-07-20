@@ -13,10 +13,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import ir.mirrajabi.okhttpjsonmock.OkHttpMockInterceptor
-import java.util.concurrent.TimeUnit
-import javax.inject.Inject
-import javax.inject.Named
-import javax.inject.Singleton
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -24,11 +20,14 @@ import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
+import javax.inject.Inject
+import javax.inject.Named
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 class NetworkPlatformsModule {
-
     @Singleton
     @Provides
     @Named(BASE_URL_PLATFORMS)
@@ -43,7 +42,7 @@ class NetworkPlatformsModule {
         httpLoggingInterceptor: HttpLoggingInterceptor,
         okHttpMockInterceptor: OkHttpMockInterceptor,
         chuckerInterceptor: ChuckerInterceptor,
-        apiInterceptor: ApiInterceptorPlatforms
+        apiInterceptor: ApiInterceptorPlatforms,
     ): OkHttpClient {
         return OkHttpClient.Builder()
             .connectTimeout(ConstantsDI.Parameters.TIMEOUT, TimeUnit.SECONDS)
@@ -61,7 +60,7 @@ class NetworkPlatformsModule {
     fun providerRetrofitPlatforms(
         @Named(BASE_URL_PLATFORMS) baseUrl: String,
         @Named(IDENTIFIER_PLATFORMS) client: OkHttpClient,
-        gsonConverterFactory: GsonConverterFactory
+        gsonConverterFactory: GsonConverterFactory,
     ): Retrofit {
         return Retrofit.Builder()
             .baseUrl(baseUrl)
@@ -70,21 +69,23 @@ class NetworkPlatformsModule {
             .build()
     }
 
-    class ApiInterceptorPlatforms @Inject constructor(
-        private val networkUtils: NetworkStatus
-    ) : Interceptor {
-        override fun intercept(chain: Interceptor.Chain): Response {
-            if (!networkUtils.isOnline()) {
-                throw NoInternetConnectionException()
+    class ApiInterceptorPlatforms
+        @Inject
+        constructor(
+            private val networkUtils: NetworkStatus,
+        ) : Interceptor {
+            override fun intercept(chain: Interceptor.Chain): Response {
+                if (!networkUtils.isOnline()) {
+                    throw NoInternetConnectionException()
+                }
+                var request = chain.request()
+                val url = request.url.newBuilder().build()
+                request = Request.Builder().url(url).build()
+                val response = chain.proceed(request)
+                if (!response.isSuccessful && response.code != ConstantsDI.Http.RESPONSE_OK) {
+                    throw ApiException()
+                }
+                return response
             }
-            var request = chain.request()
-            val url = request.url.newBuilder().build()
-            request = Request.Builder().url(url).build()
-            val response = chain.proceed(request)
-            if (!response.isSuccessful && response.code != ConstantsDI.Http.RESPONSE_OK) {
-                throw ApiException()
-            }
-            return response
         }
-    }
 }

@@ -6,7 +6,6 @@ import org.junit.Before
 import org.junit.Test
 
 class CreditsResponseModelTest {
-
     private lateinit var sutCreditsResponseModel: CreditsResponseModel
 
     @Before

@@ -10,14 +10,19 @@ import com.hacybeyker.movieoh.ui.home.adapter.MovieDiffUtilCallback
 import com.hacybeyker.movieoh.utils.extensions.loadImage
 
 class SimilarAdapter(
-    private val onClick: (MovieEntity) -> Unit
+    private val onClick: (MovieEntity) -> Unit,
 ) : ListAdapter<MovieEntity, SimilarAdapter.SimilarViewHolder>(MovieDiffUtilCallback()) {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SimilarViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): SimilarViewHolder {
         return SimilarViewHolder.from(parent, onClick)
     }
 
-    override fun onBindViewHolder(holder: SimilarViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: SimilarViewHolder,
+        position: Int,
+    ) {
         holder.bind(getItem(position))
     }
 
@@ -27,11 +32,13 @@ class SimilarAdapter(
 
     class SimilarViewHolder(
         private val binding: RecyclerMovieBinding,
-        private val onClick: (MovieEntity) -> Unit
+        private val onClick: (MovieEntity) -> Unit,
     ) : RecyclerView.ViewHolder(binding.root) {
-
         companion object {
-            fun from(parent: ViewGroup, onClick: (MovieEntity) -> Unit): SimilarViewHolder {
+            fun from(
+                parent: ViewGroup,
+                onClick: (MovieEntity) -> Unit,
+            ): SimilarViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = RecyclerMovieBinding.inflate(layoutInflater, parent, false)
                 return SimilarViewHolder(binding, onClick)

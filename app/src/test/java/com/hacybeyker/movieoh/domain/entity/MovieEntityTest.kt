@@ -6,7 +6,6 @@ import org.junit.Before
 import org.junit.Test
 
 class MovieEntityTest {
-
     private lateinit var sutMovieEntity: MovieEntity
 
     @Before

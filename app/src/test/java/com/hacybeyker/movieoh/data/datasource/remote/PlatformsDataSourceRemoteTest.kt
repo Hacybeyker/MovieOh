@@ -22,7 +22,6 @@ import org.mockito.kotlin.whenever
 @RunWith(MockitoJUnitRunner::class)
 @ExperimentalCoroutinesApi
 class PlatformsDataSourceRemoteTest {
-
     @get:Rule
     val testCoroutineRule = TestCoroutineRule()
 

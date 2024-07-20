@@ -19,7 +19,6 @@ import org.mockito.kotlin.whenever
 
 @ExperimentalCoroutinesApi
 class UpcomingDataSourceRemoteTest {
-
     @get:Rule
     val testCoroutineRule = TestCoroutineRule()
 

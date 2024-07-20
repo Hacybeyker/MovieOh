@@ -17,7 +17,6 @@ import org.mockito.kotlin.whenever
 
 @ExperimentalCoroutinesApi
 class UpcomingUseCaseTest {
-
     @get:Rule
     val testCoroutineRule = TestCoroutineRule()
 

@@ -6,5 +6,7 @@ import retrofit2.http.Path
 
 fun interface MovieApi {
     @GET("movie/{movie}")
-    suspend fun fetchMovie(@Path(value = "movie") movie: Int): MovieResponseModel
+    suspend fun fetchMovie(
+        @Path(value = "movie") movie: Int,
+    ): MovieResponseModel
 }

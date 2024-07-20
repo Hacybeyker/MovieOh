@@ -6,7 +6,6 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class MovieResponseModelTest {
-
     private lateinit var sutMovieResponseModel: MovieResponseModel
 
     @Test

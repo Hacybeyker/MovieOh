@@ -6,5 +6,7 @@ import retrofit2.http.Path
 
 fun interface CreditsApi {
     @GET("movie/{movie}/credits")
-    suspend fun fetchCredits(@Path(value = "movie") movie: Int): CreditsResponseModel
+    suspend fun fetchCredits(
+        @Path(value = "movie") movie: Int,
+    ): CreditsResponseModel
 }

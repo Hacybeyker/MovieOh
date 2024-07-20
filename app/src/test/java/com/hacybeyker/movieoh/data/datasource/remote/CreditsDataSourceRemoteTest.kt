@@ -20,7 +20,6 @@ import org.mockito.kotlin.whenever
 
 @ExperimentalCoroutinesApi
 class CreditsDataSourceRemoteTest {
-
     @get:Rule
     val testCoroutine: TestCoroutineRule = TestCoroutineRule()
 

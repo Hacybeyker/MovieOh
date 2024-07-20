@@ -18,7 +18,6 @@ import org.robolectric.shadows.ShadowNetworkCapabilities
 
 @RunWith(AndroidJUnit4::class)
 class NetworkStatusTest {
-
     lateinit var context: Context
 
     lateinit var sutNetworkStatus: NetworkStatus

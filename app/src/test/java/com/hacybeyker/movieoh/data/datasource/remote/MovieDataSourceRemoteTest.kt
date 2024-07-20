@@ -19,7 +19,6 @@ import org.mockito.kotlin.whenever
 
 @ExperimentalCoroutinesApi
 class MovieDataSourceRemoteTest {
-
     @get:Rule
     val testCoroutineRule = TestCoroutineRule()
 
