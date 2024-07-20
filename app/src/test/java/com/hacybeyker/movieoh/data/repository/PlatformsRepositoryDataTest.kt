@@ -17,7 +17,6 @@ import org.mockito.kotlin.whenever
 
 @ExperimentalCoroutinesApi
 class PlatformsRepositoryDataTest {
-
     @get:Rule
     val testCoroutineRule = TestCoroutineRule()
 
@@ -36,7 +35,7 @@ class PlatformsRepositoryDataTest {
             // WHEN
             val mockTitle = anyString()
             whenever(mockDataSource.getPlatforms(mockTitle)).doReturn(
-                NetworkResult.Success(mockPlatformsEntity)
+                NetworkResult.Success(mockPlatformsEntity),
             )
 
             val resultData = sutRepositoryData.getPlatforms(mockTitle)

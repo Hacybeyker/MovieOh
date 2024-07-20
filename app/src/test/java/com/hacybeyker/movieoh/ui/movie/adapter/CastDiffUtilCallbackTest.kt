@@ -14,7 +14,6 @@ import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
 class CastDiffUtilCallbackTest {
-
     private lateinit var sutCastDiffUtilCallback: CastDiffUtilCallback
 
     private val castEntity: List<CastEntity> by lazy {
@@ -40,29 +39,29 @@ class CastDiffUtilCallbackTest {
         assertTrue(
             sutCastDiffUtilCallback.areItemsTheSame(
                 oldItem = castOne,
-                newItem = castTwo.copy(id = 74568, originalName = "Chris Hemsworth")
-            )
+                newItem = castTwo.copy(id = 74568, originalName = "Chris Hemsworth"),
+            ),
         )
 
         assertFalse(
             sutCastDiffUtilCallback.areItemsTheSame(
                 oldItem = castOne,
-                newItem = castTwo
-            )
+                newItem = castTwo,
+            ),
         )
 
         assertFalse(
             sutCastDiffUtilCallback.areItemsTheSame(
                 oldItem = castOne,
-                newItem = castTwo.copy(id = 74568, originalName = "")
-            )
+                newItem = castTwo.copy(id = 74568, originalName = ""),
+            ),
         )
 
         assertFalse(
             sutCastDiffUtilCallback.areItemsTheSame(
                 oldItem = castOne,
-                newItem = castTwo.copy(originalName = "Chris Hemsworth")
-            )
+                newItem = castTwo.copy(originalName = "Chris Hemsworth"),
+            ),
         )
     }
 
@@ -76,15 +75,15 @@ class CastDiffUtilCallbackTest {
         assertTrue(
             sutCastDiffUtilCallback.areItemsTheSame(
                 oldItem = castOne,
-                newItem = castOne
-            )
+                newItem = castOne,
+            ),
         )
 
         assertFalse(
             sutCastDiffUtilCallback.areContentsTheSame(
                 oldItem = castOne,
-                newItem = castTwo
-            )
+                newItem = castTwo,
+            ),
         )
     }
 }

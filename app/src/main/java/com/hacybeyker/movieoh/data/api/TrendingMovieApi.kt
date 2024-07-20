@@ -6,5 +6,7 @@ import retrofit2.http.Query
 
 fun interface TrendingMovieApi {
     @GET("trending/movie/week")
-    suspend fun fetchTrendingMovie(@Query("page") page: Int): ResultResponseModel
+    suspend fun fetchTrendingMovie(
+        @Query("page") page: Int,
+    ): ResultResponseModel
 }

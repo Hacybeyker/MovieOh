@@ -12,7 +12,6 @@ import dagger.hilt.android.components.ViewModelComponent
 @Module
 @InstallIn(ViewModelComponent::class)
 abstract class TrendingModule {
-
     @Binds
     abstract fun bindTrendingDataSourceRemote(trendingDataSourceRemote: TrendingDataSourceRemote): TrendingDataSource
 

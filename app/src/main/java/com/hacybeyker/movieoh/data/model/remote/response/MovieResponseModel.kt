@@ -42,7 +42,7 @@ data class MovieResponseModel(
     @SerializedName("homepage")
     val homepage: String?,
     @SerializedName("genres")
-    val genres: List<GenreResponseModel>?
+    val genres: List<GenreResponseModel>?,
 ) {
     @VisibleForTesting
     fun isAvailableStream(): Boolean {
@@ -55,11 +55,13 @@ data class MovieResponseModel(
 
     fun assignedStream(): StreamEntity {
         var stream: StreamEntity = StreamEntity.NONE
-        if (homepage != null && isAvailableStream()) when {
-            homepage.contains(Stream.NETFLIX) -> stream = StreamEntity.NETFLIX
-            homepage.contains(Stream.AMAZON) -> stream = StreamEntity.AMAZON
-            homepage.contains(Stream.HBO) -> stream = StreamEntity.HBO
-            homepage.contains(Stream.DISNEY) -> stream = StreamEntity.DISNEY
+        if (homepage != null && isAvailableStream()) {
+            when {
+                homepage.contains(Stream.NETFLIX) -> stream = StreamEntity.NETFLIX
+                homepage.contains(Stream.AMAZON) -> stream = StreamEntity.AMAZON
+                homepage.contains(Stream.HBO) -> stream = StreamEntity.HBO
+                homepage.contains(Stream.DISNEY) -> stream = StreamEntity.DISNEY
+            }
         }
         return stream
     }
@@ -79,6 +81,6 @@ fun MovieResponseModel.toEntity(): MovieEntity {
         runtime = runtime ?: 0,
         homepage = homepage ?: "",
         stream = assignedStream(),
-        genres = genres?.toListGenreEntity() ?: arrayListOf()
+        genres = genres?.toListGenreEntity() ?: arrayListOf(),
     )
 }

@@ -4,7 +4,6 @@ import com.google.gson.Gson
 import java.io.InputStreamReader
 
 class JSONFileLoader {
-
     fun loadJsonString(file: String): String? {
         val loader: InputStreamReader? =
             InputStreamReader(this.javaClass.classLoader?.getResourceAsStream(file))

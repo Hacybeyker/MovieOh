@@ -17,7 +17,6 @@ import org.robolectric.RuntimeEnvironment
 
 @RunWith(RobolectricTestRunner::class)
 class SimilarAdapterTest {
-
     private lateinit var sutSimilarAdapter: SimilarAdapter
 
     private val spyListMovieEntity: ArrayList<MovieEntity> = spy()
@@ -34,10 +33,11 @@ class SimilarAdapterTest {
     fun validateAdapter() {
         // Given
         whenever(sutSimilarAdapter.itemCount).doReturn(2)
-        val viewHolder = sutSimilarAdapter.onCreateViewHolder(
-            parent = FrameLayout(RuntimeEnvironment.getApplication()),
-            viewType = 0
-        )
+        val viewHolder =
+            sutSimilarAdapter.onCreateViewHolder(
+                parent = FrameLayout(RuntimeEnvironment.getApplication()),
+                viewType = 0,
+            )
 
         // When
         sutSimilarAdapter.onBindViewHolder(viewHolder, 0)

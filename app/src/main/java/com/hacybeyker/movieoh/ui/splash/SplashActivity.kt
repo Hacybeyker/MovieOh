@@ -12,7 +12,6 @@ import kotlinx.coroutines.Runnable
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivitySplashBinding
 
     companion object {
@@ -29,7 +28,7 @@ class SplashActivity : AppCompatActivity() {
                 startActivity(Intent(this, HomeActivity::class.java))
                 finish()
             },
-            TIMER_SPLASH
+            TIMER_SPLASH,
         )
     }
 }

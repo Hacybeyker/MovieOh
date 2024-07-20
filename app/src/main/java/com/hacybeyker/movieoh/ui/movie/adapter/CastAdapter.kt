@@ -9,12 +9,17 @@ import com.hacybeyker.movieoh.domain.entity.CastEntity
 import com.hacybeyker.movieoh.utils.extensions.loadImage
 
 class CastAdapter : ListAdapter<CastEntity, CastAdapter.CastViewHolder>(CastDiffUtilCallback()) {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CastViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): CastViewHolder {
         return CastViewHolder.from(parent)
     }
 
-    override fun onBindViewHolder(holder: CastViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: CastViewHolder,
+        position: Int,
+    ) {
         holder.bind(getItem(position))
     }
 
@@ -23,9 +28,8 @@ class CastAdapter : ListAdapter<CastEntity, CastAdapter.CastViewHolder>(CastDiff
     }
 
     class CastViewHolder(
-        private val binding: RecyclerMovieBinding
+        private val binding: RecyclerMovieBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
-
         companion object {
             fun from(parent: ViewGroup): CastViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)

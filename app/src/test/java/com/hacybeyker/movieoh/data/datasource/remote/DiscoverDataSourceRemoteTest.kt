@@ -20,7 +20,6 @@ import org.mockito.kotlin.whenever
 
 @ExperimentalCoroutinesApi
 class DiscoverDataSourceRemoteTest {
-
     @get:Rule
     val testCoroutineRule = TestCoroutineRule()
 
@@ -39,7 +38,7 @@ class DiscoverDataSourceRemoteTest {
     fun verifyApiSuccess() {
         testCoroutineRule.runBlockingTest {
             whenever(
-                mockDiscoverApi.fetchDiscover(anyInt(), anyInt())
+                mockDiscoverApi.fetchDiscover(anyInt(), anyInt()),
             ).doReturn(mockResultResponseModel)
 
             val resultData = sutDiscoverDataSourceRemote.fetchDiscover(anyInt(), anyInt())
@@ -55,7 +54,7 @@ class DiscoverDataSourceRemoteTest {
         testCoroutineRule.runBlockingTest {
             try {
                 whenever(
-                    mockDiscoverApi.fetchDiscover(anyInt(), anyInt())
+                    mockDiscoverApi.fetchDiscover(anyInt(), anyInt()),
                 ).doThrow(RuntimeException(ApiException()))
 
                 sutDiscoverDataSourceRemote.fetchDiscover(anyInt(), anyInt())

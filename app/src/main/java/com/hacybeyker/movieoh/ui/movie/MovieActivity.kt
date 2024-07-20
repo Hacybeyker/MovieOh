@@ -27,7 +27,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MovieActivity : BaseActivity<ActivityMovieBinding, MovieViewModel>(), OnItemMovie {
-
     private val similarAdapter: SimilarAdapter by lazy { SimilarAdapter(onClick = { onClickMovie(it) }) }
     private val castAdapter: CastAdapter by lazy { CastAdapter() }
 
@@ -40,7 +39,10 @@ class MovieActivity : BaseActivity<ActivityMovieBinding, MovieViewModel>(), OnIt
     private var movie: MovieEntity? = null
 
     companion object {
-        fun newInstance(activity: Activity, movie: MovieEntity): Intent {
+        fun newInstance(
+            activity: Activity,
+            movie: MovieEntity,
+        ): Intent {
             val intent = Intent(activity, MovieActivity::class.java)
             val bundle = Bundle().apply { putParcelable(MovieEntity::class.java.name, movie) }
             intent.putExtras(bundle)
@@ -113,7 +115,7 @@ class MovieActivity : BaseActivity<ActivityMovieBinding, MovieViewModel>(), OnIt
                         Toast.makeText(
                             this@MovieActivity,
                             "Here - ${result.message}",
-                            Toast.LENGTH_SHORT
+                            Toast.LENGTH_SHORT,
                         ).show()
                     }
 

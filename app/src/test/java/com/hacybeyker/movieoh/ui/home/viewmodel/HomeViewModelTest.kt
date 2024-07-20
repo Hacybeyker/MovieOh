@@ -28,7 +28,6 @@ import org.mockito.kotlin.whenever
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
 class HomeViewModelTest {
-
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
@@ -49,12 +48,13 @@ class HomeViewModelTest {
 
     @Before
     fun setup() {
-        sutHomeViewModel = HomeViewModel(
-            mockTrendingUseCase,
-            mockUpcomingUseCase,
-            mockDiscoverUseCase,
-            mockDispatcherIO
-        )
+        sutHomeViewModel =
+            HomeViewModel(
+                mockTrendingUseCase,
+                mockUpcomingUseCase,
+                mockDiscoverUseCase,
+                mockDispatcherIO,
+            )
     }
 
     @Test
@@ -64,7 +64,7 @@ class HomeViewModelTest {
             whenever(mockTrendingUseCase.fetchTrendingMovie(anyInt())).doReturn(mockMovieEntityList)
             whenever(mockUpcomingUseCase.fetchUpcoming(anyInt())).doReturn(mockMovieEntityList)
             whenever(mockDiscoverUseCase.fetchDiscover(anyInt(), anyInt())).doReturn(
-                mockMovieEntityList
+                mockMovieEntityList,
             )
             whenever(mockMovieEntityList.size).doReturn(2)
 

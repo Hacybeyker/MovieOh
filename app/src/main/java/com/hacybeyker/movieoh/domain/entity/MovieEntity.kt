@@ -14,9 +14,8 @@ data class MovieEntity(
     val title: String,
     val voteAverage: Double,
     val voteCount: Int,
-
     var genres: List<GenreEntity>,
     var runtime: Int,
     var homepage: String,
-    var stream: StreamEntity? = null
+    var stream: StreamEntity? = null,
 ) : Parcelable

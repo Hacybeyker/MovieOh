@@ -14,7 +14,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>(), OnItemMovie {
-
     private val adapterUpcoming: MovieAdapter by lazy { MovieAdapter { onClickMovie(it) } }
     private val adapterTrending: MovieAdapter by lazy { MovieAdapter { onClickMovie(it) } }
     private val adapterAction: MovieAdapter by lazy { MovieAdapter { onClickMovie(it) } }

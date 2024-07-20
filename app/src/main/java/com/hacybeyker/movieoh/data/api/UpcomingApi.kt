@@ -6,5 +6,7 @@ import retrofit2.http.Query
 
 fun interface UpcomingApi {
     @GET("movie/upcoming")
-    suspend fun fetchUpcoming(@Query("page") page: Int): ResultResponseModel
+    suspend fun fetchUpcoming(
+        @Query("page") page: Int,
+    ): ResultResponseModel
 }

@@ -6,11 +6,15 @@ import com.hacybeyker.movieoh.data.model.remote.response.toMovieResponseModelLis
 import com.hacybeyker.movieoh.domain.entity.MovieEntity
 import javax.inject.Inject
 
-class DiscoverDataSourceRemote @Inject constructor(
-    private val api: DiscoverApi
-) : DiscoverDataSource {
-
-    override suspend fun fetchDiscover(page: Int, genre: Int): List<MovieEntity> {
-        return api.fetchDiscover(page, genre).toMovieResponseModelList()
+class DiscoverDataSourceRemote
+    @Inject
+    constructor(
+        private val api: DiscoverApi,
+    ) : DiscoverDataSource {
+        override suspend fun fetchDiscover(
+            page: Int,
+            genre: Int,
+        ): List<MovieEntity> {
+            return api.fetchDiscover(page, genre).toMovieResponseModelList()
+        }
     }
-}

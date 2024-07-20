@@ -3,7 +3,7 @@
   
 [![GithubActions](https://github.com/hacybeyker/Movieoh/actions/workflows/android_publish.yml/badge.svg?branch=master)](https://github.com/Hacybeyker/MovieOh/actions) [![Sonar Cloud](https://sonarcloud.io/api/project_badges/measure?project=com.hacybeyker.movieoh&metric=alert_status)](https://sonarcloud.io/project/overview?id=com.hacybeyker.movieoh) [![Google Play](https://img.shields.io/badge/GooglePlay-3DDC84?&logo=android&logoColor=white&labelColor=101020)](https://play.google.com/store/apps/details?id=com.hacybeyker.movieoh) [![API](https://img.shields.io/badge/API-23%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=23) [![API](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://img.shields.io/badge/License-Apache%202.0-blue.svg)  
   
-This project consumes the [TheMovieDB](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform-mobile) movie api and shows various categories of movies and when      
+This project consumes the [TheMovieDB](https://www.themoviedb.org/) movie api and shows various categories of movies and when      
 selecting a specific one, it shows a detail with more information about the movie.  
   
 ## Setup  

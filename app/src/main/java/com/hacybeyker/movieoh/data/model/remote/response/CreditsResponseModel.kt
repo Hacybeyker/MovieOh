@@ -9,12 +9,12 @@ data class CreditsResponseModel(
     @SerializedName("cast")
     val cast: List<CastResponseModel>?,
     @SerializedName("crew")
-    val crew: List<CrewResponseModel>?
+    val crew: List<CrewResponseModel>?,
 )
 
 fun CreditsResponseModel.toCreditsEntity(): CreditsEntity {
     return CreditsEntity(
         cast = cast?.toListCastEntity() ?: emptyList(),
-        crew = crew?.toListCrewEntity() ?: emptyList()
+        crew = crew?.toListCrewEntity() ?: emptyList(),
     )
 }

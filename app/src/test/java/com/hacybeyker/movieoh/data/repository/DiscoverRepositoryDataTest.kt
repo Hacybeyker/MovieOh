@@ -17,7 +17,6 @@ import org.mockito.kotlin.whenever
 
 @ExperimentalCoroutinesApi
 class DiscoverRepositoryDataTest {
-
     @get:Rule
     val testCoroutineRule = TestCoroutineRule()
 
@@ -38,8 +37,8 @@ class DiscoverRepositoryDataTest {
             whenever(
                 mockDiscoverDataSource.fetchDiscover(
                     anyInt(),
-                    anyInt()
-                )
+                    anyInt(),
+                ),
             ).doReturn(mockMovieEntity)
 
             val resultData = sutDiscoverRepositoryData.fetchDiscover(anyInt(), anyInt())
