@@ -167,7 +167,20 @@ android {
     }
 
     tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        jvmTarget = JavaVersion.VERSION_17.toString()
+        exclude("**/build/**")
+        exclude("**/resources/**")
+        exclude("**/tmp/**")
+        exclude("**/generated/**")
+        exclude("**/test/**")
+        exclude("**/androidTest/**")
+        reports {
+            html.required.set(true)
+            xml.required.set(true)
+            txt.required.set(false)
+            sarif.required.set(false)
+            md.required.set(false)
+        }
     }
 
     detekt {
@@ -175,12 +188,10 @@ android {
         allRules = true
         autoCorrect = true
         config.setFrom("$projectDir/config/detekt.yml")
-        reports {
-            html.enabled = true
-            xml.enabled = true
-            txt.enabled = false
-            sarif.enabled = false
-        }
+        baseline = file("$projectDir/config/baseline.xml")
+        parallel = true
+        ignoreFailures = false
+        basePath = project.rootProject.projectDir.absolutePath
     }
 
     ktlint {
