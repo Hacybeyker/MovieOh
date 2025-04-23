@@ -1,7 +1,6 @@
 package com.hacybeyker.movieoh.ui.home
 
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DefaultItemAnimator
 import com.hacybeyker.movieoh.R
 import com.hacybeyker.movieoh.commons.base.BaseActivity

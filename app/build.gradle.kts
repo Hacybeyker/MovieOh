@@ -174,6 +174,7 @@ android {
         exclude("**/generated/**")
         exclude("**/test/**")
         exclude("**/androidTest/**")
+
         reports {
             html.required.set(true)
             xml.required.set(true)
