@@ -28,12 +28,10 @@ data class CrewResponseModel(
     val job: String?,
 )
 
-fun List<CrewResponseModel>.toListCrewEntity(): List<CrewEntity> {
-    return this.map { it.toCrewEntity() }
-}
+fun List<CrewResponseModel>.toListCrewEntity(): List<CrewEntity> = this.map { it.toCrewEntity() }
 
-fun CrewResponseModel.toCrewEntity(): CrewEntity {
-    return CrewEntity(
+fun CrewResponseModel.toCrewEntity(): CrewEntity =
+    CrewEntity(
         adult = adult ?: false,
         gender = gender ?: -1,
         id = id ?: -1,
@@ -46,4 +44,3 @@ fun CrewResponseModel.toCrewEntity(): CrewEntity {
         department = department ?: "",
         job = job ?: "",
     )
-}

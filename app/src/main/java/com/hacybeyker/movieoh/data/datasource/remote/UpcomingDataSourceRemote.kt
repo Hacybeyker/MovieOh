@@ -11,7 +11,7 @@ class UpcomingDataSourceRemote
     constructor(
         private val api: UpcomingApi,
     ) : UpcomingDataSource {
-        override suspend fun fetchUpcoming(page: Int): List<MovieEntity> {
-            return api.fetchUpcoming(page).toMovieResponseModelList()
-        }
+        override suspend fun fetchUpcoming(
+            page: Int,
+        ): List<MovieEntity> = api.fetchUpcoming(page).toMovieResponseModelList()
     }

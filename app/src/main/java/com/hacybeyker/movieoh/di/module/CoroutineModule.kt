@@ -20,25 +20,17 @@ class CoroutineModule {
 
     @Named(DISPATCHER_MAIN)
     @Provides
-    fun provideMainDispatcher(): CoroutineDispatcher {
-        return Dispatchers.Main
-    }
+    fun provideMainDispatcher(): CoroutineDispatcher = Dispatchers.Main
 
     @Named(DISPATCHER_DEFAULT)
     @Provides
-    fun provideDefaultDispatcher(): CoroutineDispatcher {
-        return Dispatchers.Default
-    }
+    fun provideDefaultDispatcher(): CoroutineDispatcher = Dispatchers.Default
 
     @Named(DISPATCHER_IO)
     @Provides
-    fun provideIODispatcher(): CoroutineDispatcher {
-        return Dispatchers.IO
-    }
+    fun provideIODispatcher(): CoroutineDispatcher = Dispatchers.IO
 
     @Named(DISPATCHER_UNCONFINED)
     @Provides
-    fun provideUnconfinedDispatcher(): CoroutineDispatcher {
-        return Dispatchers.Unconfined
-    }
+    fun provideUnconfinedDispatcher(): CoroutineDispatcher = Dispatchers.Unconfined
 }

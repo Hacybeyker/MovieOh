@@ -9,7 +9,5 @@ class SimilarUseCase
     constructor(
         private val similarRepository: SimilarRepository,
     ) {
-        suspend fun fetchSimilar(movie: Int): List<MovieEntity> {
-            return similarRepository.fetchSimilar(movie)
-        }
+        suspend fun fetchSimilar(movie: Int): List<MovieEntity> = similarRepository.fetchSimilar(movie)
     }

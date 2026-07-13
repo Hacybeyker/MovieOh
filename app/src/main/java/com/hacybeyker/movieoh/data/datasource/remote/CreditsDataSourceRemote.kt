@@ -11,7 +11,5 @@ class CreditsDataSourceRemote
     constructor(
         private val api: CreditsApi,
     ) : CreditsDataSource {
-        override suspend fun fetchCredits(movie: Int): CreditsEntity {
-            return api.fetchCredits(movie).toCreditsEntity()
-        }
+        override suspend fun fetchCredits(movie: Int): CreditsEntity = api.fetchCredits(movie).toCreditsEntity()
     }

@@ -15,7 +15,12 @@ class PlatformsDataSourceRemote
         override suspend fun getPlatforms(name: String): NetworkResult<List<PlatformsEntity>> {
             return try {
                 val result =
-                    api.getPlatforms(name).results?.firstOrNull()?.platforms?.map { it.toEntity() }
+                    api
+                        .getPlatforms(name)
+                        .results
+                        ?.firstOrNull()
+                        ?.platforms
+                        ?.map { it.toEntity() }
                         ?: emptyList()
                 return NetworkResult.Success(result)
             } catch (e: Exception) {

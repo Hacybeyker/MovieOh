@@ -14,6 +14,4 @@ data class ResultResponseModel(
     val totalResults: Int,
 )
 
-fun ResultResponseModel.toMovieResponseModelList(): List<MovieEntity> {
-    return results.map { it.toEntity() }
-}
+fun ResultResponseModel.toMovieResponseModelList(): List<MovieEntity> = results.map { it.toEntity() }

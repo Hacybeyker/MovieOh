@@ -3,8 +3,6 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
-        mavenLocal()
-        maven(url = "https://jitpack.io")
     }
 }
 dependencyResolutionManagement {
@@ -12,10 +10,9 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        gradlePluginPortal()
-        mavenLocal()
         maven(url = "https://jitpack.io")
     }
 }
+rootProject.name = "MovieOh"
 include(":app")
 include(":uikit")

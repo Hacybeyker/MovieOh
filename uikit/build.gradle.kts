@@ -1,19 +1,18 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
-    id("com.android.library")
-    kotlin("android")
-    kotlin("kapt")
-    id("kotlin-parcelize")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {
     namespace = "com.hacybeyker.uikit"
-    compileSdk = AppVersion.compileSdkVersion
+    compileSdk = libs.versions.compile.sdk.get().toInt()
 
     defaultConfig {
-        minSdk = AppVersion.minSdkVersion
-        testInstrumentationRunner = AppVersion.testInstrumentationRunner
+        minSdk = libs.versions.min.sdk.get().toInt()
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
-        renderscriptSupportModeEnabled = true
     }
 
     buildTypes {
@@ -21,43 +20,48 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
         create("qa") {
             initWith(getByName("debug"))
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
-
-    kotlinOptions.jvmTarget = JavaVersion.VERSION_17.toString()
 
     buildFeatures {
-        dataBinding = true
-        viewBinding = true
+        compose = true
     }
 
+    kotlin {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_21)
+        }
+    }
 }
 
 dependencies {
-    implementation(AppDependencies.coreKtx)
-    // View
-    implementation(AppDependencies.appCompat)
-    implementation(AppDependencies.material)
+    implementation(libs.androidx.core.ktx)
+    // Compose
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.ui)
+    implementation(libs.compose.ui.graphics)
+    implementation(libs.compose.ui.tooling.preview)
+    implementation(libs.compose.foundation)
+    implementation(libs.compose.material3)
+    debugImplementation(libs.compose.ui.tooling)
+    // Images
+    implementation(libs.coil.compose)
     // Test
-    testImplementation(TestDependencies.junit)
-    androidTestImplementation(TestDependencies.extJUnit)
-    androidTestImplementation(TestDependencies.espressoCore)
-    testImplementation(TestDependencies.junitKtx)
-    testImplementation(TestDependencies.kotlinCoroutines)
-    testImplementation(TestDependencies.mockitoKotlin)
-    testImplementation(TestDependencies.mockitoInline)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.espresso.core)
 }

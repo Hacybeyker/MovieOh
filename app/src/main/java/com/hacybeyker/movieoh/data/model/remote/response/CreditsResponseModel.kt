@@ -12,9 +12,8 @@ data class CreditsResponseModel(
     val crew: List<CrewResponseModel>?,
 )
 
-fun CreditsResponseModel.toCreditsEntity(): CreditsEntity {
-    return CreditsEntity(
+fun CreditsResponseModel.toCreditsEntity(): CreditsEntity =
+    CreditsEntity(
         cast = cast?.toListCastEntity() ?: emptyList(),
         crew = crew?.toListCrewEntity() ?: emptyList(),
     )
-}

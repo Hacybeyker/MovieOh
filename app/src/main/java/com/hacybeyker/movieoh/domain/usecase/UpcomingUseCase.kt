@@ -9,7 +9,5 @@ class UpcomingUseCase
     constructor(
         private val upcomingRepository: UpcomingRepository,
     ) {
-        suspend fun fetchUpcoming(page: Int): List<MovieEntity> {
-            return upcomingRepository.fetchUpcoming(page)
-        }
+        suspend fun fetchUpcoming(page: Int): List<MovieEntity> = upcomingRepository.fetchUpcoming(page)
     }
