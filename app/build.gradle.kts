@@ -116,7 +116,6 @@ android {
             initWith(getByName("debug"))
             isDebuggable = true
             isMinifyEnabled = false
-            isShrinkResources = false
             applicationIdSuffix = ".qa"
             versionNameSuffix = "-qa"
             proguardFiles(
@@ -130,7 +129,6 @@ android {
         getByName("debug") {
             isDebuggable = true
             isMinifyEnabled = false
-            isShrinkResources = false
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-debug"
             proguardFiles(
@@ -182,11 +180,11 @@ android {
         abortOnError = false
         ignoreWarnings = false
     }
+}
 
-    kotlin {
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_21)
-        }
+kotlin {
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_21)
     }
 }
 
@@ -334,8 +332,6 @@ sonar {
                 .get(),
         )
         property("sonar.projectBaseDir", projectDir.absolutePath)
-        property("sonar.sources", "./src/main/")
-        property("sonar.tests", "src/test/java, src/androidTest/java")
         property("sonar.sourceEncoding", "UTF-8")
         property("sonar.coverage.jacoco.xmlReportPaths", "${layout.buildDirectory.get().asFile}/reports/jacoco/jacocoTestReport/jacocoTestReport.xml")
         property("sonar.coverage.exclusions", coverageExclusions.joinToString(","))

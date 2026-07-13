@@ -1,0 +1,15 @@
+name: "Assemble QA"
+description: "Build and upload the QA APK"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Run AssembleQa
+      shell: bash
+      run: ./gradlew app:assembleQa
+
+    - name: Upload Artifact APK
+      uses: actions/upload-artifact@v7
+      with:
+        name: apk-qa
+        path: ./app/build/outputs/apk/qa

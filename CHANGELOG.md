@@ -16,10 +16,17 @@
 - Jacoco and SonarQube configuration rewritten in Kotlin DSL (task `sonar`, jacoco 0.8.13).
 - ktlint 14.x and detekt 1.23.8 reconfigured for Compose; formatting delegated to ktlint.
 - GitHub Actions updated: no git submodules, Gradle cache via setup-gradle, release tag read from the version catalog.
+- GitHub Actions workflows unified into reusable workflows (`android_quality`, `android_qa_apk`) shared by validation, deploy, publish and manual artifact builds, removing a redundant double lint run per push.
+- Actions bumped to their latest majors: checkout@v7, setup-java@v5, upload-artifact@v7, gradle/actions/setup-gradle@v6, upload-google-play@v1.1.5.
+- `kotlin { compilerOptions }` moved to the top level of `app/build.gradle.kts`, out of the `android {}` block, to match its real `Project` receiver.
+### Fixed
+- Redundant `isShrinkResources = false` removed from the `qa`/`debug` build types (only meaningful with `isMinifyEnabled = true`).
 ### Removed
 - buildSrc module and the external dependencies git submodule.
 - ViewBinding/DataBinding, RecyclerView adapters, BaseActivity and XML layouts.
 - Unused dependencies (Room, ViewPager2, Glide, Material Components for Views, AppCompat).
+- Unused drawable/color resources and empty scaffolding directories left over from the migration.
+- Dead `REPO_USERID`/`REPO_TOKEN` CI secrets no longer referenced by the build.
 
 ## Version 6.1.0
 ### Added
