@@ -1,5 +1,6 @@
 package com.hacybeyker.movieoh.ui.favorites
 
+import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -24,6 +25,8 @@ import com.hacybeyker.movieoh.domain.entity.MovieEntity
 import com.hacybeyker.movieoh.ui.components.MoviePoster
 import com.hacybeyker.movieoh.ui.components.ShimmerScreen
 
+private enum class FavoritesViewState { LOADING, EMPTY, CONTENT }
+
 @Composable
 fun FavoritesScreen(
     onMovieClick: (MovieEntity) -> Unit,
@@ -47,23 +50,32 @@ fun FavoritesContent(
             .background(MaterialTheme.colorScheme.background)
             .safeDrawingPadding()
 
-    when {
-        uiState.isLoading -> ShimmerScreen(modifier = modifier, sections = 2)
-        uiState.movies.isEmpty() -> FavoritesEmpty(modifier = modifier)
-        else ->
-            LazyVerticalGrid(
-                columns = GridCells.Adaptive(minSize = 109.dp),
-                modifier = modifier,
-                contentPadding = PaddingValues(10.dp),
-            ) {
-                items(uiState.movies, key = { it.id }) { movie ->
-                    MoviePoster(
-                        posterPath = movie.posterPath,
-                        contentDescription = movie.title,
-                        onClick = { onMovieClick(movie) },
-                    )
+    val viewState =
+        when {
+            uiState.isLoading -> FavoritesViewState.LOADING
+            uiState.movies.isEmpty() -> FavoritesViewState.EMPTY
+            else -> FavoritesViewState.CONTENT
+        }
+
+    Crossfade(targetState = viewState, modifier = modifier, label = "favorites-view-state") { state ->
+        when (state) {
+            FavoritesViewState.LOADING -> ShimmerScreen(modifier = Modifier.fillMaxSize(), sections = 2)
+            FavoritesViewState.EMPTY -> FavoritesEmpty(modifier = Modifier.fillMaxSize())
+            FavoritesViewState.CONTENT ->
+                LazyVerticalGrid(
+                    columns = GridCells.Adaptive(minSize = 109.dp),
+                    modifier = Modifier.fillMaxSize(),
+                    contentPadding = PaddingValues(10.dp),
+                ) {
+                    items(uiState.movies, key = { it.id }) { movie ->
+                        MoviePoster(
+                            posterPath = movie.posterPath,
+                            contentDescription = movie.title,
+                            onClick = { onMovieClick(movie) },
+                        )
+                    }
                 }
-            }
+        }
     }
 }
 

@@ -1,5 +1,9 @@
 package com.hacybeyker.movieoh.ui.navigation
 
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -17,6 +21,9 @@ import com.hacybeyker.movieoh.ui.home.HomeScreen
 import com.hacybeyker.movieoh.ui.movie.MovieScreen
 import com.hacybeyker.movieoh.ui.settings.SettingsScreen
 import com.hacybeyker.movieoh.ui.splash.SplashScreen
+
+private const val FADE_DURATION_MILLIS = 300
+private const val SLIDE_DURATION_MILLIS = 350
 
 @Composable
 fun MovieOhNavHost() {
@@ -36,6 +43,10 @@ fun MovieOhNavHost() {
             navController = navController,
             startDestination = MovieOhDestinations.SPLASH,
             modifier = Modifier.padding(innerPadding),
+            enterTransition = { fadeIn(animationSpec = tween(FADE_DURATION_MILLIS)) },
+            exitTransition = { fadeOut(animationSpec = tween(FADE_DURATION_MILLIS)) },
+            popEnterTransition = { fadeIn(animationSpec = tween(FADE_DURATION_MILLIS)) },
+            popExitTransition = { fadeOut(animationSpec = tween(FADE_DURATION_MILLIS)) },
         ) {
             composable(MovieOhDestinations.SPLASH) {
                 SplashScreen(
@@ -69,6 +80,18 @@ fun MovieOhNavHost() {
                     listOf(
                         navArgument(MovieOhDestinations.MOVIE_ID_ARG) { type = NavType.IntType },
                     ),
+                enterTransition = {
+                    slideIntoContainer(
+                        AnimatedContentTransitionScope.SlideDirection.Left,
+                        animationSpec = tween(SLIDE_DURATION_MILLIS),
+                    ) + fadeIn(animationSpec = tween(SLIDE_DURATION_MILLIS))
+                },
+                popExitTransition = {
+                    slideOutOfContainer(
+                        AnimatedContentTransitionScope.SlideDirection.Right,
+                        animationSpec = tween(SLIDE_DURATION_MILLIS),
+                    ) + fadeOut(animationSpec = tween(SLIDE_DURATION_MILLIS))
+                },
             ) {
                 MovieScreen(
                     onMovieClick = { movie ->

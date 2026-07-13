@@ -1,8 +1,10 @@
 package com.hacybeyker.movieoh.ui.home
 
+import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -25,6 +27,8 @@ import com.hacybeyker.movieoh.ui.components.MovieCarousel
 import com.hacybeyker.movieoh.ui.components.ShimmerScreen
 import com.hacybeyker.uikit.component.GradientButton
 import com.hacybeyker.uikit.component.SectionHeader
+
+private enum class HomeViewState { LOADING, ERROR, CONTENT }
 
 @Composable
 fun HomeScreen(
@@ -51,29 +55,41 @@ fun HomeContent(
             .background(MaterialTheme.colorScheme.background)
             .safeDrawingPadding()
 
-    when {
-        uiState.isLoading -> ShimmerScreen(modifier = modifier)
-        uiState.isError -> HomeError(modifier = modifier, onRetry = onRetry)
-        else ->
-            LazyColumn(modifier = modifier) {
-                if (uiState.featuredMovies.isNotEmpty()) {
-                    item(key = R.string.upcoming) {
-                        FeaturedCarousel(
-                            movies = uiState.featuredMovies,
-                            onMovieClick = onMovieClick,
-                        )
+    val viewState =
+        when {
+            uiState.isLoading -> HomeViewState.LOADING
+            uiState.isError -> HomeViewState.ERROR
+            else -> HomeViewState.CONTENT
+        }
+
+    Crossfade(targetState = viewState, modifier = modifier, label = "home-view-state") { state ->
+        when (state) {
+            HomeViewState.LOADING -> ShimmerScreen(modifier = Modifier.fillMaxSize())
+            HomeViewState.ERROR -> HomeError(modifier = Modifier.fillMaxSize(), onRetry = onRetry)
+            HomeViewState.CONTENT ->
+                LazyColumn(
+                    modifier = Modifier.fillMaxSize(),
+                    contentPadding = PaddingValues(bottom = 24.dp),
+                ) {
+                    if (uiState.featuredMovies.isNotEmpty()) {
+                        item(key = R.string.upcoming) {
+                            FeaturedCarousel(
+                                movies = uiState.featuredMovies,
+                                onMovieClick = onMovieClick,
+                            )
+                        }
+                    }
+                    uiState.sections.forEach { section ->
+                        item(key = section.titleRes) {
+                            SectionHeader(title = stringResource(id = section.titleRes))
+                            MovieCarousel(
+                                movies = section.movies,
+                                onMovieClick = onMovieClick,
+                            )
+                        }
                     }
                 }
-                uiState.sections.forEach { section ->
-                    item(key = section.titleRes) {
-                        SectionHeader(title = stringResource(id = section.titleRes))
-                        MovieCarousel(
-                            movies = section.movies,
-                            onMovieClick = onMovieClick,
-                        )
-                    }
-                }
-            }
+        }
     }
 }
 

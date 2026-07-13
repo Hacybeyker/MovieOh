@@ -2,6 +2,7 @@ package com.hacybeyker.movieoh.ui.movie
 
 import android.content.Intent
 import android.widget.Toast
+import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
@@ -100,34 +101,38 @@ fun MovieContent(
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
 
-    if (uiState.isLoading || uiState.movie == null) {
-        ShimmerScreen(modifier = backgroundModifier)
-        return
-    }
+    val movie = uiState.movie
+    val hasContent = !uiState.isLoading && movie != null
 
-    Box(modifier = backgroundModifier) {
-        Column(
-            modifier =
-                Modifier
-                    .fillMaxSize()
-                    .verticalScroll(rememberScrollState()),
-        ) {
-            MovieHeader(movie = uiState.movie)
-            MovieDetail(
-                uiState = uiState,
-                onMovieClick = onMovieClick,
-                onOpenLink = onOpenLink,
-            )
-        }
-        IconButton(
-            onClick = onBackClick,
-            modifier = Modifier.padding(start = 15.dp, top = 30.dp),
-        ) {
-            Icon(
-                painter = painterResource(id = UiKitR.drawable.icon_arrow_left),
-                contentDescription = stringResource(id = R.string.back),
-                tint = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
+    Crossfade(targetState = hasContent, modifier = backgroundModifier, label = "movie-view-state") { showContent ->
+        if (!showContent || movie == null) {
+            ShimmerScreen(modifier = Modifier.fillMaxSize())
+        } else {
+            Box(modifier = Modifier.fillMaxSize()) {
+                Column(
+                    modifier =
+                        Modifier
+                            .fillMaxSize()
+                            .verticalScroll(rememberScrollState()),
+                ) {
+                    MovieHeader(movie = movie)
+                    MovieDetail(
+                        uiState = uiState,
+                        onMovieClick = onMovieClick,
+                        onOpenLink = onOpenLink,
+                    )
+                }
+                IconButton(
+                    onClick = onBackClick,
+                    modifier = Modifier.padding(start = 15.dp, top = 30.dp),
+                ) {
+                    Icon(
+                        painter = painterResource(id = UiKitR.drawable.icon_arrow_left),
+                        contentDescription = stringResource(id = R.string.back),
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                }
+            }
         }
     }
 }
