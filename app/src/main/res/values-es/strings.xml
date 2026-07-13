@@ -18,4 +18,14 @@
     <string name="about_movie">Acerca de esta película</string>
     <string name="cast">Elenco</string>
     <string name="similar_movies">Películas similares</string>
+
+    <string name="nav_home">Inicio</string>
+    <string name="nav_favorites">Favoritos</string>
+    <string name="nav_settings">Ajustes</string>
+    <string name="favorites_empty">Todavía no has agregado favoritos.</string>
+    <string name="theme_light">Claro</string>
+    <string name="theme_dark">Oscuro</string>
+    <string name="theme_system">Predeterminado del sistema</string>
+    <string name="app_version">Versión %1$s</string>
+    <string name="tmdb_attribution">Datos proporcionados por TheMovieDB</string>
 </resources>
