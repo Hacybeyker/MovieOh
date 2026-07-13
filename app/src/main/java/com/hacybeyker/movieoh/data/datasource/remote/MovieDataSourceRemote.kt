@@ -11,7 +11,5 @@ class MovieDataSourceRemote
     constructor(
         private val api: MovieApi,
     ) : MovieDataSource {
-        override suspend fun fetchMovie(movie: Int): MovieEntity {
-            return api.fetchMovie(movie).toEntity()
-        }
+        override suspend fun fetchMovie(movie: Int): MovieEntity = api.fetchMovie(movie).toEntity()
     }

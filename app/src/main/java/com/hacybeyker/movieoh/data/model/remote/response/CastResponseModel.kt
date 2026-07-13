@@ -30,12 +30,14 @@ data class CastResponseModel(
     val order: Int?,
 )
 
-fun List<CastResponseModel>.toListCastEntity(): List<CastEntity> {
-    return this.map { it.toCastEntity() }.filter { it.profilePath != "" }
-}
+fun List<CastResponseModel>.toListCastEntity(): List<CastEntity> =
+    this
+        .map {
+            it.toCastEntity()
+        }.filter { it.profilePath != "" }
 
-fun CastResponseModel.toCastEntity(): CastEntity {
-    return CastEntity(
+fun CastResponseModel.toCastEntity(): CastEntity =
+    CastEntity(
         adult = adult ?: false,
         gender = gender ?: -1,
         id = id ?: -1,
@@ -49,4 +51,3 @@ fun CastResponseModel.toCastEntity(): CastEntity {
         creditId = creditId ?: "",
         order = order ?: -1,
     )
-}

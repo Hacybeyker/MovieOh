@@ -12,7 +12,5 @@ class DiscoverUseCase
         suspend fun fetchDiscover(
             page: Int,
             genre: Int,
-        ): List<MovieEntity> {
-            return discoverRepository.fetchDiscover(page, genre)
-        }
+        ): List<MovieEntity> = discoverRepository.fetchDiscover(page, genre)
     }

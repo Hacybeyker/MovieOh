@@ -24,55 +24,41 @@ class ServiceModule {
     @Provides
     fun provideTrendingMovieServices(
         @Named(IDENTIFIER_TM_DB) retrofit: Retrofit,
-    ): TrendingMovieApi {
-        return retrofit.create(TrendingMovieApi::class.java)
-    }
+    ): TrendingMovieApi = retrofit.create(TrendingMovieApi::class.java)
 
     @Singleton
     @Provides
     fun provideUpcomingServices(
         @Named(IDENTIFIER_TM_DB) retrofit: Retrofit,
-    ): UpcomingApi {
-        return retrofit.create(UpcomingApi::class.java)
-    }
+    ): UpcomingApi = retrofit.create(UpcomingApi::class.java)
 
     @Singleton
     @Provides
     fun provideDiscoverServices(
         @Named(IDENTIFIER_TM_DB) retrofit: Retrofit,
-    ): DiscoverApi {
-        return retrofit.create(DiscoverApi::class.java)
-    }
+    ): DiscoverApi = retrofit.create(DiscoverApi::class.java)
 
     @Singleton
     @Provides
     fun provideSimilarService(
         @Named(IDENTIFIER_TM_DB) retrofit: Retrofit,
-    ): SimilarApi {
-        return retrofit.create(SimilarApi::class.java)
-    }
+    ): SimilarApi = retrofit.create(SimilarApi::class.java)
 
     @Singleton
     @Provides
     fun provideMovieService(
         @Named(IDENTIFIER_TM_DB) retrofit: Retrofit,
-    ): MovieApi {
-        return retrofit.create(MovieApi::class.java)
-    }
+    ): MovieApi = retrofit.create(MovieApi::class.java)
 
     @Singleton
     @Provides
     fun provideCreditsApi(
         @Named(IDENTIFIER_TM_DB) retrofit: Retrofit,
-    ): CreditsApi {
-        return retrofit.create(CreditsApi::class.java)
-    }
+    ): CreditsApi = retrofit.create(CreditsApi::class.java)
 
     @Singleton
     @Provides
     fun providePlatformsApi(
         @Named(IDENTIFIER_PLATFORMS) retrofit: Retrofit,
-    ): PlatformsApi {
-        return retrofit.create(PlatformsApi::class.java)
-    }
+    ): PlatformsApi = retrofit.create(PlatformsApi::class.java)
 }

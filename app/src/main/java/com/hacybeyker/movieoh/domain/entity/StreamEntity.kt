@@ -1,7 +1,7 @@
 package com.hacybeyker.movieoh.domain.entity
 
-import com.hacybeyker.movieoh.R
 import com.hacybeyker.movieoh.utils.constans.Stream
+import com.hacybeyker.uikit.R
 
 enum class StreamEntity(
     val icon: Int,

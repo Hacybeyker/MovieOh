@@ -31,9 +31,7 @@ class NetworkPlatformsModule {
     @Singleton
     @Provides
     @Named(BASE_URL_PLATFORMS)
-    fun provideBaseUrlPlatforms(): String {
-        return BuildConfig.BASE_URL_PLATFORMS
-    }
+    fun provideBaseUrlPlatforms(): String = BuildConfig.BASE_URL_PLATFORMS
 
     @Singleton
     @Named(IDENTIFIER_PLATFORMS)
@@ -43,8 +41,9 @@ class NetworkPlatformsModule {
         okHttpMockInterceptor: OkHttpMockInterceptor,
         chuckerInterceptor: ChuckerInterceptor,
         apiInterceptor: ApiInterceptorPlatforms,
-    ): OkHttpClient {
-        return OkHttpClient.Builder()
+    ): OkHttpClient =
+        OkHttpClient
+            .Builder()
             .connectTimeout(ConstantsDI.Parameters.TIMEOUT, TimeUnit.SECONDS)
             .writeTimeout(ConstantsDI.Parameters.TIMEOUT, TimeUnit.SECONDS)
             .readTimeout(ConstantsDI.Parameters.TIMEOUT, TimeUnit.SECONDS)
@@ -52,7 +51,6 @@ class NetworkPlatformsModule {
             .addInterceptor(chuckerInterceptor)
             .addInterceptor(if (BuildConfig.IS_DEVELOPMENT) okHttpMockInterceptor else apiInterceptor)
             .build()
-    }
 
     @Singleton
     @Named(IDENTIFIER_PLATFORMS)
@@ -61,13 +59,13 @@ class NetworkPlatformsModule {
         @Named(BASE_URL_PLATFORMS) baseUrl: String,
         @Named(IDENTIFIER_PLATFORMS) client: OkHttpClient,
         gsonConverterFactory: GsonConverterFactory,
-    ): Retrofit {
-        return Retrofit.Builder()
+    ): Retrofit =
+        Retrofit
+            .Builder()
             .baseUrl(baseUrl)
             .client(client)
             .addConverterFactory(gsonConverterFactory)
             .build()
-    }
 
     class ApiInterceptorPlatforms
         @Inject

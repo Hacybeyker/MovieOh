@@ -10,13 +10,10 @@ data class GenreResponseModel(
     val name: String?,
 )
 
-fun List<GenreResponseModel>.toListGenreEntity(): List<GenreEntity> {
-    return this.map { it.toGenreEntity() }
-}
+fun List<GenreResponseModel>.toListGenreEntity(): List<GenreEntity> = this.map { it.toGenreEntity() }
 
-fun GenreResponseModel.toGenreEntity(): GenreEntity {
-    return GenreEntity(
+fun GenreResponseModel.toGenreEntity(): GenreEntity =
+    GenreEntity(
         id = id ?: -1,
         name = name ?: "",
     )
-}

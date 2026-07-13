@@ -3,15 +3,14 @@ package com.hacybeyker.movieoh.utils
 import com.hacybeyker.movieoh.data.model.remote.response.MovieResponseModel
 import com.hacybeyker.movieoh.domain.entity.MovieEntity
 
-fun getListMovieEntity(): List<MovieEntity> {
-    return arrayListOf(
+fun getListMovieEntity(): List<MovieEntity> =
+    arrayListOf(
         getMovieOne(),
         getMovieTwo(),
     )
-}
 
-fun getMovieResponseModel(): MovieResponseModel {
-    return MovieResponseModel(
+fun getMovieResponseModel(): MovieResponseModel =
+    MovieResponseModel(
         adult = false,
         backdropPath = "/1Rr5SrvHxMXHu5RjKpaMba8VTzi.jpg",
         genreIds = null,
@@ -31,10 +30,9 @@ fun getMovieResponseModel(): MovieResponseModel {
         homepage = "",
         genres = null,
     )
-}
 
-fun getMovieOne(): MovieEntity {
-    return MovieEntity(
+fun getMovieOne(): MovieEntity =
+    MovieEntity(
         id = 634649,
         backdropPath = "/1Rr5SrvHxMXHu5RjKpaMba8VTzi.jpg",
         posterPath = "/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg",
@@ -49,10 +47,9 @@ fun getMovieOne(): MovieEntity {
         genres = emptyList(),
         stream = null,
     )
-}
 
-fun getMovieTwo(): MovieEntity {
-    return MovieEntity(
+fun getMovieTwo(): MovieEntity =
+    MovieEntity(
         id = 524434,
         backdropPath = "/k2twTjSddgLc1oFFHVibfxp2kQV.jpg",
         posterPath = "/6AdXwFTRTAzggD2QUTt5B7JFGKL.jpg",
@@ -67,4 +64,3 @@ fun getMovieTwo(): MovieEntity {
         genres = emptyList(),
         stream = null,
     )
-}

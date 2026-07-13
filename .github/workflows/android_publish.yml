@@ -25,7 +25,6 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: '17'
-          cache: 'gradle'
           check-latest: true
 
       - name: Setup Project
@@ -64,7 +63,6 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: '17'
-          cache: 'gradle'
           check-latest: true
 
       - name: Setup Project
@@ -100,7 +98,7 @@ jobs:
         run: ./gradlew app:jacocoTestCoverageVerification
 
       - name: Run SonarQube Scan
-        run: ./gradlew app:sonarqube -Dsonar.host.url=https://sonarcloud.io/ -Dsonar.login=${{ secrets.SONARCLOUDTOKEN }}
+        run: ./gradlew app:sonar -Dsonar.host.url=https://sonarcloud.io/ -Dsonar.token=${{ secrets.SONARCLOUDTOKEN }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -121,7 +119,6 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: '17'
-          cache: 'gradle'
           check-latest: true
 
       - name: Setup Project
@@ -151,8 +148,7 @@ jobs:
 
       - name: Create Tag Release
         run: |
-          currentVersion=`grep versionName ./buildSrc/src/main/kotlin/ConfigureApp.kt | awk -F" " '{ print $5 }' `
-          versionFormatted=`echo $currentVersion | sed 's/.\(.*\)/\1/' | sed 's/\(.*\)./\1/'`
+          versionFormatted=`grep '^app-version-name' ./gradle/libs.versions.toml | cut -d'"' -f2`
           echo "Version: $versionFormatted"
           git tag $versionFormatted
           git push origin --tags

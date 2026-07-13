@@ -13,23 +13,28 @@ import com.hacybeyker.movieoh.domain.entity.MovieEntity
 import com.hacybeyker.movieoh.domain.entity.PlatformsEntity
 
 val mockMovieEntity: MovieEntity by lazy {
-    JSONFileLoader().loadJsonString<MovieResponseModel>("response_model_movie.json")
+    JSONFileLoader()
+        .loadJsonString<MovieResponseModel>("response_model_movie.json")
         .toEntity()
 }
 
 val mockCreditEntity: CreditsEntity by lazy {
-    JSONFileLoader().loadJsonString<CreditsResponseModel>("response_model_credits.json")
+    JSONFileLoader()
+        .loadJsonString<CreditsResponseModel>("response_model_credits.json")
         .toCreditsEntity()
 }
 
 val mockSimilarMovies: List<MovieEntity> by lazy {
-    JSONFileLoader().loadJsonString<ResultResponseModel>("response_model_similar.json")
+    JSONFileLoader()
+        .loadJsonString<ResultResponseModel>("response_model_similar.json")
         .toMovieResponseModelList()
 }
 
 val mockPlatformsEntity: List<PlatformsEntity> by lazy {
-    JSONFileLoader().loadJsonString<ResultPlatformResponseModel>("response_model_platforms.json")
-        .platforms?.map { it.toEntity() } ?: emptyList()
+    JSONFileLoader()
+        .loadJsonString<ResultPlatformResponseModel>("response_model_platforms.json")
+        .platforms
+        ?.map { it.toEntity() } ?: emptyList()
 }
 
 val mockPlatformsModel: ResultsPlatformResponseModel by lazy {

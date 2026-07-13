@@ -14,7 +14,5 @@ class DiscoverDataSourceRemote
         override suspend fun fetchDiscover(
             page: Int,
             genre: Int,
-        ): List<MovieEntity> {
-            return api.fetchDiscover(page, genre).toMovieResponseModelList()
-        }
+        ): List<MovieEntity> = api.fetchDiscover(page, genre).toMovieResponseModelList()
     }

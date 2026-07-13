@@ -13,7 +13,5 @@ class DiscoverRepositoryData
         override suspend fun fetchDiscover(
             page: Int,
             genre: Int,
-        ): List<MovieEntity> {
-            return dataSource.fetchDiscover(page, genre)
-        }
+        ): List<MovieEntity> = dataSource.fetchDiscover(page, genre)
     }

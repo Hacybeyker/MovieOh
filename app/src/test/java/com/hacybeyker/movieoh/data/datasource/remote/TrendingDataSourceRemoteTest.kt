@@ -54,7 +54,8 @@ class TrendingDataSourceRemoteTest {
     fun `when call fetchTrendingMovie then api call Error`() {
         testCoroutineRule.runBlockingTest {
             try {
-                doThrow(RuntimeException("Error", ApiException())).whenever(mockApi)
+                doThrow(RuntimeException("Error", ApiException()))
+                    .whenever(mockApi)
                     .fetchTrendingMovie(anyInt())
                 sutTrendingDataSourceRemote.fetchTrendingMovie(anyInt())
                 fail()

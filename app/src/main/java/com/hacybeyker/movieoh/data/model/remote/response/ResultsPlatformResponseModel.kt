@@ -22,9 +22,8 @@ data class PlatformsResponseModel(
     val url: String?,
 )
 
-fun PlatformsResponseModel.toEntity(): PlatformsEntity {
-    return PlatformsEntity(
+fun PlatformsResponseModel.toEntity(): PlatformsEntity =
+    PlatformsEntity(
         name = name ?: "",
         url = url ?: "",
     )
-}

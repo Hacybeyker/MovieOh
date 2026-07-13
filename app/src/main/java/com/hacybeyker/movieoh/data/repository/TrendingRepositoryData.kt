@@ -10,7 +10,5 @@ class TrendingRepositoryData
     constructor(
         private val dataSource: TrendingDataSource,
     ) : TrendingRepository {
-        override suspend fun fetchTrendingMovie(page: Int): List<MovieEntity> {
-            return dataSource.fetchTrendingMovie(page)
-        }
+        override suspend fun fetchTrendingMovie(page: Int): List<MovieEntity> = dataSource.fetchTrendingMovie(page)
     }

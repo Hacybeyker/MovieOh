@@ -25,7 +25,6 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: '17'
-          cache: 'gradle'
           check-latest: true
 
       - name: Setup Project
@@ -73,6 +72,6 @@ jobs:
         run: ./gradlew app:jacocoTestCoverageVerification
 
       - name: Run SonarQube Scan
-        run: ./gradlew app:sonarqube -Dsonar.host.url=https://sonarcloud.io/ -Dsonar.login=${{ secrets.SONARCLOUDTOKEN }}
+        run: ./gradlew app:sonar -Dsonar.host.url=https://sonarcloud.io/ -Dsonar.token=${{ secrets.SONARCLOUDTOKEN }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

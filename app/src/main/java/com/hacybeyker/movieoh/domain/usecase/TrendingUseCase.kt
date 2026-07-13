@@ -9,7 +9,5 @@ class TrendingUseCase
     constructor(
         private val repository: TrendingRepository,
     ) {
-        suspend fun fetchTrendingMovie(page: Int): List<MovieEntity> {
-            return repository.fetchTrendingMovie(page)
-        }
+        suspend fun fetchTrendingMovie(page: Int): List<MovieEntity> = repository.fetchTrendingMovie(page)
     }

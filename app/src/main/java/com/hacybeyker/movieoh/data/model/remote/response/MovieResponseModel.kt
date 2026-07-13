@@ -67,8 +67,8 @@ data class MovieResponseModel(
     }
 }
 
-fun MovieResponseModel.toEntity(): MovieEntity {
-    return MovieEntity(
+fun MovieResponseModel.toEntity(): MovieEntity =
+    MovieEntity(
         id = id ?: 0,
         backdropPath = backdropPath ?: "",
         posterPath = posterPath ?: "",
@@ -83,4 +83,3 @@ fun MovieResponseModel.toEntity(): MovieEntity {
         stream = assignedStream(),
         genres = genres?.toListGenreEntity() ?: arrayListOf(),
     )
-}

@@ -7,9 +7,12 @@
     <string name="adventure">Adventure</string>
     <string name="comedy">Comedy</string>
     <string name="drama">Drama</string>
+    <string name="home_error">Something went wrong loading movies.</string>
+    <string name="retry">Retry</string>
     <string name="opinions">%1$d Opinions</string>
     <string name="duration">Duration</string>
     <string name="watch_now">Watch now</string>
+    <string name="back">Back</string>
 
     <string name="platforms">Platforms</string>
     <string name="about_movie">About this movie</string>

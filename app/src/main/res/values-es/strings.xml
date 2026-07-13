@@ -7,9 +7,12 @@
     <string name="adventure">Aventura</string>
     <string name="comedy">Comedia</string>
     <string name="drama">Drama</string>
+    <string name="home_error">Ocurrió un error al cargar las películas.</string>
+    <string name="retry">Reintentar</string>
     <string name="opinions">%1$d Opiniones</string>
     <string name="duration">Duración</string>
     <string name="watch_now">Ver ahora</string>
+    <string name="back">Atrás</string>
 
     <string name="platforms">Plataformas</string>
     <string name="about_movie">Acerca de esta película</string>
