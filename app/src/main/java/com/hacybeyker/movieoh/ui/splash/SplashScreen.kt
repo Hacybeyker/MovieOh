@@ -20,8 +20,8 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.hacybeyker.movieoh.R
-import com.hacybeyker.uikit.theme.Mariner
 import com.hacybeyker.uikit.theme.Montserrat
+import com.hacybeyker.uikit.theme.MovieOhGradients
 import com.hacybeyker.uikit.theme.White
 import kotlinx.coroutines.delay
 
@@ -38,7 +38,7 @@ fun SplashScreen(onFinished: () -> Unit) {
         modifier =
             Modifier
                 .fillMaxSize()
-                .background(Mariner),
+                .background(MovieOhGradients.splashBackground),
         contentAlignment = Alignment.Center,
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {

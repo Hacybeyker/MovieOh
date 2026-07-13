@@ -18,13 +18,13 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.hacybeyker.movieoh.domain.entity.MovieEntity
 import com.hacybeyker.movieoh.utils.extensions.toTmdbImageUrl
 import com.hacybeyker.uikit.component.NetworkImage
+import com.hacybeyker.uikit.theme.MovieOhGradients
 import kotlinx.coroutines.delay
 
 private val CARD_CORNER_RADIUS = 12.dp
@@ -91,11 +91,8 @@ private fun FeaturedCard(
                 Modifier
                     .fillMaxWidth()
                     .align(Alignment.BottomStart)
-                    .background(
-                        Brush.verticalGradient(
-                            colors = listOf(Color.Transparent, Color.Black.copy(alpha = 0.75f)),
-                        ),
-                    ).padding(12.dp),
+                    .background(MovieOhGradients.scrim())
+                    .padding(12.dp),
         ) {
             Text(
                 text = movie.title,

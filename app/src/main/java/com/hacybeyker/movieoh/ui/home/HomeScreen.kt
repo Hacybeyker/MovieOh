@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,6 +23,7 @@ import com.hacybeyker.movieoh.domain.entity.MovieEntity
 import com.hacybeyker.movieoh.ui.components.FeaturedCarousel
 import com.hacybeyker.movieoh.ui.components.MovieCarousel
 import com.hacybeyker.movieoh.ui.components.ShimmerScreen
+import com.hacybeyker.uikit.component.GradientButton
 import com.hacybeyker.uikit.component.SectionHeader
 
 @Composable
@@ -93,8 +93,9 @@ private fun HomeError(
             color = MaterialTheme.colorScheme.onBackground,
         )
         Spacer(modifier = Modifier.height(16.dp))
-        Button(onClick = onRetry) {
-            Text(text = stringResource(id = R.string.retry))
-        }
+        GradientButton(
+            text = stringResource(id = R.string.retry),
+            onClick = onRetry,
+        )
     }
 }

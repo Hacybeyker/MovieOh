@@ -8,7 +8,8 @@ import androidx.compose.runtime.Composable
 
 private val LightColorScheme =
     lightColorScheme(
-        primary = Mariner,
+        primary = CinematicPurple,
+        secondary = CinematicMagenta,
         background = White,
         onBackground = Umbra,
         surface = White,
@@ -20,10 +21,11 @@ private val LightColorScheme =
 
 private val DarkColorScheme =
     darkColorScheme(
-        primary = Mariner,
-        background = Umbra,
+        primary = CinematicMagenta,
+        secondary = CinematicPurple,
+        background = CinematicBackground,
         onBackground = Paternoster,
-        surface = Umbra,
+        surface = CinematicSurface,
         onSurface = Paternoster,
         surfaceVariant = BlackTie,
         onSurfaceVariant = SilverSnippet,
