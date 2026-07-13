@@ -21,6 +21,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.hacybeyker.movieoh.R
 import com.hacybeyker.movieoh.domain.entity.MovieEntity
+import com.hacybeyker.movieoh.ui.components.FeaturedCarousel
 import com.hacybeyker.movieoh.ui.components.MovieCarousel
 import com.hacybeyker.movieoh.ui.components.ShimmerScreen
 import com.hacybeyker.uikit.component.SectionHeader
@@ -55,6 +56,14 @@ fun HomeContent(
         uiState.isError -> HomeError(modifier = modifier, onRetry = onRetry)
         else ->
             LazyColumn(modifier = modifier) {
+                if (uiState.featuredMovies.isNotEmpty()) {
+                    item(key = R.string.upcoming) {
+                        FeaturedCarousel(
+                            movies = uiState.featuredMovies,
+                            onMovieClick = onMovieClick,
+                        )
+                    }
+                }
                 uiState.sections.forEach { section ->
                     item(key = section.titleRes) {
                         SectionHeader(title = stringResource(id = section.titleRes))

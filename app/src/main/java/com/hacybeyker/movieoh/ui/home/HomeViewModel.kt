@@ -42,7 +42,6 @@ class HomeViewModel
 
         private val sources =
             listOf(
-                SectionSource(R.string.upcoming) { upcomingUseCase.fetchUpcoming(PAGE_STAR) },
                 SectionSource(R.string.trending) { trendingUseCase.fetchTrendingMovie(PAGE_STAR) },
                 SectionSource(R.string.action) { discoverUseCase.fetchDiscover(PAGE_STAR, ACTION) },
                 SectionSource(R.string.animation) { discoverUseCase.fetchDiscover(PAGE_STAR, ANIMATION) },
@@ -58,21 +57,30 @@ class HomeViewModel
         fun loadHome() {
             viewModelScope.launch(dispatcherIO) {
                 _uiState.value = HomeUiState(isLoading = true)
-                val sections =
+                val (featuredMovies, sections) =
                     supervisorScope {
-                        sources
-                            .map { source -> async { source.load() } }
-                            .awaitAll()
-                            .filterNotNull()
+                        val featuredDeferred = async { fetchFeaturedOrEmpty() }
+                        val sectionsDeferred = sources.map { source -> async { source.load() } }
+                        featuredDeferred.await() to sectionsDeferred.awaitAll().filterNotNull()
                     }
                 _uiState.value =
                     HomeUiState(
                         isLoading = false,
+                        featuredMovies = featuredMovies,
                         sections = sections,
-                        isError = sections.isEmpty(),
+                        isError = sections.isEmpty() && featuredMovies.isEmpty(),
                     )
             }
         }
+
+        private suspend fun fetchFeaturedOrEmpty(): List<MovieEntity> =
+            try {
+                upcomingUseCase.fetchUpcoming(PAGE_STAR)
+            } catch (expected: CancellationException) {
+                throw expected
+            } catch (_: Exception) {
+                emptyList()
+            }
 
         private suspend fun SectionSource.load(): HomeSection? =
             try {

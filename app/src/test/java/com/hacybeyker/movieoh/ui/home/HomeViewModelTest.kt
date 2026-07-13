@@ -25,7 +25,6 @@ private const val DISCOVER_SECTIONS = 5
 
 private val expectedSectionTitles =
     listOf(
-        R.string.upcoming,
         R.string.trending,
         R.string.action,
         R.string.animation,
@@ -82,9 +81,30 @@ class HomeViewModelTest {
             assertFalse(uiState.isError)
             assertEquals(expectedSectionTitles, uiState.sections.map { it.titleRes })
             assertTrue(uiState.sections.all { it.movies == mockSimilarMovies })
+            assertEquals(mockSimilarMovies, uiState.featuredMovies)
             verify(mockTrendingUseCase, times(1)).fetchTrendingMovie(anyInt())
             verify(mockUpcomingUseCase, times(1)).fetchUpcoming(anyInt())
             verify(mockDiscoverUseCase, times(DISCOVER_SECTIONS)).fetchDiscover(anyInt(), anyInt())
+        }
+    }
+
+    @Test
+    fun `GIVEN upcoming fails WHEN viewmodel is created THEN other sections are shown without error`() {
+        testCoroutineRule.runBlockingTest {
+            // GIVEN
+            givenAllSectionsSucceed()
+            doAnswer { error("network") }.whenever(mockUpcomingUseCase).fetchUpcoming(anyInt())
+
+            // WHEN
+            val viewModel = buildViewModel()
+            advanceUntilIdle()
+
+            // THEN
+            val uiState = viewModel.uiState.value
+            assertFalse(uiState.isLoading)
+            assertFalse(uiState.isError)
+            assertTrue(uiState.featuredMovies.isEmpty())
+            assertEquals(expectedSectionTitles, uiState.sections.map { it.titleRes })
         }
     }
 
