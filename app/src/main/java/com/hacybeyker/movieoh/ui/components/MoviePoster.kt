@@ -14,7 +14,7 @@ import com.hacybeyker.uikit.component.NetworkImage
 
 val POSTER_WIDTH = 109.dp
 val POSTER_HEIGHT = 164.dp
-val POSTER_CORNER_RADIUS = 5.dp
+val POSTER_CORNER_RADIUS = 10.dp
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable

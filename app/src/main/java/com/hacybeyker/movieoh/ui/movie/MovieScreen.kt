@@ -7,15 +7,15 @@ import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -24,7 +24,11 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.AssistChip
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Share
+import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -38,10 +42,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -54,21 +60,23 @@ import com.hacybeyker.movieoh.domain.entity.PlatformType
 import com.hacybeyker.movieoh.domain.entity.PlatformsEntity
 import com.hacybeyker.movieoh.ui.components.MovieCarousel
 import com.hacybeyker.movieoh.ui.components.MoviePoster
-import com.hacybeyker.movieoh.ui.components.POSTER_CORNER_RADIUS
-import com.hacybeyker.movieoh.ui.components.POSTER_HEIGHT
-import com.hacybeyker.movieoh.ui.components.POSTER_WIDTH
 import com.hacybeyker.movieoh.ui.components.ShimmerMovieScreen
 import com.hacybeyker.movieoh.ui.movieactions.MovieActionsBottomSheet
+import com.hacybeyker.movieoh.ui.movieactions.MovieActionsViewModel
+import com.hacybeyker.movieoh.ui.movieactions.shareMovie
 import com.hacybeyker.movieoh.utils.extensions.format
 import com.hacybeyker.movieoh.utils.extensions.getRuntime
 import com.hacybeyker.movieoh.utils.extensions.toTmdbImageUrl
 import com.hacybeyker.movieoh.utils.extensions.toTmdbLogoUrl
+import com.hacybeyker.uikit.component.GradientButton
 import com.hacybeyker.uikit.component.NetworkImage
 import com.hacybeyker.uikit.component.SectionHeader
-import com.hacybeyker.uikit.R as UiKitR
 
 private const val OVERVIEW_MAX_LINES = 4
 private const val VOTE_AVERAGE_DECIMALS = 1
+private const val RELEASE_YEAR_LENGTH = 4
+private const val HERO_ASPECT_RATIO = 3f / 4f
+private const val HERO_FADE_START = 0.6f
 private val PLATFORM_LOGO_SIZE = 44.dp
 private val PLATFORM_LOGO_CORNER_RADIUS = 10.dp
 
@@ -124,7 +132,7 @@ fun MovieContent(
                             .fillMaxSize()
                             .verticalScroll(rememberScrollState()),
                 ) {
-                    MovieHeader(movie = movie)
+                    MovieHero(movie = movie)
                     MovieDetail(
                         uiState = uiState,
                         onMovieClick = onMovieClick,
@@ -134,12 +142,15 @@ fun MovieContent(
                 }
                 IconButton(
                     onClick = onBackClick,
-                    modifier = Modifier.padding(start = 15.dp, top = 30.dp),
+                    modifier =
+                        Modifier
+                            .align(Alignment.TopEnd)
+                            .padding(end = 15.dp, top = 30.dp),
                 ) {
                     Icon(
-                        painter = painterResource(id = UiKitR.drawable.icon_arrow_left),
+                        imageVector = Icons.Default.Close,
                         contentDescription = stringResource(id = R.string.back),
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                        tint = MaterialTheme.colorScheme.onBackground,
                     )
                 }
             }
@@ -152,16 +163,31 @@ fun MovieContent(
 }
 
 @Composable
-private fun MovieHeader(movie: MovieEntity) {
-    NetworkImage(
-        url = movie.backdropPath.toTmdbImageUrl(),
-        contentDescription = movie.title,
-        contentScale = ContentScale.Crop,
+private fun MovieHero(movie: MovieEntity) {
+    Box(
         modifier =
             Modifier
                 .fillMaxWidth()
-                .height(260.dp),
-    )
+                .aspectRatio(HERO_ASPECT_RATIO),
+    ) {
+        NetworkImage(
+            url = movie.posterPath.toTmdbImageUrl(),
+            contentDescription = movie.title,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize(),
+        )
+        Box(
+            modifier =
+                Modifier
+                    .matchParentSize()
+                    .background(
+                        Brush.verticalGradient(
+                            HERO_FADE_START to MaterialTheme.colorScheme.background.copy(alpha = 0f),
+                            1f to MaterialTheme.colorScheme.background,
+                        ),
+                    ),
+        )
+    }
 }
 
 @Composable
@@ -172,51 +198,48 @@ private fun MovieDetail(
     onOpenLink: (String) -> Unit,
 ) {
     val movie = checkNotNull(uiState.movie)
-    Column(
-        modifier =
-            Modifier
-                .fillMaxWidth()
-                .offset(y = (-20).dp)
-                .clip(RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp))
-                .background(MaterialTheme.colorScheme.background),
-    ) {
-        Row(modifier = Modifier.padding(start = 15.dp, top = 15.dp, end = 15.dp)) {
-            NetworkImage(
-                url = movie.posterPath.toTmdbImageUrl(),
-                contentDescription = movie.title,
-                cornerRadius = POSTER_CORNER_RADIUS,
-                contentScale = ContentScale.FillBounds,
-                modifier = Modifier.size(width = POSTER_WIDTH, height = POSTER_HEIGHT),
+    Column(modifier = Modifier.fillMaxWidth()) {
+        Text(
+            text = movie.title,
+            style = MaterialTheme.typography.headlineSmall,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.onBackground,
+            textAlign = TextAlign.Center,
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 15.dp),
+        )
+        Text(
+            text = movie.metadataLine(),
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            textAlign = TextAlign.Center,
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 15.dp, vertical = 8.dp),
+        )
+
+        uiState.platforms.firstOrNull()?.let { primaryPlatform ->
+            GradientButton(
+                text = stringResource(id = R.string.play),
+                onClick = { onOpenLink(primaryPlatform.url) },
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 15.dp, vertical = 5.dp),
             )
-            Column(modifier = Modifier.padding(start = 15.dp)) {
-                Text(
-                    text = movie.title,
-                    style = MaterialTheme.typography.titleLarge,
-                    color = MaterialTheme.colorScheme.onBackground,
-                )
-                Text(
-                    text = movie.releaseDate,
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.onBackground,
-                    modifier = Modifier.padding(top = 10.dp),
-                )
-            }
         }
 
-        MovieInfoRow(movie = movie)
+        MovieActionsRow(movie = movie)
 
-        SectionHeader(title = stringResource(id = R.string.about_movie), showIcon = false)
         Text(
             text = movie.overview,
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             maxLines = OVERVIEW_MAX_LINES,
             overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.padding(horizontal = 15.dp),
-        )
-
-        ChipsRow(
-            labels = movie.genres.map { it.name },
             modifier = Modifier.padding(horizontal = 15.dp, vertical = 5.dp),
         )
 
@@ -304,90 +327,68 @@ private fun MovieCastRow(uiState: MovieUiState) {
     }
 }
 
+private fun MovieEntity.metadataLine(): String =
+    listOf(
+        "★ ${voteAverage.format(VOTE_AVERAGE_DECIMALS)}",
+        releaseDate.take(RELEASE_YEAR_LENGTH),
+        runtime.getRuntime(),
+        genres.joinToString(", ") { it.name },
+    ).filter { it.isNotBlank() }.joinToString(" • ")
+
 @Composable
-private fun MovieInfoRow(movie: MovieEntity) {
+private fun MovieActionsRow(
+    movie: MovieEntity,
+    viewModel: MovieActionsViewModel = hiltViewModel(),
+) {
+    val favorites by viewModel.favorites.collectAsStateWithLifecycle()
+    val isFavorite = movie.id in favorites
+    val context = LocalContext.current
+
     Row(
         modifier =
             Modifier
                 .fillMaxWidth()
-                .padding(top = 15.dp),
-        verticalAlignment = Alignment.CenterVertically,
+                .padding(vertical = 10.dp),
+        horizontalArrangement = Arrangement.Center,
     ) {
-        InfoItem(
-            title = movie.voteAverage.format(VOTE_AVERAGE_DECIMALS),
-            titleIcon = UiKitR.drawable.icon_star,
-            description = stringResource(id = R.string.opinions, movie.voteCount),
-            modifier = Modifier.weight(1f),
+        ActionItem(
+            icon = if (isFavorite) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
+            label = stringResource(id = R.string.my_list),
+            onClick = { viewModel.toggleFavorite(movie.id) },
         )
-        InfoDivider()
-        InfoItem(
-            title = movie.runtime.getRuntime(),
-            description = stringResource(id = R.string.duration),
-            modifier = Modifier.weight(1f),
+        Spacer(modifier = Modifier.width(48.dp))
+        ActionItem(
+            icon = Icons.Filled.Share,
+            label = stringResource(id = R.string.share),
+            onClick = { shareMovie(context, movie) },
         )
     }
 }
 
 @Composable
-private fun InfoItem(
-    title: String,
-    description: String,
-    modifier: Modifier = Modifier,
-    titleIcon: Int? = null,
+private fun ActionItem(
+    icon: ImageVector,
+    label: String,
+    onClick: () -> Unit,
 ) {
-    Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(
-                text = title,
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onBackground,
-            )
-            titleIcon?.let { icon ->
-                Icon(
-                    painter = painterResource(id = icon),
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onBackground,
-                    modifier =
-                        Modifier
-                            .padding(start = 2.dp)
-                            .size(10.dp),
-                )
-            }
-        }
-        Text(
-            text = description,
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.padding(top = 5.dp),
-        )
-    }
-}
-
-@Composable
-private fun InfoDivider() {
-    Spacer(
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
         modifier =
             Modifier
-                .width(1.dp)
-                .height(20.dp)
-                .background(MaterialTheme.colorScheme.outline),
-    )
-}
-
-@Composable
-private fun ChipsRow(
-    labels: List<String>,
-    modifier: Modifier = Modifier,
-    onClick: ((Int) -> Unit)? = null,
-) {
-    Row(modifier = modifier.horizontalScroll(rememberScrollState())) {
-        labels.forEachIndexed { index, label ->
-            AssistChip(
-                onClick = { onClick?.invoke(index) },
-                label = { Text(text = label, style = MaterialTheme.typography.bodySmall) },
-                modifier = Modifier.padding(end = 5.dp),
-            )
-        }
+                .clip(RoundedCornerShape(10.dp))
+                .clickable(onClick = onClick)
+                .padding(horizontal = 12.dp, vertical = 6.dp),
+    ) {
+        Icon(
+            imageVector = icon,
+            contentDescription = null,
+            tint = MaterialTheme.colorScheme.onBackground,
+        )
+        Text(
+            text = label,
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.padding(top = 4.dp),
+        )
     }
 }

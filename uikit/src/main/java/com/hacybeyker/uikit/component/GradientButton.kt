@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.hacybeyker.uikit.theme.MovieOhGradients
 
@@ -25,6 +26,7 @@ fun GradientButton(
         text = text,
         style = MaterialTheme.typography.bodyMedium,
         color = Color.White,
+        textAlign = TextAlign.Center,
         modifier =
             modifier
                 .clip(RoundedCornerShape(BUTTON_CORNER_RADIUS))

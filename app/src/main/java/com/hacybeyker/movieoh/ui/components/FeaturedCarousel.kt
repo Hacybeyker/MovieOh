@@ -3,41 +3,31 @@ package com.hacybeyker.movieoh.ui.components
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
 import com.hacybeyker.movieoh.domain.entity.MovieEntity
 import com.hacybeyker.movieoh.utils.extensions.toTmdbImageUrl
 import com.hacybeyker.uikit.component.NetworkImage
-import com.hacybeyker.uikit.theme.MovieOhGradients
 import kotlinx.coroutines.delay
 import kotlin.math.absoluteValue
 
-val CARD_CORNER_RADIUS = 12.dp
+val CARD_CORNER_RADIUS = 16.dp
 val CARD_PEEK_PADDING = 40.dp
 val CARD_SPACING = 12.dp
-const val CARD_ASPECT_RATIO = 16f / 9f
+const val CARD_ASPECT_RATIO = 2f / 3f
 private const val AUTO_SCROLL_DELAY_MILLIS = 4_000L
 private const val AUTO_SCROLL_ANIMATION_MILLIS = 650
 private const val MIN_PAGE_SCALE = 0.94f
@@ -105,6 +95,7 @@ fun FeaturedCarousel(
     }
 }
 
+// Poster-art hero card: the artwork carries the title, so nothing is overlaid.
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun FeaturedCard(
@@ -113,35 +104,15 @@ private fun FeaturedCard(
     modifier: Modifier = Modifier,
     onLongClick: (() -> Unit)? = null,
 ) {
-    Box(
+    NetworkImage(
+        url = movie.posterPath.toTmdbImageUrl(),
+        contentDescription = movie.title,
+        cornerRadius = CARD_CORNER_RADIUS,
         modifier =
             modifier
                 .fillMaxWidth()
                 .aspectRatio(CARD_ASPECT_RATIO)
                 .clip(RoundedCornerShape(CARD_CORNER_RADIUS))
                 .combinedClickable(onClick = onClick, onLongClick = onLongClick),
-    ) {
-        NetworkImage(
-            url = movie.backdropPath.toTmdbImageUrl(),
-            contentDescription = movie.title,
-            cornerRadius = CARD_CORNER_RADIUS,
-            modifier = Modifier.fillMaxSize(),
-        )
-        Box(
-            modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .align(Alignment.BottomStart)
-                    .background(MovieOhGradients.scrim())
-                    .padding(12.dp),
-        ) {
-            Text(
-                text = movie.title,
-                style = MaterialTheme.typography.titleMedium,
-                color = Color.White,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-            )
-        }
-    }
+    )
 }

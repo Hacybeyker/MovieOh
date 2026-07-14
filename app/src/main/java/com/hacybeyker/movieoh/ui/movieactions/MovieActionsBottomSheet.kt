@@ -1,7 +1,5 @@
 package com.hacybeyker.movieoh.ui.movieactions
 
-import android.content.Context
-import android.content.Intent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -38,7 +36,6 @@ import com.hacybeyker.movieoh.ui.components.POSTER_CORNER_RADIUS
 import com.hacybeyker.movieoh.utils.extensions.toTmdbImageUrl
 import com.hacybeyker.uikit.component.NetworkImage
 
-private const val TMDB_MOVIE_URL = "https://www.themoviedb.org/movie/"
 private val POSTER_THUMB_WIDTH = 48.dp
 private val POSTER_THUMB_HEIGHT = 72.dp
 
@@ -122,17 +119,4 @@ private fun MovieActionRow(
             color = MaterialTheme.colorScheme.onBackground,
         )
     }
-}
-
-private fun shareMovie(
-    context: Context,
-    movie: MovieEntity,
-) {
-    val shareText = "${movie.title}\n$TMDB_MOVIE_URL${movie.id}"
-    val intent =
-        Intent(Intent.ACTION_SEND).apply {
-            type = "text/plain"
-            putExtra(Intent.EXTRA_TEXT, shareText)
-        }
-    context.startActivity(Intent.createChooser(intent, null))
 }

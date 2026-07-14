@@ -28,6 +28,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.clip
@@ -38,7 +39,7 @@ import androidx.compose.ui.unit.dp
 private const val SHIMMER_DURATION_MILLIS = 1_000
 private const val SHIMMER_WIDTH = 400f
 private const val GRID_PLACEHOLDER_COUNT = 12
-private const val MOVIE_BACKDROP_HEIGHT = 260
+private const val MOVIE_HERO_ASPECT_RATIO = 3f / 4f
 private const val HOME_SECTION_COUNT = 3
 private const val TEXT_LINE_COUNT = 3
 
@@ -158,6 +159,7 @@ fun ShimmerHomeScreen(modifier: Modifier = Modifier) {
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState()),
     ) {
+        ShimmerTitleBar()
         ShimmerFeaturedCarousel()
         repeat(HOME_SECTION_COUNT) {
             ShimmerSection()
@@ -186,37 +188,45 @@ fun ShimmerMovieScreen(modifier: Modifier = Modifier) {
             modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState()),
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
+        // Hero key-art
         Box(
             modifier =
                 Modifier
                     .fillMaxWidth()
-                    .height(MOVIE_BACKDROP_HEIGHT.dp)
+                    .aspectRatio(MOVIE_HERO_ASPECT_RATIO)
                     .shimmer(),
         )
-        Row(modifier = Modifier.padding(15.dp)) {
-            ShimmerPoster()
-            Column(modifier = Modifier.padding(start = 10.dp, top = 5.dp)) {
-                Box(
-                    modifier =
-                        Modifier
-                            .fillMaxWidth(fraction = 0.7f)
-                            .height(20.dp)
-                            .clip(RoundedCornerShape(5.dp))
-                            .shimmer(),
-                )
-                Box(
-                    modifier =
-                        Modifier
-                            .padding(top = 10.dp)
-                            .fillMaxWidth(fraction = 0.4f)
-                            .height(16.dp)
-                            .clip(RoundedCornerShape(5.dp))
-                            .shimmer(),
-                )
-            }
-        }
-        ShimmerTitleBar()
+        // Centered title + metadata line
+        Box(
+            modifier =
+                Modifier
+                    .padding(top = 10.dp)
+                    .fillMaxWidth(fraction = 0.6f)
+                    .height(24.dp)
+                    .clip(RoundedCornerShape(5.dp))
+                    .shimmer(),
+        )
+        Box(
+            modifier =
+                Modifier
+                    .padding(top = 10.dp)
+                    .fillMaxWidth(fraction = 0.8f)
+                    .height(14.dp)
+                    .clip(RoundedCornerShape(5.dp))
+                    .shimmer(),
+        )
+        // Play button
+        Box(
+            modifier =
+                Modifier
+                    .padding(horizontal = 15.dp, vertical = 12.dp)
+                    .fillMaxWidth()
+                    .height(42.dp)
+                    .clip(RoundedCornerShape(24.dp))
+                    .shimmer(),
+        )
         repeat(TEXT_LINE_COUNT) {
             Box(
                 modifier =
@@ -228,7 +238,6 @@ fun ShimmerMovieScreen(modifier: Modifier = Modifier) {
                         .shimmer(),
             )
         }
-        ShimmerTitleBar()
-        ShimmerPosterRow()
+        ShimmerSection()
     }
 }
