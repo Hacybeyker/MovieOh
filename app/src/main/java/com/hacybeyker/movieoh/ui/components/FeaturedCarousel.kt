@@ -34,10 +34,10 @@ import com.hacybeyker.uikit.theme.MovieOhGradients
 import kotlinx.coroutines.delay
 import kotlin.math.absoluteValue
 
-private val CARD_CORNER_RADIUS = 12.dp
-private val CARD_PEEK_PADDING = 40.dp
-private val CARD_SPACING = 12.dp
-private const val CARD_ASPECT_RATIO = 16f / 9f
+val CARD_CORNER_RADIUS = 12.dp
+val CARD_PEEK_PADDING = 40.dp
+val CARD_SPACING = 12.dp
+const val CARD_ASPECT_RATIO = 16f / 9f
 private const val AUTO_SCROLL_DELAY_MILLIS = 4_000L
 private const val AUTO_SCROLL_ANIMATION_MILLIS = 650
 private const val MIN_PAGE_SCALE = 0.94f

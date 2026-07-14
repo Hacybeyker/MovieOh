@@ -20,7 +20,6 @@ import com.hacybeyker.movieoh.ui.favorites.FavoritesScreen
 import com.hacybeyker.movieoh.ui.home.HomeScreen
 import com.hacybeyker.movieoh.ui.movie.MovieScreen
 import com.hacybeyker.movieoh.ui.settings.SettingsScreen
-import com.hacybeyker.movieoh.ui.splash.SplashScreen
 
 private const val FADE_DURATION_MILLIS = 300
 private const val SLIDE_DURATION_MILLIS = 350
@@ -41,22 +40,13 @@ fun MovieOhNavHost() {
     ) { innerPadding ->
         NavHost(
             navController = navController,
-            startDestination = MovieOhDestinations.SPLASH,
+            startDestination = MovieOhDestinations.HOME,
             modifier = Modifier.padding(innerPadding),
             enterTransition = { fadeIn(animationSpec = tween(FADE_DURATION_MILLIS)) },
             exitTransition = { fadeOut(animationSpec = tween(FADE_DURATION_MILLIS)) },
             popEnterTransition = { fadeIn(animationSpec = tween(FADE_DURATION_MILLIS)) },
             popExitTransition = { fadeOut(animationSpec = tween(FADE_DURATION_MILLIS)) },
         ) {
-            composable(MovieOhDestinations.SPLASH) {
-                SplashScreen(
-                    onFinished = {
-                        navController.navigate(MovieOhDestinations.HOME) {
-                            popUpTo(MovieOhDestinations.SPLASH) { inclusive = true }
-                        }
-                    },
-                )
-            }
             composable(MovieOhDestinations.HOME) {
                 HomeScreen(
                     onMovieClick = { movie ->

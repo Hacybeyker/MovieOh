@@ -26,7 +26,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.hacybeyker.movieoh.R
 import com.hacybeyker.movieoh.domain.entity.MovieEntity
 import com.hacybeyker.movieoh.ui.components.MoviePoster
-import com.hacybeyker.movieoh.ui.components.ShimmerScreen
+import com.hacybeyker.movieoh.ui.components.ShimmerGridScreen
 import com.hacybeyker.movieoh.ui.movieactions.MovieActionsBottomSheet
 
 private enum class FavoritesViewState { LOADING, EMPTY, CONTENT }
@@ -65,7 +65,7 @@ fun FavoritesContent(
 
     Crossfade(targetState = viewState, modifier = modifier, label = "favorites-view-state") { state ->
         when (state) {
-            FavoritesViewState.LOADING -> ShimmerScreen(modifier = Modifier.fillMaxSize(), sections = 2)
+            FavoritesViewState.LOADING -> ShimmerGridScreen(modifier = Modifier.fillMaxSize())
             FavoritesViewState.EMPTY -> FavoritesEmpty(modifier = Modifier.fillMaxSize())
             FavoritesViewState.CONTENT ->
                 LazyVerticalGrid(

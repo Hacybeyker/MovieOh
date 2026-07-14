@@ -56,7 +56,7 @@ import com.hacybeyker.movieoh.ui.components.MoviePoster
 import com.hacybeyker.movieoh.ui.components.POSTER_CORNER_RADIUS
 import com.hacybeyker.movieoh.ui.components.POSTER_HEIGHT
 import com.hacybeyker.movieoh.ui.components.POSTER_WIDTH
-import com.hacybeyker.movieoh.ui.components.ShimmerScreen
+import com.hacybeyker.movieoh.ui.components.ShimmerMovieScreen
 import com.hacybeyker.movieoh.ui.movieactions.MovieActionsBottomSheet
 import com.hacybeyker.movieoh.utils.extensions.format
 import com.hacybeyker.movieoh.utils.extensions.getRuntime
@@ -111,7 +111,7 @@ fun MovieContent(
 
     Crossfade(targetState = hasContent, modifier = backgroundModifier, label = "movie-view-state") { showContent ->
         if (!showContent || movie == null) {
-            ShimmerScreen(modifier = Modifier.fillMaxSize())
+            ShimmerMovieScreen(modifier = Modifier.fillMaxSize())
         } else {
             Box(modifier = Modifier.fillMaxSize()) {
                 Column(

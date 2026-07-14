@@ -1,7 +1,6 @@
 package com.hacybeyker.movieoh.ui.navigation
 
 object MovieOhDestinations {
-    const val SPLASH = "splash"
     const val HOME = "home"
     const val FAVORITES = "favorites"
     const val SETTINGS = "settings"

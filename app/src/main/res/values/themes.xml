@@ -5,4 +5,10 @@
         <item name="android:windowBackground">@color/white</item>
     </style>
 
+    <style name="Theme.MovieOh.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/cinematic_background</item>
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+        <item name="postSplashScreenTheme">@style/Theme.MovieOh</item>
+    </style>
+
 </resources>

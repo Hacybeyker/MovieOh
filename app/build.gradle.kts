@@ -344,6 +344,7 @@ sonar {
 dependencies {
     // Core
     implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.core.splashscreen)
     // Compose
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.ui)
@@ -376,8 +377,6 @@ dependencies {
     // Images
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)
-    // Lottie
-    implementation(libs.lottie.compose)
     // Chucker
     debugImplementation(libs.chucker)
     "qaImplementation"(libs.chucker)

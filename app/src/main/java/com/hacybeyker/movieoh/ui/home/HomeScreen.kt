@@ -27,7 +27,7 @@ import com.hacybeyker.movieoh.R
 import com.hacybeyker.movieoh.domain.entity.MovieEntity
 import com.hacybeyker.movieoh.ui.components.FeaturedCarousel
 import com.hacybeyker.movieoh.ui.components.MovieCarousel
-import com.hacybeyker.movieoh.ui.components.ShimmerScreen
+import com.hacybeyker.movieoh.ui.components.ShimmerHomeScreen
 import com.hacybeyker.movieoh.ui.movieactions.MovieActionsBottomSheet
 import com.hacybeyker.uikit.component.GradientButton
 import com.hacybeyker.uikit.component.SectionHeader
@@ -70,7 +70,7 @@ fun HomeContent(
 
     Crossfade(targetState = viewState, modifier = modifier, label = "home-view-state") { state ->
         when (state) {
-            HomeViewState.LOADING -> ShimmerScreen(modifier = Modifier.fillMaxSize())
+            HomeViewState.LOADING -> ShimmerHomeScreen(modifier = Modifier.fillMaxSize())
             HomeViewState.ERROR -> HomeError(modifier = Modifier.fillMaxSize(), onRetry = onRetry)
             HomeViewState.CONTENT ->
                 LazyColumn(
