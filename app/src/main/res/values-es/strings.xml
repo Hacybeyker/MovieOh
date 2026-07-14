@@ -32,4 +32,5 @@
     <string name="add_favorite">Agregar a favoritos</string>
     <string name="remove_favorite">Quitar de favoritos</string>
     <string name="share">Compartir</string>
+    <string name="justwatch_attribution">Datos de disponibilidad proporcionados por JustWatch</string>
 </resources>

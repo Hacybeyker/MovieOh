@@ -62,7 +62,7 @@ class MovieViewModelTest {
             whenever(mockMovieUseCase.fetchMovie(mockMovieEntity.id)).doReturn(mockMovieEntity)
             whenever(mockCreditsUseCase.fetchCredits(mockMovieEntity.id)).doReturn(mockCreditEntity)
             whenever(mockSimilarUseCase.fetchSimilar(mockMovieEntity.id)).doReturn(mockSimilarMovies)
-            whenever(mockPlatformsUseCase.getPlatforms(mockMovieEntity.title)).doReturn(
+            whenever(mockPlatformsUseCase.getPlatforms(mockMovieEntity.id)).doReturn(
                 NetworkResult.Success(mockPlatformsEntity),
             )
 
@@ -80,7 +80,7 @@ class MovieViewModelTest {
             assertEquals(mockSimilarMovies.size, uiState.similar.size)
             assertEquals(mockPlatformsEntity.size, uiState.platforms.size)
             verify(mockMovieUseCase, times(1)).fetchMovie(mockMovieEntity.id)
-            verify(mockPlatformsUseCase, times(1)).getPlatforms(mockMovieEntity.title)
+            verify(mockPlatformsUseCase, times(1)).getPlatforms(mockMovieEntity.id)
         }
     }
 
@@ -92,7 +92,7 @@ class MovieViewModelTest {
             whenever(mockMovieUseCase.fetchMovie(mockMovieEntity.id)).doReturn(mockMovieEntity)
             whenever(mockCreditsUseCase.fetchCredits(mockMovieEntity.id)).doReturn(mockCreditEntity)
             whenever(mockSimilarUseCase.fetchSimilar(mockMovieEntity.id)).doReturn(mockSimilarMovies)
-            whenever(mockPlatformsUseCase.getPlatforms(mockMovieEntity.title)).doReturn(
+            whenever(mockPlatformsUseCase.getPlatforms(mockMovieEntity.id)).doReturn(
                 NetworkResult.Error(errorMessage),
             )
 
@@ -114,7 +114,7 @@ class MovieViewModelTest {
             whenever(mockMovieUseCase.fetchMovie(mockMovieEntity.id)).doReturn(mockMovieEntity)
             whenever(mockCreditsUseCase.fetchCredits(mockMovieEntity.id)).doReturn(mockCreditEntity)
             whenever(mockSimilarUseCase.fetchSimilar(mockMovieEntity.id)).doReturn(mockSimilarMovies)
-            whenever(mockPlatformsUseCase.getPlatforms(mockMovieEntity.title))
+            whenever(mockPlatformsUseCase.getPlatforms(mockMovieEntity.id))
                 .doAnswer { error("platforms down") }
 
             // WHEN

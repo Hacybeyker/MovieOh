@@ -61,12 +61,15 @@ import com.hacybeyker.movieoh.ui.movieactions.MovieActionsBottomSheet
 import com.hacybeyker.movieoh.utils.extensions.format
 import com.hacybeyker.movieoh.utils.extensions.getRuntime
 import com.hacybeyker.movieoh.utils.extensions.toTmdbImageUrl
+import com.hacybeyker.movieoh.utils.extensions.toTmdbLogoUrl
 import com.hacybeyker.uikit.component.NetworkImage
 import com.hacybeyker.uikit.component.SectionHeader
 import com.hacybeyker.uikit.R as UiKitR
 
 private const val OVERVIEW_MAX_LINES = 4
 private const val VOTE_AVERAGE_DECIMALS = 1
+private val PLATFORM_LOGO_SIZE = 44.dp
+private val PLATFORM_LOGO_CORNER_RADIUS = 10.dp
 
 @Composable
 fun MovieScreen(
@@ -218,10 +221,12 @@ private fun MovieDetail(
 
         if (uiState.platforms.isNotEmpty()) {
             SectionHeader(title = stringResource(id = R.string.platforms), showIcon = false)
-            ChipsRow(
-                labels = uiState.platforms.map(PlatformsEntity::name),
-                modifier = Modifier.padding(horizontal = 15.dp),
-                onClick = { index -> onOpenLink(uiState.platforms[index].url) },
+            PlatformsRow(platforms = uiState.platforms, onOpenLink = onOpenLink)
+            Text(
+                text = stringResource(id = R.string.justwatch_attribution),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.padding(horizontal = 15.dp, vertical = 5.dp),
             )
         }
 
@@ -236,6 +241,33 @@ private fun MovieDetail(
                 movies = uiState.similar,
                 onMovieClick = onMovieClick,
                 onMovieLongClick = onMovieLongClick,
+            )
+        }
+    }
+}
+
+@Composable
+private fun PlatformsRow(
+    platforms: List<PlatformsEntity>,
+    onOpenLink: (String) -> Unit,
+) {
+    Row(
+        modifier =
+            Modifier
+                .padding(horizontal = 15.dp, vertical = 5.dp)
+                .horizontalScroll(rememberScrollState()),
+    ) {
+        platforms.forEach { platform ->
+            NetworkImage(
+                url = platform.logoPath.toTmdbLogoUrl(),
+                contentDescription = platform.name,
+                cornerRadius = PLATFORM_LOGO_CORNER_RADIUS,
+                modifier =
+                    Modifier
+                        .padding(end = 10.dp)
+                        .size(PLATFORM_LOGO_SIZE)
+                        .clip(RoundedCornerShape(PLATFORM_LOGO_CORNER_RADIUS))
+                        .clickable { onOpenLink(platform.url) },
             )
         }
     }

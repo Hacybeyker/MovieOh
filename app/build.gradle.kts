@@ -21,19 +21,16 @@ object AppConfig {
 
     object Release {
         const val BASE_URL = "\"https://api.themoviedb.org/3/\""
-        const val BASE_URL_PLATFORMS = "\"https://www.buscala.tv/api/\""
         const val IS_DEVELOPMENT = false
     }
 
     object Debug {
         const val BASE_URL = "\"https://hacybeyker/mocks/\""
-        const val BASE_URL_PLATFORMS = "\"https://www.buscala.tv/api/\""
         const val IS_DEVELOPMENT = true
     }
 
     object QA {
         const val BASE_URL = "\"https://api.themoviedb.org/3/\""
-        const val BASE_URL_PLATFORMS = "\"https://www.buscala.tv/api/\""
         const val IS_DEVELOPMENT = false
     }
 }
@@ -109,7 +106,6 @@ android {
                 "proguard-rules.pro",
             )
             buildConfigField("String", "BASE_URL", AppConfig.Release.BASE_URL)
-            buildConfigField("String", "BASE_URL_PLATFORMS", AppConfig.Release.BASE_URL_PLATFORMS)
             buildConfigField("boolean", "IS_DEVELOPMENT", AppConfig.Release.IS_DEVELOPMENT.toString())
         }
         create("qa") {
@@ -123,7 +119,6 @@ android {
                 "proguard-rules.pro",
             )
             buildConfigField("String", "BASE_URL", AppConfig.QA.BASE_URL)
-            buildConfigField("String", "BASE_URL_PLATFORMS", AppConfig.QA.BASE_URL_PLATFORMS)
             buildConfigField("boolean", "IS_DEVELOPMENT", AppConfig.QA.IS_DEVELOPMENT.toString())
         }
         getByName("debug") {
@@ -136,7 +131,6 @@ android {
                 "proguard-rules.pro",
             )
             buildConfigField("String", "BASE_URL", AppConfig.Debug.BASE_URL)
-            buildConfigField("String", "BASE_URL_PLATFORMS", AppConfig.Debug.BASE_URL_PLATFORMS)
             buildConfigField("boolean", "IS_DEVELOPMENT", AppConfig.Debug.IS_DEVELOPMENT.toString())
         }
     }

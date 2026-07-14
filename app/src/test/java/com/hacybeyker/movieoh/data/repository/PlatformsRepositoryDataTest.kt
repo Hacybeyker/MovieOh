@@ -15,7 +15,7 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 
-private const val MOVIE_TITLE = "Interstellar"
+private const val MOVIE_ID = 505642
 
 @ExperimentalCoroutinesApi
 class PlatformsRepositoryDataTest {
@@ -35,17 +35,17 @@ class PlatformsRepositoryDataTest {
     fun `GIVEN datasource success WHEN getPlatforms THEN result is delegated with data`() {
         testCoroutineRule.runBlockingTest {
             // GIVEN
-            whenever(mockDataSource.getPlatforms(MOVIE_TITLE)).doReturn(
+            whenever(mockDataSource.getPlatforms(MOVIE_ID)).doReturn(
                 NetworkResult.Success(mockPlatformsEntity),
             )
 
             // WHEN
-            val result = sutRepositoryData.getPlatforms(MOVIE_TITLE)
+            val result = sutRepositoryData.getPlatforms(MOVIE_ID)
 
             // THEN
             assertTrue(result is NetworkResult.Success)
             assertEquals(mockPlatformsEntity, (result as NetworkResult.Success).data)
-            verify(mockDataSource).getPlatforms(MOVIE_TITLE)
+            verify(mockDataSource).getPlatforms(MOVIE_ID)
         }
     }
 
@@ -54,12 +54,12 @@ class PlatformsRepositoryDataTest {
         testCoroutineRule.runBlockingTest {
             // GIVEN
             val errorMessage = "platforms unavailable"
-            whenever(mockDataSource.getPlatforms(MOVIE_TITLE)).doReturn(
+            whenever(mockDataSource.getPlatforms(MOVIE_ID)).doReturn(
                 NetworkResult.Error(errorMessage),
             )
 
             // WHEN
-            val result = sutRepositoryData.getPlatforms(MOVIE_TITLE)
+            val result = sutRepositoryData.getPlatforms(MOVIE_ID)
 
             // THEN
             assertTrue(result is NetworkResult.Error)

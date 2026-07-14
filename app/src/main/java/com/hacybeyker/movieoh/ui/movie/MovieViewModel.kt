@@ -58,7 +58,7 @@ class MovieViewModel
                             )
                         }
                     _uiState.value = state
-                    state.movie?.let { loadPlatforms(it.title) }
+                    state.movie?.let { loadPlatforms(it.id) }
                 } catch (expected: CancellationException) {
                     throw expected
                 } catch (_: Exception) {
@@ -67,10 +67,10 @@ class MovieViewModel
             }
         }
 
-        private fun loadPlatforms(title: String) {
+        private fun loadPlatforms(movieId: Int) {
             viewModelScope.launch(dispatcherIO) {
                 try {
-                    when (val result = platformsUseCase.getPlatforms(title)) {
+                    when (val result = platformsUseCase.getPlatforms(movieId)) {
                         is NetworkResult.Success ->
                             _uiState.update { it.copy(platforms = result.data.orEmpty()) }
 

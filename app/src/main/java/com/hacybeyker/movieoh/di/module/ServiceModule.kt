@@ -7,7 +7,6 @@ import com.hacybeyker.movieoh.data.api.PlatformsApi
 import com.hacybeyker.movieoh.data.api.SimilarApi
 import com.hacybeyker.movieoh.data.api.TrendingMovieApi
 import com.hacybeyker.movieoh.data.api.UpcomingApi
-import com.hacybeyker.movieoh.utils.constans.ConstantsDI.Named.IDENTIFIER_PLATFORMS
 import com.hacybeyker.movieoh.utils.constans.ConstantsDI.Named.IDENTIFIER_TM_DB
 import dagger.Module
 import dagger.Provides
@@ -59,6 +58,6 @@ class ServiceModule {
     @Singleton
     @Provides
     fun providePlatformsApi(
-        @Named(IDENTIFIER_PLATFORMS) retrofit: Retrofit,
+        @Named(IDENTIFIER_TM_DB) retrofit: Retrofit,
     ): PlatformsApi = retrofit.create(PlatformsApi::class.java)
 }

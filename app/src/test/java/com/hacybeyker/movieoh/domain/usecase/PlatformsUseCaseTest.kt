@@ -9,7 +9,7 @@ import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.mockito.ArgumentMatchers.anyString
+import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
@@ -33,19 +33,19 @@ class PlatformsUseCaseTest {
     fun `WHEN execute useCase THEN verify is success`() {
         testCoroutineRule.runBlockingTest {
             // WHEN
-            val mockTitle = anyString()
-            whenever(mockRepository.getPlatforms(mockTitle)).doReturn(
+            val mockMovieId = anyInt()
+            whenever(mockRepository.getPlatforms(mockMovieId)).doReturn(
                 NetworkResult.Success(
                     mockPlatformsEntity,
                 ),
             )
 
-            val resultData = sutUseCase.getPlatforms(mockTitle)
+            val resultData = sutUseCase.getPlatforms(mockMovieId)
 
             // THEN
             assertNotNull(sutUseCase)
             assertNotNull(resultData)
-            verify(mockRepository).getPlatforms(mockTitle)
+            verify(mockRepository).getPlatforms(mockMovieId)
         }
     }
 }

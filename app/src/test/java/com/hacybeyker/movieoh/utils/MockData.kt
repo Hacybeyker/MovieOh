@@ -2,10 +2,10 @@ package com.hacybeyker.movieoh.utils
 
 import com.hacybeyker.movieoh.data.model.remote.response.CreditsResponseModel
 import com.hacybeyker.movieoh.data.model.remote.response.MovieResponseModel
-import com.hacybeyker.movieoh.data.model.remote.response.ResultPlatformResponseModel
 import com.hacybeyker.movieoh.data.model.remote.response.ResultResponseModel
-import com.hacybeyker.movieoh.data.model.remote.response.ResultsPlatformResponseModel
+import com.hacybeyker.movieoh.data.model.remote.response.WatchProvidersResponseModel
 import com.hacybeyker.movieoh.data.model.remote.response.toCreditsEntity
+import com.hacybeyker.movieoh.data.model.remote.response.toEntities
 import com.hacybeyker.movieoh.data.model.remote.response.toEntity
 import com.hacybeyker.movieoh.data.model.remote.response.toMovieResponseModelList
 import com.hacybeyker.movieoh.domain.entity.CreditsEntity
@@ -30,13 +30,12 @@ val mockSimilarMovies: List<MovieEntity> by lazy {
         .toMovieResponseModelList()
 }
 
-val mockPlatformsEntity: List<PlatformsEntity> by lazy {
-    JSONFileLoader()
-        .loadJsonString<ResultPlatformResponseModel>("response_model_platforms.json")
-        .platforms
-        ?.map { it.toEntity() } ?: emptyList()
+val mockPlatformsModel: WatchProvidersResponseModel by lazy {
+    JSONFileLoader().loadJsonString<WatchProvidersResponseModel>("response_model_platforms.json")
 }
 
-val mockPlatformsModel: ResultsPlatformResponseModel by lazy {
-    JSONFileLoader().loadJsonString<ResultsPlatformResponseModel>("response_model_platforms.json")
+val mockPlatformsEntity: List<PlatformsEntity> by lazy {
+    mockPlatformsModel.results
+        ?.get("US")
+        ?.toEntities() ?: emptyList()
 }
