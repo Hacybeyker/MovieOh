@@ -17,5 +17,4 @@ data class MovieEntity(
     var genres: List<GenreEntity>,
     var runtime: Int,
     var homepage: String,
-    var stream: StreamEntity? = null,
 ) : Parcelable

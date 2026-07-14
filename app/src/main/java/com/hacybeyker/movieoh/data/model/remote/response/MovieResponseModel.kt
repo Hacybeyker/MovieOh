@@ -1,10 +1,7 @@
 package com.hacybeyker.movieoh.data.model.remote.response
 
-import androidx.annotation.VisibleForTesting
 import com.google.gson.annotations.SerializedName
 import com.hacybeyker.movieoh.domain.entity.MovieEntity
-import com.hacybeyker.movieoh.domain.entity.StreamEntity
-import com.hacybeyker.movieoh.utils.constans.Stream
 
 data class MovieResponseModel(
     @SerializedName("adult")
@@ -43,29 +40,7 @@ data class MovieResponseModel(
     val homepage: String?,
     @SerializedName("genres")
     val genres: List<GenreResponseModel>?,
-) {
-    @VisibleForTesting
-    fun isAvailableStream(): Boolean {
-        if (homepage == null) return false
-        return homepage.contains(Stream.NETFLIX) ||
-            homepage.contains(Stream.AMAZON) ||
-            homepage.contains(Stream.HBO) ||
-            homepage.contains(Stream.DISNEY)
-    }
-
-    fun assignedStream(): StreamEntity {
-        var stream: StreamEntity = StreamEntity.NONE
-        if (homepage != null && isAvailableStream()) {
-            when {
-                homepage.contains(Stream.NETFLIX) -> stream = StreamEntity.NETFLIX
-                homepage.contains(Stream.AMAZON) -> stream = StreamEntity.AMAZON
-                homepage.contains(Stream.HBO) -> stream = StreamEntity.HBO
-                homepage.contains(Stream.DISNEY) -> stream = StreamEntity.DISNEY
-            }
-        }
-        return stream
-    }
-}
+)
 
 fun MovieResponseModel.toEntity(): MovieEntity =
     MovieEntity(
@@ -80,6 +55,5 @@ fun MovieResponseModel.toEntity(): MovieEntity =
         voteCount = voteCount ?: 0,
         runtime = runtime ?: 0,
         homepage = homepage ?: "",
-        stream = assignedStream(),
         genres = genres?.toListGenreEntity() ?: arrayListOf(),
     )

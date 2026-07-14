@@ -2,6 +2,8 @@ package com.hacybeyker.movieoh.ui.movie
 
 import androidx.lifecycle.SavedStateHandle
 import com.hacybeyker.movieoh.commons.base.NetworkResult
+import com.hacybeyker.movieoh.domain.entity.PlatformType
+import com.hacybeyker.movieoh.domain.entity.PlatformsEntity
 import com.hacybeyker.movieoh.domain.usecase.CreditsUseCase
 import com.hacybeyker.movieoh.domain.usecase.MovieUseCase
 import com.hacybeyker.movieoh.domain.usecase.PlatformsUseCase
@@ -81,6 +83,34 @@ class MovieViewModelTest {
             assertEquals(mockPlatformsEntity.size, uiState.platforms.size)
             verify(mockMovieUseCase, times(1)).fetchMovie(mockMovieEntity.id)
             verify(mockPlatformsUseCase, times(1)).getPlatforms(mockMovieEntity.id)
+        }
+    }
+
+    @Test
+    fun `GIVEN a provider matching the movie homepage WHEN platforms load THEN its url is the direct homepage`() {
+        testCoroutineRule.runBlockingTest {
+            // GIVEN the fixture movie homepage points to Netflix
+            val tmdbLink = "https://www.themoviedb.org/movie/1/watch"
+            val platforms =
+                listOf(
+                    PlatformsEntity(name = "Netflix", logoPath = "/n.jpg", url = tmdbLink, type = PlatformType.STREAM),
+                    PlatformsEntity(name = "Disney Plus", logoPath = "/d.jpg", url = tmdbLink, type = PlatformType.STREAM),
+                )
+            whenever(mockMovieUseCase.fetchMovie(mockMovieEntity.id)).doReturn(mockMovieEntity)
+            whenever(mockCreditsUseCase.fetchCredits(mockMovieEntity.id)).doReturn(mockCreditEntity)
+            whenever(mockSimilarUseCase.fetchSimilar(mockMovieEntity.id)).doReturn(mockSimilarMovies)
+            whenever(mockPlatformsUseCase.getPlatforms(mockMovieEntity.id)).doReturn(
+                NetworkResult.Success(platforms),
+            )
+
+            // WHEN
+            val viewModel = buildViewModel()
+            advanceUntilIdle()
+
+            // THEN
+            val uiState = viewModel.uiState.value
+            assertEquals(mockMovieEntity.homepage, uiState.platforms.first { it.name == "Netflix" }.url)
+            assertEquals(tmdbLink, uiState.platforms.first { it.name == "Disney Plus" }.url)
         }
     }
 

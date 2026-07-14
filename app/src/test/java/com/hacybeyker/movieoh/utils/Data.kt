@@ -45,7 +45,6 @@ fun getMovieOne(): MovieEntity =
         runtime = 145,
         homepage = "",
         genres = emptyList(),
-        stream = null,
     )
 
 fun getMovieTwo(): MovieEntity =
@@ -62,5 +61,4 @@ fun getMovieTwo(): MovieEntity =
         runtime = 145,
         homepage = "",
         genres = emptyList(),
-        stream = null,
     )

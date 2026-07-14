@@ -2,6 +2,7 @@ package com.hacybeyker.movieoh.data.datasource.remote
 
 import com.hacybeyker.movieoh.commons.base.NetworkResult
 import com.hacybeyker.movieoh.data.api.PlatformsApi
+import com.hacybeyker.movieoh.domain.entity.PlatformType
 import com.hacybeyker.movieoh.utils.TestCoroutineRule
 import com.hacybeyker.movieoh.utils.mockPlatformsModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -46,9 +47,9 @@ class PlatformsDataSourceRemoteTest {
     }
 
     @Test
-    fun `GIVEN providers for the device country WHEN getPlatforms THEN they are mapped without duplicates`() {
+    fun `GIVEN providers for the device country WHEN getPlatforms THEN each provider keeps its best availability`() {
         testCoroutineRule.runBlockingTest {
-            // GIVEN
+            // GIVEN the fixture has Disney on flatrate and Amazon on both rent and buy
             Locale.setDefault(Locale.US)
             whenever(mockApi.getWatchProviders(MOVIE_ID)).doReturn(mockPlatformsModel)
 
@@ -58,7 +59,10 @@ class PlatformsDataSourceRemoteTest {
             // THEN
             assertTrue(result is NetworkResult.Success)
             val platforms = (result as NetworkResult.Success).data.orEmpty()
-            assertEquals(listOf("Disney Plus", "Amazon Video"), platforms.map { it.name })
+            assertEquals(
+                listOf("Disney Plus" to PlatformType.STREAM, "Amazon Video" to PlatformType.RENT),
+                platforms.map { it.name to it.type },
+            )
             assertTrue(platforms.all { it.url.isNotEmpty() && it.logoPath.isNotEmpty() })
             verify(mockApi).getWatchProviders(MOVIE_ID)
         }

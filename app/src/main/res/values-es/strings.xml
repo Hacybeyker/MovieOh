@@ -11,7 +11,6 @@
     <string name="retry">Reintentar</string>
     <string name="opinions">%1$d Opiniones</string>
     <string name="duration">Duración</string>
-    <string name="watch_now">Ver ahora</string>
     <string name="back">Atrás</string>
 
     <string name="platforms">Plataformas</string>
@@ -32,5 +31,8 @@
     <string name="add_favorite">Agregar a favoritos</string>
     <string name="remove_favorite">Quitar de favoritos</string>
     <string name="share">Compartir</string>
-    <string name="justwatch_attribution">Datos de disponibilidad proporcionados por JustWatch</string>
+    <string name="justwatch_attribution">Disponibilidad por JustWatch</string>
+    <string name="platforms_stream">Streaming</string>
+    <string name="platforms_rent">Alquilar</string>
+    <string name="platforms_buy">Comprar</string>
 </resources>

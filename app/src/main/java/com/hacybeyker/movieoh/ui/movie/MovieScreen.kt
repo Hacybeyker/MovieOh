@@ -2,6 +2,7 @@ package com.hacybeyker.movieoh.ui.movie
 
 import android.content.Intent
 import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -49,8 +50,8 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.hacybeyker.movieoh.R
 import com.hacybeyker.movieoh.domain.entity.MovieEntity
+import com.hacybeyker.movieoh.domain.entity.PlatformType
 import com.hacybeyker.movieoh.domain.entity.PlatformsEntity
-import com.hacybeyker.movieoh.domain.entity.StreamEntity
 import com.hacybeyker.movieoh.ui.components.MovieCarousel
 import com.hacybeyker.movieoh.ui.components.MoviePoster
 import com.hacybeyker.movieoh.ui.components.POSTER_CORNER_RADIUS
@@ -202,7 +203,7 @@ private fun MovieDetail(
             }
         }
 
-        MovieInfoRow(movie = movie, onOpenLink = onOpenLink)
+        MovieInfoRow(movie = movie)
 
         SectionHeader(title = stringResource(id = R.string.about_movie), showIcon = false)
         Text(
@@ -258,20 +259,38 @@ private fun PlatformsRow(
                 .horizontalScroll(rememberScrollState()),
     ) {
         platforms.forEach { platform ->
-            NetworkImage(
-                url = platform.logoPath.toTmdbLogoUrl(),
-                contentDescription = platform.name,
-                cornerRadius = PLATFORM_LOGO_CORNER_RADIUS,
-                modifier =
-                    Modifier
-                        .padding(end = 10.dp)
-                        .size(PLATFORM_LOGO_SIZE)
-                        .clip(RoundedCornerShape(PLATFORM_LOGO_CORNER_RADIUS))
-                        .clickable { onOpenLink(platform.url) },
-            )
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.padding(end = 12.dp),
+            ) {
+                NetworkImage(
+                    url = platform.logoPath.toTmdbLogoUrl(),
+                    contentDescription = platform.name,
+                    cornerRadius = PLATFORM_LOGO_CORNER_RADIUS,
+                    modifier =
+                        Modifier
+                            .size(PLATFORM_LOGO_SIZE)
+                            .clip(RoundedCornerShape(PLATFORM_LOGO_CORNER_RADIUS))
+                            .clickable { onOpenLink(platform.url) },
+                )
+                Text(
+                    text = stringResource(id = platform.type.labelRes()),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(top = 4.dp),
+                )
+            }
         }
     }
 }
+
+@StringRes
+private fun PlatformType.labelRes(): Int =
+    when (this) {
+        PlatformType.STREAM -> R.string.platforms_stream
+        PlatformType.RENT -> R.string.platforms_rent
+        PlatformType.BUY -> R.string.platforms_buy
+    }
 
 @Composable
 private fun MovieCastRow(uiState: MovieUiState) {
@@ -286,10 +305,7 @@ private fun MovieCastRow(uiState: MovieUiState) {
 }
 
 @Composable
-private fun MovieInfoRow(
-    movie: MovieEntity,
-    onOpenLink: (String) -> Unit,
-) {
+private fun MovieInfoRow(movie: MovieEntity) {
     Row(
         modifier =
             Modifier
@@ -309,17 +325,6 @@ private fun MovieInfoRow(
             description = stringResource(id = R.string.duration),
             modifier = Modifier.weight(1f),
         )
-        val stream = movie.stream
-        if (stream != null && stream != StreamEntity.NONE) {
-            InfoDivider()
-            StreamItem(
-                stream = stream,
-                modifier =
-                    Modifier
-                        .weight(1f)
-                        .clickable { onOpenLink(movie.homepage) },
-            )
-        }
     }
 }
 
@@ -351,28 +356,6 @@ private fun InfoItem(
         }
         Text(
             text = description,
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.padding(top = 5.dp),
-        )
-    }
-}
-
-@Composable
-private fun StreamItem(
-    stream: StreamEntity,
-    modifier: Modifier = Modifier,
-) {
-    Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
-        Icon(
-            painter = painterResource(id = stream.icon),
-            contentDescription = stream.type,
-            tint = MaterialTheme.colorScheme.onBackground,
-            modifier = Modifier.height(15.dp),
-        )
-        Text(
-            text = stringResource(id = R.string.watch_now),
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center,
