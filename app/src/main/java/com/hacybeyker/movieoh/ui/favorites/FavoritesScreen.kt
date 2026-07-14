@@ -14,6 +14,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -24,6 +27,7 @@ import com.hacybeyker.movieoh.R
 import com.hacybeyker.movieoh.domain.entity.MovieEntity
 import com.hacybeyker.movieoh.ui.components.MoviePoster
 import com.hacybeyker.movieoh.ui.components.ShimmerScreen
+import com.hacybeyker.movieoh.ui.movieactions.MovieActionsBottomSheet
 
 private enum class FavoritesViewState { LOADING, EMPTY, CONTENT }
 
@@ -57,6 +61,8 @@ fun FavoritesContent(
             else -> FavoritesViewState.CONTENT
         }
 
+    var selectedMovie by remember { mutableStateOf<MovieEntity?>(null) }
+
     Crossfade(targetState = viewState, modifier = modifier, label = "favorites-view-state") { state ->
         when (state) {
             FavoritesViewState.LOADING -> ShimmerScreen(modifier = Modifier.fillMaxSize(), sections = 2)
@@ -72,10 +78,15 @@ fun FavoritesContent(
                             posterPath = movie.posterPath,
                             contentDescription = movie.title,
                             onClick = { onMovieClick(movie) },
+                            onLongClick = { selectedMovie = movie },
                         )
                     }
                 }
         }
+    }
+
+    selectedMovie?.let { movie ->
+        MovieActionsBottomSheet(movie = movie, onDismiss = { selectedMovie = null })
     }
 }
 

@@ -1,6 +1,7 @@
 package com.hacybeyker.movieoh.ui.components
 
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -15,12 +16,14 @@ val POSTER_WIDTH = 109.dp
 val POSTER_HEIGHT = 164.dp
 val POSTER_CORNER_RADIUS = 5.dp
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MoviePoster(
     posterPath: String,
     contentDescription: String?,
     modifier: Modifier = Modifier,
     onClick: (() -> Unit)? = null,
+    onLongClick: (() -> Unit)? = null,
 ) {
     NetworkImage(
         url = posterPath.toTmdbImageUrl(),
@@ -31,6 +34,12 @@ fun MoviePoster(
                 .padding(5.dp)
                 .size(width = POSTER_WIDTH, height = POSTER_HEIGHT)
                 .clip(RoundedCornerShape(POSTER_CORNER_RADIUS))
-                .let { base -> onClick?.let { base.clickable(onClick = it) } ?: base },
+                .let { base ->
+                    if (onClick != null || onLongClick != null) {
+                        base.combinedClickable(onClick = onClick ?: {}, onLongClick = onLongClick)
+                    } else {
+                        base
+                    }
+                },
     )
 }

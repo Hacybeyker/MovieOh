@@ -28,4 +28,8 @@
     <string name="theme_system">System default</string>
     <string name="app_version">Version %1$s</string>
     <string name="tmdb_attribution">Data provided by TheMovieDB</string>
+
+    <string name="add_favorite">Add to favorites</string>
+    <string name="remove_favorite">Remove from favorites</string>
+    <string name="share">Share</string>
 </resources>

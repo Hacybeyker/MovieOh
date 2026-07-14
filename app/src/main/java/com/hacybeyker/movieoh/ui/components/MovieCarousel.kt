@@ -13,6 +13,7 @@ fun MovieCarousel(
     movies: List<MovieEntity>,
     onMovieClick: (MovieEntity) -> Unit,
     modifier: Modifier = Modifier,
+    onMovieLongClick: ((MovieEntity) -> Unit)? = null,
 ) {
     LazyRow(
         modifier = modifier,
@@ -23,6 +24,7 @@ fun MovieCarousel(
                 posterPath = movie.posterPath,
                 contentDescription = movie.title,
                 onClick = { onMovieClick(movie) },
+                onLongClick = onMovieLongClick?.let { { it(movie) } },
             )
         }
     }

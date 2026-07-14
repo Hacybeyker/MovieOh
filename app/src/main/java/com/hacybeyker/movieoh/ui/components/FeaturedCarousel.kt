@@ -2,8 +2,9 @@ package com.hacybeyker.movieoh.ui.components
 
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
@@ -47,6 +48,7 @@ fun FeaturedCarousel(
     movies: List<MovieEntity>,
     onMovieClick: (MovieEntity) -> Unit,
     modifier: Modifier = Modifier,
+    onMovieLongClick: ((MovieEntity) -> Unit)? = null,
 ) {
     if (movies.isEmpty()) return
 
@@ -87,6 +89,7 @@ fun FeaturedCarousel(
         FeaturedCard(
             movie = movie,
             onClick = { onMovieClick(movie) },
+            onLongClick = onMovieLongClick?.let { { it(movie) } },
             modifier =
                 Modifier.graphicsLayer {
                     val pageOffset =
@@ -102,11 +105,13 @@ fun FeaturedCarousel(
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun FeaturedCard(
     movie: MovieEntity,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    onLongClick: (() -> Unit)? = null,
 ) {
     Box(
         modifier =
@@ -114,7 +119,7 @@ private fun FeaturedCard(
                 .fillMaxWidth()
                 .aspectRatio(CARD_ASPECT_RATIO)
                 .clip(RoundedCornerShape(CARD_CORNER_RADIUS))
-                .clickable(onClick = onClick),
+                .combinedClickable(onClick = onClick, onLongClick = onLongClick),
     ) {
         NetworkImage(
             url = movie.backdropPath.toTmdbImageUrl(),

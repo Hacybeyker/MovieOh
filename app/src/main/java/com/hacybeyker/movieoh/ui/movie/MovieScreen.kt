@@ -31,6 +31,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -54,6 +57,7 @@ import com.hacybeyker.movieoh.ui.components.POSTER_CORNER_RADIUS
 import com.hacybeyker.movieoh.ui.components.POSTER_HEIGHT
 import com.hacybeyker.movieoh.ui.components.POSTER_WIDTH
 import com.hacybeyker.movieoh.ui.components.ShimmerScreen
+import com.hacybeyker.movieoh.ui.movieactions.MovieActionsBottomSheet
 import com.hacybeyker.movieoh.utils.extensions.format
 import com.hacybeyker.movieoh.utils.extensions.getRuntime
 import com.hacybeyker.movieoh.utils.extensions.toTmdbImageUrl
@@ -103,6 +107,7 @@ fun MovieContent(
 
     val movie = uiState.movie
     val hasContent = !uiState.isLoading && movie != null
+    var selectedMovie by remember { mutableStateOf<MovieEntity?>(null) }
 
     Crossfade(targetState = hasContent, modifier = backgroundModifier, label = "movie-view-state") { showContent ->
         if (!showContent || movie == null) {
@@ -119,6 +124,7 @@ fun MovieContent(
                     MovieDetail(
                         uiState = uiState,
                         onMovieClick = onMovieClick,
+                        onMovieLongClick = { selectedMovie = it },
                         onOpenLink = onOpenLink,
                     )
                 }
@@ -134,6 +140,10 @@ fun MovieContent(
                 }
             }
         }
+    }
+
+    selectedMovie?.let { selected ->
+        MovieActionsBottomSheet(movie = selected, onDismiss = { selectedMovie = null })
     }
 }
 
@@ -154,6 +164,7 @@ private fun MovieHeader(movie: MovieEntity) {
 private fun MovieDetail(
     uiState: MovieUiState,
     onMovieClick: (MovieEntity) -> Unit,
+    onMovieLongClick: (MovieEntity) -> Unit,
     onOpenLink: (String) -> Unit,
 ) {
     val movie = checkNotNull(uiState.movie)
@@ -221,7 +232,11 @@ private fun MovieDetail(
 
         if (uiState.similar.isNotEmpty()) {
             SectionHeader(title = stringResource(id = R.string.similar_movies), showIcon = false)
-            MovieCarousel(movies = uiState.similar, onMovieClick = onMovieClick)
+            MovieCarousel(
+                movies = uiState.similar,
+                onMovieClick = onMovieClick,
+                onMovieLongClick = onMovieLongClick,
+            )
         }
     }
 }

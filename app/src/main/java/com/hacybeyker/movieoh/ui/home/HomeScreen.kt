@@ -14,6 +14,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -25,6 +28,7 @@ import com.hacybeyker.movieoh.domain.entity.MovieEntity
 import com.hacybeyker.movieoh.ui.components.FeaturedCarousel
 import com.hacybeyker.movieoh.ui.components.MovieCarousel
 import com.hacybeyker.movieoh.ui.components.ShimmerScreen
+import com.hacybeyker.movieoh.ui.movieactions.MovieActionsBottomSheet
 import com.hacybeyker.uikit.component.GradientButton
 import com.hacybeyker.uikit.component.SectionHeader
 
@@ -62,6 +66,8 @@ fun HomeContent(
             else -> HomeViewState.CONTENT
         }
 
+    var selectedMovie by remember { mutableStateOf<MovieEntity?>(null) }
+
     Crossfade(targetState = viewState, modifier = modifier, label = "home-view-state") { state ->
         when (state) {
             HomeViewState.LOADING -> ShimmerScreen(modifier = Modifier.fillMaxSize())
@@ -76,6 +82,7 @@ fun HomeContent(
                             FeaturedCarousel(
                                 movies = uiState.featuredMovies,
                                 onMovieClick = onMovieClick,
+                                onMovieLongClick = { selectedMovie = it },
                             )
                         }
                     }
@@ -85,11 +92,16 @@ fun HomeContent(
                             MovieCarousel(
                                 movies = section.movies,
                                 onMovieClick = onMovieClick,
+                                onMovieLongClick = { selectedMovie = it },
                             )
                         }
                     }
                 }
         }
+    }
+
+    selectedMovie?.let { movie ->
+        MovieActionsBottomSheet(movie = movie, onDismiss = { selectedMovie = null })
     }
 }
 

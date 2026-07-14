@@ -2,7 +2,7 @@
 
     <style name="Theme.MovieOh" parent="android:Theme.Material.NoActionBar">
         <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:windowBackground">@color/umbra</item>
+        <item name="android:windowBackground">@color/cinematic_background</item>
     </style>
 
 </resources>
