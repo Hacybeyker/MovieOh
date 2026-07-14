@@ -7,12 +7,32 @@
     <string name="adventure">Aventura</string>
     <string name="comedy">Comedia</string>
     <string name="drama">Drama</string>
-    <string name="opinions">%1$d Opiniones</string>
-    <string name="duration">Duración</string>
-    <string name="watch_now">Ver ahora</string>
+    <string name="home_error">Ocurrió un error al cargar las películas.</string>
+    <string name="retry">Reintentar</string>
+    <string name="back">Atrás</string>
 
     <string name="platforms">Plataformas</string>
-    <string name="about_movie">Acerca de esta película</string>
     <string name="cast">Elenco</string>
     <string name="similar_movies">Películas similares</string>
+
+    <string name="home_title">Para ti</string>
+    <string name="nav_home">Inicio</string>
+    <string name="nav_favorites">Favoritos</string>
+    <string name="nav_settings">Ajustes</string>
+    <string name="favorites_empty">Todavía no has agregado favoritos.</string>
+    <string name="theme_light">Claro</string>
+    <string name="theme_dark">Oscuro</string>
+    <string name="theme_system">Predeterminado del sistema</string>
+    <string name="app_version">Versión %1$s</string>
+    <string name="tmdb_attribution">Datos proporcionados por TheMovieDB</string>
+
+    <string name="add_favorite">Agregar a favoritos</string>
+    <string name="remove_favorite">Quitar de favoritos</string>
+    <string name="share">Compartir</string>
+    <string name="justwatch_attribution">Disponibilidad por JustWatch</string>
+    <string name="platforms_stream">Streaming</string>
+    <string name="platforms_rent">Alquilar</string>
+    <string name="platforms_buy">Comprar</string>
+    <string name="play">Reproducir</string>
+    <string name="my_list">Mi lista</string>
 </resources>

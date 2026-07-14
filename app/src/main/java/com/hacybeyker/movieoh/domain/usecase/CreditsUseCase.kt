@@ -9,7 +9,5 @@ class CreditsUseCase
     constructor(
         private val repository: CreditsRepository,
     ) {
-        suspend fun fetchCredits(movie: Int): CreditsEntity {
-            return repository.fetchCredits(movie)
-        }
+        suspend fun fetchCredits(movie: Int): CreditsEntity = repository.fetchCredits(movie)
     }

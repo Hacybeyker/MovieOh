@@ -42,16 +42,12 @@ class NetworkModule {
     @Singleton
     @Provides
     @Named(API_KEY)
-    fun provideApiKey(): String {
-        return if (BuildConfig.IS_DEVELOPMENT) BuildConfig.KEY_QA else BuildConfig.KEY_PROD
-    }
+    fun provideApiKey(): String = if (BuildConfig.IS_DEVELOPMENT) BuildConfig.KEY_QA else BuildConfig.KEY_PROD
 
     @Singleton
     @Provides
     @Named(BASE_URL)
-    fun provideBaseUrl(): String {
-        return BuildConfig.BASE_URL
-    }
+    fun provideBaseUrl(): String = BuildConfig.BASE_URL
 
     @Singleton
     @Provides
@@ -63,9 +59,7 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideGsonConverterFactory(): GsonConverterFactory {
-        return GsonConverterFactory.create()
-    }
+    fun provideGsonConverterFactory(): GsonConverterFactory = GsonConverterFactory.create()
 
     @Singleton
     @Provides
@@ -83,35 +77,34 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideOkHttpMockInterceptor(inputStreamProvider: InputStreamProvider): OkHttpMockInterceptor {
-        return OkHttpMockInterceptor(inputStreamProvider, 0)
-    }
+    fun provideOkHttpMockInterceptor(
+        inputStreamProvider: InputStreamProvider,
+    ): OkHttpMockInterceptor = OkHttpMockInterceptor(inputStreamProvider, 0)
 
     @Singleton
     @Provides
     fun provideChuckCollector(
         @ApplicationContext context: Context,
-    ): ChuckerCollector {
-        return ChuckerCollector(
+    ): ChuckerCollector =
+        ChuckerCollector(
             context = context,
             showNotification = true,
             retentionPeriod = RetentionManager.Period.ONE_HOUR,
         )
-    }
 
     @Singleton
     @Provides
     fun provideChuckInterceptor(
         chuckerCollector: ChuckerCollector,
         @ApplicationContext context: Context,
-    ): ChuckerInterceptor {
-        return ChuckerInterceptor.Builder(context)
+    ): ChuckerInterceptor =
+        ChuckerInterceptor
+            .Builder(context)
             .collector(chuckerCollector)
             .maxContentLength(ConstantsDI.Parameters.CONTENT_LENGTH)
             .redactHeaders(AUTH_TOKEN, BEARER)
             .alwaysReadResponseBody(true)
             .build()
-    }
 
     @Singleton
     @Named(IDENTIFIER_TM_DB)
@@ -121,8 +114,9 @@ class NetworkModule {
         okHttpMockInterceptor: OkHttpMockInterceptor,
         chuckerInterceptor: ChuckerInterceptor,
         apiInterceptor: ApiInterceptor,
-    ): OkHttpClient {
-        return OkHttpClient.Builder()
+    ): OkHttpClient =
+        OkHttpClient
+            .Builder()
             .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
             .writeTimeout(TIMEOUT, TimeUnit.SECONDS)
             .readTimeout(TIMEOUT, TimeUnit.SECONDS)
@@ -130,7 +124,6 @@ class NetworkModule {
             .addInterceptor(chuckerInterceptor)
             .addInterceptor(if (BuildConfig.IS_DEVELOPMENT) okHttpMockInterceptor else apiInterceptor)
             .build()
-    }
 
     @Singleton
     @Named(IDENTIFIER_TM_DB)
@@ -139,13 +132,13 @@ class NetworkModule {
         @Named(BASE_URL) baseUrl: String,
         @Named(IDENTIFIER_TM_DB) client: OkHttpClient,
         gsonConverterFactory: GsonConverterFactory,
-    ): Retrofit {
-        return Retrofit.Builder()
+    ): Retrofit =
+        Retrofit
+            .Builder()
             .baseUrl(baseUrl)
             .client(client)
             .addConverterFactory(gsonConverterFactory)
             .build()
-    }
 
     class ApiInterceptor
         @Inject
@@ -158,7 +151,11 @@ class NetworkModule {
                     throw NoInternetConnectionException()
                 }
                 var request = chain.request()
-                val url = request.url.newBuilder().addQueryParameter(API_KEY, apiKey).build()
+                val url =
+                    request.url
+                        .newBuilder()
+                        .addQueryParameter(API_KEY, apiKey)
+                        .build()
                 request = Request.Builder().url(url).build()
                 val response = chain.proceed(request)
                 if (!response.isSuccessful && response.code != RESPONSE_OK) {

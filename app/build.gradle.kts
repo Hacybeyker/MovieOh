@@ -1,39 +1,79 @@
+import io.gitlab.arturbosch.detekt.Detekt
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import java.util.Properties
+
 plugins {
-    id("com.android.application")
-    kotlin("android")
-    kotlin("kapt")
-    id("kotlin-parcelize")
-    id("dagger.hilt.android.plugin")
-    id("jacoco")
-    id("org.sonarqube") version "5.1.0.4882"
-    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
-    id("org.jlleitschuh.gradle.ktlint") version "12.1.1"
-    id("io.gitlab.arturbosch.detekt") version "1.23.6"
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.detekt)
+    alias(libs.plugins.ktlint)
+    alias(libs.plugins.sonarqube)
+    jacoco
 }
 
-apply {
-    from("sonarqube.gradle")
-    from("jacoco.gradle")
+object AppConfig {
+    const val ORGANIZATION = "hacybeyker"
+    const val PROJECT_NAME = "app-movieoh-android"
+    const val APPLICATION_ID = "com.hacybeyker.movieoh"
+
+    object Release {
+        const val BASE_URL = "\"https://api.themoviedb.org/3/\""
+        const val IS_DEVELOPMENT = false
+    }
+
+    object Debug {
+        const val BASE_URL = "\"https://hacybeyker/mocks/\""
+        const val IS_DEVELOPMENT = true
+    }
+
+    object QA {
+        const val BASE_URL = "\"https://api.themoviedb.org/3/\""
+        const val IS_DEVELOPMENT = false
+    }
 }
+
+val localProperties =
+    Properties().apply {
+        val propertiesFile = rootProject.file("local.properties")
+        if (propertiesFile.exists()) {
+            propertiesFile.inputStream().use { load(it) }
+        }
+    }
+
+fun secret(name: String): String = localProperties.getProperty(name) ?: System.getenv(name) ?: ""
 
 android {
-    namespace = ConfigureApp.applicationId
-    compileSdk = AppVersion.compileSdkVersion
+    namespace = AppConfig.APPLICATION_ID
+    compileSdk =
+        libs.versions.compile.sdk
+            .get()
+            .toInt()
 
     defaultConfig {
-        applicationId = ConfigureApp.applicationId
-        minSdk = AppVersion.minSdkVersion
-        targetSdk = AppVersion.targetSdkVersion
-        versionCode = ConfigureApp.versionCode
-        versionName = ConfigureApp.versionName
-        testInstrumentationRunner = AppVersion.testInstrumentationRunner
-        renderscriptSupportModeEnabled = true
+        applicationId = AppConfig.APPLICATION_ID
+        minSdk =
+            libs.versions.min.sdk
+                .get()
+                .toInt()
+        targetSdk =
+            libs.versions.target.sdk
+                .get()
+                .toInt()
+        versionCode =
+            libs.versions.app.version.code
+                .get()
+                .toInt()
+        versionName =
+            libs.versions.app.version.name
+                .get()
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
-        kapt {
-            arguments {
-                arg("room.schemaLocation", "$projectDir/schemas")
-            }
-        }
+
+        buildConfigField("String", "KEY_PROD", "\"${secret("KEY_PROD")}\"")
+        buildConfigField("String", "KEY_QA", "\"${secret("KEY_QA")}\"")
     }
 
     testOptions {
@@ -65,77 +105,50 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
             )
-            buildConfigField("String", "BASE_URL", ConstantsApp.Release.BASE_URL)
-            buildConfigField(
-                "String",
-                "BASE_URL_PLATFORMS",
-                ConstantsApp.Release.BASE_URL_PLATFORMS,
-            )
-            buildConfigField(
-                "boolean",
-                "IS_DEVELOPMENT",
-                ConstantsApp.Release.IS_DEVELOPMENT.toString(),
-            )
+            buildConfigField("String", "BASE_URL", AppConfig.Release.BASE_URL)
+            buildConfigField("boolean", "IS_DEVELOPMENT", AppConfig.Release.IS_DEVELOPMENT.toString())
         }
         create("qa") {
             initWith(getByName("debug"))
             isDebuggable = true
             isMinifyEnabled = false
-            isShrinkResources = false
             applicationIdSuffix = ".qa"
             versionNameSuffix = "-qa"
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
             )
-            buildConfigField("String", "BASE_URL", ConstantsApp.QA.BASE_URL)
-            buildConfigField(
-                "String",
-                "BASE_URL_PLATFORMS",
-                ConstantsApp.Release.BASE_URL_PLATFORMS,
-            )
-            buildConfigField(
-                "boolean",
-                "IS_DEVELOPMENT",
-                ConstantsApp.QA.IS_DEVELOPMENT.toString(),
-            )
+            buildConfigField("String", "BASE_URL", AppConfig.QA.BASE_URL)
+            buildConfigField("boolean", "IS_DEVELOPMENT", AppConfig.QA.IS_DEVELOPMENT.toString())
         }
         getByName("debug") {
             isDebuggable = true
             isMinifyEnabled = false
-            isShrinkResources = false
-            // signingConfig = signingConfigs.getByName("debug")
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-debug"
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
             )
-            buildConfigField("String", "BASE_URL", ConstantsApp.Debug.BASE_URL)
-            buildConfigField(
-                "String",
-                "BASE_URL_PLATFORMS",
-                ConstantsApp.Release.BASE_URL_PLATFORMS,
-            )
-            buildConfigField(
-                "boolean",
-                "IS_DEVELOPMENT",
-                ConstantsApp.Debug.IS_DEVELOPMENT.toString(),
-            )
+            buildConfigField("String", "BASE_URL", AppConfig.Debug.BASE_URL)
+            buildConfigField("boolean", "IS_DEVELOPMENT", AppConfig.Debug.IS_DEVELOPMENT.toString())
         }
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 
-    kotlinOptions.jvmTarget = JavaVersion.VERSION_17.toString()
-
     buildFeatures {
-        dataBinding = true
-        viewBinding = true
+        compose = true
         buildConfig = true
+    }
+
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
     }
 
     bundle {
@@ -155,115 +168,224 @@ android {
             listOf(
                 "TypographyFractions",
                 "TypographyQuotes",
-                "JvmStaticProvidesInObjectDetector",
-                "FieldSiteTargetOnQualifierAnnotation",
-                "ModuleCompanionObjects",
-                "ModuleCompanionObjectsNotInModuleParent",
             ),
         )
         checkDependencies = true
         abortOnError = false
         ignoreWarnings = false
     }
+}
 
-    tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
-        jvmTarget = JavaVersion.VERSION_17.toString()
-        exclude("**/build/**")
-        exclude("**/resources/**")
-        exclude("**/tmp/**")
-        exclude("**/generated/**")
-        exclude("**/test/**")
-        exclude("**/androidTest/**")
+kotlin {
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_21)
+    }
+}
+
+detekt {
+    buildUponDefaultConfig = true
+    allRules = false
+    autoCorrect = false
+    config.setFrom("$projectDir/config/detekt.yml")
+    parallel = true
+    ignoreFailures = false
+    basePath = project.rootProject.projectDir.absolutePath
+}
+
+tasks.withType<Detekt>().configureEach {
+    jvmTarget = JavaVersion.VERSION_21.toString()
+    exclude("**/build/**")
+    exclude("**/resources/**")
+    exclude("**/tmp/**")
+    exclude("**/generated/**")
+    exclude("**/test/**")
+    exclude("**/androidTest/**")
+
+    reports {
+        html.required.set(true)
+        xml.required.set(true)
+        txt.required.set(false)
+        sarif.required.set(false)
+        md.required.set(false)
+    }
+}
+
+ktlint {
+    android.set(true)
+    ignoreFailures.set(false)
+    reporters {
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.HTML)
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Coverage (JaCoCo)
+// ---------------------------------------------------------------------------
+
+jacoco {
+    toolVersion = libs.versions.jacoco.get()
+}
+
+val coverageExclusions =
+    listOf(
+        "**/R.class",
+        "**/R\$*.class",
+        "**/BuildConfig.*",
+        "**/Manifest*.*",
+        "**/*Test*.*",
+        "android/**/*.*",
+        "**/*Module*.*",
+        "**/*Dagger*.*",
+        "**/*Hilt*.*",
+        "**/*MembersInjector*.*",
+        "**/*_Factory*.*",
+        "**/*_Provide*Factory*.*",
+        "**/hilt_aggregated_deps/**",
+        "**/codegen/**",
+        "**/commons/**",
+        "**/data/api/**",
+        "**/data/model/**",
+        "**/di/**",
+        "**/domain/entity/**",
+        "**/utils/**",
+        // Compose UI (covered by UI tests, not unit tests)
+        "**/MainActivity*",
+        "**/ComposableSingletons*",
+        "**/ui/components/**",
+        "**/ui/navigation/**",
+        "**/ui/theme/**",
+        "**/ui/**/*Screen*",
+        "**/ui/**/*UiState*",
+    )
+
+val jacocoTestReport =
+    tasks.register<JacocoReport>("jacocoTestReport") {
+        dependsOn("testDebugUnitTest")
+        group = "jacocoReport"
 
         reports {
-            html.required.set(true)
             xml.required.set(true)
-            txt.required.set(false)
-            sarif.required.set(false)
-            md.required.set(false)
+            html.required.set(true)
         }
+
+        val debugTree =
+            fileTree("${layout.buildDirectory.get().asFile}/tmp/kotlin-classes/debug") {
+                exclude(coverageExclusions)
+            }
+        sourceDirectories.setFrom(files("$projectDir/src/main/java"))
+        classDirectories.setFrom(files(debugTree))
+        executionData.setFrom(files("${layout.buildDirectory.get().asFile}/jacoco/testDebugUnitTest.exec"))
     }
 
-    detekt {
-        buildUponDefaultConfig = true
-        allRules = true
-        autoCorrect = true
-        config.setFrom("$projectDir/config/detekt.yml")
-        baseline = file("$projectDir/config/baseline.xml")
-        parallel = true
-        ignoreFailures = false
-        basePath = project.rootProject.projectDir.absolutePath
-    }
+tasks.register<JacocoCoverageVerification>("jacocoTestCoverageVerification") {
+    dependsOn(jacocoTestReport)
+    group = "jacocoReport"
 
-    ktlint {
-        android.set(true)
-        ignoreFailures.set(false)
-        reporters {
-            reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.HTML)
-            reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
+    val debugTree =
+        fileTree("${layout.buildDirectory.get().asFile}/tmp/kotlin-classes/debug") {
+            exclude(coverageExclusions)
+        }
+    sourceDirectories.setFrom(files("$projectDir/src/main/java"))
+    classDirectories.setFrom(files(debugTree))
+    executionData.setFrom(files("${layout.buildDirectory.get().asFile}/jacoco/testDebugUnitTest.exec"))
+
+    violationRules {
+        isFailOnViolation = true
+        rule {
+            limit {
+                minimum = "0.0".toBigDecimal()
+            }
         }
     }
+}
 
-    tasks {
-        "preBuild" {
-            dependsOn("ktlintFormat")
-            dependsOn("ktlintCheck")
-            dependsOn("detekt")
-        }
+tasks.withType<Test>().configureEach {
+    configure<JacocoTaskExtension> {
+        isIncludeNoLocationClasses = true
+        excludes = listOf("jdk.internal.*")
+    }
+    testLogging {
+        events("passed", "skipped", "failed")
+    }
+}
+
+// ---------------------------------------------------------------------------
+// SonarQube
+// ---------------------------------------------------------------------------
+
+sonar {
+    properties {
+        property("sonar.projectKey", AppConfig.APPLICATION_ID)
+        property("sonar.organization", AppConfig.ORGANIZATION)
+        property("sonar.projectName", AppConfig.PROJECT_NAME)
+        property("sonar.projectDescription", "This project is ${AppConfig.PROJECT_NAME}")
+        property(
+            "sonar.projectVersion",
+            libs.versions.app.version.name
+                .get(),
+        )
+        property("sonar.projectBaseDir", projectDir.absolutePath)
+        property("sonar.sourceEncoding", "UTF-8")
+        property("sonar.coverage.jacoco.xmlReportPaths", "${layout.buildDirectory.get().asFile}/reports/jacoco/jacocoTestReport/jacocoTestReport.xml")
+        property("sonar.coverage.exclusions", coverageExclusions.joinToString(","))
+        property("sonar.androidLint.reportPaths", "${layout.buildDirectory.get().asFile}/reports/lint-results-debug.xml")
+        property("sonar.junit.reportPaths", "${layout.buildDirectory.get().asFile}/test-results/testDebugUnitTest")
+        property("sonar.kotlin.detekt.reportPaths", "${layout.buildDirectory.get().asFile}/reports/detekt/detekt.xml")
     }
 }
 
 dependencies {
     // Core
-    implementation(fileTree("libs") { include(listOf("*.jar", "*.aar")) })
-    implementation(AppDependencies.coreKtx)
-    // View
-    implementation(AppDependencies.appCompat)
-    implementation(AppDependencies.material)
-    implementation(AppDependencies.constraintLayout)
-    implementation(AppDependencies.viewPager2)
-    implementation(AppDependencies.lottie)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.core.splashscreen)
+    // Compose
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.ui)
+    implementation(libs.compose.ui.graphics)
+    implementation(libs.compose.ui.tooling.preview)
+    implementation(libs.compose.foundation)
+    implementation(libs.compose.material3)
+    implementation(libs.compose.material.icons.core)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.navigation.compose)
+    debugImplementation(libs.compose.ui.tooling)
+    debugImplementation(libs.compose.ui.test.manifest)
+    // Lifecycle
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
     // Hilt
-    implementation(AppDependencies.hilt)
-    kapt(AppDependencies.hiltCompiler)
-    // ViewModel & Livedata
-    implementation(AppDependencies.lifecycleViewModel)
-    implementation(AppDependencies.lifecycleLiveData)
-    implementation(AppDependencies.lifecycleRuntime)
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
+    implementation(libs.hilt.navigation.compose)
+    // Storage
+    implementation(libs.androidx.datastore.preferences)
     // Coroutines
-    implementation(AppDependencies.coroutinesCore)
-    implementation(AppDependencies.coroutinesAndroid)
+    implementation(libs.coroutines.core)
+    implementation(libs.coroutines.android)
     // Retrofit
-    implementation(AppDependencies.retrofit)
-    implementation(AppDependencies.converterGson)
-    implementation(AppDependencies.loggingInterceptor)
-    implementation(AppDependencies.okHttpJsonMock)
-    // Room
-    implementation(AppDependencies.roomRuntime)
-    kapt(AppDependencies.roomCompiler)
-    implementation(AppDependencies.roomKtx)
-    // Glide
-    implementation(AppDependencies.glide)
-    kapt(AppDependencies.glideCompiler)
-    // Shimmer Facebook
-    implementation(AppDependencies.shimmerFacebook)
-    // Test
-    testImplementation(TestDependencies.junit)
-    androidTestImplementation(TestDependencies.extJUnit)
-    androidTestImplementation(TestDependencies.espressoCore)
-    testImplementation(TestDependencies.robolectric)
-    testImplementation(TestDependencies.archCore)
-    testImplementation(TestDependencies.coreKtx)
-    testImplementation(TestDependencies.junitKtx)
-    testImplementation(TestDependencies.kotlinCoroutines)
-    testImplementation(TestDependencies.mockitoKotlin)
-    testImplementation(TestDependencies.mockitoInline)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
+    implementation(libs.okhttp.logging.interceptor)
+    implementation(libs.okhttp.json.mock)
+    // Images
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
     // Chucker
-    debugImplementation(AppDependencies.chucker)
-    "qaImplementation"(AppDependencies.chucker)
-    releaseImplementation(AppDependencies.chuckerNoOp)
+    debugImplementation(libs.chucker)
+    "qaImplementation"(libs.chucker)
+    releaseImplementation(libs.chucker.no.op)
+    // Test
+    testImplementation(libs.junit)
+    testImplementation(libs.robolectric)
+    testImplementation(libs.androidx.test.core.ktx)
+    testImplementation(libs.androidx.test.ext.junit.ktx)
+    testImplementation(libs.coroutines.test)
+    testImplementation(libs.mockito.kotlin)
+    androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.espresso.core)
     // Detekt
-    detektPlugins(ValidationDependencies.detekt)
+    detektPlugins(libs.detekt.formatting)
     // Library
     api(project(":uikit"))
 }

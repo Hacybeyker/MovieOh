@@ -10,7 +10,5 @@ class PlatformsUseCase
     constructor(
         private val repository: PlatformsRepository,
     ) {
-        suspend fun getPlatforms(name: String): NetworkResult<List<PlatformsEntity>> {
-            return repository.getPlatforms(name)
-        }
+        suspend fun getPlatforms(movieId: Int): NetworkResult<List<PlatformsEntity>> = repository.getPlatforms(movieId)
     }

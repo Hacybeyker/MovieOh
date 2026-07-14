@@ -11,7 +11,5 @@ class PlatformsRepositoryData
     constructor(
         private val dataSource: PlatformsDataSource,
     ) : PlatformsRepository {
-        override suspend fun getPlatforms(name: String): NetworkResult<List<PlatformsEntity>> {
-            return dataSource.getPlatforms(name)
-        }
+        override suspend fun getPlatforms(movieId: Int): NetworkResult<List<PlatformsEntity>> = dataSource.getPlatforms(movieId)
     }

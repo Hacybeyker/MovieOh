@@ -11,7 +11,7 @@ class TrendingDataSourceRemote
     constructor(
         private val api: TrendingMovieApi,
     ) : TrendingDataSource {
-        override suspend fun fetchTrendingMovie(page: Int): List<MovieEntity> {
-            return api.fetchTrendingMovie(page).toMovieResponseModelList()
-        }
+        override suspend fun fetchTrendingMovie(
+            page: Int,
+        ): List<MovieEntity> = api.fetchTrendingMovie(page).toMovieResponseModelList()
     }

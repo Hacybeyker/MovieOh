@@ -1,0 +1,19 @@
+name: "Local Properties"
+description: "Write the TheMovieDB API keys into local.properties"
+
+inputs:
+  key-prod:
+    description: "Production API key"
+    required: true
+  key-qa:
+    description: "QA API key"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Set Local Properties
+      shell: bash
+      run: |
+        echo KEY_PROD=${{ inputs.key-prod }} >> local.properties
+        echo KEY_QA=${{ inputs.key-qa }} >> local.properties

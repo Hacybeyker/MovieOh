@@ -1,0 +1,31 @@
+name: Android QA APK
+
+on:
+  workflow_call:
+
+jobs:
+  artifact:
+    name: Artifact
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v7
+
+      - name: Setup Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+          check-latest: true
+
+      - name: Setup Project
+        uses: ./.github/actions/android
+
+      - name: Set Local Properties
+        uses: ./.github/actions/local-properties
+        with:
+          key-prod: ${{ secrets.LOCAL_PROPERTIES_KEY_PROD }}
+          key-qa: ${{ secrets.LOCAL_PROPERTIES_KEY_QA }}
+
+      - name: Assemble QA
+        uses: ./.github/actions/assemble-qa

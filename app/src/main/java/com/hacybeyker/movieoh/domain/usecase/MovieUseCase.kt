@@ -9,7 +9,5 @@ class MovieUseCase
     constructor(
         private val movieRepository: MovieRepository,
     ) {
-        suspend fun fetchMovie(movie: Int): MovieEntity {
-            return movieRepository.fetchMovie(movie)
-        }
+        suspend fun fetchMovie(movie: Int): MovieEntity = movieRepository.fetchMovie(movie)
     }

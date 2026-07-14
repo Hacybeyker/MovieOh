@@ -10,7 +10,5 @@ class CreditsRepositoryData
     constructor(
         private val dataSource: CreditsDataSource,
     ) : CreditsRepository {
-        override suspend fun fetchCredits(movie: Int): CreditsEntity {
-            return dataSource.fetchCredits(movie)
-        }
+        override suspend fun fetchCredits(movie: Int): CreditsEntity = dataSource.fetchCredits(movie)
     }

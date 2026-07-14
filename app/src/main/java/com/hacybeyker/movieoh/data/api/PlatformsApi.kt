@@ -1,12 +1,12 @@
 package com.hacybeyker.movieoh.data.api
 
-import com.hacybeyker.movieoh.data.model.remote.response.ResultsPlatformResponseModel
+import com.hacybeyker.movieoh.data.model.remote.response.WatchProvidersResponseModel
 import retrofit2.http.GET
-import retrofit2.http.Query
+import retrofit2.http.Path
 
 fun interface PlatformsApi {
-    @GET("search")
-    suspend fun getPlatforms(
-        @Query("title", encoded = true) title: String,
-    ): ResultsPlatformResponseModel
+    @GET("movie/{movieId}/watch/providers")
+    suspend fun getWatchProviders(
+        @Path("movieId") movieId: Int,
+    ): WatchProvidersResponseModel
 }

@@ -1,60 +1,63 @@
 
-# MovieOh!  🎥  
-  
-[![GithubActions](https://github.com/hacybeyker/Movieoh/actions/workflows/android_publish.yml/badge.svg?branch=master)](https://github.com/Hacybeyker/MovieOh/actions) [![Sonar Cloud](https://sonarcloud.io/api/project_badges/measure?project=com.hacybeyker.movieoh&metric=alert_status)](https://sonarcloud.io/project/overview?id=com.hacybeyker.movieoh) [![Google Play](https://img.shields.io/badge/GooglePlay-3DDC84?&logo=android&logoColor=white&labelColor=101020)](https://play.google.com/store/apps/details?id=com.hacybeyker.movieoh) [![API](https://img.shields.io/badge/API-23%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=23) [![API](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://img.shields.io/badge/License-Apache%202.0-blue.svg)  
-  
-This project consumes the [TheMovieDB](https://www.themoviedb.org/) movie api and shows various categories of movies and when      
-selecting a specific one, it shows a detail with more information about the movie.  
-  
-## Setup  
-  
-1. Run the following git commands:  
-  
- ``` text 
- git submodule init  
-```     
- ``` text 
- git submodule update  
-``` 
+# MovieOh!  🎥
 
-2. Add variables in local.properties:  
-  
- ``` text 
- KEY_PROD=YOUR_KEY  
- KEY_QA=YOUR_KEY 
- ``` 
+[![GithubActions](https://github.com/hacybeyker/Movieoh/actions/workflows/android_publish.yml/badge.svg?branch=master)](https://github.com/Hacybeyker/MovieOh/actions) [![Sonar Cloud](https://sonarcloud.io/api/project_badges/measure?project=com.hacybeyker.movieoh&metric=alert_status)](https://sonarcloud.io/project/overview?id=com.hacybeyker.movieoh) [![Google Play](https://img.shields.io/badge/GooglePlay-3DDC84?&logo=android&logoColor=white&labelColor=101020)](https://play.google.com/store/apps/details?id=com.hacybeyker.movieoh) [![API](https://img.shields.io/badge/API-24%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=24) [![API](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://img.shields.io/badge/License-Apache%202.0-blue.svg)
 
-## Project  
-Architecture and libraries that were used in the project:  
-- Clean Architecture  
-- MVVM  
-- Kotlin  
-- Hilt  
-- Mockito  
-- Coroutines  
-- Retrofit  
-- Glide  
-  
-these support libraries were also used:  
-  
-- Lint  
-- Detekt  
-- Ktlint  
+This project consumes the [TheMovieDB](https://www.themoviedb.org/) movie api and shows various categories of movies and when
+selecting a specific one, it shows a detail with more information about the movie.
+
+## Setup
+
+Add your API keys in `local.properties`:
+
+``` text
+KEY_PROD=YOUR_KEY
+KEY_QA=YOUR_KEY
+```
+
+That's it — dependencies are managed with the Gradle Version Catalog (`gradle/libs.versions.toml`), no git submodules required.
+
+## Project
+
+Architecture and libraries used in the project:
+
+- Clean Architecture (data / domain / ui)
+- MVVM with StateFlow + UiState
+- Single Activity + Navigation Compose
+- Kotlin
+- Jetpack Compose (Material 3)
+- Hilt (KSP)
+- Coroutines
+- Retrofit / OkHttp
+- Coil
+- Lottie Compose
+- Mockito
+
+Quality and tooling:
+
+- Android Lint
+- Detekt
+- Ktlint
 - Jacoco
-- Sonarcube
-- Chucker  
-  
-### Publish/Api  
-  
-- [Google Play](https://play.google.com/store/apps/details?id=com.hacybeyker.movieoh)  
-- [TheMovieDB](https://developers.themoviedb.org/3/getting-started/introduction).  
-  
-## Images  
-  
-<p align="center">      
- <img width="230" height="450" alt="MovieOh Home" src="https://drive.google.com/uc?export=view&id=14vsx4xQKC4C9guW4elhAo4EbEWgnDfkp"/>    
- <img width="230" height="450" alt="MovieOh Detail" src="https://drive.google.com/uc?export=view&id=1iHD1MaS3BQYwgveg4avoOHIb66kJRHj3"/> </p>   
-  
+- SonarQube (SonarCloud)
+- Chucker
+
+### Modules
+
+- `app`: application module (data, domain and ui layers).
+- `uikit`: Compose design system (theme, typography, colors and shared components).
+
+### Publish/Api
+
+- [Google Play](https://play.google.com/store/apps/details?id=com.hacybeyker.movieoh)
+- [TheMovieDB](https://developers.themoviedb.org/3/getting-started/introduction).
+
+## Images
+
+<p align="center">
+ <img width="230" height="450" alt="MovieOh Home" src="https://drive.google.com/uc?export=view&id=14vsx4xQKC4C9guW4elhAo4EbEWgnDfkp"/>
+ <img width="230" height="450" alt="MovieOh Detail" src="https://drive.google.com/uc?export=view&id=1iHD1MaS3BQYwgveg4avoOHIb66kJRHj3"/> </p>
+
 
 # License
 ```xml

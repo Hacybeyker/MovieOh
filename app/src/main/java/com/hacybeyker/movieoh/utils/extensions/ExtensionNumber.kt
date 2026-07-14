@@ -1,8 +1,6 @@
 package com.hacybeyker.movieoh.utils.extensions
 
-fun Double.format(decimal: Int): String {
-    return "%.${decimal}f".format(this)
-}
+fun Double.format(decimal: Int): String = "%.${decimal}f".format(this)
 
 const val HOUR_IN_MINUTE = 60
 const val HOUR = "h"

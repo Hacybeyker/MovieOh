@@ -10,7 +10,5 @@ class SimilarRepositoryData
     constructor(
         private val dataSource: SimilarDataSource,
     ) : SimilarRepository {
-        override suspend fun fetchSimilar(movie: Int): List<MovieEntity> {
-            return dataSource.fetchSimilar(movie)
-        }
+        override suspend fun fetchSimilar(movie: Int): List<MovieEntity> = dataSource.fetchSimilar(movie)
     }

@@ -10,7 +10,5 @@ class MovieRepositoryData
     constructor(
         private val dataSource: MovieDataSource,
     ) : MovieRepository {
-        override suspend fun fetchMovie(movie: Int): MovieEntity {
-            return dataSource.fetchMovie(movie)
-        }
+        override suspend fun fetchMovie(movie: Int): MovieEntity = dataSource.fetchMovie(movie)
     }

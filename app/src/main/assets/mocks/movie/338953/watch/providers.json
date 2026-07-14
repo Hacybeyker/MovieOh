@@ -1,0 +1,55 @@
+{
+  "id": 338953,
+  "results": {
+    "US": {
+      "link": "https://www.themoviedb.org/movie/338953-fantastic-beasts-the-secrets-of-dumbledore/watch?locale=US",
+      "flatrate": [
+        {
+          "logo_path": "/9ghgSC0MA082EL6HLCW3GalykFD.jpg",
+          "provider_id": 8,
+          "provider_name": "Netflix",
+          "display_priority": 0
+        },
+        {
+          "logo_path": "/97yvRBw1GzX7fXprcF80er19ot.jpg",
+          "provider_id": 337,
+          "provider_name": "Disney Plus",
+          "display_priority": 1
+        }
+      ],
+      "rent": [
+        {
+          "logo_path": "/5NyLm42TmCqCMOZFvH4fcoSNKEW.jpg",
+          "provider_id": 10,
+          "provider_name": "Amazon Video",
+          "display_priority": 3
+        }
+      ],
+      "buy": [
+        {
+          "logo_path": "/5NyLm42TmCqCMOZFvH4fcoSNKEW.jpg",
+          "provider_id": 10,
+          "provider_name": "Amazon Video",
+          "display_priority": 3
+        },
+        {
+          "logo_path": "/tbEdFQDwx5LEVr8WpSeXQSIirVq.jpg",
+          "provider_id": 3,
+          "provider_name": "Google Play Movies",
+          "display_priority": 4
+        }
+      ]
+    },
+    "PE": {
+      "link": "https://www.themoviedb.org/movie/338953-fantastic-beasts-the-secrets-of-dumbledore/watch?locale=PE",
+      "flatrate": [
+        {
+          "logo_path": "/97yvRBw1GzX7fXprcF80er19ot.jpg",
+          "provider_id": 337,
+          "provider_name": "Disney Plus",
+          "display_priority": 0
+        }
+      ]
+    }
+  }
+}

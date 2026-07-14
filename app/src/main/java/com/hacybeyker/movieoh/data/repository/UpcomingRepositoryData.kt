@@ -10,7 +10,5 @@ class UpcomingRepositoryData
     constructor(
         private val dataSource: UpcomingDataSource,
     ) : UpcomingRepository {
-        override suspend fun fetchUpcoming(page: Int): List<MovieEntity> {
-            return dataSource.fetchUpcoming(page)
-        }
+        override suspend fun fetchUpcoming(page: Int): List<MovieEntity> = dataSource.fetchUpcoming(page)
     }

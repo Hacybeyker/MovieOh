@@ -110,14 +110,16 @@ complexity:
   LongMethod:
     active: true
     threshold: 60
-    ignoreAnnotated: []
+    ignoreAnnotated:
+      - 'Composable'
   LongParameterList:
     active: true
     functionThreshold: 6
     constructorThreshold: 7
     ignoreDefaultParameters: false
     ignoreDataClasses: true
-    ignoreAnnotated: []
+    ignoreAnnotated:
+      - 'Composable'
   MethodOverloading:
     active: false
     threshold: 6
@@ -353,10 +355,14 @@ formatting:
     active: true
     autoCorrect: true
   ParameterListWrapping:
-    active: true
+    # Formatting is delegated to the ktlint Gradle plugin (newer ktlint engine).
+    active: false
     autoCorrect: true
     indentSize: 4
     maxLineLength: 120
+  Wrapping:
+    # Formatting is delegated to the ktlint Gradle plugin (newer ktlint engine).
+    active: false
   SpacingAroundAngleBrackets:
     active: false
     autoCorrect: true
@@ -657,6 +663,8 @@ style:
   MagicNumber:
     active: true
     excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
+    ignoreAnnotated:
+      - 'Composable'
     ignoreNumbers:
       - '-1'
       - '0'

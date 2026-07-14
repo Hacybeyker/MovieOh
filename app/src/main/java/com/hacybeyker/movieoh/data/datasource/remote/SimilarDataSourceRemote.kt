@@ -11,7 +11,7 @@ class SimilarDataSourceRemote
     constructor(
         private val api: SimilarApi,
     ) : SimilarDataSource {
-        override suspend fun fetchSimilar(movie: Int): List<MovieEntity> {
-            return api.fetchSimilar(movie).toMovieResponseModelList()
-        }
+        override suspend fun fetchSimilar(
+            movie: Int,
+        ): List<MovieEntity> = api.fetchSimilar(movie).toMovieResponseModelList()
     }

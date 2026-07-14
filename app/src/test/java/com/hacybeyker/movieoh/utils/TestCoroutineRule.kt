@@ -13,7 +13,7 @@ import org.junit.runners.model.Statement
 
 @ExperimentalCoroutinesApi
 class TestCoroutineRule : TestRule {
-    private val testCoroutineDispatcher = StandardTestDispatcher()
+    val testCoroutineDispatcher = StandardTestDispatcher()
     private val testCoroutineScope = TestScope(testCoroutineDispatcher)
 
     override fun apply(
