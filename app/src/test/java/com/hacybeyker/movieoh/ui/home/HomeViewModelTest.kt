@@ -1,11 +1,12 @@
 package com.hacybeyker.movieoh.ui.home
 
 import com.hacybeyker.movieoh.R
+import com.hacybeyker.movieoh.domain.entity.MovieEntity
 import com.hacybeyker.movieoh.domain.usecase.DiscoverUseCase
 import com.hacybeyker.movieoh.domain.usecase.TrendingUseCase
 import com.hacybeyker.movieoh.domain.usecase.UpcomingUseCase
 import com.hacybeyker.movieoh.utils.TestCoroutineRule
-import com.hacybeyker.movieoh.utils.mockSimilarMovies
+import com.hacybeyker.movieoh.utils.mockMovieEntity
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.advanceUntilIdle
 import org.junit.Assert.assertEquals
@@ -22,6 +23,8 @@ import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 
 private const val DISCOVER_SECTIONS = 5
+private const val MOVIES_PER_SOURCE = 4
+private const val GENRE_ID_BASE = 100
 
 private val expectedSectionTitles =
     listOf(
@@ -44,6 +47,11 @@ class HomeViewModelTest {
 
     private val mockDiscoverUseCase: DiscoverUseCase = mock()
 
+    private val upcomingMovies = moviesWithIds(1..MOVIES_PER_SOURCE)
+    private val trendingMovies = moviesWithIds(11..(10 + MOVIES_PER_SOURCE))
+
+    private fun moviesWithIds(ids: IntRange): List<MovieEntity> = ids.map { mockMovieEntity.copy(id = it) }
+
     private fun buildViewModel(): HomeViewModel =
         HomeViewModel(
             trendingUseCase = mockTrendingUseCase,
@@ -53,9 +61,12 @@ class HomeViewModelTest {
         )
 
     private suspend fun givenAllSectionsSucceed() {
-        doReturn(mockSimilarMovies).whenever(mockTrendingUseCase).fetchTrendingMovie(anyInt())
-        doReturn(mockSimilarMovies).whenever(mockUpcomingUseCase).fetchUpcoming(anyInt())
-        doReturn(mockSimilarMovies).whenever(mockDiscoverUseCase).fetchDiscover(anyInt(), anyInt())
+        doReturn(trendingMovies).whenever(mockTrendingUseCase).fetchTrendingMovie(anyInt())
+        doReturn(upcomingMovies).whenever(mockUpcomingUseCase).fetchUpcoming(anyInt())
+        doAnswer { invocation ->
+            val genre = invocation.getArgument<Int>(1)
+            moviesWithIds(genre * GENRE_ID_BASE until genre * GENRE_ID_BASE + MOVIES_PER_SOURCE)
+        }.whenever(mockDiscoverUseCase).fetchDiscover(anyInt(), anyInt())
     }
 
     private suspend fun givenAllSectionsFail() {
@@ -80,11 +91,32 @@ class HomeViewModelTest {
             assertFalse(uiState.isLoading)
             assertFalse(uiState.isError)
             assertEquals(expectedSectionTitles, uiState.sections.map { it.titleRes })
-            assertTrue(uiState.sections.all { it.movies == mockSimilarMovies })
-            assertEquals(mockSimilarMovies, uiState.featuredMovies)
+            assertTrue(uiState.sections.all { it.movies.size == MOVIES_PER_SOURCE })
+            assertEquals(upcomingMovies, uiState.featuredMovies)
             verify(mockTrendingUseCase, times(1)).fetchTrendingMovie(anyInt())
             verify(mockUpcomingUseCase, times(1)).fetchUpcoming(anyInt())
             verify(mockDiscoverUseCase, times(DISCOVER_SECTIONS)).fetchDiscover(anyInt(), anyInt())
+        }
+    }
+
+    @Test
+    fun `GIVEN a movie in several sections WHEN home loads THEN it is shown only in the first one`() {
+        testCoroutineRule.runBlockingTest {
+            // GIVEN upcoming shares ids with trending, and every genre row returns the same movies
+            doReturn(moviesWithIds(1..2)).whenever(mockUpcomingUseCase).fetchUpcoming(anyInt())
+            doReturn(moviesWithIds(2..3)).whenever(mockTrendingUseCase).fetchTrendingMovie(anyInt())
+            doReturn(moviesWithIds(3..4)).whenever(mockDiscoverUseCase).fetchDiscover(anyInt(), anyInt())
+
+            // WHEN
+            val viewModel = buildViewModel()
+            advanceUntilIdle()
+
+            // THEN the hero keeps 1-2, trending keeps 3, the first genre row keeps 4
+            // and the remaining genre rows are dropped because they would be empty
+            val uiState = viewModel.uiState.value
+            assertEquals(listOf(1, 2), uiState.featuredMovies.map { it.id })
+            assertEquals(listOf(R.string.trending, R.string.action), uiState.sections.map { it.titleRes })
+            assertEquals(listOf(listOf(3), listOf(4)), uiState.sections.map { section -> section.movies.map { it.id } })
         }
     }
 

@@ -63,13 +63,28 @@ class HomeViewModel
                         val sectionsDeferred = sources.map { source -> async { source.load() } }
                         featuredDeferred.await() to sectionsDeferred.awaitAll().filterNotNull()
                     }
+                val dedupedSections = dedupeAcrossSections(featuredMovies, sections)
                 _uiState.value =
                     HomeUiState(
                         isLoading = false,
                         featuredMovies = featuredMovies,
-                        sections = sections,
-                        isError = sections.isEmpty() && featuredMovies.isEmpty(),
+                        sections = dedupedSections,
+                        isError = dedupedSections.isEmpty() && featuredMovies.isEmpty(),
                     )
+            }
+        }
+
+        // Popular multi-genre movies top every genre row TMDB returns, so the page would
+        // repeat them. Like streaming page-construction algorithms, the first row to show
+        // a movie keeps it and later rows skip it; the hero carousel claims its movies first.
+        private fun dedupeAcrossSections(
+            featured: List<MovieEntity>,
+            sections: List<HomeSection>,
+        ): List<HomeSection> {
+            val seenIds = featured.map { it.id }.toMutableSet()
+            return sections.mapNotNull { section ->
+                val uniqueMovies = section.movies.filter { seenIds.add(it.id) }
+                if (uniqueMovies.isEmpty()) null else section.copy(movies = uniqueMovies)
             }
         }
 
